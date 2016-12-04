@@ -3,15 +3,75 @@
 <head>
   <meta charset="utf-8">
   
-  <title>cavas | Allen</title>
+  <title>Allen</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="cavas">
+  <meta name="description" content="课程内容课程笔记
+作用域种类
+
+弱类型语言：大部分为 静态作用域
+强类型语言：动态作用域
+
+
+函数声明最好不要放在if语句块内部。
+
+在现代浏览器 不会 将函数声明提升
+在早期浏览器 会 得到 提升。
+
+
+当一个匿名函数 作为某个对象的属性值时， 在其内部 只有使用 arguments.callee 来获取 函数
+
+闭包的作用
+
+计数器
+沙箱模式–匿名自调用函数。很多的框架都使用了沙箱模式
+与外界">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Allen">
 <meta property="og:url" content="http://yoursite.com/2016/12/04/cavas/index.html">
 <meta property="og:site_name" content="Allen">
-<meta property="og:updated_time" content="2016-12-03T16:41:18.521Z">
+<meta property="og:description" content="课程内容课程笔记
+作用域种类
+
+弱类型语言：大部分为 静态作用域
+强类型语言：动态作用域
+
+
+函数声明最好不要放在if语句块内部。
+
+在现代浏览器 不会 将函数声明提升
+在早期浏览器 会 得到 提升。
+
+
+当一个匿名函数 作为某个对象的属性值时， 在其内部 只有使用 arguments.callee 来获取 函数
+
+闭包的作用
+
+计数器
+沙箱模式–匿名自调用函数。很多的框架都使用了沙箱模式
+与外界">
+<meta property="og:updated_time" content="2016-12-04T10:45:05.555Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="cavas">
+<meta name="twitter:title" content="Allen">
+<meta name="twitter:description" content="课程内容课程笔记
+作用域种类
+
+弱类型语言：大部分为 静态作用域
+强类型语言：动态作用域
+
+
+函数声明最好不要放在if语句块内部。
+
+在现代浏览器 不会 将函数声明提升
+在早期浏览器 会 得到 提升。
+
+
+当一个匿名函数 作为某个对象的属性值时， 在其内部 只有使用 arguments.callee 来获取 函数
+
+闭包的作用
+
+计数器
+沙箱模式–匿名自调用函数。很多的框架都使用了沙箱模式
+与外界">
   
     <link rel="alternate" href="/atom.xml" title="Allen" type="application/atom+xml">
   
@@ -63,30 +123,68 @@
         <section id="main"><article id="post-cavas" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/12/04/cavas/" class="article-date">
-  <time datetime="2016-12-03T16:41:18.000Z" itemprop="datePublished">2016-12-04</time>
+  <time datetime="2016-12-03T16:41:18.521Z" itemprop="datePublished">2016-12-04</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      cavas
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="课程内容"><a href="#课程内容" class="headerlink" title="课程内容"></a>课程内容</h1><h2 id="课程笔记"><a href="#课程笔记" class="headerlink" title="课程笔记"></a>课程笔记</h2><ol>
+<li><p>作用域种类</p>
+<ul>
+<li>弱类型语言：大部分为 静态作用域</li>
+<li>强类型语言：动态作用域</li>
+</ul>
+</li>
+<li><p>函数声明最好不要放在if语句块内部。</p>
+<ul>
+<li>在现代浏览器 不会 将函数声明提升</li>
+<li>在早期浏览器 会 得到 提升。</li>
+</ul>
+</li>
+<li><p>当一个匿名函数 作为某个对象的属性值时， 在其内部 只有使用 arguments.callee 来获取 函数</p>
+</li>
+<li><p>闭包的作用</p>
+<ul>
+<li>计数器</li>
+<li>沙箱模式–匿名自调用函数。很多的框架都使用了沙箱模式<ul>
+<li>与外界隔离。即可以分割作用域</li>
+<li>内部代码自执行。 <ul>
+<li>在实际开发中，可以考虑将全局对象当做实参传入沙箱内部的变量，以提高js性能。</li>
+<li>用例：如果在开发中，遇到只需要执行一次的代码块。可以将其放到沙箱内部。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缓存 – 优化fib递归调用性能</li>
+<li>实现面向对象的封装<ul>
+<li>在Java 中,对象的属性可以 添加 访问修饰符,private, public,而在js并没这些关键字</li>
+<li>Object.defineProperty </li>
+</ul>
+</li>
+<li>科里化：将一个拥有多个参数的函数 转化成 一个单一参数函数 的形式。</li>
+</ul>
+</li>
+<li><p>变量的搜索原则：当访问一个变量时，</p>
+<ul>
+<li>首先在当前作用域上查找，如果找到就直接使用，并停止查找；</li>
+<li>如果没有找到，就会向上一级作用域上查找，如果找到就直接使用，并停止查找；</li>
+<li>如果还没有找到就继续向上一级作用域查找，直到全局作用域，如果找到就直接使用，并停止查找；</li>
+<li>否则报错（xxx is not defined.）</li>
+</ul>
+</li>
+</ol>
+<h2 id="课后练习"><a href="#课后练习" class="headerlink" title="课后练习"></a>课后练习</h2><ol>
+<li>分析科里化中案例的代码实现 有什么地方可优化？</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/04/cavas/" data-id="ciw9g9dh60000hkvjk1qamm4s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/04/cavas/" data-id="ciwasfwra0001esvjq7g28t7j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -94,6 +192,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2016/12/04/canvas/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          canvas
+        
+      </div>
+    </a>
   
   
     <a href="/2016/12/03/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -135,7 +242,11 @@
       <ul>
         
           <li>
-            <a href="/2016/12/04/cavas/">cavas</a>
+            <a href="/2016/12/04/canvas/">canvas</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/04/cavas/">(no title)</a>
           </li>
         
           <li>

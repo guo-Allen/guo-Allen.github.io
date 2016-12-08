@@ -96,7 +96,7 @@
 要了解跨域,首先就要知道什么是同源?
 
 所谓同源是指，域名，协议，端口完全相同">
-<meta property="og:updated_time" content="2016-12-08T04:39:17.455Z">
+<meta property="og:updated_time" content="2016-12-08T08:07:11.710Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于跨域">
 <meta name="twitter:description" content="同源
@@ -363,19 +363,33 @@
 <p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
 <p>##跨域方案</p>
 <p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
-<p>*document.domain + iframe</p>
-<p>*window.name + iframe</p>
-<p>*location.hash + iframe</p>
-<p>*window.postMessage()</p>
+<ul>
+<li><p>document.domain + iframe</p>
+</li>
+<li><p>window.name + iframe</p>
+</li>
+<li><p>location.hash + iframe</p>
+</li>
+<li><p>window.postMessage()</p>
+</li>
+</ul>
 <p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
 <h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
 <p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
 </blockquote>
-<p>只能以get发送请求<br><em>src只能发送get请求
-</em>jsonp也只能通过get请求<br>*服务端代码</p>
+<p>只能以get发送请求</p>
+<ul>
+<li>src只能发送get请求</li>
+<li>jsonp也只能通过get请求</li>
+<li>服务端代码</li>
+</ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-<p><em>前端代码:注意,域名不同
-    </em>核心是 通过script标签的src属性提交get请求</p>
+<ul>
+<li>前端代码:注意,域名不同<ul>
+<li>核心是 通过script标签的src属性提交get请求</li>
+</ul>
+</li>
+</ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
 <p>##jQuery 的$.ajax()</p>
 <blockquote>

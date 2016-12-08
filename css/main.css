@@ -279,7 +279,7 @@ p {
 a {
   color: #a64942;
   text-decoration: none;
-  border-bottom: 1px solid #283739;
+  border-bottom: 1px solid #cbf9da;
   word-wrap: break-word;
 }
 a:hover {
@@ -378,7 +378,7 @@ dd {
 .translation {
   margin-top: -20px;
   font-size: 14px;
-  color: #283739;
+  color: #cbf9da;
 }
 .scrollbar-measure {
   width: 100px;
@@ -397,7 +397,7 @@ dd {
   border-radius: 0;
   width: 140px;
   outline: none;
-  border-bottom: 1px solid #283739;
+  border-bottom: 1px solid #cbf9da;
   background: inherit;
   opacity: 0.5;
 }
@@ -1018,7 +1018,7 @@ pre .javascript .function {
   margin: 10px auto 15px;
   text-align: center;
   font-size: 14px;
-  color: #283739;
+  color: #cbf9da;
   font-weight: bold;
   line-height: 1;
 }
@@ -1263,7 +1263,7 @@ pre .javascript .function {
 }
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
-  color: #283739;
+  color: #cbf9da;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 12px;
   text-align: center;
@@ -1274,7 +1274,7 @@ pre .javascript .function {
   padding: 3px;
 }
 .posts-expand .post-meta .post-category-list-link {
-  color: #283739;
+  color: #cbf9da;
 }
 .post-meta-item-icon {
   display: none;
@@ -1404,7 +1404,7 @@ pre .javascript .function {
   -webkit-transform: translateZ(0);
 }
 .sidebar a {
-  color: #283739;
+  color: #cbf9da;
   border-bottom-color: #a64942;
 }
 .sidebar a:hover {
@@ -1423,7 +1423,7 @@ pre .javascript .function {
 .sidebar-inner {
   position: relative;
   padding: 20px 10px;
-  color: #283739;
+  color: #cbf9da;
   text-align: center;
 }
 .sidebar-toggle {
@@ -1479,7 +1479,7 @@ pre .javascript .function {
   margin-top: 0;
   text-align: center;
   font-size: 13px;
-  color: #283739;
+  color: #cbf9da;
 }
 .site-state {
   overflow: hidden;
@@ -1507,7 +1507,7 @@ pre .javascript .function {
 }
 .site-state-item-name {
   font-size: 13px;
-  color: #283739;
+  color: #cbf9da;
 }
 .feed-link {
   margin-top: 20px;
@@ -1549,7 +1549,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a8ffbf;
+  background: #f541a6;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1661,7 +1661,7 @@ pre .javascript .function {
 }
 .footer {
   font-size: 14px;
-  color: #283739;
+  color: #cbf9da;
 }
 .footer img {
   border: none;

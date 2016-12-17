@@ -214,6 +214,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            menu.guestbook
+          </a>
+        </li>
+      
 
       
         <li class="menu-item menu-item-search">
@@ -254,6 +264,435 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/17/前端常见的小算法/" itemprop="url">
+                  前端常见的小算法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-17T14:56:54+08:00" content="2016-12-17">
+              2016-12-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/17/前端常见的小算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/17/前端常见的小算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
+</blockquote>
+<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
+<pre><code>function findMaxChar(str){
+    if(str.length==1){
+        return str;
+    }
+    let charObj={};
+    for(let i,i&lt;str.length;i++){
+        if(!charObj[str.charAt(i)]){
+            charObj[str.charAt(i)]=1;
+        }else{
+            charObj[str.charAt(i)]+= 1;
+        }
+    }
+    let maxChar = &apos;&apos;,
+        maxValue= 1;
+    for(var k in charObj){
+        if(charObj[k]&gt;=maxValue){
+            maxChar = k;
+            maxValue = charObj[k];
+        }
+    }    
+    return maxChar;
+}
+//暴露接口
+module.exports = findMaxChar;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
+<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
+<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
+<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
+<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
+<blockquote>
+<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/16/Node 模块化/" itemprop="url">
+                  Node 模块化简介
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-16T23:07:05+08:00" content="2016-12-16">
+              2016-12-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/NodeJs/" itemprop="url" rel="index">
+                    <span itemprop="name">NodeJs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/16/Node 模块化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/16/Node 模块化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##既然切页面都知道外链样式和脚本,那么前后端交互就更得模块分明不是</p>
+<h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
+<li><p>一个 js 文件就是一个模块</p>
+</li>
+<li><p>每个模块都是私有的作用域</p>
+</li>
+<li><p>每个模块内部都提供了一个接口对象：<code>module.exports</code></p>
+<ul>
+<li>可以通过给 <code>module.exports</code> 接口对象添加成员或者赋值对外提供接口接口对象</li>
+</ul>
+</li>
+<li><p>为了方便，每个模块内部还为 <code>module.exports</code> 接口对象提供了一个别名： <code>exports</code> </p>
+<ul>
+<li>所以也可以通过给 <code>exports</code> 接口对象添加成员向外暴露</li>
+</ul>
+</li>
+<li><p>如果想要向外暴露单个的成员（单个函数、单个变量等）</p>
+<ul>
+<li>则通过给 <code>module.exports</code> 接口对象赋值即可</li>
+<li>注意：给 <code>exports</code> 赋值不管用<ul>
+<li>因为每个模块内部最终暴露的接口对象是 <code>module.exports</code></li>
+<li>所以给 <code>exports</code> 赋值会切断和 <code>module.exports</code> 之间的引用关系，是不管用的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在模块中，可以使用 <code>requrie</code> 函数加载执行指定模块</p>
+<ul>
+<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 <code>module.exports</code> 接口对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-自定义模块（用户自己编写的模块）"><a href="#2-自定义模块（用户自己编写的模块）" class="headerlink" title="2. 自定义模块（用户自己编写的模块）"></a>2. 自定义模块（用户自己编写的模块）</h3><p>以 <code>./</code> 或 <code>../</code> 开头的模块标识就是文件模块，一般就是用户编写的。</p>
+<ul>
+<li>require</li>
+<li>module.exports</li>
+<li>exports</li>
+</ul>
+<h3 id="3-核心模块（Node-内置）"><a href="#3-核心模块（Node-内置）" class="headerlink" title="3. 核心模块（Node 内置）"></a>3. 核心模块（Node 内置）</h3><ul>
+<li>核心模块就是 node 内置的模块，需要通过唯一的标识名称来进行获取</li>
+<li>每一个核心模块基本上都是暴露了一个对象，里面包含一些方法供我们使用</li>
+<li>每一个核心模块都有自己的作用</li>
+<li>一般在加载核心模块的时候，变量的起名最好就和核心模块的标识名同名即可<ul>
+<li>例如：<code>var fs = require(&#39;fs&#39;)</code></li>
+</ul>
+</li>
+<li>核心模块本质上也是文件模块<ul>
+<li>核心模块已经被编译到了 node 的可执行程序，一般看不到</li>
+<li>可以通过查看 node 的源码看到核心模块文件</li>
+<li>核心模块也是基于模块化的方式编写的模块</li>
+</ul>
+</li>
+</ul>
+<p>每一个模块都提供了单一的功能，以下是常用的核心模块：</p>
+<table>
+<thead>
+<tr>
+<th>模块名称</th>
+<th>模块作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fs</td>
+<td>文件操作</td>
+</tr>
+<tr>
+<td>http</td>
+<td>http服务</td>
+</tr>
+<tr>
+<td>net</td>
+<td>Socket网络编程</td>
+</tr>
+<tr>
+<td>os</td>
+<td>操作系统相关</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>path</td>
+<td>路径操作</td>
+</tr>
+<tr>
+<td>querystring</td>
+<td>处理查询字符串</td>
+</tr>
+<tr>
+<td>url</td>
+<td>处理url路径</td>
+</tr>
+<tr>
+<td>util</td>
+<td>工具函数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-第三方模块（也称作包，由社区提供）"><a href="#4-第三方模块（也称作包，由社区提供）" class="headerlink" title="4. 第三方模块（也称作包，由社区提供）"></a>4. 第三方模块（也称作包，由社区提供）</h3><h3 id="包与-Npm"><a href="#包与-Npm" class="headerlink" title="包与 Npm"></a>包与 Npm</h3><ul>
+<li>包<ul>
+<li>将相同业务功能的文件模块组织到一个目录中，那这个目录就称之为包</li>
+<li>包就是文件模块的集合</li>
+</ul>
+</li>
+<li>package.json 包说明文件</li>
+<li>npm 网站<ul>
+<li>npm 第一层含义就是包的托管网站</li>
+<li>(<a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a>)</li>
+</ul>
+</li>
+<li>npm 命令行工具<ul>
+<li>Node 本身提供了一个包管理工具：npm Node Package Manage</li>
+<li>npm 命令行工具可以安装和管理 Node 包</li>
+<li>例如，安装 art-template</li>
+<li>就可以使用 npm install art-template</li>
+<li>想要在项目中使用，就可以使用这个工具来帮你安装就可以了</li>
+<li>为什么要安装到项目根路径？</li>
+<li>为什么使用   require(‘art-template’) 就可以使用模板引擎</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>###文件模块系统</p>
+<ul>
+<li><p>app.js</p>
+<ul>
+<li>创建服务器</li>
+<li>监听request请求事件,设置请求处理函数,这个事件是所有请求的入口</li>
+<li>绑定端口号,启动服务器</li>
+</ul>
+</li>
+<li><p>router.js</p>
+<ul>
+<li>解析请求路径,根据不同的请求路径,分发到具体的处理函数    </li>
+</ul>
+</li>
+<li><p>handler.js</p>
+<ul>
+<li>书写具体处理函数</li>
+</ul>
+</li>
+<li><p>views文件</p>
+<ul>
+<li>用来存放请求的静态页面</li>
+</ul>
+</li>
+<li><p>static文件</p>
+<ul>
+<li>用来存放静态页面所需的样式和图片</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -346,10 +785,9 @@
       
         
           <h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
-<li>Server<ul>
-<li>为客户端提交接口：数据</li>
-<li>Java、.Net、Ruby、Python、PHP、Go、Swift、Lua</li>
-<li>学 Node 本质不是在学 Node，在学 服务器（Web后台）编程
+<li><p>Server<br>  服务器端: 为客户端提交接口(数据)</p>
+<ul>
+<li>Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/11/Node JS/#more" rel="contents">
               阅读全文 &raquo;
@@ -1135,7 +1573,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1143,7 +1581,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1152,7 +1590,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1213,10 +1651,6 @@
               
                 <li class="links-of-blogroll-item">
                   <a href="http://liergou.vip/" title="二狗" target="_blank">二狗</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://weibo.com/206695858" title="张磊" target="_blank">张磊</a>
                 </li>
               
             </ul>

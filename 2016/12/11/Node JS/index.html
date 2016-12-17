@@ -85,27 +85,24 @@
 
 
 <meta name="description" content="1. Node.js 介绍1.1 网站开发模型（BS）
-Server
-为客户端提交接口：数据
-Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
-学 Node 本质不是在学 Node，在学 服务器（Web后台）编程">
+Server  服务器端: 为客户端提交接口(数据)
+
+Java、.Net、Ruby、Python、PHP、Go、Swift、Lua">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node js 简介">
 <meta property="og:url" content="http://yoursite.com/2016/12/11/Node JS/index.html">
 <meta property="og:site_name" content="Allen's Notes">
 <meta property="og:description" content="1. Node.js 介绍1.1 网站开发模型（BS）
-Server
-为客户端提交接口：数据
-Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
-学 Node 本质不是在学 Node，在学 服务器（Web后台）编程">
-<meta property="og:updated_time" content="2016-12-11T14:50:19.764Z">
+Server  服务器端: 为客户端提交接口(数据)
+
+Java、.Net、Ruby、Python、PHP、Go、Swift、Lua">
+<meta property="og:updated_time" content="2016-12-16T15:16:46.403Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node js 简介">
 <meta name="twitter:description" content="1. Node.js 介绍1.1 网站开发模型（BS）
-Server
-为客户端提交接口：数据
-Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
-学 Node 本质不是在学 Node，在学 服务器（Web后台）编程">
+Server  服务器端: 为客户端提交接口(数据)
+
+Java、.Net、Ruby、Python、PHP、Go、Swift、Lua">
 
 
 
@@ -222,6 +219,16 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-guestbook">
+          <a href="/guestbook" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            menu.guestbook
           </a>
         </li>
       
@@ -358,168 +365,46 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
 
       
         <h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
-<li>Server<ul>
-<li>为客户端提交接口：数据</li>
-<li>Java、.Net、Ruby、Python、PHP、Go、Swift、Lua</li>
-<li>学 Node 本质不是在学 Node，在学 服务器（Web后台）编程<a id="more"></a> </li>
-<li>请求<ul>
+<li><p>Server<br>  服务器端: 为客户端提交接口(数据)</p>
+<ul>
+<li>Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<a id="more"></a> </li>
+<li>请求</li>
 <li>处理</li>
-</ul>
-</li>
 <li>响应</li>
-<li>大前端时代：JavaScript 语言也可以运行在服务器端</li>
-<li>使用 JavaScript 这门语言也可以进行服务器编程</li>
-<li>JavaScript 通过 Node.js 运行在服务器端</li>
 </ul>
 </li>
-<li>Browser<ul>
+<li><p>Browser</p>
+<ul>
 <li>客户端：把一坨用户看不懂的数据变成友好的形式给用户体验</li>
 </ul>
 </li>
 </ul>
 <h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><blockquote>
-<p>简单的说 Node.js 就是运行在服务端的 JavaScript</p>
+<p>简单的说<br>            Node.js 就是运行在服务端的 JavaScript</p>
+<p>复杂的说呢就是:<br>            Node.js 是一个基于Chrome V8 引擎的 JavaScript<br>            Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>            Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>            node.js 可跨平台 (Linux  windows  Unix)</p>
 </blockquote>
-<ul>
-<li><p>什么是 JavaScript</p>
-<ul>
-<li>JavaScript 一个运行在浏览器端的脚本原因</li>
-<li>运行时：浏览器</li>
-<li>Ecmascript：JavaScript 基本语法：var、if-else、for、Array、Object、String、function</li>
-<li>BOM<ul>
-<li>Window</li>
-<li>DOM</li>
-</ul>
-</li>
-<li>通过 V8 引擎解析和执行 JavaScript 代码</li>
-</ul>
-</li>
-<li><p>Node.js® is a JavaScript runtime built on Chrome’s V8 JavaScript engine. </p>
-<ul>
-<li>Node.js 是 JavaScript 运行时<ul>
-<li>不是一门新的语言</li>
-<li>可以解析和执行 JavaScript 语言</li>
-</ul>
-</li>
-<li>构建与 Chrome V8 引擎至上<ul>
-<li>Node 将 Chrome 中的 V8 引擎移植了出来</li>
-<li>在 Node 环境，给编程人员提供了一些编程接口<ul>
-<li>文件操作</li>
-<li>网络操作</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient.<ul>
-<li>事件驱动<ul>
-<li>原来前端中编程思维在 Node 中同样适用</li>
-</ul>
-</li>
-<li>非阻塞（异步）IO模型<ul>
-<li>IO：输入与输出</li>
-<li>之前在客户端中异步编程模型在 Node 中同样适用</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Node.js’ package ecosystem, npm, is the largest ecosystem of open source libraries in the world.</p>
-<ul>
-<li>npm 包管理系统</li>
-<li>全球最大的开源库生态系统</li>
-</ul>
-</li>
-<li><p>Node.js®是一个基于Chrome V8 引擎的 JavaScript 运行时</p>
-<ul>
-<li>V8是一个由美国Google开发的开源JavaScript引擎，用于Google Chrome中</li>
-<li>V8引 擎执行Javascript的速度非常快，性能非常好</li>
-</ul>
-</li>
-<li>Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型</li>
-<li>Node.js 之生态系统 npm 是目前最大的开源包管理系统</li>
-<li>跨平台<ul>
-<li>Linux</li>
-<li>Windows</li>
-<li>Unix</li>
-</ul>
-</li>
-</ul>
 <h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
-<li>MEAN<ul>
-<li>MongoDB</li>
-<li>Node：Express：基于Node的一个 Web 开发框架</li>
-<li>AngularJS：前端 JavaScript 框架</li>
-<li><ul>
-<li>Nginx：服务器，类似于 Apache 的一个服务器</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>LAMP</p>
-<ul>
-<li>Linus</li>
-<li>Apache<ul>
-<li>服务器软件</li>
-</ul>
-</li>
-<li>MySQL<ul>
-<li>存储数据的数据仓库</li>
-</ul>
-</li>
-<li>PHP<ul>
-<li>接收请求</li>
-<li>处理请求</li>
-<li>发送响应</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>网站开发</p>
-</li>
+<li>MEAN</li>
+<li>LAMP</li>
+<li>网站开发</li>
 <li>命令行应用程序</li>
 </ul>
 <h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><ul>
 <li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
-<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。<ul>
+<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
 <li>2009 年，Angular 诞生了</li>
-</ul>
-</li>
 <li>2009年5月，Ryan Dahl在GitHub上发布了最初版本的部分Node.js包，随后几个月里，有人开始使用Node.js开发应用。</li>
 <li>2009年11月和2010年4月，两届JSConf大会都安排了Node.js的讲座。</li>
 <li>2010年年底，Node.js获得云计算服务商Joyent资助，创始人Ryan Dahl加入Joyent全职负责Node.js的发展。</li>
-<li>2011年7月，Node.js在微软的支持下发布Windows版本。[2] </li>
+<li>2011年7月，Node.js在微软的支持下发布Windows版本。</li>
 </ul>
 <h3 id="1-5-资源推荐"><a href="#1-5-资源推荐" class="headerlink" title="1.5 资源推荐"></a>1.5 资源推荐</h3><ul>
 <li>深入浅出 Node.js</li>
 <li>CNODE</li>
-<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">https://cnodejs.org/getstart</a></li>
+<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
 </ul>
 <hr>
-<h2 id="2-快速上手"><a href="#2-快速上手" class="headerlink" title="2. 快速上手"></a>2. 快速上手</h2><h3 id="2-1-环境安装"><a href="#2-1-环境安装" class="headerlink" title="2.1 环境安装"></a>2.1 环境安装</h3><p><a href="https://nodejs.org/en/download/" target="_blank" rel="external">点我下载</a></p>
-<h3 id="2-2-Hello-World"><a href="#2-2-Hello-World" class="headerlink" title="2.2 Hello World"></a>2.2 Hello World</h3><ul>
-<li>当你在控制台输入：<code>node 01-hello-world.js</code> 之后</li>
-<li>实际上通过你安装目录下的那个 <code>node.exe</code> 可执行程序读取了 <code>01-hello-world.js</code> 文件中的源代码</li>
-<li>然后解析和执行文件中的代码</li>
-<li>最后将结果打印输出到了控制台中</li>
-</ul>
-<h3 id="2-3-文件操作"><a href="#2-3-文件操作" class="headerlink" title="2.3 文件操作"></a>2.3 文件操作</h3><h3 id="2-4-HTTP-服务"><a href="#2-4-HTTP-服务" class="headerlink" title="2.4 HTTP 服务"></a>2.4 HTTP 服务</h3><h3 id="2-5-文件版留言本"><a href="#2-5-文件版留言本" class="headerlink" title="2.5 文件版留言本"></a>2.5 文件版留言本</h3><ul>
-<li>npm<ul>
-<li>npm：node package manager</li>
-<li>安装和管理 Node 包</li>
-</ul>
-</li>
-<li>在哪个项目中要使用 art-tempalte 这个包</li>
-<li>就通过控制台进入该项目的根路径</li>
-<li>进入要安装包的项目根路径之后，输入 <code>npm install art-template</code></li>
-<li>只要执行了上述命令之后，npm 会自动在当前目录下找 node_modules 目录，<ul>
-<li>如果没有该目录，则直接创建该目录，并且把下载好的包直接放到该目录下</li>
-<li>如果有该目录，则直接把下载好的包放到该目录当中</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="3-Node-基础"><a href="#3-Node-基础" class="headerlink" title="3. Node 基础"></a>3. Node 基础</h2><h3 id="Node-中的-JavaScript"><a href="#Node-中的-JavaScript" class="headerlink" title="Node 中的 JavaScript"></a>Node 中的 JavaScript</h3><ul>
+<h2 id="2-Node中的-JavaScript"><a href="#2-Node中的-JavaScript" class="headerlink" title="2. Node中的 JavaScript"></a>2. Node中的 JavaScript</h2><ul>
 <li><em>console</em></li>
 <li><em>setInterval(callback, delay[, …args])</em></li>
 <li><em>setTimeout(callback, delay[, …args])</em></li>
@@ -535,131 +420,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
 <li>process</li>
 <li>require()</li>
 </ul>
-<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><ul>
-<li>一个 js 文件就是一个模块</li>
-<li>每个模块都是私有的作用域</li>
-<li>每个模块内部都提供了一个接口对象：<code>module.exports</code><ul>
-<li>可以通过给 <code>module.exports</code> 接口对象添加成员或者赋值对外提供接口接口对象</li>
-</ul>
-</li>
-<li>为了方便，每个模块内部还为 <code>module.exports</code> 接口对象提供了一个别名： <code>exports</code> <ul>
-<li>所以也可以通过给 <code>exports</code> 接口对象添加成员向外暴露</li>
-</ul>
-</li>
-<li>如果想要向外暴露单个的成员（单个函数、单个变量等）<ul>
-<li>则通过给 <code>module.exports</code> 接口对象赋值即可</li>
-<li>注意：给 <code>exports</code> 赋值不管用<ul>
-<li>因为每个模块内部最终暴露的接口对象是 <code>module.exports</code></li>
-<li>所以给 <code>exports</code> 赋值会切断和 <code>module.exports</code> 之间的引用关系，是不管用的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>在模块中，可以使用 <code>requrie</code> 函数加载执行指定模块<ul>
-<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 <code>module.exports</code> 接口对象</li>
-</ul>
-</li>
-<li>根据模块标识对模块分类<ul>
-<li>可以省略后缀名</li>
-<li>自定义模块（就是自己写的，以 ./ 或 ../ 开头）</li>
-<li>核心模块（由Node提供的，一个唯一的标识名）</li>
-<li>第三方模块</li>
-</ul>
-</li>
-</ul>
-<h3 id="自定义模块（用户自己编写的模块）"><a href="#自定义模块（用户自己编写的模块）" class="headerlink" title="自定义模块（用户自己编写的模块）"></a>自定义模块（用户自己编写的模块）</h3><p>以 <code>./</code> 或 <code>../</code> 开头的模块标识就是文件模块，一般就是用户编写的。</p>
-<ul>
-<li>require</li>
-<li>module.exports</li>
-<li>exports</li>
-</ul>
-<h3 id="核心模块（Node-内置）"><a href="#核心模块（Node-内置）" class="headerlink" title="核心模块（Node 内置）"></a>核心模块（Node 内置）</h3><ul>
-<li>核心模块就是 node 内置的模块，需要通过唯一的标识名称来进行获取</li>
-<li>每一个核心模块基本上都是暴露了一个对象，里面包含一些方法供我们使用</li>
-<li>每一个核心模块都有自己的作用</li>
-<li>一般在加载核心模块的时候，变量的起名最好就和核心模块的标识名同名即可<ul>
-<li>例如：<code>var fs = require(&#39;fs&#39;)</code></li>
-</ul>
-</li>
-<li>核心模块本质上也是文件模块<ul>
-<li>核心模块已经被编译到了 node 的可执行程序，一般看不到</li>
-<li>可以通过查看 node 的源码看到核心模块文件</li>
-<li>核心模块也是基于模块化的方式编写的模块</li>
-</ul>
-</li>
-</ul>
-<p>每一个模块都提供了单一的功能，以下是常用的核心模块：</p>
-<table>
-<thead>
-<tr>
-<th>模块名称</th>
-<th>模块作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fs</td>
-<td>文件操作</td>
-</tr>
-<tr>
-<td>http</td>
-<td>http服务</td>
-</tr>
-<tr>
-<td>net</td>
-<td>Socket网络编程</td>
-</tr>
-<tr>
-<td>os</td>
-<td>操作系统相关</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>path</td>
-<td>路径操作</td>
-</tr>
-<tr>
-<td>querystring</td>
-<td>处理查询字符串</td>
-</tr>
-<tr>
-<td>url</td>
-<td>处理url路径</td>
-</tr>
-<tr>
-<td>util</td>
-<td>工具函数</td>
-</tr>
-</tbody>
-</table>
-<h3 id="第三方模块（也称作包，由社区提供）"><a href="#第三方模块（也称作包，由社区提供）" class="headerlink" title="第三方模块（也称作包，由社区提供）"></a>第三方模块（也称作包，由社区提供）</h3><h3 id="包与-Npm"><a href="#包与-Npm" class="headerlink" title="包与 Npm"></a>包与 Npm</h3><ul>
-<li>包<ul>
-<li>将相同业务功能的文件模块组织到一个目录中，那这个目录就称之为包</li>
-<li>包就是文件模块的集合</li>
-</ul>
-</li>
-<li>package.json 包说明文件</li>
-<li>npm 网站<ul>
-<li>npm 第一层含义就是包的托管网站</li>
-<li><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a></li>
-</ul>
-</li>
-<li>npm 命令行工具<ul>
-<li>Node 本身提供了一个包管理工具：npm Node Package Manage</li>
-<li>npm 命令行工具可以安装和管理 Node 包</li>
-<li>例如，安装 art-template</li>
-<li>就可以使用 npm install art-template</li>
-<li>想要在项目中使用，就可以使用这个工具来帮你安装就可以了</li>
-<li>为什么要安装到项目根路径？</li>
-<li>为什么使用   require(‘art-template’) 就可以使用模板引擎</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
+<h2 id="3-文件操作"><a href="#3-文件操作" class="headerlink" title="3.文件操作"></a>3.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
 <li>path.basename(path[, ext])：获取文件名部分</li>
 <li>path.dirname(path)：获取目录部分</li>
 <li>path.extname(path)：获取扩展名部分</li>
@@ -691,7 +452,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
 <li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
 </ul>
 <hr>
-<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
+<h2 id="4-HTTP"><a href="#4-HTTP" class="headerlink" title="4. HTTP"></a>4. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
 <li><p>Server</p>
 <ul>
 <li>http.createServer([requestListener])</li>
@@ -757,6 +518,10 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/16/Node 模块化/" rel="prev" title="Node 模块化简介">
+                Node 模块化简介 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -847,7 +612,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -855,7 +620,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -864,7 +629,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -927,10 +692,6 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
                   <a href="http://liergou.vip/" title="二狗" target="_blank">二狗</a>
                 </li>
               
-                <li class="links-of-blogroll-item">
-                  <a href="http://weibo.com/206695858" title="张磊" target="_blank">张磊</a>
-                </li>
-              
             </ul>
           </div>
         
@@ -944,7 +705,7 @@ Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Node-js-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Node.js 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-网站开发模型（BS）"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 网站开发模型（BS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-什么是-Node-js？"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 什么是 Node.js？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-使用-Node-可以做什么？"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用 Node 可以做什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Node-发展史"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Node 发展史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-资源推荐"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 资源推荐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-快速上手"><span class="nav-number">2.</span> <span class="nav-text">2. 快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-环境安装"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 环境安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Hello-World"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Hello World</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-文件操作"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-HTTP-服务"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 HTTP 服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-文件版留言本"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 文件版留言本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Node-基础"><span class="nav-number">3.</span> <span class="nav-text">3. Node 基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Node-中的-JavaScript"><span class="nav-number">3.1.</span> <span class="nav-text">Node 中的 JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块化"><span class="nav-number">3.2.</span> <span class="nav-text">模块化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义模块（用户自己编写的模块）"><span class="nav-number">3.3.</span> <span class="nav-text">自定义模块（用户自己编写的模块）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心模块（Node-内置）"><span class="nav-number">3.4.</span> <span class="nav-text">核心模块（Node 内置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方模块（也称作包，由社区提供）"><span class="nav-number">3.5.</span> <span class="nav-text">第三方模块（也称作包，由社区提供）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包与-Npm"><span class="nav-number">3.6.</span> <span class="nav-text">包与 Npm</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文件操作"><span class="nav-number">4.</span> <span class="nav-text">4.文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#path"><span class="nav-number">4.1.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步调用与异步调用"><span class="nav-number">4.2.</span> <span class="nav-text">同步调用与异步调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作常用API"><span class="nav-number">4.3.</span> <span class="nav-text">文件操作常用API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录操作常用API"><span class="nav-number">4.4.</span> <span class="nav-text">目录操作常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-HTTP"><span class="nav-number">5.</span> <span class="nav-text">5. HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">5.1.</span> <span class="nav-text">API</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Node-js-介绍"><span class="nav-number">1.</span> <span class="nav-text">1. Node.js 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-网站开发模型（BS）"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 网站开发模型（BS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-什么是-Node-js？"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 什么是 Node.js？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-使用-Node-可以做什么？"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 使用 Node 可以做什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Node-发展史"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Node 发展史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-资源推荐"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 资源推荐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Node中的-JavaScript"><span class="nav-number">2.</span> <span class="nav-text">2. Node中的 JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-文件操作"><span class="nav-number">3.</span> <span class="nav-text">3.文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#path"><span class="nav-number">3.1.</span> <span class="nav-text">path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同步调用与异步调用"><span class="nav-number">3.2.</span> <span class="nav-text">同步调用与异步调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作常用API"><span class="nav-number">3.3.</span> <span class="nav-text">文件操作常用API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录操作常用API"><span class="nav-number">3.4.</span> <span class="nav-text">目录操作常用API</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HTTP"><span class="nav-number">4.</span> <span class="nav-text">4. HTTP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#API"><span class="nav-number">4.1.</span> <span class="nav-text">API</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

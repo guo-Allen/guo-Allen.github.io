@@ -84,25 +84,16 @@
 
 
 
-<meta name="description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的
-
-字符串翻转123function strReverse(str) &amp;#123;	return str= str.split(&amp;apos;&amp;apos;).reverse().join(&amp;apos;&amp;apos;);&amp;#125;
-数组去重1234567891011121314151617181920">
+<meta name="description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端常见的小算法">
 <meta property="og:url" content="http://yoursite.com/2016/12/18/前端常见的小算法/index.html">
 <meta property="og:site_name" content="Allen's Notes">
-<meta property="og:description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的
-
-字符串翻转123function strReverse(str) &amp;#123;	return str= str.split(&amp;apos;&amp;apos;).reverse().join(&amp;apos;&amp;apos;);&amp;#125;
-数组去重1234567891011121314151617181920">
-<meta property="og:updated_time" content="2016-12-17T08:47:05.684Z">
+<meta property="og:description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的">
+<meta property="og:updated_time" content="2016-12-20T14:04:04.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端常见的小算法">
-<meta name="twitter:description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的
-
-字符串翻转123function strReverse(str) &amp;#123;	return str= str.split(&amp;apos;&amp;apos;).reverse().join(&amp;apos;&amp;apos;);&amp;#125;
-数组去重1234567891011121314151617181920">
+<meta name="twitter:description" content="虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的">
 
 
 
@@ -367,6 +358,7 @@
         <blockquote>
 <p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
 </blockquote>
+ <a id="more"></a>
 <h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
 <pre><code>function findMaxChar(str){

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-08T08:07:11.710Z</updated>
+  <updated>2016-12-08T13:06:24.233Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,80 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>关于跨域</title>
-    <link href="http://yoursite.com/2016/12/18/%E8%B7%A8%E5%9F%9F/"/>
-    <id>http://yoursite.com/2016/12/18/跨域/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T08:07:11.710Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
-<p>要了解跨域,首先就要知道什么是同源?</p>
-</blockquote>
-<p>所谓同源是指，域名，协议，端口完全相同<br><a id="more"></a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//URL	说明	是否允许通信</span></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名下	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/lab/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/script/b.js	//同一域名下不同文件夹	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com:8000/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名，不同端口	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">https:<span class="comment">//www.a.com/b.js	//同一域名，不同协议	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//70.32.92.74/b.js	//域名和域名对应ip	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//script.a.com/b.js	//主域相同，子域不同	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//a.com/b.js	//同一域名，不同二级域名（同上）	不允许（cookie这种情况下也不允许访问）</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.cnblogs.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//不同域名	不允许</span></div></pre></td></tr></table></figure>
-<p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
-<p>##跨域方案</p>
-<p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
-<ul>
-<li><p>document.domain + iframe</p>
-</li>
-<li><p>window.name + iframe</p>
-</li>
-<li><p>location.hash + iframe</p>
-</li>
-<li><p>window.postMessage()</p>
-</li>
-</ul>
-<p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
-<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
-<p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
-</blockquote>
-<p>只能以get发送请求</p>
-<ul>
-<li>src只能发送get请求</li>
-<li>jsonp也只能通过get请求</li>
-<li>服务端代码</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>前端代码:注意,域名不同<ul>
-<li>核心是 通过script标签的src属性提交get请求</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>##jQuery 的$.ajax()</p>
-<blockquote>
-<p>方法当中集成了JSONP的实现，可以非常方便的实现跨域数据的访问。</p>
-</blockquote>
-<p>dataType: ‘jsonp’ 设置dataType值为jsonp即开启跨域访问<br>jsonp 可以指定服务端接收的参数的“key”值，默认为callback<br>jsonpCallback 可以指定相应的回调函数，默认自动生成</p>
-<pre><code>*实例代码
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript" src='jquery/jquery-3.0.0.min.js'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;区域1的页面&lt;/h1&gt;</div><div class="line">    &lt;input type="button" name="" onclick='sendAjax()' value="jquery区域请求"&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    function sendAjax()&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            url:'http://www.section02.com/sectcion02_jqJsonp.php',</div><div class="line">            type:'post',</div><div class="line">            dataType: 'jsonp',</div><div class="line">            data:&#123;name:'itt'&#125;,</div><div class="line">            success:function(data)&#123;</div><div class="line">                console.log(data);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h2 id="跨域借口"><a href="#跨域借口" class="headerlink" title="跨域借口"></a>跨域借口</h2><blockquote>
-<p>一些平台为我们提供了可以直接使用的接口,我们只需要按照他们提供的格式提交数据即可</p>
-</blockquote>
-<p><a href="http://developer.baidu.com/map/carapi-7.htm" target="_blank" rel="external">百度车联网api</a><br>开发者秘钥ak:0A5bc3c4fb543c8f9bc54b77bc155724</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h2 id=&quot;同源&quot;&gt;&lt;a href=&quot;#同源&quot; class=&quot;headerlink&quot; title=&quot;同源&quot;&gt;&lt;/a&gt;同源&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;要了解跨域,首先就要知道什么是同源?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所谓同源是指，域名，协议，端口完全相同&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
   
   <entry>
     <title>很暗的</title>
@@ -160,6 +86,80 @@
     
     
       <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于跨域</title>
+    <link href="http://yoursite.com/2016/12/18/%E8%B7%A8%E5%9F%9F/"/>
+    <id>http://yoursite.com/2016/12/18/跨域/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-08T08:07:11.710Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
+<p>要了解跨域,首先就要知道什么是同源?</p>
+</blockquote>
+<p>所谓同源是指，域名，协议，端口完全相同<br><a id="more"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//URL	说明	是否允许通信</span></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名下	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/lab/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/script/b.js	//同一域名下不同文件夹	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com:8000/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名，不同端口	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">https:<span class="comment">//www.a.com/b.js	//同一域名，不同协议	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//70.32.92.74/b.js	//域名和域名对应ip	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//script.a.com/b.js	//主域相同，子域不同	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//a.com/b.js	//同一域名，不同二级域名（同上）	不允许（cookie这种情况下也不允许访问）</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.cnblogs.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//不同域名	不允许</span></div></pre></td></tr></table></figure>
+<p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
+<p>##跨域方案</p>
+<p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
+<ul>
+<li><p>document.domain + iframe</p>
+</li>
+<li><p>window.name + iframe</p>
+</li>
+<li><p>location.hash + iframe</p>
+</li>
+<li><p>window.postMessage()</p>
+</li>
+</ul>
+<p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
+<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
+<p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
+</blockquote>
+<p>只能以get发送请求</p>
+<ul>
+<li>src只能发送get请求</li>
+<li>jsonp也只能通过get请求</li>
+<li>服务端代码</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>前端代码:注意,域名不同<ul>
+<li>核心是 通过script标签的src属性提交get请求</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>##jQuery 的$.ajax()</p>
+<blockquote>
+<p>方法当中集成了JSONP的实现，可以非常方便的实现跨域数据的访问。</p>
+</blockquote>
+<p>dataType: ‘jsonp’ 设置dataType值为jsonp即开启跨域访问<br>jsonp 可以指定服务端接收的参数的“key”值，默认为callback<br>jsonpCallback 可以指定相应的回调函数，默认自动生成</p>
+<pre><code>*实例代码
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript" src='jquery/jquery-3.0.0.min.js'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;区域1的页面&lt;/h1&gt;</div><div class="line">    &lt;input type="button" name="" onclick='sendAjax()' value="jquery区域请求"&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    function sendAjax()&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            url:'http://www.section02.com/sectcion02_jqJsonp.php',</div><div class="line">            type:'post',</div><div class="line">            dataType: 'jsonp',</div><div class="line">            data:&#123;name:'itt'&#125;,</div><div class="line">            success:function(data)&#123;</div><div class="line">                console.log(data);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="跨域借口"><a href="#跨域借口" class="headerlink" title="跨域借口"></a>跨域借口</h2><blockquote>
+<p>一些平台为我们提供了可以直接使用的接口,我们只需要按照他们提供的格式提交数据即可</p>
+</blockquote>
+<p><a href="http://developer.baidu.com/map/carapi-7.htm" target="_blank" rel="external">百度车联网api</a><br>开发者秘钥ak:0A5bc3c4fb543c8f9bc54b77bc155724</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;h2 id=&quot;同源&quot;&gt;&lt;a href=&quot;#同源&quot; class=&quot;headerlink&quot; title=&quot;同源&quot;&gt;&lt;/a&gt;同源&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;要了解跨域,首先就要知道什么是同源?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所谓同源是指，域名，协议，端口完全相同&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   

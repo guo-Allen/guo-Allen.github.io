@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-08T13:06:24.233Z</updated>
+  <updated>2016-12-23T13:27:46.826Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,76 +16,297 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>很暗的</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
-    <id>http://yoursite.com/2016/12/18/很暗的/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T13:06:24.233Z</updated>
+    <title>MVC及MVVC 在Angular中的思想</title>
+    <link href="http://yoursite.com/2016/12/23/MVC%20%E5%8F%8A%20MVVM%20%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2016/12/23/MVC 及 MVVM 思想/</id>
+    <published>2016-12-23T13:27:46.825Z</published>
+    <updated>2016-12-23T13:27:46.826Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
-<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
-<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
-<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
-<p>这种乍然是很悲哀的。</p>
-<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
-<p>然而事实上它的消失是悄然无息的。</p>
-<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
-<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
-<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
-<p>你简直是我的全部。</p>
-<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
-<p>也记得你说最近跟我说的最后一句话。</p>
-<p>我记得你跟我说过的好听的话。</p>
-<p>也记得你对我说过的残忍的话。</p>
-<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
-</blockquote>
+    <content type="html"><![CDATA[<h3 id="MVC-的基本概念"><a href="#MVC-的基本概念" class="headerlink" title="MVC 的基本概念"></a>MVC 的基本概念</h3><ul>
+<li><p>概念解释</p>
+<ul>
+<li>M Model, 模型, 数据</li>
+<li>V View, 视图, 就是如何展示数据</li>
+<li>C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.</li>
+</ul>
+</li>
+<li><p>使用 MVC 的思想处理代码, 可以使得代码分工变得明确, 那么代码的组织方式可以根据不同分块进行单独处理,所以 在 ng 中, 提供了一个非常不同于以往的编程方法</p>
+<ul>
+<li>在 ng 中完全遵循 MVC 的思想, 将 html 当做展示数据的 View, 而 需要在 界面中展示的数据就是 modle.</li>
+<li>在处理文本输入绑定的时候, 输入的文本内容就是数据. 所在凡是需要作为数据的标签可以利用 ng-model </li>
+<li>给它取一个名字. 在有了名字以后, 代码的背后就会对应的创建一个 该名字的 Model 出来. 在数据发生变化的时候, 为了可以展示数据, 会自动的将数据展示到 界面中( 控制器 )</li>
+</ul>
+</li>
+</ul>
+<h3 id="ng弱化了控制器"><a href="#ng弱化了控制器" class="headerlink" title="ng弱化了控制器"></a>ng弱化了控制器</h3><ul>
+<li>在 传统的 MVC 框架中, 控制器是联系 view 与 model 的桥梁, 一般书写代码都在控制器中. 在控制器里面调用使用视图与数据模型. 在 ng 中似乎弱化了控制器的功能.</li>
+<li>在 MVC 的思想中有两个基本问题<br>  1&gt; 数据如何同步<br>  2&gt; 业务逻辑如何实现在 ng 中所谓控制器的功能实际上表现出来的只有 模块功能的管理作用.</li>
+</ul>
+<h3 id="ng是MVVM-框架"><a href="#ng是MVVM-框架" class="headerlink" title="ng是MVVM 框架"></a>ng是MVVM 框架</h3><ul>
+<li><p>MVVM是Model-View-ViewModel的简写,MVVM（Model-View-ViewModel）框架的由来便是MVP（Model-View-Presenter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架。它立足于原有MVP框架并且把WPF的新特性糅合进去，以应对客户日益复杂的需求变化。</p>
+</li>
+<li><p>正因为, ng减少了控制器的作用, 但是引入了一个新的对象, 这个对象与界面中数据一一对应,并且支持数据的双向绑定. 这样的一个对象与 Model 还是有一定的区别. 这个对象称为ViewModel, 基于视图的数据模型.虽然因此弱化了 controller 的概念, 但是强化了 viewmodel 的功能. 因此有人称 ng 是 MVVM 框架.</p>
+</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
-&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
+      &lt;h3 id=&quot;MVC-的基本概念&quot;&gt;&lt;a href=&quot;#MVC-的基本概念&quot; class=&quot;headerlink&quot; title=&quot;MVC 的基本概念&quot;&gt;&lt;/a&gt;MVC 的基本概念&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;概念解释&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M Model, 模型, 数据
     
     </summary>
     
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
     
     
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
     
   </entry>
   
   <entry>
-    <title>我想要的</title>
-    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2016/12/18/无题/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-17T09:21:36.677Z</updated>
+    <title>angular中$scope作用域</title>
+    <link href="http://yoursite.com/2016/12/23/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>http://yoursite.com/2016/12/23/angular中 $scope 作用域/</id>
+    <published>2016-12-23T13:26:49.262Z</published>
+    <updated>2016-12-23T13:26:49.263Z</updated>
     
-    <content type="html"><![CDATA[<hr>
-<blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
-<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
-<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
-<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
-<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
-<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
-</blockquote>
+    <content type="html"><![CDATA[<h2 id="作用域-scope"><a href="#作用域-scope" class="headerlink" title="作用域 scope"></a>作用域 scope</h2><ul>
+<li><p>作用域对象<br>就是 $scope<br>-&gt; 什么时候创建 $scope<br>  在 ng 凡是有 控制器就有 $scope 存在.<br>  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.</p>
+<p>-&gt; 多个 $scope 之间的 关系是什么<br>  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有<br>  嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope</p>
+<p>  对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 <strong>proto</strong> 就是 b<br>  Object.create( b ) -&gt; a</p>
+<p>  在 原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?<br>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员</p>
+<pre><code>var base = { name: &apos;jim&apos; };
+var sub = Object.create( base );
+console.log( sub.name );
+</code></pre><p>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.</p>
+<pre><code>sub.age = 19;
+</code></pre><p>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性</p>
+<pre><code>sub.name = &apos;tom&apos;;
+// 除非 sub.__proto__.name = &apos;tom&apos;
+
+根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
+
+需要具备一个能力, 看 html 标签 绘制 scope 关系
+</code></pre></li>
+</ul>
+<p>  -&gt; 为什么一开始的代码中没有写 controller 也可以双向绑定<br>      在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理<br>      实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象<br>      它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
+<pre><code>凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性
+
+这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问
+ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会
+执行该方法.
+
+语法: 
+    module.run( [ &apos;...&apos;, function ( ... ) { ... } ] )
+</code></pre><ul>
+<li>作用域继承</li>
+</ul>
+<ul>
+<li>搭建本地 http 服务器<br>1&gt; 在 node 官网下载 node 安装包<br>  下载 .msi 格式的需要双击安装<br>  如果下载 zip 格式的 可以配置命令行手动安装<br>2&gt; 下一步下一步安装<br>  安装完成以后, 验证是否安装成功使用<br>  node -v<br>  npm -v<br>3&gt; 安装成功后使用 安装 hs 服务器软件<br>  npm install -g http-server<br>4&gt; 使用 shift + 右键 菜单中可以看到 在当前目录下 打开命令行<br>5&gt; 键入 hs -o 或 http-server -o 可以打开服务,在 当前目录下搭建 http 服务器, 并打开页面<br>  默认载入 index.html 文件</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
+      &lt;h2 id=&quot;作用域-scope&quot;&gt;&lt;a href=&quot;#作用域-scope&quot; class=&quot;headerlink&quot; title=&quot;作用域 scope&quot;&gt;&lt;/a&gt;作用域 scope&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;作用域对象&lt;br&gt;就是 $scope&lt;br&gt;-&amp;gt; 什么时候创
     
     </summary>
     
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
     
     
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>angular 基础思想</title>
+    <link href="http://yoursite.com/2016/12/23/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2016/12/23/angular 基础思想/</id>
+    <published>2016-12-23T13:23:17.436Z</published>
+    <updated>2016-12-23T13:25:19.335Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="angular-官方"><a href="#angular-官方" class="headerlink" title="angular 官方"></a>angular 官方</h2><ul>
+<li>ng 表示 AngularJS.</li>
+<li>官方网站<ul>
+<li><a href="https://angularjs.org" target="_blank" rel="external">angular官网</a> </li>
+<li><a href="https://code.angularjs.org/" target="_blank" rel="external">源代码</a><a id="more"></a>  
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="angular-基础"><a href="#angular-基础" class="headerlink" title="angular 基础"></a>angular 基础</h2><ul>
+<li><p>angular 是什么东西</p>
+<ul>
+<li><p>ng 是一个处理单页面应用程序的 框架. 它扩展了原有的 HTML , 使用标签模板指令等方法去实现动态的单页面应用程序.</p>
+</li>
+<li><p>要理解angular,就得先理解框架和库<br>库, 就是仓库, 是一堆按照功能分类的方法, 对象数据的集合. 其目的是将用户开发的代码简化方便.<br>框架, 框架是一种结构. 该结构规定了用户应该如何使用, 按照这个结构编写代码.</p>
+</li>
+<li><p>什么是单页面应用程序 single page application<br>所谓的单页面应用程序是整个页面站点, 无论是什么页面内容都是一个 HTML 文件, 在 HTML 文件的内部<br>操作数据的显示与变化. 所有数据改动不再使用刷新的方法, 而是利用 ajax 和 dom 操作在界面上进行调整.</p>
+</li>
+<li><p>ng 不推荐在代码中使用 DOM 操作. 因此一般在 ng 项目中很少使用 DOM 操作. </p>
+</li>
+</ul>
+</li>
+<li><p>ng 代码的背后是如何执行的</p>
+<pre><code>ng 是一个完全遵循 MVC( MVVM ) 的框架. 那么提供了一个开发的模型
+凡是使用 ng 开发, 所有的处理都应该放在 ng-app 中, 也就是我们所说的模块中.
+只要有了模块, ng 这个框架会给我们创建很多的东西来完成数据的双向绑定( 同步 ).
+
+在实际开发时候, 一般一个页面中会包含很多的功能, 在 ng 中每一个具体功能由 控制器 维护.
+在 ng 的代码中有一个属性 ng-controller, 该属性会提供一个具体的函数, 在函数中处理数据. 
+</code></pre><p>  ng 的一般开发的代码结构就出现了</p>
+<pre><code>1&gt; 页面中必须有 ng-app, 而且都会自己命名
+2&gt; 页面中都会有 ng-controller, 因此使用 ng-controller 就有一个 $scope, 可以控制数据
+3&gt; 页面的 ng-controller 中都有 ng-model, ng-model 书写数据就会是 $scope 的属性
+4&gt; 代码中一定有一个 angular.module( &apos;ng-app名字&apos;, [] ) 来创建模块
+5&gt; 使用 .controller( &apos;控制器的名字&apos;, 函数 ) 来定义控制器. 以便得到 $scope, 可以操作数据.
+</code></pre></li>
+</ul>
+<h2 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h2><pre><code>创建对象的方法很多, 常用的是 构造函数( 构造器, constructor ), 和工厂( factory )模式
+所以在代码中, 创建对象的函数, 常常称为工厂函数, 利用工厂函数创建对象的设计模式就是工厂模式
+Object.create(  )
+
+依赖注入
+  所谓的依赖就是指, 在实现某些功能的时候, 需要某些特定的对象.
+  所谓的注入, 就是需要某个对象的时候, 作为参数传入
+
+  因此依赖注入就是, 在需要使用某一个对象的时候, 利用参数传入即可
+
+依赖注入的实现原理
+1&gt; ng 在运行的时候, 会跟我们创建很多对象
+2&gt; 这些对象都是私有的
+
+在 ng 中可以被注入的对象有两类, 一类是 provider, 一类是服务( services )
+</code></pre><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ol>
+<li><p>如何定义模块<br> angular.module( ‘模块名’, [] )<br> 在一个 app 中可以定义多个模块, 定义多个模块的时候命名有讲究<br> 例如: 整个 ng-app 叫做 mainApp</p>
+<pre><code>一个登陆的模块可以叫做 mainApp.login
+</code></pre></li>
+<li><p>如何获取模块<br> angular.module( ‘模块名’ );<br> 在 ng 中无论代码是否在闭包中, 凡是已经定义的模块, 都可以获取.</p>
+</li>
+<li><p>控制器<br> 语法:<br> module.controller( ‘控制器名’, </p>
+<pre><code>[ &apos;需要依赖注入的对象的名字&apos;, ..., 
+   function ( 依赖列表 ) {
+
+   } ] )
+</code></pre><p> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
+<p> });</p>
+<p> function ( $scope, $http ) { … }<br> =&gt;<br> [ ‘$scope’, ‘$http’, function ( $scope, $http ) { … } ] </p>
+</li>
+<li><p>问题<br> -&gt; 为什么函数内的参数可以随意取名字<br>   假设内部在调用这个数组的时候, 采用的是语法</p>
+<pre><code>run( [ &apos;$scope&apos;, &apos;$http&apos;, function ( $scope, $http ) { ... } ] )
+假设 run 函数的定义为
+  function run( args ) {
+    ...
+  }
+</code></pre><p>   在 数组中 除了最后一个以外, 都是需要被注入的对象的名字</p>
+<pre><code>1&gt; 将名字全部取出
+    var names = args.slice( 0, args.length - 1 )
+2&gt; 利用名字在 ng 内部找寻 ( 创建 ) 对应的对象
+3&gt; 获得到对象以后, 也是一个数组的形式
+    var depObjs = names.map(function ( v, i ) {
+      ... 在内部查找, 找到后返回
+    });
+4&gt; 调用最终的那个函数
+  -&gt; 获得函数
+    func = args[ args.length - 1 ];
+  -&gt; 调用
+    func.apply( ..., depObjs )
+
+和正常的函数一样, 函数的参数只是在函数内部需要使用传入数据时所用的名字, 它只是被内部数据所依赖.
+  function ( $scope ) { ... }
+  =&gt;
+  function ( scope ) { ... } 
+</code></pre></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;angular-官方&quot;&gt;&lt;a href=&quot;#angular-官方&quot; class=&quot;headerlink&quot; title=&quot;angular 官方&quot;&gt;&lt;/a&gt;angular 官方&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;ng 表示 AngularJS.&lt;/li&gt;
+&lt;li&gt;官方网站&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://angularjs.org&quot;&gt;angular官网&lt;/a&gt; &lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://code.angularjs.org/&quot;&gt;源代码&lt;/a&gt;
+    
+    </summary>
+    
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
+    
+    
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中 异常</title>
+    <link href="http://yoursite.com/2016/12/23/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
+    <id>http://yoursite.com/2016/12/23/Js中异常 exception /</id>
+    <published>2016-12-23T13:16:20.581Z</published>
+    <updated>2016-12-23T13:16:20.583Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
+<li>程序执行是出现的结果与预期结果不一致.</li>
+<li>运行时出现了错误</li>
+</ol>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><pre><code>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段
+   1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.
+   2&gt; 只有在运行时出现的错误才可以被 try-catch
+</code></pre><h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
+<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
+<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br> 在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br> 将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
+<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
+<ol>
+<li><p>什么时候使用 throw 抛出异常<br>1&gt; 写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<br>  一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</p>
+<p>  例如: Person( name, age, gender )</p>
+<p>  function Person ( name, age, gender ) {</p>
+<pre><code>if ( typeof name == &apos;string&apos; &amp;&amp; typeof age == &apos;number&apos; &amp;&amp; typeof gender === &apos;string&apos; ) {
+  throw new Error( &apos;.... 参数不正确&apos; );
+}
+</code></pre></li>
+</ol>
+</li>
+</ol>
+<pre><code>      // 其后的代码
+    }
+2&gt; 系统定义的内置异常不够使用的时候
+
+在 js 中 try-catch 语法有 3 中( 知道即可 )
+  try-catch
+
+  try {
+
+  } catch ( e ) {
+
+  } finally { // 永远会执行
+
+  }
+
+  try {
+
+  } finally {
+
+  }
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是异常？&quot;&gt;&lt;a href=&quot;#什么是异常？&quot; class=&quot;headerlink&quot; title=&quot;什么是异常？&quot;&gt;&lt;/a&gt;什么是异常？&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;程序执行是出现的结果与预期结果不一致.&lt;/li&gt;
+&lt;li&gt;运行时出现了错误&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   
@@ -164,11 +385,85 @@
   </entry>
   
   <entry>
+    <title>很暗的</title>
+    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
+    <id>http://yoursite.com/2016/12/18/很暗的/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-08T13:06:24.233Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
+<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
+<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
+<p>这种乍然是很悲哀的。</p>
+<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
+<p>然而事实上它的消失是悄然无息的。</p>
+<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
+<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
+<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
+<p>你简直是我的全部。</p>
+<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
+<p>也记得你说最近跟我说的最后一句话。</p>
+<p>我记得你跟我说过的好听的话。</p>
+<p>也记得你对我说过的残忍的话。</p>
+<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
+&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我想要的</title>
+    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
+    <id>http://yoursite.com/2016/12/18/无题/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-17T09:21:36.677Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
+<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
+<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
+<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
+<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
+<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS严格模式</title>
     <link href="http://yoursite.com/2016/12/18/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
     <id>http://yoursite.com/2016/12/18/严格模式/</id>
     <published>2016-12-17T17:06:31.520Z</published>
-    <updated>2016-12-07T13:47:32.515Z</updated>
+    <updated>2016-12-23T13:18:04.264Z</updated>
     
     <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
 <li>消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；</li>
@@ -260,6 +555,8 @@
     
     </summary>
     
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
     
   </entry>
   
@@ -330,9 +627,9 @@ module.exports = findMaxChar;
     <link href="http://yoursite.com/2016/12/18/Node%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/18/Node 模块化/</id>
     <published>2016-12-17T17:06:31.504Z</published>
-    <updated>2016-12-20T14:02:08.154Z</updated>
+    <updated>2016-12-23T12:45:08.999Z</updated>
     
-    <content type="html"><![CDATA[<p>##既然切页面都知道外链样式和脚本,那么前后端交互就更得模块分明不是</p>
+    <content type="html"><![CDATA[<p>##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</p>
 <h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
 <li><p>一个 js 文件就是一个模块</p>
 </li>
@@ -455,9 +752,7 @@ module.exports = findMaxChar;
 </ul>
 </li>
 </ul>
-<hr>
-<p>###文件模块系统</p>
-<ul>
+<h3 id="5-文件模块系统"><a href="#5-文件模块系统" class="headerlink" title="5. 文件模块系统"></a>5. 文件模块系统</h3><h4 id="在实际开发中建议用一下模块来整理文档文件。"><a href="#在实际开发中建议用一下模块来整理文档文件。" class="headerlink" title="在实际开发中建议用一下模块来整理文档文件。"></a>在实际开发中建议用一下模块来整理文档文件。</h4><ul>
 <li><p>app.js</p>
 <ul>
 <li>创建服务器</li>
@@ -490,7 +785,7 @@ module.exports = findMaxChar;
     
     <summary type="html">
     
-      &lt;p&gt;##既然切页面都知道外链样式和脚本,那么前后端交互就更得模块分明不是&lt;/p&gt;
+      &lt;p&gt;##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&lt;/p&gt;
 &lt;h3 id=&quot;1-模块简介&quot;&gt;&lt;a href=&quot;#1-模块简介&quot; class=&quot;headerlink&quot; title=&quot;1. 模块简介&quot;&gt;&lt;/a&gt;1. 模块简介&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;p&gt;一个 js 文件就是一个模块&lt;/p&gt;
 &lt;/li&gt;
@@ -506,38 +801,39 @@ module.exports = findMaxChar;
   </entry>
   
   <entry>
-    <title>Node js 简介</title>
-    <link href="http://yoursite.com/2016/12/18/Node%20JS/"/>
-    <id>http://yoursite.com/2016/12/18/Node JS/</id>
+    <title>Node js（基础）</title>
+    <link href="http://yoursite.com/2016/12/18/Node%20JS%20%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2016/12/18/Node JS （基础）/</id>
     <published>2016-12-17T17:06:31.457Z</published>
-    <updated>2016-12-20T14:02:49.004Z</updated>
+    <updated>2016-12-23T12:40:59.261Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
-<li><p>Server<br>  服务器端: 为客户端提交接口(数据)</p>
+<li>要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。</li>
+<li><p>S（Server）：服务器端， 为客户端提交接口(数据)</p>
 <ul>
-<li>Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<a id="more"></a> </li>
-<li>请求</li>
-<li>处理</li>
-<li>响应</li>
+<li>常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<a id="more"></a> </li>
+<li>简单来说服务器就是处理客户端的请求，做出处理之后并响应回去。</li>
 </ul>
 </li>
-<li><p>Browser</p>
-<ul>
-<li>客户端：把一坨用户看不懂的数据变成友好的形式给用户体验</li>
-</ul>
+<li><p>B（Browser）：客户端，简单说就是把一坨用户看不懂的数据变成友好的形式给用户体验</p>
 </li>
 </ul>
-<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><blockquote>
-<p>简单的说<br>            Node.js 就是运行在服务端的 JavaScript</p>
-<p>复杂的说呢就是:<br>            Node.js 是一个基于Chrome V8 引擎的 JavaScript<br>            Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>            Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>            node.js 可跨平台 (Linux  windows  Unix)</p>
-</blockquote>
-<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
-<li>MEAN</li>
-<li>LAMP</li>
-<li>网站开发</li>
-<li>命令行应用程序</li>
+<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><ul>
+<li><p>简单的说呢 </p>
+<pre><code>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境
+</code></pre></li>
+<li><p>复杂的说呢就是:</p>
+<pre><code>V8引 擎执行Javascript的速度非常快，性能非常好，Node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好，也就是它对Google V8引擎进行了封装。
+</code></pre></li>
+<li><p>特点：            </p>
+<pre><code>Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型
+Node.js 的生态系统 npm 是目前最大的开源包管理系统
+node.js 可跨平台 (Linux  windows  Unix)
+</code></pre></li>
 </ul>
-<h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><ul>
+<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><pre><code>在几年的时间里，Node.JS逐渐发展成一个成熟的开发平台，吸引了许多开发者。有许多大型高流量网站都采用Node.JS进行开发，此外，开发人员还可以使用它来开发一些快速移动Web框架。除了Web应用外，NodeJS也被应用在许多方面，这些项目涉及到应用程序监控、媒体流、远程控制、桌面和移动应用等等。真的是很牛逼啊。
+</code></pre><h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><p>####饮水思源嘛，人家开发出来，我们后来人总得记着</p>
+<ul>
 <li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
 <li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
 <li>2009 年，Angular 诞生了</li>
@@ -551,7 +847,9 @@ module.exports = findMaxChar;
 <li>CNODE</li>
 <li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
 </ul>
-<h2 id="2-Node中的-JavaScript"><a href="#2-Node中的-JavaScript" class="headerlink" title="2. Node中的 JavaScript"></a>2. Node中的 JavaScript</h2><ul>
+<h2 id="2-Node-js-关于-HTTP-处理过程"><a href="#2-Node-js-关于-HTTP-处理过程" class="headerlink" title="2. Node.js 关于 HTTP 处理过程"></a>2. Node.js 关于 HTTP 处理过程</h2><h3 id="2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。"><a href="#2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。" class="headerlink" title="2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。"></a>2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	var http = require(&apos;http&apos;);</div><div class="line">	var server = http.createServer(function(request, response) &#123;   </div><div class="line">	// handle your requset </div><div class="line">	&#125;);</div><div class="line">```	</div><div class="line">###	2.2 传入 createServer 的 function 在每次 HTTP 请求时都将被调用执行，因此这个 function 也被称为请求的处理者。事实上通过 createServer 返回的 Server 对象是一个 EventEmitter，我们需要做的仅仅是在这里保存这个 server 对象，并在之后对其添加监听器。</div><div class="line">```	</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。"><a href="#2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。" class="headerlink" title="2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。"></a>2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;).listen(8080);</div></pre></td></tr></table></figure>
+<h3 id="2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案"><a href="#2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案" class="headerlink" title="2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案."></a>2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案.</h3><h2 id="3-Node中的-JavaScript"><a href="#3-Node中的-JavaScript" class="headerlink" title="3. Node中的 JavaScript"></a>3. Node中的 JavaScript</h2><ul>
 <li><em>console</em></li>
 <li><em>setInterval(callback, delay[, …args])</em></li>
 <li><em>setTimeout(callback, delay[, …args])</em></li>
@@ -567,7 +865,7 @@ module.exports = findMaxChar;
 <li>process</li>
 <li>require()</li>
 </ul>
-<h2 id="3-文件操作"><a href="#3-文件操作" class="headerlink" title="3.文件操作"></a>3.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
+<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
 <li>path.basename(path[, ext])：获取文件名部分</li>
 <li>path.dirname(path)：获取目录部分</li>
 <li>path.extname(path)：获取扩展名部分</li>
@@ -598,7 +896,7 @@ module.exports = findMaxChar;
 <li>fs.readdir(path, callback)：读取一个目录</li>
 <li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
 </ul>
-<h2 id="4-HTTP"><a href="#4-HTTP" class="headerlink" title="4. HTTP"></a>4. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
+<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
 <li><p>Server</p>
 <ul>
 <li>http.createServer([requestListener])</li>
@@ -632,9 +930,10 @@ module.exports = findMaxChar;
     <summary type="html">
     
       &lt;h2 id=&quot;1-Node-js-介绍&quot;&gt;&lt;a href=&quot;#1-Node-js-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. Node.js 介绍&quot;&gt;&lt;/a&gt;1. Node.js 介绍&lt;/h2&gt;&lt;h3 id=&quot;1-1-网站开发模型（BS）&quot;&gt;&lt;a href=&quot;#1-1-网站开发模型（BS）&quot; class=&quot;headerlink&quot; title=&quot;1.1 网站开发模型（BS）&quot;&gt;&lt;/a&gt;1.1 网站开发模型（BS）&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Server&lt;br&gt;  服务器端: 为客户端提交接口(数据)&lt;/p&gt;
+&lt;li&gt;要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;S（Server）：服务器端， 为客户端提交接口(数据)&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
+&lt;li&gt;常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua
     
     </summary>
     

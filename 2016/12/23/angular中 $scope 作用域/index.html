@@ -87,21 +87,18 @@
 
 
 <meta name="description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope  在 ng 凡是有 控制器就有 $scope 存在.  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
--&amp;gt; 多个 $scope 之间的 关系是什么  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有  嵌">
+作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular中$scope作用域">
 <meta property="og:url" content="http://yoursite.com/2016/12/23/angular中 $scope 作用域/index.html">
 <meta property="og:site_name" content="Allen's Notes">
 <meta property="og:description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope  在 ng 凡是有 控制器就有 $scope 存在.  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
--&amp;gt; 多个 $scope 之间的 关系是什么  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有  嵌">
-<meta property="og:updated_time" content="2016-12-23T13:26:49.263Z">
+作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
+<meta property="og:updated_time" content="2016-12-23T13:53:04.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular中$scope作用域">
 <meta name="twitter:description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope  在 ng 凡是有 控制器就有 $scope 存在.  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
--&amp;gt; 多个 $scope 之间的 关系是什么  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有  嵌">
+作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
 
 
 
@@ -349,20 +346,13 @@
 
       
         <h2 id="作用域-scope"><a href="#作用域-scope" class="headerlink" title="作用域 scope"></a>作用域 scope</h2><ul>
-<li><p>作用域对象<br>就是 $scope<br>-&gt; 什么时候创建 $scope<br>  在 ng 凡是有 控制器就有 $scope 存在.<br>  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.</p>
+<li><p>作用域对象<br>就是 $scope<br>-&gt; 什么时候创建 $scope</p>
+<a id="more"></a>
+<p>  在 ng 凡是有 控制器就有 $scope 存在.<br>  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.</p>
 <p>-&gt; 多个 $scope 之间的 关系是什么<br>  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有<br>  嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope</p>
 <p>  对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 <strong>proto</strong> 就是 b<br>  Object.create( b ) -&gt; a</p>
-<p>  在 原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?<br>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员</p>
-<pre><code>var base = { name: &apos;jim&apos; };
-var sub = Object.create( base );
-console.log( sub.name );
-</code></pre><p>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.</p>
-<pre><code>sub.age = 19;
-</code></pre><p>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性</p>
-<pre><code>sub.name = &apos;tom&apos;;
-// 除非 sub.__proto__.name = &apos;tom&apos;
-
-根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
+<p>  在 原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?<br>-&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>  var base = { name: ‘jim’ };<br>  var sub = Object.create( base );<br>  console.log( sub.name );<br>-&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>  sub.age = 19;<br>-&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>  sub.name = ‘tom’;<br>  // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
+<pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
 
 需要具备一个能力, 看 html 标签 绘制 scope 关系
 </code></pre></li>
@@ -376,13 +366,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
 
 语法: 
     module.run( [ &apos;...&apos;, function ( ... ) { ... } ] )
-</code></pre><ul>
-<li>作用域继承</li>
-</ul>
-<ul>
-<li>搭建本地 http 服务器<br>1&gt; 在 node 官网下载 node 安装包<br>  下载 .msi 格式的需要双击安装<br>  如果下载 zip 格式的 可以配置命令行手动安装<br>2&gt; 下一步下一步安装<br>  安装完成以后, 验证是否安装成功使用<br>  node -v<br>  npm -v<br>3&gt; 安装成功后使用 安装 hs 服务器软件<br>  npm install -g http-server<br>4&gt; 使用 shift + 右键 菜单中可以看到 在当前目录下 打开命令行<br>5&gt; 键入 hs -o 或 http-server -o 可以打开服务,在 当前目录下搭建 http 服务器, 并打开页面<br>  默认载入 index.html 文件</li>
-</ul>
-
+</code></pre>
       
     </div>
 

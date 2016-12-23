@@ -88,38 +88,20 @@
 
 <meta name="description" content="什么是异常？
 程序执行是出现的结果与预期结果不一致.
-运行时出现了错误
-
-分析要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段
-   1&amp;gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.
-   2&amp;gt; 只有在运行时出现的错误才可以被 try-catch
-找错喽
-throw new Error( ‘错误的消息’ )人为的">
+运行时出现了错误">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS中 异常">
 <meta property="og:url" content="http://yoursite.com/2016/12/23/Js中异常 exception /index.html">
 <meta property="og:site_name" content="Allen's Notes">
 <meta property="og:description" content="什么是异常？
 程序执行是出现的结果与预期结果不一致.
-运行时出现了错误
-
-分析要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段
-   1&amp;gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.
-   2&amp;gt; 只有在运行时出现的错误才可以被 try-catch
-找错喽
-throw new Error( ‘错误的消息’ )人为的">
-<meta property="og:updated_time" content="2016-12-23T13:16:20.583Z">
+运行时出现了错误">
+<meta property="og:updated_time" content="2016-12-23T13:59:56.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中 异常">
 <meta name="twitter:description" content="什么是异常？
 程序执行是出现的结果与预期结果不一致.
-运行时出现了错误
-
-分析要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段
-   1&amp;gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.
-   2&amp;gt; 只有在运行时出现的错误才可以被 try-catch
-找错喽
-throw new Error( ‘错误的消息’ )人为的">
+运行时出现了错误">
 
 
 
@@ -368,48 +350,52 @@ throw new Error( ‘错误的消息’ )人为的">
       
         <h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
 <li>程序执行是出现的结果与预期结果不一致.</li>
-<li>运行时出现了错误</li>
-</ol>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><pre><code>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段
-   1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.
-   2&gt; 只有在运行时出现的错误才可以被 try-catch
-</code></pre><h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
-<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
-<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br> 在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br> 将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
-<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
-<ol>
-<li><p>什么时候使用 throw 抛出异常<br>1&gt; 写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<br>  一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</p>
-<p>  例如: Person( name, age, gender )</p>
-<p>  function Person ( name, age, gender ) {</p>
-<pre><code>if ( typeof name == &apos;string&apos; &amp;&amp; typeof age == &apos;number&apos; &amp;&amp; typeof gender === &apos;string&apos; ) {
-  throw new Error( &apos;.... 参数不正确&apos; );
-}
-</code></pre></li>
-</ol>
+<li>运行时出现了错误<a id="more"></a>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段<br>1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.<br>2&gt; 只有在运行时出现的错误才可以被 try-catch</li>
+</ul>
 </li>
 </ol>
-<pre><code>      // 其后的代码
-    }
-2&gt; 系统定义的内置异常不够使用的时候
+<h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
+<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
+<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br>在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br>将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
+<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
+</li>
+<li><p>什么时候使用 throw 抛出异常</p>
+<ul>
+<li>写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<ul>
+<li>一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>例如: Person( name, age, gender )</p>
+<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>            }</p>
+<pre><code>  // 其后的代码
+}
+</code></pre><ul>
+<li><p>系统定义的内置异常不够使用的时候</p>
+<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )</p>
+<pre><code>try-catch
 
-在 js 中 try-catch 语法有 3 中( 知道即可 )
-  try-catch
+try {
 
-  try {
+} catch ( e ) {
 
-  } catch ( e ) {
+} finally { // 永远会执行
 
-  } finally { // 永远会执行
+}
 
-  }
+try {
 
-  try {
+} finally {
 
-  } finally {
+}
+</code></pre></li>
+</ul>
 
-  }
-</code></pre>
       
     </div>
 
@@ -439,8 +425,8 @@ throw new Error( ‘错误的消息’ )人为的">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/18/跨域/" rel="next" title="关于跨域">
-                <i class="fa fa-chevron-left"></i> 关于跨域
+              <a href="/2016/12/18/很暗的/" rel="next" title="很暗的">
+                <i class="fa fa-chevron-left"></i> 很暗的
               </a>
             
           </div>

@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
+<meta name="description" content="作用域对象  就是 $scope
+什么时候创建 $scope ?">
 <meta property="og:type" content="article">
 <meta property="og:title" content="angular中$scope作用域">
 <meta property="og:url" content="http://yoursite.com/2016/12/23/angular中 $scope 作用域/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
-<meta property="og:updated_time" content="2016-12-23T13:53:04.692Z">
+<meta property="og:description" content="作用域对象  就是 $scope
+什么时候创建 $scope ?">
+<meta property="og:updated_time" content="2016-12-26T12:14:16.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular中$scope作用域">
-<meta name="twitter:description" content="作用域 scope
-作用域对象就是 $scope-&amp;gt; 什么时候创建 $scope">
+<meta name="twitter:description" content="作用域对象  就是 $scope
+什么时候创建 $scope ?">
 
 
 
@@ -345,28 +345,23 @@
       
 
       
-        <h2 id="作用域-scope"><a href="#作用域-scope" class="headerlink" title="作用域 scope"></a>作用域 scope</h2><ul>
-<li><p>作用域对象<br>就是 $scope<br>-&gt; 什么时候创建 $scope</p>
-<a id="more"></a>
-<p>  在 ng 凡是有 控制器就有 $scope 存在.<br>  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.</p>
-<p>-&gt; 多个 $scope 之间的 关系是什么<br>  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有<br>  嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope</p>
-<p>  对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 <strong>proto</strong> 就是 b<br>  Object.create( b ) -&gt; a</p>
-<p>  在 原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?<br>-&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>  var base = { name: ‘jim’ };<br>  var sub = Object.create( base );<br>  console.log( sub.name );<br>-&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>  sub.age = 19;<br>-&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>  sub.name = ‘tom’;<br>  // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
+        <h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
+<h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
+<pre><code>在 ng 凡是有 控制器就有 $scope 存在.
+在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
+</code></pre><h3 id="多个-scope-之间的-关系是什么"><a href="#多个-scope-之间的-关系是什么" class="headerlink" title="多个 $scope 之间的 关系是什么?"></a>多个 $scope 之间的 关系是什么?</h3><pre><code>在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有
+嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope
+
+对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 __proto__ 就是 b
+Object.create( b ) -&gt; a
+</code></pre><h3 id="在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><a href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样" class="headerlink" title="在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?"></a>在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</h3><p>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>    var base = { name: ‘jim’ };<br>    var sub = Object.create( base );<br>    console.log( sub.name );<br>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>    sub.age = 19;<br>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>    sub.name = ‘tom’;<br>    // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
 <pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
 
 需要具备一个能力, 看 html 标签 绘制 scope 关系
-</code></pre></li>
-</ul>
-<p>  -&gt; 为什么一开始的代码中没有写 controller 也可以双向绑定<br>      在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理<br>      实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象<br>      它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
-<pre><code>凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性
+</code></pre><h3 id="为什么一开始的代码中没有写-controller-也可以双向绑定"><a href="#为什么一开始的代码中没有写-controller-也可以双向绑定" class="headerlink" title="为什么一开始的代码中没有写 controller 也可以双向绑定?"></a>为什么一开始的代码中没有写 controller 也可以双向绑定?</h3><p>  -&gt; 在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理,实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象,它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
+<p>  -&gt; 凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性</p>
+<p>  -&gt; 这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问,ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会执行该方法.<br>  -语法:<br>    module.run( [ ‘…’, function ( … ) { … } ] )</p>
 
-这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问
-ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会
-执行该方法.
-
-语法: 
-    module.run( [ &apos;...&apos;, function ( ... ) { ... } ] )
-</code></pre>
       
     </div>
 
@@ -497,7 +492,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -514,7 +509,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -601,7 +596,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域-scope"><span class="nav-number">1.</span> <span class="nav-text">作用域 scope</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域对象"><span class="nav-number">1.</span> <span class="nav-text">作用域对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候创建-scope"><span class="nav-number">1.1.</span> <span class="nav-text">什么时候创建 $scope ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个-scope-之间的-关系是什么"><span class="nav-number">1.2.</span> <span class="nav-text">多个 $scope 之间的 关系是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><span class="nav-number">1.3.</span> <span class="nav-text">在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么一开始的代码中没有写-controller-也可以双向绑定"><span class="nav-number">1.4.</span> <span class="nav-text">为什么一开始的代码中没有写 controller 也可以双向绑定?</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

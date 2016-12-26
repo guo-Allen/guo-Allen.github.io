@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="NodeJs," />
+  <meta name="keywords" content="模块化," />
 
 
 
@@ -86,27 +86,21 @@
 
 
 
-<meta name="description" content="##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是
-1. 模块简介
+<meta name="description" content="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是1. 模块简介
 一个 js 文件就是一个模块
-
 每个模块都是私有的作用域">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Node 模块化简介">
 <meta property="og:url" content="http://yoursite.com/2016/12/18/Node 模块化/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是
-1. 模块简介
+<meta property="og:description" content="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是1. 模块简介
 一个 js 文件就是一个模块
-
 每个模块都是私有的作用域">
-<meta property="og:updated_time" content="2016-12-23T12:45:08.999Z">
+<meta property="og:updated_time" content="2016-12-26T12:23:03.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node 模块化简介">
-<meta name="twitter:description" content="##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是
-1. 模块简介
+<meta name="twitter:description" content="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是1. 模块简介
 一个 js 文件就是一个模块
-
 每个模块都是私有的作用域">
 
 
@@ -354,35 +348,32 @@
       
 
       
-        <p>##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</p>
-<h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
-<li><p>一个 js 文件就是一个模块</p>
-</li>
-<li><p>每个模块都是私有的作用域</p>
-<a id="more"></a></li>
-<li><p>每个模块内部都提供了一个接口对象：<code>module.exports</code></p>
+        <h2 id="既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><a href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是" class="headerlink" title="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是"></a>既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</h2><h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
+<li>一个 js 文件就是一个模块</li>
+<li>每个模块都是私有的作用域<a id="more"></a></li>
+<li><p>每个模块内部都提供了一个接口对象：module.exports</p>
 <ul>
-<li>可以通过给 <code>module.exports</code> 接口对象添加成员或者赋值对外提供接口接口对象</li>
+<li>可以通过给 module.exports 接口对象添加成员或者赋值对外提供接口接口对象</li>
 </ul>
 </li>
-<li><p>为了方便，每个模块内部还为 <code>module.exports</code> 接口对象提供了一个别名： <code>exports</code> </p>
+<li><p>为了方便，每个模块内部还为 module.exports 接口对象提供了一个别名： exports </p>
 <ul>
-<li>所以也可以通过给 <code>exports</code> 接口对象添加成员向外暴露</li>
+<li>所以也可以通过给 exports 接口对象添加成员向外暴露</li>
 </ul>
 </li>
 <li><p>如果想要向外暴露单个的成员（单个函数、单个变量等）</p>
 <ul>
-<li>则通过给 <code>module.exports</code> 接口对象赋值即可</li>
-<li>注意：给 <code>exports</code> 赋值不管用<ul>
-<li>因为每个模块内部最终暴露的接口对象是 <code>module.exports</code></li>
-<li>所以给 <code>exports</code> 赋值会切断和 <code>module.exports</code> 之间的引用关系，是不管用的</li>
+<li>则通过给 module.exports 接口对象赋值即可</li>
+<li>注意：给 exports 赋值不管用<ul>
+<li>因为每个模块内部最终暴露的接口对象是 module.exports</li>
+<li>所以给 exports 赋值会切断和 module.exports 之间的引用关系，是不管用的</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>在模块中，可以使用 <code>requrie</code> 函数加载执行指定模块</p>
+<li><p>在模块中，可以使用 requri` 函数加载执行指定模块</p>
 <ul>
-<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 <code>module.exports</code> 接口对象</li>
+<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 module.exports 接口对象</li>
 </ul>
 </li>
 </ul>
@@ -502,7 +493,7 @@
 </li>
 <li><p>static文件</p>
 <ul>
-<li>用来存放静态页面所需的样式和图片</li>
+<li>用来存放静态页面所需的样式，图片，字体等。</li>
 </ul>
 </li>
 </ul>
@@ -527,7 +518,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/NodeJs/" rel="tag">#NodeJs</a>
+            <a href="/tags/模块化/" rel="tag">#模块化</a>
           
         </div>
       
@@ -637,7 +628,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -654,7 +645,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -741,7 +732,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模块简介"><span class="nav-number">1.</span> <span class="nav-text">1. 模块简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-自定义模块（用户自己编写的模块）"><span class="nav-number">2.</span> <span class="nav-text">2. 自定义模块（用户自己编写的模块）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-核心模块（Node-内置）"><span class="nav-number">3.</span> <span class="nav-text">3. 核心模块（Node 内置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-第三方模块（也称作包，由社区提供）"><span class="nav-number">4.</span> <span class="nav-text">4. 第三方模块（也称作包，由社区提供）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包与-Npm"><span class="nav-number">5.</span> <span class="nav-text">包与 Npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文件模块系统"><span class="nav-number">6.</span> <span class="nav-text">5. 文件模块系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在实际开发中建议用一下模块来整理文档文件。"><span class="nav-number">6.1.</span> <span class="nav-text">在实际开发中建议用一下模块来整理文档文件。</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><span class="nav-number">1.</span> <span class="nav-text">既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-模块简介"><span class="nav-number">1.1.</span> <span class="nav-text">1. 模块简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-自定义模块（用户自己编写的模块）"><span class="nav-number">1.2.</span> <span class="nav-text">2. 自定义模块（用户自己编写的模块）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-核心模块（Node-内置）"><span class="nav-number">1.3.</span> <span class="nav-text">3. 核心模块（Node 内置）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-第三方模块（也称作包，由社区提供）"><span class="nav-number">1.4.</span> <span class="nav-text">4. 第三方模块（也称作包，由社区提供）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包与-Npm"><span class="nav-number">1.5.</span> <span class="nav-text">包与 Npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文件模块系统"><span class="nav-number">1.6.</span> <span class="nav-text">5. 文件模块系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在实际开发中建议用一下模块来整理文档文件。"><span class="nav-number">1.6.1.</span> <span class="nav-text">在实际开发中建议用一下模块来整理文档文件。</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

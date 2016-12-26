@@ -68,12 +68,10 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="模块化," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
@@ -88,16 +86,25 @@
 
 
 
-<meta name="description" content="清风徐来，水波不兴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="Node 中可以使用 JavaScript
+在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿
+在 Node 中，一个 JavaScript 文件就是一个模块
+模块天生就是私有作用域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Module">
+<meta property="og:url" content="http://yoursite.com/2016/12/26/JavaScript 模块化/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="清风徐来，水波不兴。">
-<meta property="og:updated_time" content="2016-12-07T07:16:44.557Z">
+<meta property="og:description" content="Node 中可以使用 JavaScript
+在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿
+在 Node 中，一个 JavaScript 文件就是一个模块
+模块天生就是私有作用域">
+<meta property="og:updated_time" content="2016-12-26T11:44:57.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="清风徐来，水波不兴。">
+<meta name="twitter:title" content="JavaScript Module">
+<meta name="twitter:description" content="Node 中可以使用 JavaScript
+在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿
+在 Node 中，一个 JavaScript 文件就是一个模块
+模块天生就是私有作用域">
 
 
 
@@ -115,13 +122,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    标签 | Allen's Blog
-  
-</title>
+  <title> JavaScript Module | Allen's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -152,7 +153,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -265,16 +266,206 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 7 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript Module
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-26T19:44:57+08:00" content="2016-12-26">
+              2016-12-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/NodeJs/" itemprop="url" rel="index">
+                    <span itemprop="name">NodeJs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/26/JavaScript 模块化/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/26/JavaScript 模块化/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/Array/" style="font-size: 12px; color: #ccc">Array</a> <a href="/tags/NodeJs/" style="font-size: 21px; color: #6f6f6f">NodeJs</a> <a href="/tags/angular/" style="font-size: 30px; color: #111">angular</a> <a href="/tags/人生/" style="font-size: 21px; color: #6f6f6f">人生</a> <a href="/tags/小算法-Algorithm/" style="font-size: 12px; color: #ccc">小算法(Algorithm)</a> <a href="/tags/模块化/" style="font-size: 21px; color: #6f6f6f">模块化</a> <a href="/tags/跨域/" style="font-size: 12px; color: #ccc">跨域</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>Node 中可以使用 JavaScript<ul>
+<li>在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿</li>
+<li>在 Node 中，一个 JavaScript 文件就是一个模块<ul>
+<li>模块天生就是私有作用域<a id="more"></a></li>
+</ul>
+</li>
+<li>Node 就是基于 CommonJS 规范实现了一套自己的模块化解决方案<ul>
+<li>所谓的规范只是指定标准的人或者组织，不负责实现</li>
+<li>一般这种所谓的规范都是先有的实现，慢慢的用的人多了，自然而然就形成一种标准</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>浏览器也可以使用 JavaScript</p>
+<ul>
+<li>浏览器中的 JavaScript 必须依赖于 html 页面中的 script 标签</li>
+<li>JavaScript 有一个天大的缺陷：无法直接通过 js 语法本身去加载另一个 js 文件</li>
+<li>对于大型项目来说，在一个页面通过 script 标签之间加载 n 多个 JavaScript 文件</li>
+<li>以前写代码都习惯加上 匿名自执行函数</li>
+<li>在浏览器环境，也有一个社区 RequireJS ，也为 JavaScript 语言在浏览器端实现了一套模块化解决方案<ul>
+<li>例如如何定一个模块</li>
+<li>以及模块与模块之间如何相互加载</li>
+<li>以及模块如何暴露接口</li>
+</ul>
+</li>
+<li>由于 Require 推广的很好，在社区中形成了一种标准，所以 RequireJS 社区给自己定义了一个模块规范名称：AMD</li>
+<li>AMD：Asynchronous Module Definition  异步模块定义规范</li>
+<li>国内阿里巴巴有一个牛人，不服 RequireJS，感觉用的不爽，所以做了一个叫 SeaJS，由于在国内推广的比较好，所以也给自己起了个名字：CMD：Common Module Definition</li>
+<li>但是 SeaJS 已经不更新维护了</li>
+<li>RequireJS 还在更新维护</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<ul>
+<li>无论是 CMD、AMD、CommonJS、UMD 什么什么 MD 模块系统</li>
+<li>它们的本质初衷都是一样的，都是为了解决 JavaScript 历史问题：没有模块化系统</li>
+<li>所以，在 2015 年 6 月，ES6正式发布了，其中就定义了 模块系统 规范</li>
+<li>原生就提供了 import、export 等接口API用来作为自己官方的模块API规范</li>
+<li>但是，这个模块系统由一个很大的问题，还没有任何环境能原生直接支持</li>
+<li>必须通过一个叫：babel 的工具，编译转换才可以使用</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/模块化/" rel="tag">#模块化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/23/MVC 及 MVVM 思想/" rel="next" title="MVC及MVVC 在Angular中的思想">
+                <i class="fa fa-chevron-left"></i> MVC及MVVC 在Angular中的思想
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/26/JavaScript 模块化/"
+     data-title="JavaScript Module"
+     data-content=""
+     data-url="http://yoursite.com/2016/12/26/JavaScript 模块化/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
   </div>
 
 
@@ -285,8 +476,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="tags/index.html"
-           data-title="标签" data-url="http://yoursite.com/tags/index.html">
+      <div class="ds-thread" data-thread-key="2016/12/26/JavaScript 模块化/"
+           data-title="JavaScript Module" data-url="http://yoursite.com/2016/12/26/JavaScript 模块化/">
       </div>
     
   </div>
@@ -310,8 +501,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -420,6 +620,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -522,6 +733,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

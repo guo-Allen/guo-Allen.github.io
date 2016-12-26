@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-23T13:54:39.016Z</updated>
+  <updated>2016-12-26T11:44:57.228Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,76 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript Module</title>
+    <link href="http://yoursite.com/2016/12/26/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://yoursite.com/2016/12/26/JavaScript 模块化/</id>
+    <published>2016-12-26T11:44:57.228Z</published>
+    <updated>2016-12-26T11:44:57.228Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>Node 中可以使用 JavaScript<ul>
+<li>在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿</li>
+<li>在 Node 中，一个 JavaScript 文件就是一个模块<ul>
+<li>模块天生就是私有作用域<a id="more"></a></li>
+</ul>
+</li>
+<li>Node 就是基于 CommonJS 规范实现了一套自己的模块化解决方案<ul>
+<li>所谓的规范只是指定标准的人或者组织，不负责实现</li>
+<li>一般这种所谓的规范都是先有的实现，慢慢的用的人多了，自然而然就形成一种标准</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>浏览器也可以使用 JavaScript</p>
+<ul>
+<li>浏览器中的 JavaScript 必须依赖于 html 页面中的 script 标签</li>
+<li>JavaScript 有一个天大的缺陷：无法直接通过 js 语法本身去加载另一个 js 文件</li>
+<li>对于大型项目来说，在一个页面通过 script 标签之间加载 n 多个 JavaScript 文件</li>
+<li>以前写代码都习惯加上 匿名自执行函数</li>
+<li>在浏览器环境，也有一个社区 RequireJS ，也为 JavaScript 语言在浏览器端实现了一套模块化解决方案<ul>
+<li>例如如何定一个模块</li>
+<li>以及模块与模块之间如何相互加载</li>
+<li>以及模块如何暴露接口</li>
+</ul>
+</li>
+<li>由于 Require 推广的很好，在社区中形成了一种标准，所以 RequireJS 社区给自己定义了一个模块规范名称：AMD</li>
+<li>AMD：Asynchronous Module Definition  异步模块定义规范</li>
+<li>国内阿里巴巴有一个牛人，不服 RequireJS，感觉用的不爽，所以做了一个叫 SeaJS，由于在国内推广的比较好，所以也给自己起了个名字：CMD：Common Module Definition</li>
+<li>但是 SeaJS 已经不更新维护了</li>
+<li>RequireJS 还在更新维护</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<ul>
+<li>无论是 CMD、AMD、CommonJS、UMD 什么什么 MD 模块系统</li>
+<li>它们的本质初衷都是一样的，都是为了解决 JavaScript 历史问题：没有模块化系统</li>
+<li>所以，在 2015 年 6 月，ES6正式发布了，其中就定义了 模块系统 规范</li>
+<li>原生就提供了 import、export 等接口API用来作为自己官方的模块API规范</li>
+<li>但是，这个模块系统由一个很大的问题，还没有任何环境能原生直接支持</li>
+<li>必须通过一个叫：babel 的工具，编译转换才可以使用</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;Node 中可以使用 JavaScript&lt;ul&gt;
+&lt;li&gt;在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿&lt;/li&gt;
+&lt;li&gt;在 Node 中，一个 JavaScript 文件就是一个模块&lt;ul&gt;
+&lt;li&gt;模块天生就是私有作用域
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+  </entry>
   
   <entry>
     <title>MVC及MVVC 在Angular中的思想</title>
@@ -70,35 +140,30 @@
     <link href="http://yoursite.com/2016/12/23/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
     <id>http://yoursite.com/2016/12/23/angular中 $scope 作用域/</id>
     <published>2016-12-23T13:26:49.262Z</published>
-    <updated>2016-12-23T13:53:04.692Z</updated>
+    <updated>2016-12-26T12:14:16.570Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="作用域-scope"><a href="#作用域-scope" class="headerlink" title="作用域 scope"></a>作用域 scope</h2><ul>
-<li><p>作用域对象<br>就是 $scope<br>-&gt; 什么时候创建 $scope</p>
-<a id="more"></a>
-<p>  在 ng 凡是有 控制器就有 $scope 存在.<br>  在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.</p>
-<p>-&gt; 多个 $scope 之间的 关系是什么<br>  在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有<br>  嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope</p>
-<p>  对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 <strong>proto</strong> 就是 b<br>  Object.create( b ) -&gt; a</p>
-<p>  在 原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?<br>-&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>  var base = { name: ‘jim’ };<br>  var sub = Object.create( base );<br>  console.log( sub.name );<br>-&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>  sub.age = 19;<br>-&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>  sub.name = ‘tom’;<br>  // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
+    <content type="html"><![CDATA[<h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
+<h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
+<pre><code>在 ng 凡是有 控制器就有 $scope 存在.
+在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
+</code></pre><h3 id="多个-scope-之间的-关系是什么"><a href="#多个-scope-之间的-关系是什么" class="headerlink" title="多个 $scope 之间的 关系是什么?"></a>多个 $scope 之间的 关系是什么?</h3><pre><code>在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有
+嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope
+
+对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 __proto__ 就是 b
+Object.create( b ) -&gt; a
+</code></pre><h3 id="在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><a href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样" class="headerlink" title="在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?"></a>在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</h3><p>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>    var base = { name: ‘jim’ };<br>    var sub = Object.create( base );<br>    console.log( sub.name );<br>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>    sub.age = 19;<br>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>    sub.name = ‘tom’;<br>    // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
 <pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
 
 需要具备一个能力, 看 html 标签 绘制 scope 关系
-</code></pre></li>
-</ul>
-<p>  -&gt; 为什么一开始的代码中没有写 controller 也可以双向绑定<br>      在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理<br>      实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象<br>      它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
-<pre><code>凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性
-
-这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问
-ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会
-执行该方法.
-
-语法: 
-    module.run( [ &apos;...&apos;, function ( ... ) { ... } ] )
-</code></pre>]]></content>
+</code></pre><h3 id="为什么一开始的代码中没有写-controller-也可以双向绑定"><a href="#为什么一开始的代码中没有写-controller-也可以双向绑定" class="headerlink" title="为什么一开始的代码中没有写 controller 也可以双向绑定?"></a>为什么一开始的代码中没有写 controller 也可以双向绑定?</h3><p>  -&gt; 在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理,实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象,它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
+<p>  -&gt; 凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性</p>
+<p>  -&gt; 这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问,ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会执行该方法.<br>  -语法:<br>    module.run( [ ‘…’, function ( … ) { … } ] )</p>
+]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;作用域-scope&quot;&gt;&lt;a href=&quot;#作用域-scope&quot; class=&quot;headerlink&quot; title=&quot;作用域 scope&quot;&gt;&lt;/a&gt;作用域 scope&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;作用域对象&lt;br&gt;就是 $scope&lt;br&gt;-&amp;gt; 什么时候创建 $scope&lt;/p&gt;
+      &lt;h2 id=&quot;作用域对象&quot;&gt;&lt;a href=&quot;#作用域对象&quot; class=&quot;headerlink&quot; title=&quot;作用域对象&quot;&gt;&lt;/a&gt;作用域对象&lt;/h2&gt;&lt;p&gt;  就是 $scope&lt;/p&gt;
+&lt;h3 id=&quot;什么时候创建-scope&quot;&gt;&lt;a href=&quot;#什么时候创建-scope&quot; class=&quot;headerlink&quot; title=&quot;什么时候创建 $scope ?&quot;&gt;&lt;/a&gt;什么时候创建 $scope ?&lt;/h3&gt;
     
     </summary>
     
@@ -114,7 +179,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
     <link href="http://yoursite.com/2016/12/23/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
     <id>http://yoursite.com/2016/12/23/angular 基础思想/</id>
     <published>2016-12-23T13:23:17.436Z</published>
-    <updated>2016-12-23T13:47:42.140Z</updated>
+    <updated>2016-12-26T11:59:37.162Z</updated>
     
     <content type="html"><![CDATA[<h2 id="angular-官方"><a href="#angular-官方" class="headerlink" title="angular 官方"></a>angular 官方</h2><ul>
 <li>ng 表示 AngularJS.</li>
@@ -145,12 +210,14 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
 <li><p>在实际开发时候, 一般一个页面中会包含很多的功能, 在 ng 中每一个具体功能由 控制器 维护.<br>  在 ng 的代码中有一个属性 ng-controller, 该属性会提供一个具体的函数, 在函数中处理数据. </p>
 </li>
 <li><p>ng 的一般开发的代码结构就出现了</p>
-<pre><code>1&gt; 页面中必须有 ng-app, 而且都会自己命名
-2&gt; 页面中都会有 ng-controller, 因此使用 ng-controller 就有一个 $scope, 可以控制数据
-3&gt; 页面的 ng-controller 中都有 ng-model, ng-model 书写数据就会是 $scope 的属性
-4&gt; 代码中一定有一个 angular.module( &apos;ng-app名字&apos;, [] ) 来创建模块
-5&gt; 使用 .controller( &apos;控制器的名字&apos;, 函数 ) 来定义控制器. 以便得到 $scope, 可以操作数据.
-</code></pre></li>
+<ul>
+<li>页面中必须有 ng-app, 而且都会自己命名</li>
+<li>页面中都会有 ng-controller, 因此使用 ng-controller 就有一个 $scope, 可以控制数据</li>
+<li>页面的 ng-controller 中都有 ng-model, ng-model 书写数据就会是 $scope 的属性</li>
+<li>代码中一定有一个 angular.module( ‘ng-app名字’, [] ) 来创建模块</li>
+<li>使用 .controller( ‘控制器的名字’, 函数 ) 来定义控制器. 以便得到 $scope, 可以操作数据.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -158,12 +225,15 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
 <li><p>创建对象的方法很多, 常用的是 构造函数( 构造器, constructor ), 和工厂( factory )模式<br>  所以在代码中, 创建对象的函数, 常常称为工厂函数, 利用工厂函数创建对象的设计模式就是工厂模式<br>  Object.create(  )</p>
 </li>
 <li><p>依赖注入</p>
-<pre><code>所谓的依赖就是指, 在实现某些功能的时候, 需要某些特定的对象.
-所谓的注入, 就是需要某个对象的时候, 作为参数传入
-
-因此依赖注入就是, 在需要使用某一个对象的时候, 利用参数传入即可
-</code></pre></li>
-<li><p>依赖注入的实现原理<br>  1&gt; ng 在运行的时候, 会跟我们创建很多对象<br>  2&gt; 这些对象都是私有的</p>
+<ul>
+<li>所谓的依赖就是指, 在实现某些功能的时候, 需要某些特定的对象.</li>
+<li><p>所谓的注入, 就是需要某个对象的时候, 作为参数传入</p>
+</li>
+<li><p>因此依赖注入就是, 在需要使用某一个对象的时候, 利用参数传入即可</p>
+</li>
+</ul>
+</li>
+<li><p>依赖注入的实现原理<br>1&gt; ng 在运行的时候, 会跟我们创建很多对象<br>2&gt; 这些对象都是私有的</p>
 </li>
 <li><p>在 ng 中可以被注入的对象有两类, 一类是 provider, 一类是服务( services )</p>
 </li>
@@ -173,12 +243,9 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
 </li>
 <li><p>如何获取模块<br> angular.module( ‘模块名’ );<br> 在 ng 中无论代码是否在闭包中, 凡是已经定义的模块, 都可以获取.</p>
 </li>
-<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’, </p>
-<pre><code>[ &apos;需要依赖注入的对象的名字&apos;, ..., 
-   function ( 依赖列表 ) {
-
-   } ] )
-</code></pre><p> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
+<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’,<br> [ ‘需要依赖注入的对象的名字’, …, </p>
+<pre><code>function ( 依赖列表 ) {
+</code></pre><p> } ] )<br> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
 <p> });</p>
 <p> function ( $scope, $http ) { … }<br> =&gt;<br> [ ‘$scope’, ‘$http’, function ( $scope, $http ) { … } ] </p>
 </li>
@@ -225,7 +292,7 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
     <link href="http://yoursite.com/2016/12/23/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
     <id>http://yoursite.com/2016/12/23/Js中异常 exception /</id>
     <published>2016-12-23T13:16:20.581Z</published>
-    <updated>2016-12-23T13:59:56.643Z</updated>
+    <updated>2016-12-26T12:20:12.349Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
 <li>程序执行是出现的结果与预期结果不一致.</li>
@@ -251,25 +318,18 @@ ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运�
 </li>
 </ol>
 <p>例如: Person( name, age, gender )</p>
-<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>            }</p>
-<pre><code>  // 其后的代码
-}
-</code></pre><ul>
+<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
+<ul>
 <li><p>系统定义的内置异常不够使用的时候</p>
-<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )</p>
-<pre><code>try-catch
-
-try {
-
-} catch ( e ) {
+<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
+<p>2&gt; try {</p>
+<pre><code>} catch ( e ) {
 
 } finally { // 永远会执行
 
 }
-
-try {
-
-} finally {
+</code></pre><p>3&gt; try {</p>
+<pre><code>} finally {
 
 }
 </code></pre></li>
@@ -288,47 +348,6 @@ try {
     
     
       <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>很暗的</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
-    <id>http://yoursite.com/2016/12/18/很暗的/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T13:06:24.233Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
-<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
-<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
-<p>这种乍然是很悲哀的。</p>
-<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
-<p>然而事实上它的消失是悄然无息的。</p>
-<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
-<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
-<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
-<p>你简直是我的全部。</p>
-<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
-<p>也记得你说最近跟我说的最后一句话。</p>
-<p>我记得你跟我说过的好听的话。</p>
-<p>也记得你对我说过的残忍的话。</p>
-<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
-&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
     
   </entry>
   
@@ -429,6 +448,47 @@ try {
       &lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>很暗的</title>
+    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
+    <id>http://yoursite.com/2016/12/18/很暗的/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-08T13:06:24.233Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
+<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
+<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
+<p>这种乍然是很悲哀的。</p>
+<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
+<p>然而事实上它的消失是悄然无息的。</p>
+<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
+<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
+<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
+<p>你简直是我的全部。</p>
+<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
+<p>也记得你说最近跟我说的最后一句话。</p>
+<p>我记得你跟我说过的好听的话。</p>
+<p>也记得你对我说过的残忍的话。</p>
+<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
+&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
     
     </summary>
     
@@ -608,37 +668,34 @@ module.exports = findMaxChar;
     <link href="http://yoursite.com/2016/12/18/Node%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/18/Node 模块化/</id>
     <published>2016-12-17T17:06:31.504Z</published>
-    <updated>2016-12-23T12:45:08.999Z</updated>
+    <updated>2016-12-26T12:23:03.823Z</updated>
     
-    <content type="html"><![CDATA[<p>##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</p>
-<h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
-<li><p>一个 js 文件就是一个模块</p>
-</li>
-<li><p>每个模块都是私有的作用域</p>
-<a id="more"></a></li>
-<li><p>每个模块内部都提供了一个接口对象：<code>module.exports</code></p>
+    <content type="html"><![CDATA[<h2 id="既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><a href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是" class="headerlink" title="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是"></a>既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</h2><h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
+<li>一个 js 文件就是一个模块</li>
+<li>每个模块都是私有的作用域<a id="more"></a></li>
+<li><p>每个模块内部都提供了一个接口对象：module.exports</p>
 <ul>
-<li>可以通过给 <code>module.exports</code> 接口对象添加成员或者赋值对外提供接口接口对象</li>
+<li>可以通过给 module.exports 接口对象添加成员或者赋值对外提供接口接口对象</li>
 </ul>
 </li>
-<li><p>为了方便，每个模块内部还为 <code>module.exports</code> 接口对象提供了一个别名： <code>exports</code> </p>
+<li><p>为了方便，每个模块内部还为 module.exports 接口对象提供了一个别名： exports </p>
 <ul>
-<li>所以也可以通过给 <code>exports</code> 接口对象添加成员向外暴露</li>
+<li>所以也可以通过给 exports 接口对象添加成员向外暴露</li>
 </ul>
 </li>
 <li><p>如果想要向外暴露单个的成员（单个函数、单个变量等）</p>
 <ul>
-<li>则通过给 <code>module.exports</code> 接口对象赋值即可</li>
-<li>注意：给 <code>exports</code> 赋值不管用<ul>
-<li>因为每个模块内部最终暴露的接口对象是 <code>module.exports</code></li>
-<li>所以给 <code>exports</code> 赋值会切断和 <code>module.exports</code> 之间的引用关系，是不管用的</li>
+<li>则通过给 module.exports 接口对象赋值即可</li>
+<li>注意：给 exports 赋值不管用<ul>
+<li>因为每个模块内部最终暴露的接口对象是 module.exports</li>
+<li>所以给 exports 赋值会切断和 module.exports 之间的引用关系，是不管用的</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>在模块中，可以使用 <code>requrie</code> 函数加载执行指定模块</p>
+<li><p>在模块中，可以使用 requri` 函数加载执行指定模块</p>
 <ul>
-<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 <code>module.exports</code> 接口对象</li>
+<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 module.exports 接口对象</li>
 </ul>
 </li>
 </ul>
@@ -758,7 +815,7 @@ module.exports = findMaxChar;
 </li>
 <li><p>static文件</p>
 <ul>
-<li>用来存放静态页面所需的样式和图片</li>
+<li>用来存放静态页面所需的样式，图片，字体等。</li>
 </ul>
 </li>
 </ul>
@@ -766,18 +823,16 @@ module.exports = findMaxChar;
     
     <summary type="html">
     
-      &lt;p&gt;##既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&lt;/p&gt;
-&lt;h3 id=&quot;1-模块简介&quot;&gt;&lt;a href=&quot;#1-模块简介&quot; class=&quot;headerlink&quot; title=&quot;1. 模块简介&quot;&gt;&lt;/a&gt;1. 模块简介&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;一个 js 文件就是一个模块&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;每个模块都是私有的作用域&lt;/p&gt;
+      &lt;h2 id=&quot;既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是&quot;&gt;&lt;a href=&quot;#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是&quot; class=&quot;headerlink&quot; title=&quot;既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&quot;&gt;&lt;/a&gt;既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&lt;/h2&gt;&lt;h3 id=&quot;1-模块简介&quot;&gt;&lt;a href=&quot;#1-模块简介&quot; class=&quot;headerlink&quot; title=&quot;1. 模块简介&quot;&gt;&lt;/a&gt;1. 模块简介&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;一个 js 文件就是一个模块&lt;/li&gt;
+&lt;li&gt;每个模块都是私有的作用域
     
     </summary>
     
       <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
     
     
-      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
+      <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     
   </entry>
   

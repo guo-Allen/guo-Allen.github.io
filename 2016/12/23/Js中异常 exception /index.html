@@ -96,7 +96,7 @@
 <meta property="og:description" content="什么是异常？
 程序执行是出现的结果与预期结果不一致.
 运行时出现了错误">
-<meta property="og:updated_time" content="2016-12-23T13:59:56.643Z">
+<meta property="og:updated_time" content="2016-12-26T12:20:12.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中 异常">
 <meta name="twitter:description" content="什么是异常？
@@ -372,25 +372,18 @@
 </li>
 </ol>
 <p>例如: Person( name, age, gender )</p>
-<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>            }</p>
-<pre><code>  // 其后的代码
-}
-</code></pre><ul>
+<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
+<ul>
 <li><p>系统定义的内置异常不够使用的时候</p>
-<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )</p>
-<pre><code>try-catch
-
-try {
-
-} catch ( e ) {
+<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
+<p>2&gt; try {</p>
+<pre><code>} catch ( e ) {
 
 } finally { // 永远会执行
 
 }
-
-try {
-
-} finally {
+</code></pre><p>3&gt; try {</p>
+<pre><code>} finally {
 
 }
 </code></pre></li>
@@ -425,8 +418,8 @@ try {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/18/很暗的/" rel="next" title="很暗的">
-                <i class="fa fa-chevron-left"></i> 很暗的
+              <a href="/2016/12/18/跨域/" rel="next" title="关于跨域">
+                <i class="fa fa-chevron-left"></i> 关于跨域
               </a>
             
           </div>
@@ -526,7 +519,7 @@ try {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -543,7 +536,7 @@ try {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

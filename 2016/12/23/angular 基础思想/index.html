@@ -100,7 +100,7 @@ ng 表示 AngularJS.
 官方网站
 angular官网 
 源代码">
-<meta property="og:updated_time" content="2016-12-23T13:47:42.140Z">
+<meta property="og:updated_time" content="2016-12-26T11:59:37.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="angular 基础思想">
 <meta name="twitter:description" content="angular 官方
@@ -383,12 +383,14 @@ angular官网
 <li><p>在实际开发时候, 一般一个页面中会包含很多的功能, 在 ng 中每一个具体功能由 控制器 维护.<br>  在 ng 的代码中有一个属性 ng-controller, 该属性会提供一个具体的函数, 在函数中处理数据. </p>
 </li>
 <li><p>ng 的一般开发的代码结构就出现了</p>
-<pre><code>1&gt; 页面中必须有 ng-app, 而且都会自己命名
-2&gt; 页面中都会有 ng-controller, 因此使用 ng-controller 就有一个 $scope, 可以控制数据
-3&gt; 页面的 ng-controller 中都有 ng-model, ng-model 书写数据就会是 $scope 的属性
-4&gt; 代码中一定有一个 angular.module( &apos;ng-app名字&apos;, [] ) 来创建模块
-5&gt; 使用 .controller( &apos;控制器的名字&apos;, 函数 ) 来定义控制器. 以便得到 $scope, 可以操作数据.
-</code></pre></li>
+<ul>
+<li>页面中必须有 ng-app, 而且都会自己命名</li>
+<li>页面中都会有 ng-controller, 因此使用 ng-controller 就有一个 $scope, 可以控制数据</li>
+<li>页面的 ng-controller 中都有 ng-model, ng-model 书写数据就会是 $scope 的属性</li>
+<li>代码中一定有一个 angular.module( ‘ng-app名字’, [] ) 来创建模块</li>
+<li>使用 .controller( ‘控制器的名字’, 函数 ) 来定义控制器. 以便得到 $scope, 可以操作数据.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -396,12 +398,15 @@ angular官网
 <li><p>创建对象的方法很多, 常用的是 构造函数( 构造器, constructor ), 和工厂( factory )模式<br>  所以在代码中, 创建对象的函数, 常常称为工厂函数, 利用工厂函数创建对象的设计模式就是工厂模式<br>  Object.create(  )</p>
 </li>
 <li><p>依赖注入</p>
-<pre><code>所谓的依赖就是指, 在实现某些功能的时候, 需要某些特定的对象.
-所谓的注入, 就是需要某个对象的时候, 作为参数传入
-
-因此依赖注入就是, 在需要使用某一个对象的时候, 利用参数传入即可
-</code></pre></li>
-<li><p>依赖注入的实现原理<br>  1&gt; ng 在运行的时候, 会跟我们创建很多对象<br>  2&gt; 这些对象都是私有的</p>
+<ul>
+<li>所谓的依赖就是指, 在实现某些功能的时候, 需要某些特定的对象.</li>
+<li><p>所谓的注入, 就是需要某个对象的时候, 作为参数传入</p>
+</li>
+<li><p>因此依赖注入就是, 在需要使用某一个对象的时候, 利用参数传入即可</p>
+</li>
+</ul>
+</li>
+<li><p>依赖注入的实现原理<br>1&gt; ng 在运行的时候, 会跟我们创建很多对象<br>2&gt; 这些对象都是私有的</p>
 </li>
 <li><p>在 ng 中可以被注入的对象有两类, 一类是 provider, 一类是服务( services )</p>
 </li>
@@ -411,12 +416,9 @@ angular官网
 </li>
 <li><p>如何获取模块<br> angular.module( ‘模块名’ );<br> 在 ng 中无论代码是否在闭包中, 凡是已经定义的模块, 都可以获取.</p>
 </li>
-<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’, </p>
-<pre><code>[ &apos;需要依赖注入的对象的名字&apos;, ..., 
-   function ( 依赖列表 ) {
-
-   } ] )
-</code></pre><p> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
+<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’,<br> [ ‘需要依赖注入的对象的名字’, …, </p>
+<pre><code>function ( 依赖列表 ) {
+</code></pre><p> } ] )<br> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
 <p> });</p>
 <p> function ( $scope, $http ) { … }<br> =&gt;<br> [ ‘$scope’, ‘$http’, function ( $scope, $http ) { … } ] </p>
 </li>
@@ -570,7 +572,7 @@ angular官网
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -587,7 +589,7 @@ angular官网
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

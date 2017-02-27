@@ -58,7 +58,7 @@ console.log(zs);
     <link href="http://yoursite.com/2017/02/27/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
     <id>http://yoursite.com/2017/02/27/实现继承/</id>
     <published>2017-02-27T13:45:44.371Z</published>
-    <updated>2017-02-27T15:24:58.912Z</updated>
+    <updated>2017-02-27T15:27:47.978Z</updated>
     
     <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
@@ -85,11 +85,32 @@ console.log(zs);
 </li>
 </ul>
 <h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
-<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123;name:&quot;女娲&quot;, age: 1, gender: &quot;female&quot;&#125;;</div><div class="line">var o2 = &#123;grade: &quot;三年级二班&quot;, score: 100&#125;;</div><div class="line"></div><div class="line">// o2 继承 o1</div><div class="line">for ( var k in o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</div><div class="line">//给 o2 提供一个方法, 叫 extend</div><div class="line">o2.extend = function (obj) &#123;</div><div class="line">    for (var k in obj) &#123;</div><div class="line">        this[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  // 继承</div><div class="line">``` </div><div class="line"></div><div class="line">### 对象冒充</div><div class="line">- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。</div></pre></td></tr></table></figure>
-</li>
+<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<br>```<br>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</li>
 </ul>
-<p>function parent(name, age) {<br>        this.name = name;<br>        this.age = age;<br>}<br>function child(name, age, gender, address) {<br>        // 将parent作为child对象的一个方法来调用<br>        this.parent = parent;<br>        this.parent(name, age);<br>            // 卸磨杀驴<br>        delete this.parent;<br>        this.gender = gender;<br>        this.address = address;<br>}<br>    var ch = new child(‘tom’, 18, ‘boy’, ‘beijing’);<br>    console.log(ch);<br>``` </p>
-]]></content>
+<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
+<p>//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>//给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
+<p>o2.extend(o1);  // 继承</p>
+<pre><code>
+### 对象冒充
+- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。
+
+```javascript
+function parent(name, age) {
+        this.name = name;
+        this.age = age;
+}
+function child(name, age, gender, address) {
+        // 将parent作为child对象的一个方法来调用
+        this.parent = parent;
+        this.parent(name, age);
+            // 卸磨杀驴
+        delete this.parent;
+        this.gender = gender;
+        this.address = address;
+}
+    var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
+    console.log(ch);
+</code></pre>]]></content>
     
     <summary type="html">
     
@@ -450,6 +471,80 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>我想要的</title>
+    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
+    <id>http://yoursite.com/2016/12/18/无题/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-17T09:21:36.677Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
+<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
+<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
+<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
+<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
+<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>很暗的</title>
+    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
+    <id>http://yoursite.com/2016/12/18/很暗的/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-08T13:06:24.233Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
+<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
+<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
+<p>这种乍然是很悲哀的。</p>
+<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
+<p>然而事实上它的消失是悄然无息的。</p>
+<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
+<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
+<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
+<p>你简直是我的全部。</p>
+<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
+<p>也记得你说最近跟我说的最后一句话。</p>
+<p>我记得你跟我说过的好听的话。</p>
+<p>也记得你对我说过的残忍的话。</p>
+<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
+&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于跨域</title>
     <link href="http://yoursite.com/2016/12/18/%E8%B7%A8%E5%9F%9F/"/>
     <id>http://yoursite.com/2016/12/18/跨域/</id>
@@ -520,80 +615,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>很暗的</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
-    <id>http://yoursite.com/2016/12/18/很暗的/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T13:06:24.233Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
-<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
-<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
-<p>这种乍然是很悲哀的。</p>
-<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
-<p>然而事实上它的消失是悄然无息的。</p>
-<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
-<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
-<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
-<p>你简直是我的全部。</p>
-<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
-<p>也记得你说最近跟我说的最后一句话。</p>
-<p>我记得你跟我说过的好听的话。</p>
-<p>也记得你对我说过的残忍的话。</p>
-<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
-&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我想要的</title>
-    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2016/12/18/无题/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-17T09:21:36.677Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
-<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
-<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
-<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
-<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
-<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
     
   </entry>
   

@@ -112,7 +112,7 @@
 
 继承：子类可以使用从父类继承的属性和方法。  *即：让某个类型的对象获得另一个类型的对象的属性的方法    
 多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断">
-<meta property="og:updated_time" content="2017-02-27T15:24:58.912Z">
+<meta property="og:updated_time" content="2017-02-27T15:27:47.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象的继承">
 <meta name="twitter:description" content="特性
@@ -397,11 +397,32 @@
 </li>
 </ul>
 <h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
-<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123;name:&quot;女娲&quot;, age: 1, gender: &quot;female&quot;&#125;;</div><div class="line">var o2 = &#123;grade: &quot;三年级二班&quot;, score: 100&#125;;</div><div class="line"></div><div class="line">// o2 继承 o1</div><div class="line">for ( var k in o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</div><div class="line">//给 o2 提供一个方法, 叫 extend</div><div class="line">o2.extend = function (obj) &#123;</div><div class="line">    for (var k in obj) &#123;</div><div class="line">        this[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  // 继承</div><div class="line">``` </div><div class="line"></div><div class="line">### 对象冒充</div><div class="line">- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。</div></pre></td></tr></table></figure>
-</li>
+<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<br>```<br>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</li>
 </ul>
-<p>function parent(name, age) {<br>        this.name = name;<br>        this.age = age;<br>}<br>function child(name, age, gender, address) {<br>        // 将parent作为child对象的一个方法来调用<br>        this.parent = parent;<br>        this.parent(name, age);<br>            // 卸磨杀驴<br>        delete this.parent;<br>        this.gender = gender;<br>        this.address = address;<br>}<br>    var ch = new child(‘tom’, 18, ‘boy’, ‘beijing’);<br>    console.log(ch);<br>``` </p>
+<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
+<p>//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>//给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
+<p>o2.extend(o1);  // 继承</p>
+<pre><code>
+### 对象冒充
+- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。
 
+```javascript
+function parent(name, age) {
+        this.name = name;
+        this.age = age;
+}
+function child(name, age, gender, address) {
+        // 将parent作为child对象的一个方法来调用
+        this.parent = parent;
+        this.parent(name, age);
+            // 卸磨杀驴
+        delete this.parent;
+        this.gender = gender;
+        this.address = address;
+}
+    var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
+    console.log(ch);
+</code></pre>
       
     </div>
 

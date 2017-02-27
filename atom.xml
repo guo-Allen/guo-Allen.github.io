@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-12-26T11:44:57.228Z</updated>
+  <updated>2017-02-27T14:29:52.080Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,114 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>创建对象的五种方式</title>
+    <link href="http://yoursite.com/2017/02/27/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2017/02/27/创建对象的五种方式/</id>
+    <published>2017-02-27T14:24:40.420Z</published>
+    <updated>2017-02-27T14:29:52.080Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一种-new一个"><a href="#第一种-new一个" class="headerlink" title="第一种 new一个"></a>第一种 new一个</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj1=new Object();</div><div class="line">console.log(obj1);</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="第二种-字面量"><a href="#第二种-字面量" class="headerlink" title="第二种  字面量"></a>第二种  字面量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj2=&#123;name:&apos;top&apos;,age:19&#125;;</div><div class="line">console.log(obj2);</div></pre></td></tr></table></figure>
+<h2 id="第三种-构造函数"><a href="#第三种-构造函数" class="headerlink" title="第三种  构造函数"></a>第三种  构造函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person (name,age,skill) &#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.skill=skill;</div><div class="line">&#125;</div><div class="line">var obj3=new Person(&apos;top&apos;,19,&apos;吃饭&apos;);</div><div class="line">console.log(obj3);</div></pre></td></tr></table></figure>
+<h2 id="第四种-原型式"><a href="#第四种-原型式" class="headerlink" title="第四种  原型式"></a>第四种  原型式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function person () &#123;&#125;</div><div class="line">person.prototype=&#123;</div><div class="line">	constructor:person,</div><div class="line">	name:&apos;张三&apos;,</div><div class="line">	age:29</div><div class="line">&#125;;</div><div class="line">var zs=new person;</div><div class="line">zs.name=&apos;李四&apos;;</div><div class="line">console.log(zs);</div></pre></td></tr></table></figure>
+<h2 id="第五种-组合方式"><a href="#第五种-组合方式" class="headerlink" title="第五种   组合方式"></a>第五种   组合方式</h2><pre><code>function Info (name,age,skill) {
+    this.name=name;
+    this.age=age;
+    this.skill=skill;
+}
+    Info.prototype.sayHi=function  () {
+    console.log(&apos;我的名字是&apos;+this.name);
+}
+var zs=new Info(&apos;tom&apos;,39,&apos;抓老鼠&apos;);
+zs.sayHi();
+console.log(zs);
+</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第一种-new一个&quot;&gt;&lt;a href=&quot;#第一种-new一个&quot; class=&quot;headerlink&quot; title=&quot;第一种 new一个&quot;&gt;&lt;/a&gt;第一种 new一个&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var obj1=new Object();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(obj1);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对象的继承</title>
+    <link href="http://yoursite.com/2017/02/27/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>http://yoursite.com/2017/02/27/实现继承/</id>
+    <published>2017-02-27T13:45:44.371Z</published>
+    <updated>2017-02-27T14:23:45.397Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>我们都知道面向对象的三大特性：封装、继承、多态。<ul>
+<li>封装：将复杂的操作包裹起来，让简单的东西留在外面<ul>
+<li>函数是对 具体过程的封装。</li>
+<li>对象是对 行为和数据的封装。</li>
+</ul>
+</li>
+<li>继承：子类可以使用从父类继承的属性和方法。<br>*即：让某个类型的对象获得另一个类型的对象的属性的方法    </li>
+<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 </li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>今天主要总结下继承的几种方式及代码</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2></blockquote>
+<h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
+<li>ES5提供的方法（IE9+ 开始支持）</li>
+</ul>
+<ul>
+<li><p>基本用法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123; </div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">"hello，i am chuanchuan"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1);</div></pre></td></tr></table></figure>
+</li>
+<li><p>实现兼容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var create = function( obj ) &#123;</div><div class="line">    if ( Object.create ) &#123;</div><div class="line">        return Object.create( obj );</div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        function F() &#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        return new F();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line"></div><div class="line">### 原型继承</div><div class="line"> - 如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法</div><div class="line"> * 基本用法</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>function Person() {}<br>// 将需要的属性添加到原型对象中<br>Person.prototype.sayHi = function() {};<br>//覆盖原型对象<br>Person.prototype = {<br>    constructor: Person,<br>    sayHi: function() {},<br>    sayNo: function() {},<br>    sayYouAgin: function() {}<br>};<br>var p = new Person();<br>p.sayHi();<br>p.sayNo();<br>p.sayYouAgin();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 组合继承</div><div class="line"> - 由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3...</div><div class="line"> * 基本用法</div></pre></td></tr></table></figure></p>
+<p>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</p>
+<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
+<p>// 如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>// 给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
+<p>o2.extend(o1);  // 继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 对象冒充</div><div class="line"> - 将parent作为child对象的一个方法来调用，然后卸磨杀驴。</div></pre></td></tr></table></figure></p>
+<p>function parent(name, age) {<br>            this.name = name;<br>            this.age = age;<br>        }</p>
+<pre><code>function child(name, age, gender, address) {
+    // 将parent作为child对象的一个方法来调用
+    this.parent = parent;
+    this.parent(name, age);
+    // 卸磨杀驴
+    delete this.parent;
+    this.gender = gender;
+    this.address = address;
+}
+
+var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
+console.log(ch);
+</code></pre><p>``` </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;我们都知道面向对象的三大特性：封装、继承、多态。&lt;ul&gt;
+&lt;li&gt;封装：将复杂的操作包裹起来，让简单的东西留在外面&lt;ul&gt;
+&lt;l
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript Module</title>
@@ -179,7 +287,7 @@ Object.create( b ) -&gt; a
     <link href="http://yoursite.com/2016/12/23/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
     <id>http://yoursite.com/2016/12/23/angular 基础思想/</id>
     <published>2016-12-23T13:23:17.436Z</published>
-    <updated>2016-12-26T11:59:37.162Z</updated>
+    <updated>2016-12-26T12:29:48.756Z</updated>
     
     <content type="html"><![CDATA[<h2 id="angular-官方"><a href="#angular-官方" class="headerlink" title="angular 官方"></a>angular 官方</h2><ul>
 <li>ng 表示 AngularJS.</li>
@@ -243,9 +351,8 @@ Object.create( b ) -&gt; a
 </li>
 <li><p>如何获取模块<br> angular.module( ‘模块名’ );<br> 在 ng 中无论代码是否在闭包中, 凡是已经定义的模块, 都可以获取.</p>
 </li>
-<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’,<br> [ ‘需要依赖注入的对象的名字’, …, </p>
-<pre><code>function ( 依赖列表 ) {
-</code></pre><p> } ] )<br> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
+<li><p>控制器<br> 语法:<br>module.controller( ‘控制器名’, [ ‘需要依赖注入的对象的名字’, …, function ( 依赖列表 ) {</p>
+<p>} ] )<br> 简化写法<br> module.controller( ‘控制器名’, function ( 依赖名字列表 ) {</p>
 <p> });</p>
 <p> function ( $scope, $http ) { … }<br> =&gt;<br> [ ‘$scope’, ‘$http’, function ( $scope, $http ) { … } ] </p>
 </li>
@@ -500,6 +607,68 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>前端常见的小算法</title>
+    <link href="http://yoursite.com/2016/12/18/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/12/18/前端常见的小算法/</id>
+    <published>2016-12-17T17:06:31.520Z</published>
+    <updated>2016-12-20T14:04:04.642Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
+</blockquote>
+ <a id="more"></a>
+<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
+<pre><code>function findMaxChar(str){
+    if(str.length==1){
+        return str;
+    }
+    let charObj={};
+    for(let i,i&lt;str.length;i++){
+        if(!charObj[str.charAt(i)]){
+            charObj[str.charAt(i)]=1;
+        }else{
+            charObj[str.charAt(i)]+= 1;
+        }
+    }
+    let maxChar = &apos;&apos;,
+        maxValue= 1;
+    for(var k in charObj){
+        if(charObj[k]&gt;=maxValue){
+            maxChar = k;
+            maxValue = charObj[k];
+        }
+    }    
+    return maxChar;
+}
+//暴露接口
+module.exports = findMaxChar;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
+<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
+<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
+<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
+<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
+<blockquote>
+<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS严格模式</title>
     <link href="http://yoursite.com/2016/12/18/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
     <id>http://yoursite.com/2016/12/18/严格模式/</id>
@@ -602,73 +771,11 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
-    <title>前端常见的小算法</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/12/18/前端常见的小算法/</id>
-    <published>2016-12-17T17:06:31.520Z</published>
-    <updated>2016-12-20T14:04:04.642Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
-</blockquote>
- <a id="more"></a>
-<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
-<pre><code>function findMaxChar(str){
-    if(str.length==1){
-        return str;
-    }
-    let charObj={};
-    for(let i,i&lt;str.length;i++){
-        if(!charObj[str.charAt(i)]){
-            charObj[str.charAt(i)]=1;
-        }else{
-            charObj[str.charAt(i)]+= 1;
-        }
-    }
-    let maxChar = &apos;&apos;,
-        maxValue= 1;
-    for(var k in charObj){
-        if(charObj[k]&gt;=maxValue){
-            maxChar = k;
-            maxValue = charObj[k];
-        }
-    }    
-    return maxChar;
-}
-//暴露接口
-module.exports = findMaxChar;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
-<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
-<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
-<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
-<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
-<blockquote>
-<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Node 模块化简介</title>
     <link href="http://yoursite.com/2016/12/18/Node%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/18/Node 模块化/</id>
     <published>2016-12-17T17:06:31.504Z</published>
-    <updated>2016-12-26T12:23:03.823Z</updated>
+    <updated>2016-12-26T12:26:31.882Z</updated>
     
     <content type="html"><![CDATA[<h2 id="既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><a href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是" class="headerlink" title="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是"></a>既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</h2><h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
 <li>一个 js 文件就是一个模块</li>
@@ -699,7 +806,7 @@ module.exports = findMaxChar;
 </ul>
 </li>
 </ul>
-<h3 id="2-自定义模块（用户自己编写的模块）"><a href="#2-自定义模块（用户自己编写的模块）" class="headerlink" title="2. 自定义模块（用户自己编写的模块）"></a>2. 自定义模块（用户自己编写的模块）</h3><p>以 <code>./</code> 或 <code>../</code> 开头的模块标识就是文件模块，一般就是用户编写的。</p>
+<h3 id="2-自定义模块（用户自己编写的模块）"><a href="#2-自定义模块（用户自己编写的模块）" class="headerlink" title="2. 自定义模块（用户自己编写的模块）"></a>2. 自定义模块（用户自己编写的模块）</h3><p>以 ./ 或 ../ 开头的模块标识就是文件模块，一般就是用户编写的。</p>
 <ul>
 <li>require</li>
 <li>module.exports</li>
@@ -710,7 +817,7 @@ module.exports = findMaxChar;
 <li>每一个核心模块基本上都是暴露了一个对象，里面包含一些方法供我们使用</li>
 <li>每一个核心模块都有自己的作用</li>
 <li>一般在加载核心模块的时候，变量的起名最好就和核心模块的标识名同名即可<ul>
-<li>例如：<code>var fs = require(&#39;fs&#39;)</code></li>
+<li>例如：var fs = require(‘fs’)</li>
 </ul>
 </li>
 <li>核心模块本质上也是文件模块<ul>

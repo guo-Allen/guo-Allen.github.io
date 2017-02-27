@@ -58,7 +58,7 @@ console.log(zs);
     <link href="http://yoursite.com/2017/02/27/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
     <id>http://yoursite.com/2017/02/27/实现继承/</id>
     <published>2017-02-27T13:45:44.371Z</published>
-    <updated>2017-02-27T15:29:48.858Z</updated>
+    <updated>2017-02-27T15:34:51.375Z</updated>
     
     <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
@@ -77,19 +77,39 @@ console.log(zs);
 </li>
 </ul>
 <h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
-<li>ES5提供的方法（IE9+ 开始支持）<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123; </div><div class="line">    sayHi: function() &#123;</div><div class="line">        alert(&quot;hello，i am chuanchuan&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var o2 = Object.create(o1);</div><div class="line"></div><div class="line">//实现兼容</div><div class="line"></div><div class="line">var create = function( obj ) &#123;</div><div class="line">    if ( Object.create ) &#123;</div><div class="line">        return Object.create( obj );</div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        function F() &#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        return new F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>ES5提供的方法（IE9+ 开始支持）<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123; </div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">"hello，i am chuanchuan"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1);</div><div class="line"></div><div class="line"><span class="comment">//实现兼容</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> create = <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( <span class="built_in">Object</span>.create ) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.create( obj );</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="原型继承-Object-prototype"><a href="#原型继承-Object-prototype" class="headerlink" title="原型继承- Object.prototype"></a>原型继承- Object.prototype</h3><ul>
-<li>如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function Person() &#123;&#125;</div><div class="line">// 将需要的属性添加到原型对象中</div><div class="line">Person.prototype.sayHi = function() &#123;&#125;;</div><div class="line">//覆盖原型对象</div><div class="line">Person.prototype = &#123;</div><div class="line">	constructor: Person,</div><div class="line">    sayHi: function() &#123;&#125;,</div><div class="line">    sayNo: function() &#123;&#125;,</div><div class="line">    sayYouAgin: function() &#123;&#125;</div><div class="line">&#125;;</div><div class="line">var p = new Person();</div><div class="line">p.sayHi();</div><div class="line">p.sayNo();</div><div class="line">p.sayYouAgin();</div></pre></td></tr></table></figure>
+<li>如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="comment">// 将需要的属性添加到原型对象中</span></div><div class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line"><span class="comment">//覆盖原型对象</span></div><div class="line">Person.prototype = &#123;</div><div class="line">	<span class="attr">constructor</span>: Person,</div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayNo</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayYouAgin</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div><div class="line">p.sayHi();</div><div class="line">p.sayNo();</div><div class="line">p.sayYouAgin();</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
-<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123;name:&quot;女娲&quot;, age: 1, gender: &quot;female&quot;&#125;;</div><div class="line">var o2 = &#123;grade: &quot;三年级二班&quot;, score: 100&#125;;</div><div class="line"></div><div class="line">// o2 继承 o1</div><div class="line">for ( var k in o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</div><div class="line">//给 o2 提供一个方法, 叫 extend</div><div class="line">o2.extend = function (obj) &#123;</div><div class="line">    for (var k in obj) &#123;</div><div class="line">        this[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  // 继承</div><div class="line">``` </div><div class="line"></div><div class="line">### 对象冒充</div><div class="line">- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。</div></pre></td></tr></table></figure>
-</li>
+<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<br>```js<br>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</li>
 </ul>
-<p>function parent(name, age) {<br>        this.name = name;<br>        this.age = age;<br>}<br>function child(name, age, gender, address) {<br>        // 将parent作为child对象的一个方法来调用<br>        this.parent = parent;<br>        this.parent(name, age);<br>            // 卸磨杀驴<br>        delete this.parent;<br>        this.gender = gender;<br>        this.address = address;<br>}<br>    var ch = new child(‘tom’, 18, ‘boy’, ‘beijing’);<br>    console.log(ch);<br>``` </p>
-]]></content>
+<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
+<p>//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>//给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
+<p>o2.extend(o1);  // 继承</p>
+<pre><code>
+### 对象冒充
+- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。
+```js
+function parent(name, age) {
+        this.name = name;
+        this.age = age;
+}
+function child(name, age, gender, address) {
+        // 将parent作为child对象的一个方法来调用
+        this.parent = parent;
+        this.parent(name, age);
+            // 卸磨杀驴
+        delete this.parent;
+        this.gender = gender;
+        this.address = address;
+}
+    var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
+    console.log(ch);
+</code></pre>]]></content>
     
     <summary type="html">
     

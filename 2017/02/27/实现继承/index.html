@@ -112,7 +112,7 @@
 
 继承：子类可以使用从父类继承的属性和方法。  *即：让某个类型的对象获得另一个类型的对象的属性的方法    
 多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断">
-<meta property="og:updated_time" content="2017-02-27T14:46:20.797Z">
+<meta property="og:updated_time" content="2017-02-27T14:51:32.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象的继承">
 <meta name="twitter:description" content="特性
@@ -382,23 +382,30 @@
 </ul>
 </li>
 <li>继承：子类可以使用从父类继承的属性和方法。<br>  *即：让某个类型的对象获得另一个类型的对象的属性的方法    </li>
-<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 </li>
-</ul>
+<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 <a id="more"></a> 
 <blockquote>
 <p>今天主要总结下继承的几种方式及代码</p>
+</blockquote>
+</li>
+</ul>
 <h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
 <li>ES5提供的方法（IE9+ 开始支持）</li>
 </ul>
 <ul>
-<li>基本用法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123; </div><div class="line">    sayHi: function() &#123;</div><div class="line">        alert(&quot;hello，i am chuanchuan&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var o2 = Object.create(o1);</div></pre></td></tr></table></figure>
-</li>
+<li>基本用法</li>
 </ul>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123; </div><div class="line">    sayHi: function() &#123;</div><div class="line">        alert(&quot;hello，i am chuanchuan&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var o2 = Object.create(o1);</div></pre></td></tr></table></figure>
 <ul>
-<li>实现兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var create = function( obj ) &#123;</div><div class="line">    if ( Object.create ) &#123;</div><div class="line">        return Object.create( obj );</div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        function F() &#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        return new F();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">### 原型继承- Object.prototype</div><div class="line"> - 如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法</div><div class="line"> * 基本用法</div></pre></td></tr></table></figure>
+<li>实现兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var create = function( obj ) &#123;</div><div class="line">    if ( Object.create ) &#123;</div><div class="line">        return Object.create( obj );</div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        function F() &#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        return new F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>function Person() {}<br>// 将需要的属性添加到原型对象中<br>Person.prototype.sayHi = function() {};<br>//覆盖原型对象<br>Person.prototype = {<br>    constructor: Person,<br>    sayHi: function() {},<br>    sayNo: function() {},<br>    sayYouAgin: function() {}<br>};<br>var p = new Person();<br>p.sayHi();<br>p.sayNo();<br>p.sayYouAgin();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">### 组合继承</div><div class="line">- 由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3...</div><div class="line">* 基本用法</div></pre></td></tr></table></figure></p>
+<h3 id="原型继承-Object-prototype"><a href="#原型继承-Object-prototype" class="headerlink" title="原型继承- Object.prototype"></a>原型继承- Object.prototype</h3><ul>
+<li>如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法</li>
+</ul>
+<ul>
+<li>基本用法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function Person() &#123;&#125;</div><div class="line">// 将需要的属性添加到原型对象中</div><div class="line">Person.prototype.sayHi = function() &#123;&#125;;</div><div class="line">//覆盖原型对象</div><div class="line">Person.prototype = &#123;</div><div class="line">	constructor: Person,</div><div class="line">    sayHi: function() &#123;&#125;,</div><div class="line">    sayNo: function() &#123;&#125;,</div><div class="line">    sayYouAgin: function() &#123;&#125;</div><div class="line">&#125;;</div><div class="line">var p = new Person();</div><div class="line">p.sayHi();</div><div class="line">p.sayNo();</div><div class="line">p.sayYouAgin();</div><div class="line">``` </div><div class="line"></div><div class="line">### 组合继承</div><div class="line">- 由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3...</div><div class="line">* 基本用法</div></pre></td></tr></table></figure>
 <p>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</p>
 <p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
 <p>// 如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>// 给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
@@ -652,7 +659,7 @@ console.log(ch);
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">1.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经典继承-Object-create"><span class="nav-number">1.1.</span> <span class="nav-text">经典继承 - Object.create</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">1.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#经典继承-Object-create"><span class="nav-number">1.1.</span> <span class="nav-text">经典继承 - Object.create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型继承-Object-prototype"><span class="nav-number">1.2.</span> <span class="nav-text">原型继承- Object.prototype</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

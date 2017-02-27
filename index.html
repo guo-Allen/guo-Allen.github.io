@@ -469,8 +469,7 @@
 
       
         
-          
-            <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+          <h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
 </ul>
 <ul>
@@ -480,43 +479,12 @@
 </ul>
 </li>
 <li>继承：子类可以使用从父类继承的属性和方法。<br>  *即：让某个类型的对象获得另一个类型的对象的属性的方法    </li>
-<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 </li>
-</ul>
-<blockquote>
-<p>今天主要总结下继承的几种方式及代码</p>
-<h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
-<li>ES5提供的方法（IE9+ 开始支持）</li>
-</ul>
-<ul>
-<li>基本用法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123; </div><div class="line">    sayHi: function() &#123;</div><div class="line">        alert(&quot;hello，i am chuanchuan&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">var o2 = Object.create(o1);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<ul>
-<li>实现兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">var create = function( obj ) &#123;</div><div class="line">    if ( Object.create ) &#123;</div><div class="line">        return Object.create( obj );</div><div class="line">    &#125; else &#123;</div><div class="line"></div><div class="line">        function F() &#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        return new F();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">``` </div><div class="line">### 原型继承- Object.prototype</div><div class="line"> - 如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法</div><div class="line"> * 基本用法</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>function Person() {}<br>// 将需要的属性添加到原型对象中<br>Person.prototype.sayHi = function() {};<br>//覆盖原型对象<br>Person.prototype = {<br>    constructor: Person,<br>    sayHi: function() {},<br>    sayNo: function() {},<br>    sayYouAgin: function() {}<br>};<br>var p = new Person();<br>p.sayHi();<br>p.sayNo();<br>p.sayYouAgin();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">### 组合继承</div><div class="line">- 由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3...</div><div class="line">* 基本用法</div></pre></td></tr></table></figure></p>
-<p>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</p>
-<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
-<p>// 如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>// 给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
-<p>o2.extend(o1);  // 继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 对象冒充</div><div class="line">- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。</div></pre></td></tr></table></figure></p>
-<p>function parent(name, age) {<br>            this.name = name;<br>            this.age = age;<br>        }</p>
-<pre><code>function child(name, age, gender, address) {
-    // 将parent作为child对象的一个方法来调用
-    this.parent = parent;
-    this.parent(name, age);
-    // 卸磨杀驴
-    delete this.parent;
-    this.gender = gender;
-    this.address = address;
-}
-
-var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
-console.log(ch);
-</code></pre><p>``` </p>
-
-          
+<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/02/27/实现继承/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1189,6 +1157,130 @@ console.log(ch);
             
               
                 
+                <a class="post-title-link" href="/2016/12/18/无题/" itemprop="url">
+                  我想要的
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-18T01:06:31+08:00" content="2016-12-18">
+              2016-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/杂记/" itemprop="url" rel="index">
+                    <span itemprop="name">杂记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/18/无题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/18/无题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <hr>
+<blockquote>
+<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/18/无题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/18/很暗的/" itemprop="url">
                   很暗的
                 </a>
@@ -1389,130 +1481,6 @@ console.log(ch);
 <p>所谓同源是指，域名，协议，端口完全相同<br>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/18/跨域/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/18/无题/" itemprop="url">
-                  我想要的
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-18T01:06:31+08:00" content="2016-12-18">
-              2016-12-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/杂记/" itemprop="url" rel="index">
-                    <span itemprop="name">杂记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/18/无题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/18/无题/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <hr>
-<blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/18/无题/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

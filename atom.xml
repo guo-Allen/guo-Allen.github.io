@@ -58,7 +58,7 @@ console.log(zs);
     <link href="http://yoursite.com/2017/02/27/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
     <id>http://yoursite.com/2017/02/27/实现继承/</id>
     <published>2017-02-27T13:45:44.371Z</published>
-    <updated>2017-02-27T15:34:51.375Z</updated>
+    <updated>2017-02-27T15:37:56.117Z</updated>
     
     <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
@@ -85,31 +85,29 @@ console.log(zs);
 </li>
 </ul>
 <h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
-<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3…<br>```js<br>var o1 = {name:”女娲”, age: 1, gender: “female”};<br>var o2 = {grade: “三年级二班”, score: 100};</li>
+<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3….</li>
 </ul>
-<p>// o2 继承 o1<br>for ( var k in o1 ) {<br>  o2[k] = o1[k];<br>}</p>
-<p>//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码<br>//给 o2 提供一个方法, 叫 extend<br>o2.extend = function (obj) {<br>    for (var k in obj) {<br>        this[k] = obj[k];<br>    }<br>}</p>
-<p>o2.extend(o1);  // 继承</p>
-<pre><code>
-### 对象冒充
-- 将parent作为child对象的一个方法来调用，然后卸磨杀驴。
-```js
-function parent(name, age) {
-        this.name = name;
-        this.age = age;
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123;<span class="attr">name</span>:<span class="string">"女娲"</span>, <span class="attr">age</span>: <span class="number">1</span>, <span class="attr">gender</span>: <span class="string">"female"</span>&#125;;</div><div class="line"><span class="keyword">var</span> o2 = &#123;<span class="attr">grade</span>: <span class="string">"三年级二班"</span>, <span class="attr">score</span>: <span class="number">100</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// o2 继承 o1</span></div><div class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> k <span class="keyword">in</span> o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</span></div><div class="line"><span class="comment">//给 o2 提供一个方法, 叫 extend</span></div><div class="line">o2.extend = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> obj) &#123;</div><div class="line">        <span class="keyword">this</span>[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  <span class="comment">// 继承</span></div></pre></td></tr></table></figure>
+<h3 id="对象冒充"><a href="#对象冒充" class="headerlink" title="对象冒充"></a>对象冒充</h3><ul>
+<li>将parent作为child对象的一个方法来调用，然后卸磨杀驴。<pre><code class="js"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>{
+      <span class="keyword">this</span>.name = name;
+      <span class="keyword">this</span>.age = age;
 }
-function child(name, age, gender, address) {
-        // 将parent作为child对象的一个方法来调用
-        this.parent = parent;
-        this.parent(name, age);
-            // 卸磨杀驴
-        delete this.parent;
-        this.gender = gender;
-        this.address = address;
+<span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, gender, address</span>) </span>{
+      <span class="comment">// 将parent作为child对象的一个方法来调用</span>
+      <span class="keyword">this</span>.parent = parent;
+      <span class="keyword">this</span>.parent(name, age);
+          <span class="comment">// 卸磨杀驴</span>
+      <span class="keyword">delete</span> <span class="keyword">this</span>.parent;
+      <span class="keyword">this</span>.gender = gender;
+      <span class="keyword">this</span>.address = address;
 }
-    var ch = new child(&apos;tom&apos;, 18, &apos;boy&apos;, &apos;beijing&apos;);
-    console.log(ch);
-</code></pre>]]></content>
+  <span class="keyword">var</span> ch = <span class="keyword">new</span> child(<span class="string">'tom'</span>, <span class="number">18</span>, <span class="string">'boy'</span>, <span class="string">'beijing'</span>);
+  <span class="built_in">console</span>.log(ch);
+</code></pre>
+</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
@@ -470,39 +468,6 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
-    <title>我想要的</title>
-    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2016/12/18/无题/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-17T09:21:36.677Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
-<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
-<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
-<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
-<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
-<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
     <title>很暗的</title>
     <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
     <id>http://yoursite.com/2016/12/18/很暗的/</id>
@@ -533,6 +498,39 @@ Object.create( b ) -&gt; a
       &lt;blockquote&gt;
 &lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
 &lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我想要的</title>
+    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
+    <id>http://yoursite.com/2016/12/18/无题/</id>
+    <published>2016-12-17T17:06:31.582Z</published>
+    <updated>2016-12-17T09:21:36.677Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
+<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
+<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
+<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
+<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
+<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
     
     </summary>
     
@@ -614,68 +612,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端常见的小算法</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/12/18/前端常见的小算法/</id>
-    <published>2016-12-17T17:06:31.520Z</published>
-    <updated>2016-12-20T14:04:04.642Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
-</blockquote>
- <a id="more"></a>
-<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
-<pre><code>function findMaxChar(str){
-    if(str.length==1){
-        return str;
-    }
-    let charObj={};
-    for(let i,i&lt;str.length;i++){
-        if(!charObj[str.charAt(i)]){
-            charObj[str.charAt(i)]=1;
-        }else{
-            charObj[str.charAt(i)]+= 1;
-        }
-    }
-    let maxChar = &apos;&apos;,
-        maxValue= 1;
-    for(var k in charObj){
-        if(charObj[k]&gt;=maxValue){
-            maxChar = k;
-            maxValue = charObj[k];
-        }
-    }    
-    return maxChar;
-}
-//暴露接口
-module.exports = findMaxChar;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
-<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
-<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
-<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
-<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
-<blockquote>
-<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
     
   </entry>
   
@@ -778,6 +714,68 @@ module.exports = findMaxChar;
     
       <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
     
+    
+  </entry>
+  
+  <entry>
+    <title>前端常见的小算法</title>
+    <link href="http://yoursite.com/2016/12/18/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/12/18/前端常见的小算法/</id>
+    <published>2016-12-17T17:06:31.520Z</published>
+    <updated>2016-12-20T14:04:04.642Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
+</blockquote>
+ <a id="more"></a>
+<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
+<pre><code>function findMaxChar(str){
+    if(str.length==1){
+        return str;
+    }
+    let charObj={};
+    for(let i,i&lt;str.length;i++){
+        if(!charObj[str.charAt(i)]){
+            charObj[str.charAt(i)]=1;
+        }else{
+            charObj[str.charAt(i)]+= 1;
+        }
+    }
+    let maxChar = &apos;&apos;,
+        maxValue= 1;
+    for(var k in charObj){
+        if(charObj[k]&gt;=maxValue){
+            maxChar = k;
+            maxValue = charObj[k];
+        }
+    }    
+    return maxChar;
+}
+//暴露接口
+module.exports = findMaxChar;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
+<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
+<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
+<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
+<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
+<blockquote>
+<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
     
   </entry>
   

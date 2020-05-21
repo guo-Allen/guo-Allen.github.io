@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-27T14:29:52.080Z</updated>
+  <updated>2018-03-01T11:24:49.709Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,348 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>唯爱伊人</title>
+    <link href="http://yoursite.com/2018/02/28/%E5%94%AF%E7%88%B1%E4%BC%8A/"/>
+    <id>http://yoursite.com/2018/02/28/唯爱伊/</id>
+    <published>2018-02-27T16:00:00.000Z</published>
+    <updated>2018-03-01T11:24:49.709Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="2018-02-27"><a href="#2018-02-27" class="headerlink" title="2018-02-27"></a>2018-02-27</h2><ul>
+<li>今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记。</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4icuh29j20u0aqnu0y.jpg" alt="2018-02-27（01）"><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4zga2hnj20u0aqn7wj.jpg" alt="2018-02-27（02）"><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4ztq9cfj20u0aw5npe.jpg" alt="2018-02-27（03）"></p>
+<h2 id="2018-02-28"><a href="#2018-02-28" class="headerlink" title="2018-02-28"></a>2018-02-28</h2><ul>
+<li>今天你说奶奶严重了，如果奶奶走了，你就剩下我了。我给自己烫了个疤。<br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxj9sbmn9j20u0aqnnpe.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjae0mscj20u0aqn4qr.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjarmrpdj20u0aqn4qr.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjb190gmj20u0awhx6q.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjc8bbaqj20u06zehdt.jpg" alt=""></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="她和他" scheme="http://yoursite.com/categories/%E5%A5%B9%E5%92%8C%E4%BB%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>table行内编辑和双击变输入框</title>
+    <link href="http://yoursite.com/2017/11/03/table%E5%8F%8C%E5%87%BB%E5%8F%98%E8%BE%93%E5%85%A5%E6%A1%86/"/>
+    <id>http://yoursite.com/2017/11/03/table双击变输入框/</id>
+    <published>2017-11-02T16:00:00.000Z</published>
+    <updated>2017-11-03T02:56:41.818Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>最近用dataTable做Lims的管理界面，使用的是bootstrap-dataTable,样式还不错，功能api也很丰富，增删查又是，就是表格修改竟然是付费的，我这西北汉子的血性，付费怎么可以呢（请原谅小码畜没钱支持原创）。自己写呗。我这里提供两种思路。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="行内编辑"><a href="#行内编辑" class="headerlink" title="行内编辑"></a>行内编辑</h2><ul>
+<li>思路：（在每一行最后动态生成一个编辑按钮，可以使用bootstrap提供的自己图标）。<br>1.点击编辑按钮，获取当前行的每一个单元格td,循环遍历获取单元格的text，每个单元格中的值替换为一个input输入框，将text赋值给input的value。同时编辑按钮变为保存按钮。<br>2.点击保存按钮，获取当前行的每一个单元格td,循环遍历获取单元格中input的value，每个单元格中的input输入框替换为input的value。同时保存按钮变为编辑按钮。<br>3.可以在层叠样式中为input输入框设置一些样式，宽高啦，边框颜色啦，边框阴影啦这些。<br>4.这种思路太简单啦，我就写代码啦。</li>
+</ul>
+<p><strong>之前遇到一个bug，table中的输入框宽高占100%在移动端会让table超出页面部分没有滚动条，不能滑动。只需要设置宽高为99%就完美解决啦</strong></p>
+<h2 id="双击变输入框"><a href="#双击变输入框" class="headerlink" title="双击变输入框"></a>双击变输入框</h2><blockquote>
+<p>我原本是想做成上述这种编辑格式的，奈何Boss钟情于行内双击编辑，说简单有效快，客户都蠢萌，什么行内编辑啦，弹框编辑啦，麻烦！ </p>
+<p>那就写呗，我原本的思路是获取tbody中的所有单元格，双击时变为输入框，点击document时又赋值就行啦。结果写出来一看，图样图森破啊。百度走一波，百度前十条都是错的，而且都一模一样，难道这些人写博客不管对错都照抄的么？（不开心）。</p>
+</blockquote>
+<p><strong>想了一晚上，还是想到了。赋值时不能注册给页面单击事件，应该给document注册mouseup事件</strong></p>
+<ul>
+<li>代码如下<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 事件   </span></div><div class="line"><span class="built_in">document</span>.ondblclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span>(event.srcElement.tagName.toLowerCase() == <span class="string">"td"</span>) &#123;</div><div class="line">		<span class="keyword">var</span> obj=event.srcElement;</div><div class="line">		<span class="keyword">var</span> tdValue = obj.innerText;</div><div class="line">	    obj.innerText = <span class="string">""</span>;</div><div class="line">    	<span class="keyword">var</span> txt = <span class="built_in">document</span>.createElement(<span class="string">"input"</span>);</div><div class="line">	    txt.type = <span class="string">"text"</span>;</div><div class="line">	    txt.value = tdValue;</div><div class="line">    	txt.id = <span class="string">"edit"</span>;</div><div class="line">    	txt.setAttribute(<span class="string">"className"</span>, <span class="string">"form-control"</span>);</div><div class="line">	    obj.appendChild(txt);</div><div class="line">    	txt.select();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="comment">// 取消单元格中的文本框，并将文本框中的值赋给单元格   </span></div><div class="line"><span class="built_in">document</span>.onmouseup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>) &amp;&amp; event.srcElement.id != <span class="string">"edit"</span>) &#123;</div><div class="line">		<span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>).parentElement;</div><div class="line">    	<span class="keyword">var</span> txtValue = <span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>).value;</div><div class="line">    	obj.innerText = txtValue;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;最近用dataTable做Lims的管理界面，使用的是bootstrap-dataTable,样式还不错，功能api也很丰富，增删查又是，就是表格修改竟然是付费的，我这西北汉子的血性，付费怎么可以呢（请原谅小码畜没钱支持原创）。自己写呗。我这里提供两种思路。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="dataTable" scheme="http://yoursite.com/tags/dataTable/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Iframe父子窗口元素获取、通信、跳转</title>
+    <link href="http://yoursite.com/2017/08/18/Iframe%E7%88%B6%E5%AD%90%E7%AA%97%E5%8F%A3%E5%85%83%E7%B4%A0%E8%8E%B7%E5%8F%96%E3%80%81%E9%80%9A%E4%BF%A1%E3%80%81%E8%B7%B3%E8%BD%AC/"/>
+    <id>http://yoursite.com/2017/08/18/Iframe父子窗口元素获取、通信、跳转/</id>
+    <published>2017-08-17T16:00:00.000Z</published>
+    <updated>2017-08-18T03:50:31.281Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="在父窗口中获取iframe中子元素"><a href="#在父窗口中获取iframe中子元素" class="headerlink" title="在父窗口中获取iframe中子元素"></a>在父窗口中获取iframe中子元素</h2><ul>
+<li>列表项</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text1 = <span class="built_in">window</span>.frames[<span class="string">"iframe的name值"</span>].document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> text2 = <span class="built_in">document</span>.getElementById(<span class="string">"iframe的Id"</span>).contentWindow.document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>jQuery<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 = $(<span class="string">"#iframe的ID"</span>).find(<span class="string">"#iframe中的元素ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 =  $(<span class="string">"#iframe中的元素ID"</span>,<span class="built_in">document</span>.frames(<span class="string">"frame的name"</span>).document);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在子元素中获取父iframe窗口"><a href="#在子元素中获取父iframe窗口" class="headerlink" title="在子元素中获取父iframe窗口"></a>在子元素中获取父iframe窗口</h2><ul>
+<li><p>js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text =  parent.window.document.getElementById(<span class="string">"#iframe的ID"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 =$(<span class="string">'iframe的Id'</span>, parent.document);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 = $(<span class="built_in">window</span>.parent).find(<span class="string">"iframe[id='xxx']"</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在父子窗口通信"><a href="#在父子窗口通信" class="headerlink" title="在父子窗口通信"></a>在父子窗口通信</h2><ul>
+<li><p>方法调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childMethod();</div><div class="line">子页面调用父页面方法：parent.window.parentMethod();</div></pre></td></tr></table></figure>
+</li>
+<li><p>变量调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childValue();</div><div class="line">子页面调用父页面方法：parent.window.parentValue();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h2><ul>
+<li><p>子页面中a链接固定跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"跳转的路径"</span> target=<span class="string">"父窗口iframe的Name"</span>&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>子页面中js跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframe的Id"</span>, <span class="built_in">window</span>.parent.document)[<span class="number">0</span>].src = <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>多个父iframe窗口，顶级窗口跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"iframe"</span>,top.parent.document)[<span class="number">0</span>].src= <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="iframe" scheme="http://yoursite.com/tags/iframe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用chart.js与echarts.js绘制图表</title>
+    <link href="http://yoursite.com/2017/07/29/%E4%BD%BF%E7%94%A8chart.js%E4%B8%8Eecharts.js%E7%BB%98%E5%88%B6%E5%9B%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2017/07/29/使用chart.js与echarts.js绘制图表/</id>
+    <published>2017-07-28T16:00:00.000Z</published>
+    <updated>2017-08-01T10:07:48.894Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法</strong><br><a id="more"></a> </p>
+<h2 id="了解图表插件"><a href="#了解图表插件" class="headerlink" title="了解图表插件"></a>了解图表插件</h2><blockquote>
+<p>要在前端页面中使用图标插件，首先就要对其有基本的了解，无论是chart.js还是echart.js都是基于H5新属性Canvas提供的API封装的插件，其基本原理也就是在画布上绘制坐标，定义相对于坐标的算法实现描点、连线、填充等操作。在HTML页面中开发者只需要添加一个Canvas标签即可，然后在js中获取Canvas元素，运用插件提供的方法绘制图标，所以在页面中我们看到的图表并不存在实际DOM元素，它只是相对于画布绘制的图形，点击右键可是能图片另存为的哦</p>
+</blockquote>
+<p>当然说这些对于我们务实的程序员并没有什么卵用，但是当boss给出需求和技术时能自信的说自己的见解，哼哼，技术大牛有没有。<br>言归正传，接下来我将分别介绍这两种图表插件的基本使用方法</p>
+<h2 id="使用chart-js绘制柱状图与饼图"><a href="#使用chart-js绘制柱状图与饼图" class="headerlink" title="使用chart.js绘制柱状图与饼图"></a>使用chart.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件"><a href="#下载并引入chart-js文件" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/chartjs/Chart.js" target="_blank" rel="external">chart.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"Chart.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表"><a href="#创建图表" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>无论哪种图表插件都是基于Canvas标签的，所以我们首先要在页面写一个Canvas标签，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;canvas id=<span class="string">"myChart"</span> width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;&lt;/canvas&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们需要的DOM节点，然后在这个DOM节点上调用 Canvas的-getContext(“2d”) 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"myChart"</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - 当然我们也可以用JQuery</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="keyword">var</span> ctx = $(<span class="string">"#myChart"</span>).get(<span class="number">0</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">当我们完成了在指定的canvas上实例化Chart对象之后，Chart.js会自动针对retina屏幕做缩放。</div><div class="line"> </div><div class="line"> - js操作</div><div class="line">Chart对象设置完成后，我们就可以继续创建Chart.js中提供的具体类型的图表了。下面这个案例中，我们将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 Bar(data,options)这个API，此方法需要传入两个实参，当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可，下面我们分别展示 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据</span></div><div class="line"><span class="keyword">var</span> barChartData = &#123;</div><div class="line">        <span class="comment">//X轴显示的数据</span></div><div class="line">		labels: [<span class="string">"类别一"</span>, <span class="string">"类别二"</span>, <span class="string">"类别三"</span>, <span class="string">"类别四"</span>, <span class="string">"类别五"</span>],</div><div class="line">		<span class="attr">datasets</span>: [&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"繁殖"</span>, <span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">68</span>, <span class="number">59</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">56</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;,</div><div class="line">			&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"出货"</span>,<span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(60,141,188,0.9)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(60,141,188,0.8)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">28</span>, <span class="number">48</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">86</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	&#125;;</div><div class="line"><span class="comment">// 柱状图选项设置</span></div><div class="line"><span class="keyword">var</span> barChartOptions = &#123;</div><div class="line">		<span class="attr">scaleOverlay</span>: <span class="literal">false</span>, <span class="comment">// 网格线是否在数据线的上面</span></div><div class="line">		scaleOverride: <span class="literal">false</span>, <span class="comment">// 是否用硬编码重写y轴网格线</span></div><div class="line">		scaleSteps: <span class="literal">null</span>, <span class="comment">//y轴刻度的个数</span></div><div class="line">		scaleStepWidth: <span class="literal">null</span>, <span class="comment">//y轴每个刻度的宽度</span></div><div class="line">		scaleStartValue: <span class="literal">null</span>, <span class="comment">//y轴的起始值</span></div><div class="line">		scaleBeginAtZero: <span class="literal">true</span>,<span class="comment">// y轴标记是否从0开始</span></div><div class="line">		scaleShowGridLines: <span class="literal">true</span>,<span class="comment">// 是否显示网格线</span></div><div class="line">		scaleGridLineColor: <span class="string">"rgba(0,0,0,.05)"</span>,<span class="comment">// 网格线的颜色</span></div><div class="line">		scaleGridLineWidth: <span class="number">1</span>, <span class="comment">// 网格线的线宽</span></div><div class="line">		scaleShowHorizontalLines: <span class="literal">true</span>,<span class="comment">// 是否显示横向线</span></div><div class="line">		scaleShowVerticalLines: <span class="literal">true</span>,<span class="comment">// 是否显示竖向线</span></div><div class="line">		barShowStroke: <span class="literal">true</span>,<span class="comment">// 是否显示线</span></div><div class="line">		barStrokeWidth: <span class="number">2</span>, <span class="comment">// 线宽</span></div><div class="line">		barValueSpacing: <span class="number">20</span>,<span class="comment">// 柱状块与x值所形成的线之间的距离</span></div><div class="line">		barDatasetSpacing: <span class="number">1</span>,<span class="comment">// 在同一x值内的柱状块之间的间距</span></div><div class="line">		animation : <span class="literal">true</span>,<span class="comment">//是否有动画效果</span></div><div class="line">        animationSteps : <span class="number">60</span>,<span class="comment">//动画的步数</span></div><div class="line">        animationEasing : <span class="string">"easeOutQuart"</span>,<span class="comment">// 动画的效果</span></div><div class="line">		 <span class="comment">// 图例</span></div><div class="line">		legendTemplate: <span class="string">"&lt;ul class=\"&lt;%=name.toLowerCase()%&gt;-legend\"&gt;&lt;% for (var i=0; i&lt;datasets.length; i++)&#123;%&gt;&lt;li&gt;&lt;span style=\"background-color:&lt;%=datasets[i].fillColor%&gt;\"&gt;&lt;/span&gt;&lt;%if(datasets[i].label)&#123;%&gt;&lt;%=datasets[i].label%&gt;&lt;%&#125;%&gt;&lt;/li&gt;&lt;%&#125;%&gt;&lt;/ul&gt;"</span>,</div><div class="line">		<span class="comment">//Boolean - whether to make the chart responsive</span></div><div class="line">		responsive: <span class="literal">true</span>,</div><div class="line">		<span class="attr">maintainAspectRatio</span>: <span class="literal">true</span></div><div class="line">	&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg" alt="chart.js 柱状图"></p>
+</li>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用chart.js在页面上展现饼图，我们需要使用它提供的 Pie(data,options)这个API，此方法可以传入两个实参，其实我们只传第一个参数就行了（除非你是处女座的程序员），当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据  （对于一个饼图,必须传递一个对象数组的值和颜色属性。value键的值应该是一个数字。chart.js会计算的相对比例。）</span></div><div class="line"><span class="keyword">var</span> pieChartData = [</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">30</span>,</div><div class="line">		<span class="attr">color</span>:<span class="string">"#F38630"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">50</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#E0E4CC"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">100</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#69D2E7"</span></div><div class="line">	&#125;			</div><div class="line">];</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4az9gjhzj20b40b40t2.jpg" alt="chart.js 饼图"></p>
+</li>
+</ul>
+<h2 id="使用echarts-js绘制柱状图与饼图"><a href="#使用echarts-js绘制柱状图与饼图" class="headerlink" title="使用echarts.js绘制柱状图与饼图"></a>使用echarts.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件-1"><a href="#下载并引入chart-js文件-1" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/ecomfe/echartss" target="_blank" rel="external">echarts.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"echarts.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表-1"><a href="#创建图表-1" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>Echarts图表插件也是基于Canvas标签的，但是不同于chart.js直接在页面中写canvas标签，而是我们需要在页面中写一个div盒子，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"main"</span> style=<span class="string">"height:400px;"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们定义的div标签，然后在这个DOM节点上调用 echarts.init()方法初始化，它会自动给div标签内添加一个canvas画布。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - js操作</div><div class="line">Echarts对象初始化完成后，我们就可以继续创建Echarts.js中提供的具体类型的图表了。下面这个案例中，我们也将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据选项设置</span></div><div class="line">option = &#123;</div><div class="line">		<span class="attr">color</span>: [<span class="string">'#3398DB'</span>],</div><div class="line">		<span class="attr">title</span>: &#123;</div><div class="line">		    <span class="attr">text</span>: <span class="string">'订单数量'</span>,</div><div class="line">		    <span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">		    <span class="attr">textStyle</span>: &#123;</div><div class="line">		        <span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">		        <span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">	    	    <span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">	    	&#125;</div><div class="line">    	&#125;,</div><div class="line">		<span class="attr">tooltip</span>: &#123;&#125;,</div><div class="line">		<span class="attr">legend</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">'数量'</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">xAxis</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">"02月"</span>, <span class="string">"03月"</span>, <span class="string">"04月"</span>, <span class="string">"05月"</span>, <span class="string">"06月"</span>, <span class="string">"07月"</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">yAxis</span>: &#123;&#125;,</div><div class="line">		<span class="attr">series</span>: [&#123;</div><div class="line">			<span class="comment">// 根据名字对应到相应的系列</span></div><div class="line">			name: <span class="string">'数量'</span>,</div><div class="line">			<span class="attr">type</span>: <span class="string">'bar'</span>,</div><div class="line">			<span class="attr">data</span>:  [<span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>]</div><div class="line">		&#125;]</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4c8i3p0hj20eb0cb0st.jpg" alt="Echarts.js 柱状图"></p>
+<ul>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用Echarts.js在页面上展现饼图，我们也是使用它提供的setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据选项设置  （对于饼图,必须传递在series的data中传入一个数组对象。value键的值应该是一个数字。Echarts.js会计算的相对比例。）</span></div><div class="line">		option = &#123;</div><div class="line">					<span class="attr">title</span>: &#123;</div><div class="line">						<span class="attr">text</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">						<span class="attr">textStyle</span>: &#123;</div><div class="line">							<span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">							<span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">							<span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">						&#125;</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">tooltip</span>: &#123;</div><div class="line">						<span class="attr">trigger</span>: <span class="string">'item'</span>,</div><div class="line">						<span class="attr">formatter</span>: <span class="string">"&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)"</span></div><div class="line">					&#125;,</div><div class="line">					<span class="attr">series</span>: [&#123;</div><div class="line">						<span class="attr">name</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">type</span>: <span class="string">'pie'</span>,</div><div class="line">						<span class="attr">radius</span>: <span class="string">'55%'</span>,</div><div class="line">						<span class="attr">center</span>: [<span class="string">'50%'</span>, <span class="string">'60%'</span>],</div><div class="line">						<span class="attr">data</span>: [&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"55555"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"88888"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">4</span>,<span class="string">"name"</span>:<span class="string">"产品03"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">9</span>,<span class="string">"name"</span>:<span class="string">"科技服务"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">1</span>,<span class="string">"name"</span>:<span class="string">"成人组织"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">6</span>,<span class="string">"name"</span>:<span class="string">"医学健康"</span>&#125;],</div><div class="line">						<span class="attr">itemStyle</span>: &#123;</div><div class="line">							<span class="attr">normal</span>: &#123;</div><div class="line">								<span class="attr">label</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span>,</div><div class="line">									<span class="attr">formatter</span>: <span class="string">'&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)'</span></div><div class="line">								&#125;,</div><div class="line">								<span class="attr">labelLine</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span></div><div class="line">								&#125;</div><div class="line">							&#125;,</div><div class="line">							<span class="attr">emphasis</span>: &#123;</div><div class="line">								<span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">								<span class="attr">shadowOffsetX</span>: <span class="number">0</span>,</div><div class="line">								<span class="attr">shadowColor</span>: <span class="string">'rgba(0, 0, 0, 0.5)'</span></div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;]</div><div class="line">				&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4cy9ga60j20bv09o3yu.jpg" alt="Echarts.js 饼图"></p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>市场上有好多好多的图表统计插件，大体有以下几种</p>
+</blockquote>
+<ul>
+<li>MSChart<br>这个是Visual Studio里的自带控件，使用比较简单，不过数据需要在后台绑定。</li>
+<li>ichart.js<br>是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 支持饼图、环形图、折线图、面积图、柱形图、条形图等。</li>
+<li>Chart.js<br>也是一款基于HTML5的图形库和ichartjs整体类似,支持柱状图、饼图、曲线图、雷达图、蛛网图、级地图等。不过Chart.js的教程文档没有ichartjs的详细。不过感觉在对于移动的适配上感觉比ichartjs要好一点。</li>
+<li>ECharts.js<br>这也是一款基于HTML5的图形库。图形的创建也比较简单，直接引用Javascript即可。这也是我最喜欢使用的，喜欢这个库的原因主要有三点。<ol>
+<li>这个库是百度的项目，而且一直有更新，目前最新的是EChart 3；</li>
+<li>这个库的项目文档比较详细，每个点都说明的比较清楚，而且是中文的，理解比较容易；</li>
+<li>这个库有深度的交互式数据探索，而且图表的动画真的真的是很炫酷呐。</li>
+</ol>
+</li>
+</ul>
+<p><strong>最后附上chart.js与echart.js的中文文档，我这里只讲了柱状图与饼图的简单使用方法，如有其它图表需求，请移步官方文档</strong><br> <a href="http://www.bootcss.com/p/chart.js/docs/" target="_blank" rel="external">chart.js中文文档</a></p>
+<p> <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="external">Echarts.js中文文档</a></p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="chartJs与echartsJs" scheme="http://yoursite.com/categories/chartJs%E4%B8%8EechartsJs/"/>
+    
+    
+      <category term="图表插件" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%A1%A8%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>模板引擎</title>
+    <link href="http://yoursite.com/2017/07/18/%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/"/>
+    <id>http://yoursite.com/2017/07/18/模板引擎/</id>
+    <published>2017-07-18T10:30:00.000Z</published>
+    <updated>2017-07-18T10:34:59.470Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="模板引擎简介"><a href="#模板引擎简介" class="headerlink" title="模板引擎简介"></a>模板引擎简介</h2><blockquote>
+<p>我们在实际开发中，前后交互需要频繁的使用ajax，使用ajax请求数据时,返回的如果是一个JSON格式的字符串,我们需要将其包装到对应的HTML代码中,再添加到页面上,才能看到效果.那么这个包装得过程有没有简单的方法呢?<br><a id="more"></a></p>
+<ul>
+<li>假设有如下的数据<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line"> <span class="attr">name</span>:<span class="string">"fox"</span>,</div><div class="line"> <span class="attr">age</span>:<span class="number">18</span>,</div><div class="line"> <span class="attr">skill</span>:<span class="string">"卖萌"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>希望包装为：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;li&gt;姓名:fox&lt;/li&gt;</div><div class="line">  &lt;li&gt;年龄:18&lt;/li&gt;</div><div class="line">  &lt;li&gt;爱好:卖萌&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义模板，替换为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;li&gt;姓名:&lt;%= name %&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;年龄:&lt;%= age %&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;爱好:&lt;%= skill %&gt;&lt;/li&gt;</div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>其间需要我们使用对象替换的位置为&lt;%=属性名%&gt;部分,如果可以读取模板-&gt;传入对象-&gt;完成替换-&gt;返回html代码,实现这样的步骤,那么就能够完成我们的模板操作了</strong></p>
+<h2 id="模板插件原理"><a href="#模板插件原理" class="headerlink" title="模板插件原理"></a>模板插件原理</h2><blockquote>
+<p>我们定义一段文本作为模板,读取文本,使用特殊的符号&lt;%=属性名%&gt;,通过正则表达式找到这些特殊的符号进行替换,是不是就实现了这样的效果呢?</p>
+</blockquote>
+<h3 id="定义正则表达式"><a href="#定义正则表达式" class="headerlink" title="定义正则表达式"></a>定义正则表达式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* </span></div><div class="line">JS中的RegExp对象:</div><div class="line">    创建</div><div class="line">        创建方法1: var reg = new RegExp("正则")</div><div class="line">        创建方法2: var reg = /正则/;    推荐使用这种</div><div class="line">    使用:</div><div class="line">        reg.exec(string) 可以检测字符串</div><div class="line">*/</div><div class="line"><span class="comment">/*</span></div><div class="line">正则含义</div><div class="line">     &lt;%  : 以 &lt;% 开始</div><div class="line">    =\s*： "="号之后有0个或多个空白字符</div><div class="line">    ([^%&gt;]+\S): 匹配除了%&gt;以外的所有字符(至少1个)</div><div class="line">    \s*:0个或多个空白字符</div><div class="line">    %&gt;:以%&gt;结束</div><div class="line">*/</div><div class="line">    <span class="keyword">var</span> reg = <span class="regexp">/&lt;%=\s*([^%&gt;]+\S)\s*%&gt;/</span>;</div></pre></td></tr></table></figure>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ul>
+<li>定义好作为模板的文本</li>
+<li>使用正则表达式进行匹配替换即可<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义文本</span></div><div class="line"><span class="keyword">var</span> str = <span class="string">'大家好，我叫&lt;%= name %&gt;，我今年&lt;%= age %&gt;，我的爱好为:&lt;%= skill %&gt;'</span>;</div><div class="line"><span class="comment">// 定义数据</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">'itcast'</span>,</div><div class="line">        <span class="attr">age</span>: <span class="number">10</span>,</div><div class="line">        <span class="attr">skill</span>:<span class="string">'打篮球'</span></div><div class="line">        &#125;;</div><div class="line"><span class="comment">// 快速的创建方法,好处,直接使用 \ 即可 不需要考虑 转义</span></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/&lt;%=\s*([^%&gt;]+\S)\s*%&gt;/</span>;</div><div class="line"><span class="comment">// 返回的是一个对象</span></div><div class="line"><span class="keyword">var</span> match = <span class="literal">null</span>;</div><div class="line"><span class="comment">// 使用  while循环 进行检查,知道没有匹配的内容</span></div><div class="line"><span class="keyword">while</span> (match = reg.exec(str))&#123;</div><div class="line">    <span class="comment">// 匹配到的字符串</span></div><div class="line">    <span class="keyword">var</span> mathString = match[<span class="number">0</span>]</div><div class="line">    <span class="comment">// 子表达式匹配到的字符串</span></div><div class="line">    <span class="keyword">var</span> subString = match[<span class="number">1</span>];</div><div class="line">    <span class="comment">// 打印文本内容</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"循环中:"</span>+str);</div><div class="line">    <span class="comment">// 替换字符串的内容</span></div><div class="line">    <span class="keyword">var</span> str = str.replace(mathString,data[subString]);</div><div class="line">     match = reg.exec(str);</div><div class="line">&#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"循环完毕:"</span>+str);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>基本原理就是不断的去循环用正则匹配，如果匹配到了立即替换，从而达到批量替换的目的</strong></p>
+<h2 id="常见的模板插件"><a href="#常见的模板插件" class="headerlink" title="常见的模板插件"></a>常见的模板插件</h2><p>您可以前往以下网址下载：<br><a href="http://tangram.baidu.com/BaiduTemplate/" target="_blank" rel="external">baidu Template（百度开发）</a><br><a href="https://github.com/aui/artTemplate" target="_blank" rel="external">ArtTemplate（腾讯开发）</a><br><a href="https://github.com/shepherdwind/velocity.js/" target="_blank" rel="external">velocity.js（淘宝开发）</a></p>
+<blockquote>
+<p>模板引擎的用法大同小异,ArtTemplate由于性能优秀,且我在开发中常用artTemplate，这里我演示ArtTemplate的用法，ArtTemplate分为简洁语法和原生语法两个版本，其实也是大同小异，这里我会分别演示。</p>
+</blockquote>
+<h3 id="ArtTemplate简洁语法"><a href="#ArtTemplate简洁语法" class="headerlink" title="ArtTemplate简洁语法"></a>ArtTemplate简洁语法</h3><ul>
+<li><p>导入模板引擎：将下载好的ArtTemplate导入到页面中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src = <span class="string">"plugins/template/template.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义模板：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script id="test" type="text/html"&gt;</div><div class="line">&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &#123;&#123;each list as value i&#125;&#125;</div><div class="line">        &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;</div><div class="line">    &#123;&#123;/each&#125;&#125;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>这里一定要注意script标签的type是“text/html”,如果写成”text/javascript”会执行</strong></p>
+<ul>
+<li>渲染数据：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里我们模拟数据，在实际开发中都是后台约定好数据格式，用ajax传递真实数据。</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">    <span class="attr">title</span>: <span class="string">'标签'</span>,</div><div class="line">    <span class="attr">list</span>: [<span class="string">'文艺'</span>, <span class="string">'博客'</span>, <span class="string">'摄影'</span>, <span class="string">'电影'</span>, <span class="string">'民谣'</span>, <span class="string">'旅行'</span>, <span class="string">'吉他'</span>]</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="ArtTemplate原生语法"><a href="#ArtTemplate原生语法" class="headerlink" title="ArtTemplate原生语法"></a>ArtTemplate原生语法</h3><ul>
+<li><p>导入模板引擎：将下载好的ArtTemplate导入到页面中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src = <span class="string">"plugins/template/template-native.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定义模板：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script id=<span class="string">"test"</span> type=<span class="string">"text/html"</span>&gt;</div><div class="line">&lt;h1&gt;&lt;%=title%&gt;&lt;/h1&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;%for(i = 0; i &lt; list.length; i ++) &#123;%&gt;</div><div class="line">        &lt;li&gt;索引 &lt;%=i + 1%&gt; ：&lt;%=list[i]%&gt;&lt;/li&gt;</div><div class="line">    &lt;%&#125;%&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>再次重申：这里一定要注意script标签的type是“text/html”,如果写成”text/javascript”会执行</strong></p>
+<ul>
+<li>渲染数据：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里我们模拟数据，在实际开发中和后台约定好数据格式，用ajax传递真实数据。</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">    <span class="attr">title</span>: <span class="string">'标签'</span>,</div><div class="line">    <span class="attr">list</span>: [<span class="string">'文艺'</span>, <span class="string">'博客'</span>, <span class="string">'摄影'</span>, <span class="string">'电影'</span>, <span class="string">'民谣'</span>, <span class="string">'旅行'</span>, <span class="string">'吉他'</span>]</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>art-template 真的是一个渲染性能出众模板引擎，无论在NodeJS还是在浏览器中都可以运行。在实际开发中为开发者提供了很大的便利，我介绍的这点只是我在开发中最常用的功能，如果想深入了解，请移步<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">ArtTemplate</a>。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;模板引擎简介&quot;&gt;&lt;a href=&quot;#模板引擎简介&quot; class=&quot;headerlink&quot; title=&quot;模板引擎简介&quot;&gt;&lt;/a&gt;模板引擎简介&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;我们在实际开发中，前后交互需要频繁的使用ajax，使用ajax请求数据时,返回的如果是一个JSON格式的字符串,我们需要将其包装到对应的HTML代码中,再添加到页面上,才能看到效果.那么这个包装得过程有没有简单的方法呢?&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="template" scheme="http://yoursite.com/tags/template/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我汉三儿又回来了</title>
+    <link href="http://yoursite.com/2017/07/10/%E6%88%91%E6%B1%89%E4%B8%89%E5%84%BF%E5%8F%88%E5%9B%9E%E6%9D%A5%E4%BA%86/"/>
+    <id>http://yoursite.com/2017/07/10/我汉三儿又回来了/</id>
+    <published>2017-07-09T16:00:00.000Z</published>
+    <updated>2017-07-14T08:00:13.118Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>上一篇博文还是去年的，年后来找了新工作，就一直忙着，适应新工作，适应新环境。<br>最近有点调整好新环境的工作时间了，决定把这个捡起来，每天写一写。<br><a id="more"></a><br>新工作的代码和之前接触的有点不同，而且记忆力是越来越差了，可能是我不再是个孩子的缘故了。啧啧。<br>一个人工作吃饭睡觉，怎么滴都是一个人，女朋友离的远，有点无奈，还是逼迫自己每天看点新知识，写点东西，一点一点积累。<br>现在工作流程也熟悉了，没有刚来那两个月那么忙乱，前段时间每天得空了就逛逛知乎，看看动图，上豆瓣看点影评，最近看不动了。<br>有段时间压力大，做梦都梦见代码，而且还容易失眠，有bug解决了又欣喜若狂。但是貌似开心沉闷都是自己的事情。过去了也没有值得留念的。所以，归根结底，还是空虚的缘故吧。<br>之前总觉得牛逼的人生是吹牛的结果，国情如此，人情世故决定言轻眼浅。还好，我是一个小小程序员，干技术的不用低眉顺眼的形式，而且，乐趣无穷。逛逛论坛，溜溜社区，写点小文，看看段子。<br>之前觉得技术不能实现人生目标，现在发现实现技术就是人生目标了。人生除了吸烟，总得有点儿坚持的东西吧。即使道阻且长。</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;上一篇博文还是去年的，年后来找了新工作，就一直忙着，适应新工作，适应新环境。&lt;br&gt;最近有点调整好新环境的工作时间了，决定把这个捡起来，每天写一写。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>创建对象的五种方式</title>
     <link href="http://yoursite.com/2017/02/27/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
     <id>http://yoursite.com/2017/02/27/创建对象的五种方式/</id>
-    <published>2017-02-27T14:24:40.420Z</published>
-    <updated>2017-02-27T14:29:52.080Z</updated>
+    <published>2017-02-26T16:00:00.000Z</published>
+    <updated>2017-07-14T08:07:48.519Z</updated>
     
     <content type="html"><![CDATA[<h2 id="第一种-new一个"><a href="#第一种-new一个" class="headerlink" title="第一种 new一个"></a>第一种 new一个</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj1=new Object();</div><div class="line">console.log(obj1);</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -54,249 +391,11 @@ console.log(zs);
   </entry>
   
   <entry>
-    <title>对象的四种继承</title>
-    <link href="http://yoursite.com/2017/02/27/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
-    <id>http://yoursite.com/2017/02/27/实现继承/</id>
-    <published>2017-02-27T13:45:44.371Z</published>
-    <updated>2017-02-27T15:41:54.038Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
-<li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
-</ul>
-<ul>
-<li>封装：将复杂的操作包裹起来，让简单的东西留在外面<ul>
-<li>函数是对 具体过程的封装。</li>
-<li>对象是对 行为和数据的封装。</li>
-</ul>
-</li>
-<li>继承：子类可以使用从父类继承的属性和方法。<br>  *即：让某个类型的对象获得另一个类型的对象的属性的方法    </li>
-<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 <a id="more"></a>
-<blockquote>
-<p>今天主要总结下继承的几种方式及代码</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
-<li>ES5提供的方法（IE9+ 开始支持）<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123; </div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">"hello，i am chuanchuan"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1);</div><div class="line"></div><div class="line"><span class="comment">//实现兼容</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> create = <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( <span class="built_in">Object</span>.create ) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.create( obj );</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="原型继承-Object-prototype"><a href="#原型继承-Object-prototype" class="headerlink" title="原型继承- Object.prototype"></a>原型继承- Object.prototype</h3><ul>
-<li>如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="comment">// 将需要的属性添加到原型对象中</span></div><div class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line"><span class="comment">//覆盖原型对象</span></div><div class="line">Person.prototype = &#123;</div><div class="line">	<span class="attr">constructor</span>: Person,</div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayNo</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayYouAgin</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div><div class="line">p.sayHi();</div><div class="line">p.sayNo();</div><div class="line">p.sayYouAgin();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
-<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3….</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123;name:&quot;女娲&quot;, age: 1, gender: &quot;female&quot;&#125;;</div><div class="line">var o2 = &#123;grade: &quot;三年级二班&quot;, score: 100&#125;;</div><div class="line"></div><div class="line">// o2 继承 o1</div><div class="line">for ( var k in o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</div><div class="line">//给 o2 提供一个方法, 叫 extend</div><div class="line">o2.extend = function (obj) &#123;</div><div class="line">    for (var k in obj) &#123;</div><div class="line">        this[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  // 继承</div></pre></td></tr></table></figure>
-<h3 id="对象冒充"><a href="#对象冒充" class="headerlink" title="对象冒充"></a>对象冒充</h3><ul>
-<li>将parent作为child对象的一个方法来调用，然后卸磨杀驴。<pre><code class="js"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>{
-      <span class="keyword">this</span>.name = name;
-      <span class="keyword">this</span>.age = age;
-}
-<span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, gender, address</span>) </span>{
-      <span class="comment">// 将parent作为child对象的一个方法来调用</span>
-      <span class="keyword">this</span>.parent = parent;
-      <span class="keyword">this</span>.parent(name, age);
-          <span class="comment">// 卸磨杀驴</span>
-      <span class="keyword">delete</span> <span class="keyword">this</span>.parent;
-      <span class="keyword">this</span>.gender = gender;
-      <span class="keyword">this</span>.address = address;
-}
-  <span class="keyword">var</span> ch = <span class="keyword">new</span> child(<span class="string">'tom'</span>, <span class="number">18</span>, <span class="string">'boy'</span>, <span class="string">'beijing'</span>);
-  <span class="built_in">console</span>.log(ch);
-</code></pre>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;我们都知道面向对象的三大特性：封装、继承、多态。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;封装：将复杂的操作包裹起来，让简单的东西留在外面&lt;ul&gt;
-&lt;li&gt;函数是对 具体过程的封装。&lt;/li&gt;
-&lt;li&gt;对象是对 行为和数据的封装。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;继承：子类可以使用从父类继承的属性和方法。&lt;br&gt;  *即：让某个类型的对象获得另一个类型的对象的属性的方法    &lt;/li&gt;
-&lt;li&gt;多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript Module</title>
-    <link href="http://yoursite.com/2016/12/26/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    <id>http://yoursite.com/2016/12/26/JavaScript 模块化/</id>
-    <published>2016-12-26T11:44:57.228Z</published>
-    <updated>2016-12-26T11:44:57.228Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>Node 中可以使用 JavaScript<ul>
-<li>在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿</li>
-<li>在 Node 中，一个 JavaScript 文件就是一个模块<ul>
-<li>模块天生就是私有作用域<a id="more"></a></li>
-</ul>
-</li>
-<li>Node 就是基于 CommonJS 规范实现了一套自己的模块化解决方案<ul>
-<li>所谓的规范只是指定标准的人或者组织，不负责实现</li>
-<li>一般这种所谓的规范都是先有的实现，慢慢的用的人多了，自然而然就形成一种标准</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>浏览器也可以使用 JavaScript</p>
-<ul>
-<li>浏览器中的 JavaScript 必须依赖于 html 页面中的 script 标签</li>
-<li>JavaScript 有一个天大的缺陷：无法直接通过 js 语法本身去加载另一个 js 文件</li>
-<li>对于大型项目来说，在一个页面通过 script 标签之间加载 n 多个 JavaScript 文件</li>
-<li>以前写代码都习惯加上 匿名自执行函数</li>
-<li>在浏览器环境，也有一个社区 RequireJS ，也为 JavaScript 语言在浏览器端实现了一套模块化解决方案<ul>
-<li>例如如何定一个模块</li>
-<li>以及模块与模块之间如何相互加载</li>
-<li>以及模块如何暴露接口</li>
-</ul>
-</li>
-<li>由于 Require 推广的很好，在社区中形成了一种标准，所以 RequireJS 社区给自己定义了一个模块规范名称：AMD</li>
-<li>AMD：Asynchronous Module Definition  异步模块定义规范</li>
-<li>国内阿里巴巴有一个牛人，不服 RequireJS，感觉用的不爽，所以做了一个叫 SeaJS，由于在国内推广的比较好，所以也给自己起了个名字：CMD：Common Module Definition</li>
-<li>但是 SeaJS 已经不更新维护了</li>
-<li>RequireJS 还在更新维护</li>
-</ul>
-</li>
-<li><p>总结：</p>
-<ul>
-<li>无论是 CMD、AMD、CommonJS、UMD 什么什么 MD 模块系统</li>
-<li>它们的本质初衷都是一样的，都是为了解决 JavaScript 历史问题：没有模块化系统</li>
-<li>所以，在 2015 年 6 月，ES6正式发布了，其中就定义了 模块系统 规范</li>
-<li>原生就提供了 import、export 等接口API用来作为自己官方的模块API规范</li>
-<li>但是，这个模块系统由一个很大的问题，还没有任何环境能原生直接支持</li>
-<li>必须通过一个叫：babel 的工具，编译转换才可以使用</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;Node 中可以使用 JavaScript&lt;ul&gt;
-&lt;li&gt;在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿&lt;/li&gt;
-&lt;li&gt;在 Node 中，一个 JavaScript 文件就是一个模块&lt;ul&gt;
-&lt;li&gt;模块天生就是私有作用域
-    
-    </summary>
-    
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
-    
-    
-      <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MVC及MVVC 在Angular中的思想</title>
-    <link href="http://yoursite.com/2016/12/23/MVC%20%E5%8F%8A%20MVVM%20%E6%80%9D%E6%83%B3/"/>
-    <id>http://yoursite.com/2016/12/23/MVC 及 MVVM 思想/</id>
-    <published>2016-12-23T13:27:46.825Z</published>
-    <updated>2016-12-23T13:54:39.016Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="MVC-的基本概念"><a href="#MVC-的基本概念" class="headerlink" title="MVC 的基本概念"></a>MVC 的基本概念</h3><ul>
-<li>概念解释<ul>
-<li>M Model, 模型, 数据</li>
-<li>V View, 视图, 就是如何展示数据</li>
-<li>C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.<a id="more"></a></li>
-</ul>
-</li>
-<li>使用 MVC 的思想处理代码, 可以使得代码分工变得明确, 那么代码的组织方式可以根据不同分块进行单独处理,所以 在 ng 中, 提供了一个非常不同于以往的编程方法<ul>
-<li>在 ng 中完全遵循 MVC 的思想, 将 html 当做展示数据的 View, 而 需要在 界面中展示的数据就是 modle.</li>
-<li>在处理文本输入绑定的时候, 输入的文本内容就是数据. 所在凡是需要作为数据的标签可以利用 ng-model </li>
-<li>给它取一个名字. 在有了名字以后, 代码的背后就会对应的创建一个 该名字的 Model 出来. 在数据发生变化的时候, 为了可以展示数据, 会自动的将数据展示到 界面中( 控制器 )</li>
-</ul>
-</li>
-</ul>
-<h3 id="ng弱化了控制器"><a href="#ng弱化了控制器" class="headerlink" title="ng弱化了控制器"></a>ng弱化了控制器</h3><ul>
-<li>在 传统的 MVC 框架中, 控制器是联系 view 与 model 的桥梁, 一般书写代码都在控制器中. 在控制器里面调用使用视图与数据模型. 在 ng 中似乎弱化了控制器的功能.</li>
-<li>在 MVC 的思想中有两个基本问题<br>  1&gt; 数据如何同步<br>  2&gt; 业务逻辑如何实现在 ng 中所谓控制器的功能实际上表现出来的只有 模块功能的管理作用.</li>
-</ul>
-<h3 id="ng是MVVM-框架"><a href="#ng是MVVM-框架" class="headerlink" title="ng是MVVM 框架"></a>ng是MVVM 框架</h3><ul>
-<li><p>MVVM是Model-View-ViewModel的简写,MVVM（Model-View-ViewModel）框架的由来便是MVP（Model-View-Presenter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架。它立足于原有MVP框架并且把WPF的新特性糅合进去，以应对客户日益复杂的需求变化。</p>
-</li>
-<li><p>正因为, ng减少了控制器的作用, 但是引入了一个新的对象, 这个对象与界面中数据一一对应,并且支持数据的双向绑定. 这样的一个对象与 Model 还是有一定的区别. 这个对象称为ViewModel, 基于视图的数据模型.虽然因此弱化了 controller 的概念, 但是强化了 viewmodel 的功能. 因此有人称 ng 是 MVVM 框架.</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;MVC-的基本概念&quot;&gt;&lt;a href=&quot;#MVC-的基本概念&quot; class=&quot;headerlink&quot; title=&quot;MVC 的基本概念&quot;&gt;&lt;/a&gt;MVC 的基本概念&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;概念解释&lt;ul&gt;
-&lt;li&gt;M Model, 模型, 数据&lt;/li&gt;
-&lt;li&gt;V View, 视图, 就是如何展示数据&lt;/li&gt;
-&lt;li&gt;C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.
-    
-    </summary>
-    
-      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
-    
-    
-      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>angular中$scope作用域</title>
-    <link href="http://yoursite.com/2016/12/23/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
-    <id>http://yoursite.com/2016/12/23/angular中 $scope 作用域/</id>
-    <published>2016-12-23T13:26:49.262Z</published>
-    <updated>2016-12-26T12:14:16.570Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
-<h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
-<pre><code>在 ng 凡是有 控制器就有 $scope 存在.
-在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
-</code></pre><h3 id="多个-scope-之间的-关系是什么"><a href="#多个-scope-之间的-关系是什么" class="headerlink" title="多个 $scope 之间的 关系是什么?"></a>多个 $scope 之间的 关系是什么?</h3><pre><code>在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有
-嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope
-
-对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 __proto__ 就是 b
-Object.create( b ) -&gt; a
-</code></pre><h3 id="在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><a href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样" class="headerlink" title="在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?"></a>在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</h3><p>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>    var base = { name: ‘jim’ };<br>    var sub = Object.create( base );<br>    console.log( sub.name );<br>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>    sub.age = 19;<br>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>    sub.name = ‘tom’;<br>    // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
-<pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
-
-需要具备一个能力, 看 html 标签 绘制 scope 关系
-</code></pre><h3 id="为什么一开始的代码中没有写-controller-也可以双向绑定"><a href="#为什么一开始的代码中没有写-controller-也可以双向绑定" class="headerlink" title="为什么一开始的代码中没有写 controller 也可以双向绑定?"></a>为什么一开始的代码中没有写 controller 也可以双向绑定?</h3><p>  -&gt; 在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理,实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象,它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
-<p>  -&gt; 凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性</p>
-<p>  -&gt; 这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问,ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会执行该方法.<br>  -语法:<br>    module.run( [ ‘…’, function ( … ) { … } ] )</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;作用域对象&quot;&gt;&lt;a href=&quot;#作用域对象&quot; class=&quot;headerlink&quot; title=&quot;作用域对象&quot;&gt;&lt;/a&gt;作用域对象&lt;/h2&gt;&lt;p&gt;  就是 $scope&lt;/p&gt;
-&lt;h3 id=&quot;什么时候创建-scope&quot;&gt;&lt;a href=&quot;#什么时候创建-scope&quot; class=&quot;headerlink&quot; title=&quot;什么时候创建 $scope ?&quot;&gt;&lt;/a&gt;什么时候创建 $scope ?&lt;/h3&gt;
-    
-    </summary>
-    
-      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
-    
-    
-      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
-    
-  </entry>
-  
-  <entry>
     <title>angular 基础思想</title>
-    <link href="http://yoursite.com/2016/12/23/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
-    <id>http://yoursite.com/2016/12/23/angular 基础思想/</id>
-    <published>2016-12-23T13:23:17.436Z</published>
-    <updated>2016-12-26T12:29:48.756Z</updated>
+    <link href="http://yoursite.com/2016/12/26/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2016/12/26/angular 基础思想/</id>
+    <published>2016-12-25T16:00:00.000Z</published>
+    <updated>2017-07-14T07:52:39.116Z</updated>
     
     <content type="html"><![CDATA[<h2 id="angular-官方"><a href="#angular-官方" class="headerlink" title="angular 官方"></a>angular 官方</h2><ul>
 <li>ng 表示 AngularJS.</li>
@@ -404,11 +503,120 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>angular中$scope作用域</title>
+    <link href="http://yoursite.com/2016/12/25/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>http://yoursite.com/2016/12/25/angular中 $scope 作用域/</id>
+    <published>2016-12-24T16:00:00.000Z</published>
+    <updated>2017-07-14T07:53:14.115Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
+<h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
+<pre><code>在 ng 凡是有 控制器就有 $scope 存在.
+在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
+</code></pre><h3 id="多个-scope-之间的-关系是什么"><a href="#多个-scope-之间的-关系是什么" class="headerlink" title="多个 $scope 之间的 关系是什么?"></a>多个 $scope 之间的 关系是什么?</h3><pre><code>在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有
+嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope
+
+对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 __proto__ 就是 b
+Object.create( b ) -&gt; a
+</code></pre><h3 id="在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><a href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样" class="headerlink" title="在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?"></a>在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</h3><p>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>    var base = { name: ‘jim’ };<br>    var sub = Object.create( base );<br>    console.log( sub.name );<br>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>    sub.age = 19;<br>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>    sub.name = ‘tom’;<br>    // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
+<pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
+
+需要具备一个能力, 看 html 标签 绘制 scope 关系
+</code></pre><h3 id="为什么一开始的代码中没有写-controller-也可以双向绑定"><a href="#为什么一开始的代码中没有写-controller-也可以双向绑定" class="headerlink" title="为什么一开始的代码中没有写 controller 也可以双向绑定?"></a>为什么一开始的代码中没有写 controller 也可以双向绑定?</h3><p>  -&gt; 在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理,实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象,它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
+<p>  -&gt; 凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性</p>
+<p>  -&gt; 这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问,ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会执行该方法.<br>  -语法:<br>    module.run( [ ‘…’, function ( … ) { … } ] )</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;作用域对象&quot;&gt;&lt;a href=&quot;#作用域对象&quot; class=&quot;headerlink&quot; title=&quot;作用域对象&quot;&gt;&lt;/a&gt;作用域对象&lt;/h2&gt;&lt;p&gt;  就是 $scope&lt;/p&gt;
+&lt;h3 id=&quot;什么时候创建-scope&quot;&gt;&lt;a href=&quot;#什么时候创建-scope&quot; class=&quot;headerlink&quot; title=&quot;什么时候创建 $scope ?&quot;&gt;&lt;/a&gt;什么时候创建 $scope ?&lt;/h3&gt;
+    
+    </summary>
+    
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
+    
+    
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript Module</title>
+    <link href="http://yoursite.com/2016/12/24/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://yoursite.com/2016/12/24/JavaScript 模块化/</id>
+    <published>2016-12-23T16:00:00.000Z</published>
+    <updated>2017-07-14T07:56:33.816Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>Node 中可以使用 JavaScript<ul>
+<li>在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿</li>
+<li>在 Node 中，一个 JavaScript 文件就是一个模块<ul>
+<li>模块天生就是私有作用域<a id="more"></a></li>
+</ul>
+</li>
+<li>Node 就是基于 CommonJS 规范实现了一套自己的模块化解决方案<ul>
+<li>所谓的规范只是指定标准的人或者组织，不负责实现</li>
+<li>一般这种所谓的规范都是先有的实现，慢慢的用的人多了，自然而然就形成一种标准</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>浏览器也可以使用 JavaScript</p>
+<ul>
+<li>浏览器中的 JavaScript 必须依赖于 html 页面中的 script 标签</li>
+<li>JavaScript 有一个天大的缺陷：无法直接通过 js 语法本身去加载另一个 js 文件</li>
+<li>对于大型项目来说，在一个页面通过 script 标签之间加载 n 多个 JavaScript 文件</li>
+<li>以前写代码都习惯加上 匿名自执行函数</li>
+<li>在浏览器环境，也有一个社区 RequireJS ，也为 JavaScript 语言在浏览器端实现了一套模块化解决方案<ul>
+<li>例如如何定一个模块</li>
+<li>以及模块与模块之间如何相互加载</li>
+<li>以及模块如何暴露接口</li>
+</ul>
+</li>
+<li>由于 Require 推广的很好，在社区中形成了一种标准，所以 RequireJS 社区给自己定义了一个模块规范名称：AMD</li>
+<li>AMD：Asynchronous Module Definition  异步模块定义规范</li>
+<li>国内阿里巴巴有一个牛人，不服 RequireJS，感觉用的不爽，所以做了一个叫 SeaJS，由于在国内推广的比较好，所以也给自己起了个名字：CMD：Common Module Definition</li>
+<li>但是 SeaJS 已经不更新维护了</li>
+<li>RequireJS 还在更新维护</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<ul>
+<li>无论是 CMD、AMD、CommonJS、UMD 什么什么 MD 模块系统</li>
+<li>它们的本质初衷都是一样的，都是为了解决 JavaScript 历史问题：没有模块化系统</li>
+<li>所以，在 2015 年 6 月，ES6正式发布了，其中就定义了 模块系统 规范</li>
+<li>原生就提供了 import、export 等接口API用来作为自己官方的模块API规范</li>
+<li>但是，这个模块系统由一个很大的问题，还没有任何环境能原生直接支持</li>
+<li>必须通过一个叫：babel 的工具，编译转换才可以使用</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;Node 中可以使用 JavaScript&lt;ul&gt;
+&lt;li&gt;在 Node 中，内置了两个 API：module.exports 和 require 这两个哥们儿&lt;/li&gt;
+&lt;li&gt;在 Node 中，一个 JavaScript 文件就是一个模块&lt;ul&gt;
+&lt;li&gt;模块天生就是私有作用域
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS中 异常</title>
-    <link href="http://yoursite.com/2016/12/23/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
-    <id>http://yoursite.com/2016/12/23/Js中异常 exception /</id>
-    <published>2016-12-23T13:16:20.581Z</published>
-    <updated>2016-12-26T12:20:12.349Z</updated>
+    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
+    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
+    <published>2016-12-23T16:00:00.000Z</published>
+    <updated>2017-07-14T07:56:46.049Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
 <li>程序执行是出现的结果与预期结果不一致.</li>
@@ -468,159 +676,140 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
-    <title>很暗的</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
-    <id>http://yoursite.com/2016/12/18/很暗的/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T13:06:24.233Z</updated>
+    <title>对象的四种继承</title>
+    <link href="http://yoursite.com/2016/12/24/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>http://yoursite.com/2016/12/24/实现继承/</id>
+    <published>2016-12-23T16:00:00.000Z</published>
+    <updated>2017-07-14T07:59:44.570Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
-<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
-<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
-<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
-<p>这种乍然是很悲哀的。</p>
-<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
-<p>然而事实上它的消失是悄然无息的。</p>
-<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
-<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
-<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
-<p>你简直是我的全部。</p>
-<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
-<p>也记得你说最近跟我说的最后一句话。</p>
-<p>我记得你跟我说过的好听的话。</p>
-<p>也记得你对我说过的残忍的话。</p>
-<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
-&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我想要的</title>
-    <link href="http://yoursite.com/2016/12/18/%E6%97%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2016/12/18/无题/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-17T09:21:36.677Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
+    <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
+</ul>
+<ul>
+<li>封装：将复杂的操作包裹起来，让简单的东西留在外面<ul>
+<li>函数是对 具体过程的封装。</li>
+<li>对象是对 行为和数据的封装。</li>
+</ul>
+</li>
+<li>继承：子类可以使用从父类继承的属性和方法。<br>  *即：让某个类型的对象获得另一个类型的对象的属性的方法    </li>
+<li>多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。 <a id="more"></a>
 <blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
-<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
-<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
-<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
-<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
-<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
+<p>今天主要总结下继承的几种方式及代码</p>
 </blockquote>
+</li>
+</ul>
+<h3 id="经典继承-Object-create"><a href="#经典继承-Object-create" class="headerlink" title="经典继承 - Object.create"></a>经典继承 - Object.create</h3><ul>
+<li>ES5提供的方法（IE9+ 开始支持）<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o1 = &#123; </div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        alert(<span class="string">"hello，i am chuanchuan"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> o2 = <span class="built_in">Object</span>.create(o1);</div><div class="line"></div><div class="line"><span class="comment">//实现兼容</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> create = <span class="function"><span class="keyword">function</span>(<span class="params"> obj </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( <span class="built_in">Object</span>.create ) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Object</span>.create( obj );</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">        F.prototype = obj;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="原型继承-Object-prototype"><a href="#原型继承-Object-prototype" class="headerlink" title="原型继承- Object.prototype"></a>原型继承- Object.prototype</h3><ul>
+<li>如果需要让一个对象拥有某些属性和方法，可以把这些属性和方法放到原型对象中，因为对象会继承自原型对象，所以就获得了该属性和方法<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line"><span class="comment">// 将需要的属性添加到原型对象中</span></div><div class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line"><span class="comment">//覆盖原型对象</span></div><div class="line">Person.prototype = &#123;</div><div class="line">	<span class="attr">constructor</span>: Person,</div><div class="line">    <span class="attr">sayHi</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayNo</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;,</div><div class="line">    <span class="attr">sayYouAgin</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Person();</div><div class="line">p.sayHi();</div><div class="line">p.sayNo();</div><div class="line">p.sayYouAgin();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="混入式继承-Object-extend"><a href="#混入式继承-Object-extend" class="headerlink" title="混入式继承- Object.extend"></a>混入式继承- Object.extend</h3><ul>
+<li>由于一个对象可以继承自任意的对象，即：o可以继承自对象o1，o2，o3….</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var o1 = &#123;name:&quot;女娲&quot;, age: 1, gender: &quot;female&quot;&#125;;</div><div class="line">var o2 = &#123;grade: &quot;三年级二班&quot;, score: 100&#125;;</div><div class="line"></div><div class="line">// o2 继承 o1</div><div class="line">for ( var k in o1 ) &#123;</div><div class="line">  o2[k] = o1[k];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//如果希望 o2 可以继承自任意的对象. 所以为了简化继承的代码</div><div class="line">//给 o2 提供一个方法, 叫 extend</div><div class="line">o2.extend = function (obj) &#123;</div><div class="line">    for (var k in obj) &#123;</div><div class="line">        this[k] = obj[k];</div><div class="line">    &#125;   </div><div class="line">&#125;</div><div class="line"></div><div class="line">o2.extend(o1);  // 继承</div></pre></td></tr></table></figure>
+<h3 id="对象冒充"><a href="#对象冒充" class="headerlink" title="对象冒充"></a>对象冒充</h3><ul>
+<li>将parent作为child对象的一个方法来调用，然后卸磨杀驴。<pre><code class="js"><span class="function"><span class="keyword">function</span> <span class="title">parent</span>(<span class="params">name, age</span>) </span>{
+      <span class="keyword">this</span>.name = name;
+      <span class="keyword">this</span>.age = age;
+}
+<span class="function"><span class="keyword">function</span> <span class="title">child</span>(<span class="params">name, age, gender, address</span>) </span>{
+      <span class="comment">// 将parent作为child对象的一个方法来调用</span>
+      <span class="keyword">this</span>.parent = parent;
+      <span class="keyword">this</span>.parent(name, age);
+          <span class="comment">// 卸磨杀驴</span>
+      <span class="keyword">delete</span> <span class="keyword">this</span>.parent;
+      <span class="keyword">this</span>.gender = gender;
+      <span class="keyword">this</span>.address = address;
+}
+  <span class="keyword">var</span> ch = <span class="keyword">new</span> child(<span class="string">'tom'</span>, <span class="number">18</span>, <span class="string">'boy'</span>, <span class="string">'beijing'</span>);
+  <span class="built_in">console</span>.log(ch);
+</code></pre>
+</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于跨域</title>
-    <link href="http://yoursite.com/2016/12/18/%E8%B7%A8%E5%9F%9F/"/>
-    <id>http://yoursite.com/2016/12/18/跨域/</id>
-    <published>2016-12-17T17:06:31.582Z</published>
-    <updated>2016-12-08T08:07:11.710Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
-<p>要了解跨域,首先就要知道什么是同源?</p>
-</blockquote>
-<p>所谓同源是指，域名，协议，端口完全相同<br><a id="more"></a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//URL	说明	是否允许通信</span></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名下	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/lab/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/script/b.js	//同一域名下不同文件夹	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com:8000/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名，不同端口	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">https:<span class="comment">//www.a.com/b.js	//同一域名，不同协议	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//70.32.92.74/b.js	//域名和域名对应ip	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//script.a.com/b.js	//主域相同，子域不同	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//a.com/b.js	//同一域名，不同二级域名（同上）	不允许（cookie这种情况下也不允许访问）</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.cnblogs.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//不同域名	不允许</span></div></pre></td></tr></table></figure>
-<p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
-<p>##跨域方案</p>
-<p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
-<ul>
-<li><p>document.domain + iframe</p>
-</li>
-<li><p>window.name + iframe</p>
-</li>
-<li><p>location.hash + iframe</p>
-</li>
-<li><p>window.postMessage()</p>
-</li>
-</ul>
-<p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
-<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
-<p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
-</blockquote>
-<p>只能以get发送请求</p>
-<ul>
-<li>src只能发送get请求</li>
-<li>jsonp也只能通过get请求</li>
-<li>服务端代码</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>前端代码:注意,域名不同<ul>
-<li>核心是 通过script标签的src属性提交get请求</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>##jQuery 的$.ajax()</p>
-<blockquote>
-<p>方法当中集成了JSONP的实现，可以非常方便的实现跨域数据的访问。</p>
-</blockquote>
-<p>dataType: ‘jsonp’ 设置dataType值为jsonp即开启跨域访问<br>jsonp 可以指定服务端接收的参数的“key”值，默认为callback<br>jsonpCallback 可以指定相应的回调函数，默认自动生成</p>
-<pre><code>*实例代码
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript" src='jquery/jquery-3.0.0.min.js'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;区域1的页面&lt;/h1&gt;</div><div class="line">    &lt;input type="button" name="" onclick='sendAjax()' value="jquery区域请求"&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    function sendAjax()&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            url:'http://www.section02.com/sectcion02_jqJsonp.php',</div><div class="line">            type:'post',</div><div class="line">            dataType: 'jsonp',</div><div class="line">            data:&#123;name:'itt'&#125;,</div><div class="line">            success:function(data)&#123;</div><div class="line">                console.log(data);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h2 id="跨域借口"><a href="#跨域借口" class="headerlink" title="跨域借口"></a>跨域借口</h2><blockquote>
-<p>一些平台为我们提供了可以直接使用的接口,我们只需要按照他们提供的格式提交数据即可</p>
-</blockquote>
-<p><a href="http://developer.baidu.com/map/carapi-7.htm" target="_blank" rel="external">百度车联网api</a><br>开发者秘钥ak:0A5bc3c4fb543c8f9bc54b77bc155724</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h2 id=&quot;同源&quot;&gt;&lt;a href=&quot;#同源&quot; class=&quot;headerlink&quot; title=&quot;同源&quot;&gt;&lt;/a&gt;同源&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;要了解跨域,首先就要知道什么是同源?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所谓同源是指，域名，协议，端口完全相同&lt;br&gt;
+      &lt;h2 id=&quot;特性&quot;&gt;&lt;a href=&quot;#特性&quot; class=&quot;headerlink&quot; title=&quot;特性&quot;&gt;&lt;/a&gt;特性&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;我们都知道面向对象的三大特性：封装、继承、多态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;封装：将复杂的操作包裹起来，让简单的东西留在外面&lt;ul&gt;
+&lt;li&gt;函数是对 具体过程的封装。&lt;/li&gt;
+&lt;li&gt;对象是对 行为和数据的封装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;继承：子类可以使用从父类继承的属性和方法。&lt;br&gt;  *即：让某个类型的对象获得另一个类型的对象的属性的方法    &lt;/li&gt;
+&lt;li&gt;多态：把不同的子类对象都当作父类来看，可以屏蔽不同子类对象之间的差异，写出通用的代码，做出通用的编程，以适应需求的不断变化。
     
     </summary>
     
       <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
     
     
-      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+      <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MVC及MVVC 在Angular中的思想</title>
+    <link href="http://yoursite.com/2016/12/23/MVC%20%E5%8F%8A%20MVVM%20%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2016/12/23/MVC 及 MVVM 思想/</id>
+    <published>2016-12-22T16:00:00.000Z</published>
+    <updated>2017-07-14T07:57:27.076Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="MVC-的基本概念"><a href="#MVC-的基本概念" class="headerlink" title="MVC 的基本概念"></a>MVC 的基本概念</h3><ul>
+<li>概念解释<ul>
+<li>M Model, 模型, 数据</li>
+<li>V View, 视图, 就是如何展示数据</li>
+<li>C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.<a id="more"></a></li>
+</ul>
+</li>
+<li>使用 MVC 的思想处理代码, 可以使得代码分工变得明确, 那么代码的组织方式可以根据不同分块进行单独处理,所以 在 ng 中, 提供了一个非常不同于以往的编程方法<ul>
+<li>在 ng 中完全遵循 MVC 的思想, 将 html 当做展示数据的 View, 而 需要在 界面中展示的数据就是 modle.</li>
+<li>在处理文本输入绑定的时候, 输入的文本内容就是数据. 所在凡是需要作为数据的标签可以利用 ng-model </li>
+<li>给它取一个名字. 在有了名字以后, 代码的背后就会对应的创建一个 该名字的 Model 出来. 在数据发生变化的时候, 为了可以展示数据, 会自动的将数据展示到 界面中( 控制器 )</li>
+</ul>
+</li>
+</ul>
+<h3 id="ng弱化了控制器"><a href="#ng弱化了控制器" class="headerlink" title="ng弱化了控制器"></a>ng弱化了控制器</h3><ul>
+<li>在 传统的 MVC 框架中, 控制器是联系 view 与 model 的桥梁, 一般书写代码都在控制器中. 在控制器里面调用使用视图与数据模型. 在 ng 中似乎弱化了控制器的功能.</li>
+<li>在 MVC 的思想中有两个基本问题<br>  1&gt; 数据如何同步<br>  2&gt; 业务逻辑如何实现在 ng 中所谓控制器的功能实际上表现出来的只有 模块功能的管理作用.</li>
+</ul>
+<h3 id="ng是MVVM-框架"><a href="#ng是MVVM-框架" class="headerlink" title="ng是MVVM 框架"></a>ng是MVVM 框架</h3><ul>
+<li><p>MVVM是Model-View-ViewModel的简写,MVVM（Model-View-ViewModel）框架的由来便是MVP（Model-View-Presenter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架。它立足于原有MVP框架并且把WPF的新特性糅合进去，以应对客户日益复杂的需求变化。</p>
+</li>
+<li><p>正因为, ng减少了控制器的作用, 但是引入了一个新的对象, 这个对象与界面中数据一一对应,并且支持数据的双向绑定. 这样的一个对象与 Model 还是有一定的区别. 这个对象称为ViewModel, 基于视图的数据模型.虽然因此弱化了 controller 的概念, 但是强化了 viewmodel 的功能. 因此有人称 ng 是 MVVM 框架.</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;MVC-的基本概念&quot;&gt;&lt;a href=&quot;#MVC-的基本概念&quot; class=&quot;headerlink&quot; title=&quot;MVC 的基本概念&quot;&gt;&lt;/a&gt;MVC 的基本概念&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;概念解释&lt;ul&gt;
+&lt;li&gt;M Model, 模型, 数据&lt;/li&gt;
+&lt;li&gt;V View, 视图, 就是如何展示数据&lt;/li&gt;
+&lt;li&gt;C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.
+    
+    </summary>
+    
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
+    
+    
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
     
   </entry>
   
   <entry>
     <title>JS严格模式</title>
-    <link href="http://yoursite.com/2016/12/18/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2016/12/18/严格模式/</id>
-    <published>2016-12-17T17:06:31.520Z</published>
-    <updated>2016-12-23T13:18:04.264Z</updated>
+    <link href="http://yoursite.com/2016/12/23/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2016/12/23/严格模式/</id>
+    <published>2016-12-22T16:00:00.000Z</published>
+    <updated>2017-07-14T08:02:05.260Z</updated>
     
     <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
 <li>消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；</li>
@@ -718,64 +907,142 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
-    <title>前端常见的小算法</title>
-    <link href="http://yoursite.com/2016/12/18/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/12/18/前端常见的小算法/</id>
-    <published>2016-12-17T17:06:31.520Z</published>
-    <updated>2016-12-20T14:04:04.642Z</updated>
+    <title>Node js（基础）</title>
+    <link href="http://yoursite.com/2016/12/20/Node%20JS%20%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2016/12/20/Node JS （基础）/</id>
+    <published>2016-12-19T16:00:00.000Z</published>
+    <updated>2017-07-14T07:57:36.221Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
-<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
-</blockquote>
- <a id="more"></a>
-<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
-<pre><code>function findMaxChar(str){
-    if(str.length==1){
-        return str;
-    }
-    let charObj={};
-    for(let i,i&lt;str.length;i++){
-        if(!charObj[str.charAt(i)]){
-            charObj[str.charAt(i)]=1;
-        }else{
-            charObj[str.charAt(i)]+= 1;
-        }
-    }
-    let maxChar = &apos;&apos;,
-        maxValue= 1;
-    for(var k in charObj){
-        if(charObj[k]&gt;=maxValue){
-            maxChar = k;
-            maxValue = charObj[k];
-        }
-    }    
-    return maxChar;
-}
-//暴露接口
-module.exports = findMaxChar;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
-<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
-<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
-<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
-<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
-<blockquote>
-<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
-</blockquote>
+    <content type="html"><![CDATA[<h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
+<li>要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。</li>
+<li><p>S（Server）：服务器端， 为客户端提交接口(数据)</p>
+<a id="more"></a>
+<ul>
+<li>常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<!--more--> </li>
+<li>简单来说服务器就是处理客户端的请求，做出处理之后并响应回去。</li>
+</ul>
+</li>
+<li><p>B（Browser）：客户端，简单说就是把一坨用户看不懂的数据变成友好的形式给用户体验</p>
+</li>
+</ul>
+<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><ul>
+<li><p>简单的说呢<br>  Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境</p>
+</li>
+<li><p>复杂的说呢就是:<br>  V8引 擎执行Javascript的速度非常快，性能非常好，Node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好，也就是它对Google V8引擎进行了封装。</p>
+</li>
+<li><p>特点：<br>  Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>  Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>  Node.js 可跨平台 (Linux  windows  Unix)</p>
+</li>
+</ul>
+<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
+<li>在几年的时间里，Node.JS逐渐发展成一个成熟的开发平台，吸引了许多开发者。有许多大型高流量网站都采用Node.JS进行开发，此外，开发人员还可以使用它来开发一些快速移动Web框架。除了Web应用外，NodeJS也被应用在许多方面，这些项目涉及到应用程序监控、媒体流、远程控制、桌面和移动应用等等。真的是很牛逼啊。</li>
+</ul>
+<h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><p>####饮水思源嘛，人家开发出来，我们后来人总得记着</p>
+<ul>
+<li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
+<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
+<li>2009 年，Angular 诞生了</li>
+<li>2009年5月，Ryan Dahl在GitHub上发布了最初版本的部分Node.js包，随后几个月里，有人开始使用Node.js开发应用。</li>
+<li>2009年11月和2010年4月，两届JSConf大会都安排了Node.js的讲座。</li>
+<li>2010年年底，Node.js获得云计算服务商Joyent资助，创始人Ryan Dahl加入Joyent全职负责Node.js的发展。</li>
+<li>2011年7月，Node.js在微软的支持下发布Windows版本。</li>
+</ul>
+<h3 id="1-5-资源推荐"><a href="#1-5-资源推荐" class="headerlink" title="1.5 资源推荐"></a>1.5 资源推荐</h3><ul>
+<li>深入浅出 Node.js</li>
+<li>CNODE</li>
+<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
+</ul>
+<h2 id="2-Node-js-关于-HTTP-处理过程"><a href="#2-Node-js-关于-HTTP-处理过程" class="headerlink" title="2. Node.js 关于 HTTP 处理过程"></a>2. Node.js 关于 HTTP 处理过程</h2><h3 id="2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。"><a href="#2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。" class="headerlink" title="2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。"></a>2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	var http = require(&apos;http&apos;);</div><div class="line">	var server = http.createServer(function(request, response) &#123;   </div><div class="line">	// handle your requset </div><div class="line">	&#125;);</div><div class="line">```	</div><div class="line">###	2.2 传入 createServer 的 function 在每次 HTTP 请求时都将被调用执行，因此这个 function 也被称为请求的处理者。事实上通过 createServer 返回的 Server 对象是一个 EventEmitter，我们需要做的仅仅是在这里保存这个 server 对象，并在之后对其添加监听器。</div><div class="line">```	</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。"><a href="#2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。" class="headerlink" title="2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。"></a>2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;).listen(8080);</div></pre></td></tr></table></figure>
+<h3 id="2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案"><a href="#2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案" class="headerlink" title="2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案."></a>2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案.</h3><h2 id="3-Node中的-JavaScript"><a href="#3-Node中的-JavaScript" class="headerlink" title="3. Node中的 JavaScript"></a>3. Node中的 JavaScript</h2><ul>
+<li><em>console</em></li>
+<li><em>setInterval(callback, delay[, …args])</em></li>
+<li><em>setTimeout(callback, delay[, …args])</em></li>
+<li><em>clearInterval(intervalObject)</em></li>
+<li><em>clearTimeout(timeoutObject)</em></li>
+<li>clearImmediate(immediateObject)</li>
+<li>setImmediate(callback[, …args])</li>
+<li>__dirname</li>
+<li>__filename</li>
+<li>module</li>
+<li>exports</li>
+<li>global</li>
+<li>process</li>
+<li>require()</li>
+</ul>
+<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
+<li>path.basename(path[, ext])：获取文件名部分</li>
+<li>path.dirname(path)：获取目录部分</li>
+<li>path.extname(path)：获取扩展名部分</li>
+<li>path.isAbsolute(path)：判断是否是绝对路径</li>
+<li>path.join([…paths])：将多个路径拼接为一个路径</li>
+</ul>
+<h3 id="同步调用与异步调用"><a href="#同步调用与异步调用" class="headerlink" title="同步调用与异步调用"></a>同步调用与异步调用</h3><p>fs模块对文件的几乎所有操作都有同步和异步两种形式，例如：<code>readFile()</code> 和 <code>readFileSync()</code>。</p>
+<p>同步与异步文件系统调用的区别</p>
+<ul>
+<li>同步调用立即执行，会阻塞后续代码继续执行，如果想要捕获异常需要使用 <code>try-catch</code></li>
+<li>异步调用不会阻塞后续代码继续执行，需要回调函数作为额外的参数，通常包含一个错误作为回调函数的第一个参数</li>
+<li>异步调用通过判断第一个err对象来处理异常</li>
+<li>异步调用结果往往通过回调函数来进行获取</li>
+</ul>
+<p>Node 只在文件IO操作中，提供了同步调用和异步调用两种形式，两者可以结合使用，<br>但是推荐能使用异步调用解决问题的情况下，少用同步调用。</p>
+<h3 id="文件操作常用API"><a href="#文件操作常用API" class="headerlink" title="文件操作常用API"></a>文件操作常用API</h3><ul>
+<li>fs.writeFile(file, data, callback)：文件写入</li>
+<li>fs.appendFile(file, data, callback)：文件追加</li>
+<li>fs.readFile(file[, options], callback)：文件读取</li>
+<li>fs.unlink(path, callback)：删除文件</li>
+<li>fs.stat(path, callback)：获取文件信息</li>
+<li>fs.access(path, callback)：验证文件路径是否存在</li>
+<li>fs.rename(oldPath, newPath, callback)：重命名或移动文件</li>
+</ul>
+<h3 id="目录操作常用API"><a href="#目录操作常用API" class="headerlink" title="目录操作常用API"></a>目录操作常用API</h3><ul>
+<li>fs.mkdir(path, callback)：创建一个目录</li>
+<li>fs.rmdir(path, callback)：删除一个空目录</li>
+<li>fs.readdir(path, callback)：读取一个目录</li>
+<li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
+</ul>
+<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
+<li><p>Server</p>
+<ul>
+<li>http.createServer([requestListener])</li>
+<li>Event: ‘request’</li>
+<li>Event: ‘close’</li>
+<li>Event: ‘connection’</li>
+<li>server.close([callback])</li>
+<li>server.listen([port][, hostname][, backlog][, callback])</li>
+</ul>
+</li>
+<li><p>Request</p>
+<ul>
+<li>Event: ‘data’</li>
+<li>Event: ‘close’</li>
+<li>message.headers</li>
+<li>message.httpVersion</li>
+<li>message.method</li>
+<li>message.url</li>
+</ul>
+</li>
+<li><p>Response</p>
+<ul>
+<li>response.write(chunk[, encoding][, callback])</li>
+<li>response.end([data][, encoding][, callback])</li>
+<li>response.writeHead(statusCode[, statusMessage][, headers])</li>
+</ul>
+</li>
+</ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;h2 id=&quot;1-Node-js-介绍&quot;&gt;&lt;a href=&quot;#1-Node-js-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. Node.js 介绍&quot;&gt;&lt;/a&gt;1. Node.js 介绍&lt;/h2&gt;&lt;h3 id=&quot;1-1-网站开发模型（BS）&quot;&gt;&lt;a href=&quot;#1-1-网站开发模型（BS）&quot; class=&quot;headerlink&quot; title=&quot;1.1 网站开发模型（BS）&quot;&gt;&lt;/a&gt;1.1 网站开发模型（BS）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;S（Server）：服务器端， 为客户端提交接口(数据)&lt;/p&gt;
     
     </summary>
     
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
     
     
-      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   
@@ -783,8 +1050,8 @@ module.exports = findMaxChar;
     <title>Node 模块化简介</title>
     <link href="http://yoursite.com/2016/12/18/Node%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/18/Node 模块化/</id>
-    <published>2016-12-17T17:06:31.504Z</published>
-    <updated>2016-12-26T12:26:31.882Z</updated>
+    <published>2016-12-17T16:00:00.000Z</published>
+    <updated>2017-07-14T07:57:49.040Z</updated>
     
     <content type="html"><![CDATA[<h2 id="既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><a href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是" class="headerlink" title="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是"></a>既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</h2><h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
 <li>一个 js 文件就是一个模块</li>
@@ -953,151 +1220,85 @@ module.exports = findMaxChar;
   </entry>
   
   <entry>
-    <title>Node js（基础）</title>
-    <link href="http://yoursite.com/2016/12/18/Node%20JS%20%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/12/18/Node JS （基础）/</id>
-    <published>2016-12-17T17:06:31.457Z</published>
-    <updated>2016-12-23T14:03:45.671Z</updated>
+    <title>我想要的</title>
+    <link href="http://yoursite.com/2016/12/17/%E6%97%A0%E9%A2%98/"/>
+    <id>http://yoursite.com/2016/12/17/无题/</id>
+    <published>2016-12-16T16:00:00.000Z</published>
+    <updated>2017-07-14T08:01:50.761Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
-<li>要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。</li>
-<li><p>S（Server）：服务器端， 为客户端提交接口(数据)</p>
-<a id="more"></a>
-<ul>
-<li>常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<!--more--> </li>
-<li>简单来说服务器就是处理客户端的请求，做出处理之后并响应回去。</li>
-</ul>
-</li>
-<li><p>B（Browser）：客户端，简单说就是把一坨用户看不懂的数据变成友好的形式给用户体验</p>
-</li>
-</ul>
-<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><ul>
-<li><p>简单的说呢<br>  Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境</p>
-</li>
-<li><p>复杂的说呢就是:<br>  V8引 擎执行Javascript的速度非常快，性能非常好，Node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好，也就是它对Google V8引擎进行了封装。</p>
-</li>
-<li><p>特点：<br>  Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>  Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>  Node.js 可跨平台 (Linux  windows  Unix)</p>
-</li>
-</ul>
-<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
-<li>在几年的时间里，Node.JS逐渐发展成一个成熟的开发平台，吸引了许多开发者。有许多大型高流量网站都采用Node.JS进行开发，此外，开发人员还可以使用它来开发一些快速移动Web框架。除了Web应用外，NodeJS也被应用在许多方面，这些项目涉及到应用程序监控、媒体流、远程控制、桌面和移动应用等等。真的是很牛逼啊。</li>
-</ul>
-<h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><p>####饮水思源嘛，人家开发出来，我们后来人总得记着</p>
-<ul>
-<li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
-<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
-<li>2009 年，Angular 诞生了</li>
-<li>2009年5月，Ryan Dahl在GitHub上发布了最初版本的部分Node.js包，随后几个月里，有人开始使用Node.js开发应用。</li>
-<li>2009年11月和2010年4月，两届JSConf大会都安排了Node.js的讲座。</li>
-<li>2010年年底，Node.js获得云计算服务商Joyent资助，创始人Ryan Dahl加入Joyent全职负责Node.js的发展。</li>
-<li>2011年7月，Node.js在微软的支持下发布Windows版本。</li>
-</ul>
-<h3 id="1-5-资源推荐"><a href="#1-5-资源推荐" class="headerlink" title="1.5 资源推荐"></a>1.5 资源推荐</h3><ul>
-<li>深入浅出 Node.js</li>
-<li>CNODE</li>
-<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
-</ul>
-<h2 id="2-Node-js-关于-HTTP-处理过程"><a href="#2-Node-js-关于-HTTP-处理过程" class="headerlink" title="2. Node.js 关于 HTTP 处理过程"></a>2. Node.js 关于 HTTP 处理过程</h2><h3 id="2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。"><a href="#2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。" class="headerlink" title="2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。"></a>2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	var http = require(&apos;http&apos;);</div><div class="line">	var server = http.createServer(function(request, response) &#123;   </div><div class="line">	// handle your requset </div><div class="line">	&#125;);</div><div class="line">```	</div><div class="line">###	2.2 传入 createServer 的 function 在每次 HTTP 请求时都将被调用执行，因此这个 function 也被称为请求的处理者。事实上通过 createServer 返回的 Server 对象是一个 EventEmitter，我们需要做的仅仅是在这里保存这个 server 对象，并在之后对其添加监听器。</div><div class="line">```	</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。"><a href="#2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。" class="headerlink" title="2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。"></a>2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;).listen(8080);</div></pre></td></tr></table></figure>
-<h3 id="2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案"><a href="#2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案" class="headerlink" title="2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案."></a>2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案.</h3><h2 id="3-Node中的-JavaScript"><a href="#3-Node中的-JavaScript" class="headerlink" title="3. Node中的 JavaScript"></a>3. Node中的 JavaScript</h2><ul>
-<li><em>console</em></li>
-<li><em>setInterval(callback, delay[, …args])</em></li>
-<li><em>setTimeout(callback, delay[, …args])</em></li>
-<li><em>clearInterval(intervalObject)</em></li>
-<li><em>clearTimeout(timeoutObject)</em></li>
-<li>clearImmediate(immediateObject)</li>
-<li>setImmediate(callback[, …args])</li>
-<li>__dirname</li>
-<li>__filename</li>
-<li>module</li>
-<li>exports</li>
-<li>global</li>
-<li>process</li>
-<li>require()</li>
-</ul>
-<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
-<li>path.basename(path[, ext])：获取文件名部分</li>
-<li>path.dirname(path)：获取目录部分</li>
-<li>path.extname(path)：获取扩展名部分</li>
-<li>path.isAbsolute(path)：判断是否是绝对路径</li>
-<li>path.join([…paths])：将多个路径拼接为一个路径</li>
-</ul>
-<h3 id="同步调用与异步调用"><a href="#同步调用与异步调用" class="headerlink" title="同步调用与异步调用"></a>同步调用与异步调用</h3><p>fs模块对文件的几乎所有操作都有同步和异步两种形式，例如：<code>readFile()</code> 和 <code>readFileSync()</code>。</p>
-<p>同步与异步文件系统调用的区别</p>
-<ul>
-<li>同步调用立即执行，会阻塞后续代码继续执行，如果想要捕获异常需要使用 <code>try-catch</code></li>
-<li>异步调用不会阻塞后续代码继续执行，需要回调函数作为额外的参数，通常包含一个错误作为回调函数的第一个参数</li>
-<li>异步调用通过判断第一个err对象来处理异常</li>
-<li>异步调用结果往往通过回调函数来进行获取</li>
-</ul>
-<p>Node 只在文件IO操作中，提供了同步调用和异步调用两种形式，两者可以结合使用，<br>但是推荐能使用异步调用解决问题的情况下，少用同步调用。</p>
-<h3 id="文件操作常用API"><a href="#文件操作常用API" class="headerlink" title="文件操作常用API"></a>文件操作常用API</h3><ul>
-<li>fs.writeFile(file, data, callback)：文件写入</li>
-<li>fs.appendFile(file, data, callback)：文件追加</li>
-<li>fs.readFile(file[, options], callback)：文件读取</li>
-<li>fs.unlink(path, callback)：删除文件</li>
-<li>fs.stat(path, callback)：获取文件信息</li>
-<li>fs.access(path, callback)：验证文件路径是否存在</li>
-<li>fs.rename(oldPath, newPath, callback)：重命名或移动文件</li>
-</ul>
-<h3 id="目录操作常用API"><a href="#目录操作常用API" class="headerlink" title="目录操作常用API"></a>目录操作常用API</h3><ul>
-<li>fs.mkdir(path, callback)：创建一个目录</li>
-<li>fs.rmdir(path, callback)：删除一个空目录</li>
-<li>fs.readdir(path, callback)：读取一个目录</li>
-<li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
-</ul>
-<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
-<li><p>Server</p>
-<ul>
-<li>http.createServer([requestListener])</li>
-<li>Event: ‘request’</li>
-<li>Event: ‘close’</li>
-<li>Event: ‘connection’</li>
-<li>server.close([callback])</li>
-<li>server.listen([port][, hostname][, backlog][, callback])</li>
-</ul>
-</li>
-<li><p>Request</p>
-<ul>
-<li>Event: ‘data’</li>
-<li>Event: ‘close’</li>
-<li>message.headers</li>
-<li>message.httpVersion</li>
-<li>message.method</li>
-<li>message.url</li>
-</ul>
-</li>
-<li><p>Response</p>
-<ul>
-<li>response.write(chunk[, encoding][, callback])</li>
-<li>response.end([data][, encoding][, callback])</li>
-<li>response.writeHead(statusCode[, statusMessage][, headers])</li>
-</ul>
-</li>
-</ul>
+    <content type="html"><![CDATA[<hr>
+<blockquote>
+<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
+<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
+<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
+<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
+<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
+<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
+</blockquote>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;1-Node-js-介绍&quot;&gt;&lt;a href=&quot;#1-Node-js-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. Node.js 介绍&quot;&gt;&lt;/a&gt;1. Node.js 介绍&lt;/h2&gt;&lt;h3 id=&quot;1-1-网站开发模型（BS）&quot;&gt;&lt;a href=&quot;#1-1-网站开发模型（BS）&quot; class=&quot;headerlink&quot; title=&quot;1.1 网站开发模型（BS）&quot;&gt;&lt;/a&gt;1.1 网站开发模型（BS）&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;S（Server）：服务器端， 为客户端提交接口(数据)&lt;/p&gt;
+      &lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
     
     </summary>
     
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
-      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>很暗的</title>
+    <link href="http://yoursite.com/2016/12/08/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
+    <id>http://yoursite.com/2016/12/08/很暗的/</id>
+    <published>2016-12-07T16:00:00.000Z</published>
+    <updated>2017-07-14T07:58:43.473Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
+<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
+<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
+<p>这种乍然是很悲哀的。</p>
+<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
+<p>然而事实上它的消失是悄然无息的。</p>
+<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
+<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
+<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
+<p>你简直是我的全部。</p>
+<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
+<p>也记得你说最近跟我说的最后一句话。</p>
+<p>我记得你跟我说过的好听的话。</p>
+<p>也记得你对我说过的残忍的话。</p>
+<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
+&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
+    
+    
+      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
     
   </entry>
   
   <entry>
     <title>ES5数组新增Api</title>
-    <link href="http://yoursite.com/2016/12/18/ES5-%E6%95%B0%E7%BB%84%E6%96%B0%E5%A2%9E%E7%9A%84%E5%87%A0%E4%B8%AAApi/"/>
-    <id>http://yoursite.com/2016/12/18/ES5-数组新增的几个Api/</id>
-    <published>2016-12-17T17:06:31.442Z</published>
-    <updated>2016-12-07T13:48:08.322Z</updated>
+    <link href="http://yoursite.com/2016/12/07/ES5-%E6%95%B0%E7%BB%84%E6%96%B0%E5%A2%9E%E7%9A%84%E5%87%A0%E4%B8%AAApi/"/>
+    <id>http://yoursite.com/2016/12/07/ES5-数组新增的几个Api/</id>
+    <published>2016-12-06T16:00:00.000Z</published>
+    <updated>2017-07-14T07:56:18.449Z</updated>
     
     <content type="html"><![CDATA[<h2 id="forEach-callback-thisArg"><a href="#forEach-callback-thisArg" class="headerlink" title="forEach(callback[thisArg])"></a>forEach(callback[thisArg])</h2><ul>
 <li>在ES5之前，我们可以通过for和for in 两种方式来遍历数组，而ES5引入了一个新方法forEach，使数组遍历更加简洁，forEach需要传递2个参数，第一个参数是回调函数，是必选参数，第二个参数是一个对象，用来改变callback中的this指向，是可选参数。<a id="more"></a>
@@ -1164,6 +1365,80 @@ module.exports = findMaxChar;
     
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于跨域</title>
+    <link href="http://yoursite.com/2016/12/02/%E8%B7%A8%E5%9F%9F/"/>
+    <id>http://yoursite.com/2016/12/02/跨域/</id>
+    <published>2016-12-01T16:00:00.000Z</published>
+    <updated>2017-07-14T07:58:56.845Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
+<p>要了解跨域,首先就要知道什么是同源?</p>
+</blockquote>
+<p>所谓同源是指，域名，协议，端口完全相同<br><a id="more"></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//URL	说明	是否允许通信</span></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名下	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/lab/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/script/b.js	//同一域名下不同文件夹	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com:8000/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名，不同端口	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">https:<span class="comment">//www.a.com/b.js	//同一域名，不同协议	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//70.32.92.74/b.js	//域名和域名对应ip	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//script.a.com/b.js	//主域相同，子域不同	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//a.com/b.js	//同一域名，不同二级域名（同上）	不允许（cookie这种情况下也不允许访问）</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.cnblogs.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//不同域名	不允许</span></div></pre></td></tr></table></figure>
+<p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
+<p>##跨域方案</p>
+<p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
+<ul>
+<li><p>document.domain + iframe</p>
+</li>
+<li><p>window.name + iframe</p>
+</li>
+<li><p>location.hash + iframe</p>
+</li>
+<li><p>window.postMessage()</p>
+</li>
+</ul>
+<p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
+<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
+<p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
+</blockquote>
+<p>只能以get发送请求</p>
+<ul>
+<li>src只能发送get请求</li>
+<li>jsonp也只能通过get请求</li>
+<li>服务端代码</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>前端代码:注意,域名不同<ul>
+<li>核心是 通过script标签的src属性提交get请求</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>##jQuery 的$.ajax()</p>
+<blockquote>
+<p>方法当中集成了JSONP的实现，可以非常方便的实现跨域数据的访问。</p>
+</blockquote>
+<p>dataType: ‘jsonp’ 设置dataType值为jsonp即开启跨域访问<br>jsonp 可以指定服务端接收的参数的“key”值，默认为callback<br>jsonpCallback 可以指定相应的回调函数，默认自动生成</p>
+<pre><code>*实例代码
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript" src='jquery/jquery-3.0.0.min.js'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;区域1的页面&lt;/h1&gt;</div><div class="line">    &lt;input type="button" name="" onclick='sendAjax()' value="jquery区域请求"&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    function sendAjax()&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            url:'http://www.section02.com/sectcion02_jqJsonp.php',</div><div class="line">            type:'post',</div><div class="line">            dataType: 'jsonp',</div><div class="line">            data:&#123;name:'itt'&#125;,</div><div class="line">            success:function(data)&#123;</div><div class="line">                console.log(data);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<h2 id="跨域借口"><a href="#跨域借口" class="headerlink" title="跨域借口"></a>跨域借口</h2><blockquote>
+<p>一些平台为我们提供了可以直接使用的接口,我们只需要按照他们提供的格式提交数据即可</p>
+</blockquote>
+<p><a href="http://developer.baidu.com/map/carapi-7.htm" target="_blank" rel="external">百度车联网api</a><br>开发者秘钥ak:0A5bc3c4fb543c8f9bc54b77bc155724</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;h2 id=&quot;同源&quot;&gt;&lt;a href=&quot;#同源&quot; class=&quot;headerlink&quot; title=&quot;同源&quot;&gt;&lt;/a&gt;同源&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;要了解跨域,首先就要知道什么是同源?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所谓同源是指，域名，协议，端口完全相同&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   

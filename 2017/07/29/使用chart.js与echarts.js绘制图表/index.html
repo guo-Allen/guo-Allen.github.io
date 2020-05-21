@@ -1,0 +1,940 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="图表插件," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用chart.js与echarts.js绘制图表">
+<meta property="og:url" content="http://yoursite.com/2017/07/29/使用chart.js与echarts.js绘制图表/index.html">
+<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:description" content="最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4az9gjhzj20b40b40t2.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4c8i3p0hj20eb0cb0st.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4cy9ga60j20bv09o3yu.jpg">
+<meta property="og:updated_time" content="2017-08-01T10:07:48.894Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用chart.js与echarts.js绘制图表">
+<meta name="twitter:description" content="最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 使用chart.js与echarts.js绘制图表 | Allen's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?79de4c5de7ea450da2211481144c258d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Allen's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">(*@ο@*) 哇～) 好大坨knowledge</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="#" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用chart.js与echarts.js绘制图表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-29T00:00:00+08:00" content="2017-07-29">
+              2017-07-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/chartJs与echartsJs/" itemprop="url" rel="index">
+                    <span itemprop="name">chartJs与echartsJs</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/29/使用chart.js与echarts.js绘制图表/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/29/使用chart.js与echarts.js绘制图表/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法</strong><br><a id="more"></a> </p>
+<h2 id="了解图表插件"><a href="#了解图表插件" class="headerlink" title="了解图表插件"></a>了解图表插件</h2><blockquote>
+<p>要在前端页面中使用图标插件，首先就要对其有基本的了解，无论是chart.js还是echart.js都是基于H5新属性Canvas提供的API封装的插件，其基本原理也就是在画布上绘制坐标，定义相对于坐标的算法实现描点、连线、填充等操作。在HTML页面中开发者只需要添加一个Canvas标签即可，然后在js中获取Canvas元素，运用插件提供的方法绘制图标，所以在页面中我们看到的图表并不存在实际DOM元素，它只是相对于画布绘制的图形，点击右键可是能图片另存为的哦</p>
+</blockquote>
+<p>当然说这些对于我们务实的程序员并没有什么卵用，但是当boss给出需求和技术时能自信的说自己的见解，哼哼，技术大牛有没有。<br>言归正传，接下来我将分别介绍这两种图表插件的基本使用方法</p>
+<h2 id="使用chart-js绘制柱状图与饼图"><a href="#使用chart-js绘制柱状图与饼图" class="headerlink" title="使用chart.js绘制柱状图与饼图"></a>使用chart.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件"><a href="#下载并引入chart-js文件" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/chartjs/Chart.js" target="_blank" rel="external">chart.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"Chart.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表"><a href="#创建图表" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>无论哪种图表插件都是基于Canvas标签的，所以我们首先要在页面写一个Canvas标签，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;canvas id=<span class="string">"myChart"</span> width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;&lt;/canvas&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们需要的DOM节点，然后在这个DOM节点上调用 Canvas的-getContext(“2d”) 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"myChart"</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - 当然我们也可以用JQuery</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="keyword">var</span> ctx = $(<span class="string">"#myChart"</span>).get(<span class="number">0</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">当我们完成了在指定的canvas上实例化Chart对象之后，Chart.js会自动针对retina屏幕做缩放。</div><div class="line"> </div><div class="line"> - js操作</div><div class="line">Chart对象设置完成后，我们就可以继续创建Chart.js中提供的具体类型的图表了。下面这个案例中，我们将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 Bar(data,options)这个API，此方法需要传入两个实参，当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可，下面我们分别展示 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据</span></div><div class="line"><span class="keyword">var</span> barChartData = &#123;</div><div class="line">        <span class="comment">//X轴显示的数据</span></div><div class="line">		labels: [<span class="string">"类别一"</span>, <span class="string">"类别二"</span>, <span class="string">"类别三"</span>, <span class="string">"类别四"</span>, <span class="string">"类别五"</span>],</div><div class="line">		<span class="attr">datasets</span>: [&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"繁殖"</span>, <span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">68</span>, <span class="number">59</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">56</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;,</div><div class="line">			&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"出货"</span>,<span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(60,141,188,0.9)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(60,141,188,0.8)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">28</span>, <span class="number">48</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">86</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	&#125;;</div><div class="line"><span class="comment">// 柱状图选项设置</span></div><div class="line"><span class="keyword">var</span> barChartOptions = &#123;</div><div class="line">		<span class="attr">scaleOverlay</span>: <span class="literal">false</span>, <span class="comment">// 网格线是否在数据线的上面</span></div><div class="line">		scaleOverride: <span class="literal">false</span>, <span class="comment">// 是否用硬编码重写y轴网格线</span></div><div class="line">		scaleSteps: <span class="literal">null</span>, <span class="comment">//y轴刻度的个数</span></div><div class="line">		scaleStepWidth: <span class="literal">null</span>, <span class="comment">//y轴每个刻度的宽度</span></div><div class="line">		scaleStartValue: <span class="literal">null</span>, <span class="comment">//y轴的起始值</span></div><div class="line">		scaleBeginAtZero: <span class="literal">true</span>,<span class="comment">// y轴标记是否从0开始</span></div><div class="line">		scaleShowGridLines: <span class="literal">true</span>,<span class="comment">// 是否显示网格线</span></div><div class="line">		scaleGridLineColor: <span class="string">"rgba(0,0,0,.05)"</span>,<span class="comment">// 网格线的颜色</span></div><div class="line">		scaleGridLineWidth: <span class="number">1</span>, <span class="comment">// 网格线的线宽</span></div><div class="line">		scaleShowHorizontalLines: <span class="literal">true</span>,<span class="comment">// 是否显示横向线</span></div><div class="line">		scaleShowVerticalLines: <span class="literal">true</span>,<span class="comment">// 是否显示竖向线</span></div><div class="line">		barShowStroke: <span class="literal">true</span>,<span class="comment">// 是否显示线</span></div><div class="line">		barStrokeWidth: <span class="number">2</span>, <span class="comment">// 线宽</span></div><div class="line">		barValueSpacing: <span class="number">20</span>,<span class="comment">// 柱状块与x值所形成的线之间的距离</span></div><div class="line">		barDatasetSpacing: <span class="number">1</span>,<span class="comment">// 在同一x值内的柱状块之间的间距</span></div><div class="line">		animation : <span class="literal">true</span>,<span class="comment">//是否有动画效果</span></div><div class="line">        animationSteps : <span class="number">60</span>,<span class="comment">//动画的步数</span></div><div class="line">        animationEasing : <span class="string">"easeOutQuart"</span>,<span class="comment">// 动画的效果</span></div><div class="line">		 <span class="comment">// 图例</span></div><div class="line">		legendTemplate: <span class="string">"&lt;ul class=\"&lt;%=name.toLowerCase()%&gt;-legend\"&gt;&lt;% for (var i=0; i&lt;datasets.length; i++)&#123;%&gt;&lt;li&gt;&lt;span style=\"background-color:&lt;%=datasets[i].fillColor%&gt;\"&gt;&lt;/span&gt;&lt;%if(datasets[i].label)&#123;%&gt;&lt;%=datasets[i].label%&gt;&lt;%&#125;%&gt;&lt;/li&gt;&lt;%&#125;%&gt;&lt;/ul&gt;"</span>,</div><div class="line">		<span class="comment">//Boolean - whether to make the chart responsive</span></div><div class="line">		responsive: <span class="literal">true</span>,</div><div class="line">		<span class="attr">maintainAspectRatio</span>: <span class="literal">true</span></div><div class="line">	&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg" alt="chart.js 柱状图"></p>
+</li>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用chart.js在页面上展现饼图，我们需要使用它提供的 Pie(data,options)这个API，此方法可以传入两个实参，其实我们只传第一个参数就行了（除非你是处女座的程序员），当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据  （对于一个饼图,必须传递一个对象数组的值和颜色属性。value键的值应该是一个数字。chart.js会计算的相对比例。）</span></div><div class="line"><span class="keyword">var</span> pieChartData = [</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">30</span>,</div><div class="line">		<span class="attr">color</span>:<span class="string">"#F38630"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">50</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#E0E4CC"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">100</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#69D2E7"</span></div><div class="line">	&#125;			</div><div class="line">];</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4az9gjhzj20b40b40t2.jpg" alt="chart.js 饼图"></p>
+</li>
+</ul>
+<h2 id="使用echarts-js绘制柱状图与饼图"><a href="#使用echarts-js绘制柱状图与饼图" class="headerlink" title="使用echarts.js绘制柱状图与饼图"></a>使用echarts.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件-1"><a href="#下载并引入chart-js文件-1" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/ecomfe/echartss" target="_blank" rel="external">echarts.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"echarts.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表-1"><a href="#创建图表-1" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>Echarts图表插件也是基于Canvas标签的，但是不同于chart.js直接在页面中写canvas标签，而是我们需要在页面中写一个div盒子，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"main"</span> style=<span class="string">"height:400px;"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们定义的div标签，然后在这个DOM节点上调用 echarts.init()方法初始化，它会自动给div标签内添加一个canvas画布。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - js操作</div><div class="line">Echarts对象初始化完成后，我们就可以继续创建Echarts.js中提供的具体类型的图表了。下面这个案例中，我们也将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据选项设置</span></div><div class="line">option = &#123;</div><div class="line">		<span class="attr">color</span>: [<span class="string">'#3398DB'</span>],</div><div class="line">		<span class="attr">title</span>: &#123;</div><div class="line">		    <span class="attr">text</span>: <span class="string">'订单数量'</span>,</div><div class="line">		    <span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">		    <span class="attr">textStyle</span>: &#123;</div><div class="line">		        <span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">		        <span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">	    	    <span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">	    	&#125;</div><div class="line">    	&#125;,</div><div class="line">		<span class="attr">tooltip</span>: &#123;&#125;,</div><div class="line">		<span class="attr">legend</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">'数量'</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">xAxis</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">"02月"</span>, <span class="string">"03月"</span>, <span class="string">"04月"</span>, <span class="string">"05月"</span>, <span class="string">"06月"</span>, <span class="string">"07月"</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">yAxis</span>: &#123;&#125;,</div><div class="line">		<span class="attr">series</span>: [&#123;</div><div class="line">			<span class="comment">// 根据名字对应到相应的系列</span></div><div class="line">			name: <span class="string">'数量'</span>,</div><div class="line">			<span class="attr">type</span>: <span class="string">'bar'</span>,</div><div class="line">			<span class="attr">data</span>:  [<span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>]</div><div class="line">		&#125;]</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4c8i3p0hj20eb0cb0st.jpg" alt="Echarts.js 柱状图"></p>
+<ul>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用Echarts.js在页面上展现饼图，我们也是使用它提供的setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据选项设置  （对于饼图,必须传递在series的data中传入一个数组对象。value键的值应该是一个数字。Echarts.js会计算的相对比例。）</span></div><div class="line">		option = &#123;</div><div class="line">					<span class="attr">title</span>: &#123;</div><div class="line">						<span class="attr">text</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">						<span class="attr">textStyle</span>: &#123;</div><div class="line">							<span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">							<span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">							<span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">						&#125;</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">tooltip</span>: &#123;</div><div class="line">						<span class="attr">trigger</span>: <span class="string">'item'</span>,</div><div class="line">						<span class="attr">formatter</span>: <span class="string">"&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)"</span></div><div class="line">					&#125;,</div><div class="line">					<span class="attr">series</span>: [&#123;</div><div class="line">						<span class="attr">name</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">type</span>: <span class="string">'pie'</span>,</div><div class="line">						<span class="attr">radius</span>: <span class="string">'55%'</span>,</div><div class="line">						<span class="attr">center</span>: [<span class="string">'50%'</span>, <span class="string">'60%'</span>],</div><div class="line">						<span class="attr">data</span>: [&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"55555"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"88888"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">4</span>,<span class="string">"name"</span>:<span class="string">"产品03"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">9</span>,<span class="string">"name"</span>:<span class="string">"科技服务"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">1</span>,<span class="string">"name"</span>:<span class="string">"成人组织"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">6</span>,<span class="string">"name"</span>:<span class="string">"医学健康"</span>&#125;],</div><div class="line">						<span class="attr">itemStyle</span>: &#123;</div><div class="line">							<span class="attr">normal</span>: &#123;</div><div class="line">								<span class="attr">label</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span>,</div><div class="line">									<span class="attr">formatter</span>: <span class="string">'&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)'</span></div><div class="line">								&#125;,</div><div class="line">								<span class="attr">labelLine</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span></div><div class="line">								&#125;</div><div class="line">							&#125;,</div><div class="line">							<span class="attr">emphasis</span>: &#123;</div><div class="line">								<span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">								<span class="attr">shadowOffsetX</span>: <span class="number">0</span>,</div><div class="line">								<span class="attr">shadowColor</span>: <span class="string">'rgba(0, 0, 0, 0.5)'</span></div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;]</div><div class="line">				&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4cy9ga60j20bv09o3yu.jpg" alt="Echarts.js 饼图"></p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>市场上有好多好多的图表统计插件，大体有以下几种</p>
+</blockquote>
+<ul>
+<li>MSChart<br>这个是Visual Studio里的自带控件，使用比较简单，不过数据需要在后台绑定。</li>
+<li>ichart.js<br>是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 支持饼图、环形图、折线图、面积图、柱形图、条形图等。</li>
+<li>Chart.js<br>也是一款基于HTML5的图形库和ichartjs整体类似,支持柱状图、饼图、曲线图、雷达图、蛛网图、级地图等。不过Chart.js的教程文档没有ichartjs的详细。不过感觉在对于移动的适配上感觉比ichartjs要好一点。</li>
+<li>ECharts.js<br>这也是一款基于HTML5的图形库。图形的创建也比较简单，直接引用Javascript即可。这也是我最喜欢使用的，喜欢这个库的原因主要有三点。<ol>
+<li>这个库是百度的项目，而且一直有更新，目前最新的是EChart 3；</li>
+<li>这个库的项目文档比较详细，每个点都说明的比较清楚，而且是中文的，理解比较容易；</li>
+<li>这个库有深度的交互式数据探索，而且图表的动画真的真的是很炫酷呐。</li>
+</ol>
+</li>
+</ul>
+<p><strong>最后附上chart.js与echart.js的中文文档，我这里只讲了柱状图与饼图的简单使用方法，如有其它图表需求，请移步官方文档</strong><br> <a href="http://www.bootcss.com/p/chart.js/docs/" target="_blank" rel="external">chart.js中文文档</a></p>
+<p> <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="external">Echarts.js中文文档</a></p>
+<hr>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/图表插件/" rel="tag">#图表插件</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/18/模板引擎/" rel="next" title="模板引擎">
+                <i class="fa fa-chevron-left"></i> 模板引擎
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/18/Iframe父子窗口元素获取、通信、跳转/" rel="prev" title="Iframe父子窗口元素获取、通信、跳转">
+                Iframe父子窗口元素获取、通信、跳转 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/07/29/使用chart.js与echarts.js绘制图表/"
+     data-title="使用chart.js与echarts.js绘制图表"
+     data-content=""
+     data-url="http://yoursite.com/2017/07/29/使用chart.js与echarts.js绘制图表/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/29/使用chart.js与echarts.js绘制图表/"
+           data-title="使用chart.js与echarts.js绘制图表" data-url="http://yoursite.com/2017/07/29/使用chart.js与echarts.js绘制图表/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="郭恒开" />
+          <p class="site-author-name" itemprop="name">郭恒开</p>
+          <p class="site-description motion-element" itemprop="description">清风徐来，水波不兴。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/guo-Allen" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3766631172" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://zhihu.com/people/allen-18-6" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://sunqi.info/" title="孙琦" target="_blank">孙琦</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://liergou.vip/" title="二狗" target="_blank">二狗</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#了解图表插件"><span class="nav-number">1.</span> <span class="nav-text">了解图表插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用chart-js绘制柱状图与饼图"><span class="nav-number">2.</span> <span class="nav-text">使用chart.js绘制柱状图与饼图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并引入chart-js文件"><span class="nav-number">2.1.</span> <span class="nav-text">下载并引入chart.js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建图表"><span class="nav-number">2.2.</span> <span class="nav-text">创建图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用echarts-js绘制柱状图与饼图"><span class="nav-number">3.</span> <span class="nav-text">使用echarts.js绘制柱状图与饼图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载并引入chart-js文件-1"><span class="nav-number">3.1.</span> <span class="nav-text">下载并引入chart.js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建图表-1"><span class="nav-number">3.2.</span> <span class="nav-text">创建图表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郭恒开</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"guohengkai"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';                
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+                            
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').mousedown(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+  
+
+  
+
+  
+
+</body>
+</html>

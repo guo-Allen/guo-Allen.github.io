@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-01T11:24:49.709Z</updated>
+  <updated>2020-05-21T15:11:55.298Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,26 +20,32 @@
     <link href="http://yoursite.com/2018/02/28/%E5%94%AF%E7%88%B1%E4%BC%8A/"/>
     <id>http://yoursite.com/2018/02/28/唯爱伊/</id>
     <published>2018-02-27T16:00:00.000Z</published>
-    <updated>2018-03-01T11:24:49.709Z</updated>
+    <updated>2020-05-21T15:11:55.298Z</updated>
     
-    <content type="html"><![CDATA[<blockquote>
-<p>从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="2018-02-27"><a href="#2018-02-27" class="headerlink" title="2018-02-27"></a>2018-02-27</h2><ul>
-<li>今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记。</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4icuh29j20u0aqnu0y.jpg" alt="2018-02-27（01）"><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4zga2hnj20u0aqn7wj.jpg" alt="2018-02-27（02）"><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1fow4ztq9cfj20u0aw5npe.jpg" alt="2018-02-27（03）"></p>
-<h2 id="2018-02-28"><a href="#2018-02-28" class="headerlink" title="2018-02-28"></a>2018-02-28</h2><ul>
-<li>今天你说奶奶严重了，如果奶奶走了，你就剩下我了。我给自己烫了个疤。<br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxj9sbmn9j20u0aqnnpe.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjae0mscj20u0aqn4qr.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjarmrpdj20u0aqn4qr.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjb190gmj20u0awhx6q.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1foxjc8bbaqj20u06zehdt.jpg" alt=""></li>
-</ul>
-]]></content>
+    <content type="html"><![CDATA[<!--more > 从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。 -->
+<!-- ## 2018-02-27
+
+* 今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记。
+
+![2018-02-27（01）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4icuh29j20u0aqnu0y.jpg)
+![2018-02-27（02）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4zga2hnj20u0aqn7wj.jpg)
+![2018-02-27（03）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4ztq9cfj20u0aw5npe.jpg)
+
+## 2018-02-28
+
+* 今天你说奶奶严重了，如果奶奶走了，你就剩下我了。我给自己烫了个疤。
+![](http://ww1.sinaimg.cn/large/e0823b04ly1foxj9sbmn9j20u0aqnnpe.jpg)
+![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjae0mscj20u0aqn4qr.jpg)
+![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjarmrpdj20u0aqn4qr.jpg)
+![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjb190gmj20u0awhx6q.jpg)
+![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjc8bbaqj20u06zehdt.jpg) -->]]></content>
     
     <summary type="html">
     
-      &lt;blockquote&gt;
-&lt;p&gt;从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。&lt;/p&gt;
-&lt;/blockquote&gt;
+      &lt;!--more &gt; 从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。 --&gt;
+&lt;!-- ## 2018-02-27
+
+* 今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记
     
     </summary>
     

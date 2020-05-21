@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-05-21T15:11:55.298Z</updated>
+  <updated>2017-11-03T02:56:41.818Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,45 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>唯爱伊人</title>
-    <link href="http://yoursite.com/2018/02/28/%E5%94%AF%E7%88%B1%E4%BC%8A/"/>
-    <id>http://yoursite.com/2018/02/28/唯爱伊/</id>
-    <published>2018-02-27T16:00:00.000Z</published>
-    <updated>2020-05-21T15:11:55.298Z</updated>
-    
-    <content type="html"><![CDATA[<!--more > 从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。 -->
-<!-- ## 2018-02-27
-
-* 今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记。
-
-![2018-02-27（01）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4icuh29j20u0aqnu0y.jpg)
-![2018-02-27（02）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4zga2hnj20u0aqn7wj.jpg)
-![2018-02-27（03）](http://ww1.sinaimg.cn/large/e0823b04ly1fow4ztq9cfj20u0aw5npe.jpg)
-
-## 2018-02-28
-
-* 今天你说奶奶严重了，如果奶奶走了，你就剩下我了。我给自己烫了个疤。
-![](http://ww1.sinaimg.cn/large/e0823b04ly1foxj9sbmn9j20u0aqnnpe.jpg)
-![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjae0mscj20u0aqn4qr.jpg)
-![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjarmrpdj20u0aqn4qr.jpg)
-![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjb190gmj20u0awhx6q.jpg)
-![](http://ww1.sinaimg.cn/large/e0823b04ly1foxjc8bbaqj20u06zehdt.jpg) -->]]></content>
-    
-    <summary type="html">
-    
-      &lt;!--more &gt; 从今日开始，记录我与锐锐的聊天。或亲密，或依赖，或吵架，或嫉妒，或无理取闹。余生只想爱她。 --&gt;
-&lt;!-- ## 2018-02-27
-
-* 今天才突发奇想，觉得可以记录一下日常。未来某一天情人节了、生日了、吵架了等等。都拿给她看。希望我们的爱情被日常铭记
-    
-    </summary>
-    
-      <category term="她和他" scheme="http://yoursite.com/categories/%E5%A5%B9%E5%92%8C%E4%BB%96/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>table行内编辑和双击变输入框</title>
@@ -327,34 +288,6 @@
     
     
       <category term="template" scheme="http://yoursite.com/tags/template/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我汉三儿又回来了</title>
-    <link href="http://yoursite.com/2017/07/10/%E6%88%91%E6%B1%89%E4%B8%89%E5%84%BF%E5%8F%88%E5%9B%9E%E6%9D%A5%E4%BA%86/"/>
-    <id>http://yoursite.com/2017/07/10/我汉三儿又回来了/</id>
-    <published>2017-07-09T16:00:00.000Z</published>
-    <updated>2017-07-14T08:00:13.118Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<blockquote>
-<p>上一篇博文还是去年的，年后来找了新工作，就一直忙着，适应新工作，适应新环境。<br>最近有点调整好新环境的工作时间了，决定把这个捡起来，每天写一写。<br><a id="more"></a><br>新工作的代码和之前接触的有点不同，而且记忆力是越来越差了，可能是我不再是个孩子的缘故了。啧啧。<br>一个人工作吃饭睡觉，怎么滴都是一个人，女朋友离的远，有点无奈，还是逼迫自己每天看点新知识，写点东西，一点一点积累。<br>现在工作流程也熟悉了，没有刚来那两个月那么忙乱，前段时间每天得空了就逛逛知乎，看看动图，上豆瓣看点影评，最近看不动了。<br>有段时间压力大，做梦都梦见代码，而且还容易失眠，有bug解决了又欣喜若狂。但是貌似开心沉闷都是自己的事情。过去了也没有值得留念的。所以，归根结底，还是空虚的缘故吧。<br>之前总觉得牛逼的人生是吹牛的结果，国情如此，人情世故决定言轻眼浅。还好，我是一个小小程序员，干技术的不用低眉顺眼的形式，而且，乐趣无穷。逛逛论坛，溜溜社区，写点小文，看看段子。<br>之前觉得技术不能实现人生目标，现在发现实现技术就是人生目标了。人生除了吸烟，总得有点儿坚持的东西吧。即使道阻且长。</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;上一篇博文还是去年的，年后来找了新工作，就一直忙着，适应新工作，适应新环境。&lt;br&gt;最近有点调整好新环境的工作时间了，决定把这个捡起来，每天写一写。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
     
   </entry>
   
@@ -1445,6 +1378,68 @@ Object.create( b ) -&gt; a
     
     
       <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端常见的小算法</title>
+    <link href="http://yoursite.com/2016/11/25/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/11/25/前端常见的小算法/</id>
+    <published>2016-11-24T16:00:00.000Z</published>
+    <updated>2017-07-14T07:59:35.165Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
+</blockquote>
+ <a id="more"></a>
+<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
+<pre><code>function findMaxChar(str){
+    if(str.length==1){
+        return str;
+    }
+    let charObj={};
+    for(let i,i&lt;str.length;i++){
+        if(!charObj[str.charAt(i)]){
+            charObj[str.charAt(i)]=1;
+        }else{
+            charObj[str.charAt(i)]+= 1;
+        }
+    }
+    let maxChar = &apos;&apos;,
+        maxValue= 1;
+    for(var k in charObj){
+        if(charObj[k]&gt;=maxValue){
+            maxChar = k;
+            maxValue = charObj[k];
+        }
+    }    
+    return maxChar;
+}
+//暴露接口
+module.exports = findMaxChar;
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
+<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
+<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
+<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
+<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
+<blockquote>
+<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
     
   </entry>
   

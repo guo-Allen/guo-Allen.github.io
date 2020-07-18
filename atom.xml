@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-03T02:56:41.818Z</updated>
+  <updated>2020-07-18T03:41:26.888Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,265 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="http://yoursite.com/2020/07/18/regExp/"/>
+    <id>http://yoursite.com/2020/07/18/regExp/</id>
+    <published>2020-07-17T16:00:00.000Z</published>
+    <updated>2020-07-18T03:41:26.888Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。</p>
+<ul>
+<li>用在前端，就一句话：匹配字符串。</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h4 id="初始化方法"><a href="#初始化方法" class="headerlink" title="初始化方法"></a>初始化方法</h4><ul>
+<li>对象创建：new regExp()</li>
+<li>字面量创建： / /</li>
+</ul>
+<h4 id="测试正则表达式"><a href="#测试正则表达式" class="headerlink" title="测试正则表达式"></a>测试正则表达式</h4><ul>
+<li>test方法</li>
+</ul>
+<h4 id="正则表达式中的特殊字符"><a href="#正则表达式中的特殊字符" class="headerlink" title="正则表达式中的特殊字符"></a>正则表达式中的特殊字符</h4><ul>
+<li><p>边界符</p>
+<ul>
+<li>^ 匹配开始</li>
+<li>\$ 匹配结尾</li>
+</ul>
+</li>
+<li><p>字符类</p>
+<ul>
+<li>[] 匹配其中一个</li>
+<li>注意：方括号内部加上^表示取反，只要包含方括号内的字符，都返回 false</li>
+</ul>
+</li>
+<li><p>量词符</p>
+<ul>
+<li>* 重复0次或更多次 【&gt;=0 次】</li>
+<li>+ 重复1次或更多次 【&gt;=1 次】</li>
+<li>?  重复0次或1次</li>
+<li>{n} 重复n次</li>
+<li>{n,} 重复n次到更多次</li>
+<li>{n,m} 重复n次到m次</li>
+<li>注意：方括号内部加上^表示取反，只要包含方括号内的字符，都返回 false</li>
+</ul>
+</li>
+<li><p>预定义类</p>
+<ul>
+<li>\d \D 数字</li>
+<li>\w \W 数字字符下划线</li>
+<li>\s \S 换行符，空格，制表符</li>
+</ul>
+</li>
+</ul>
+<h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><ul>
+<li>g 全局替换</li>
+<li>i 忽略大小写</li>
+<li>gi</li>
+</ul>
+<h4 id="简单练习"><a href="#简单练习" class="headerlink" title="简单练习"></a>简单练习</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/abc/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abcdefg"</span>));  <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^abcf/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abcdefg"</span>));  <span class="comment">//false</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^abcf/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abcdefg"</span>));  <span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/abc$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abecdefg"</span>)); <span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[abc]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abrrecdefg"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[a-zA-z]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"abrrecCdefg"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[0-9]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"9"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[^a-z]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"A"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[^a-z]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"9"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[0-9]*/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">""</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[0-9]+/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"100000000000"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[0-9]?/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"100000000000"</span>));<span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^[0-9]&#123;2&#125;$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"1000"</span>));<span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^[0-9]&#123;2,5&#125;$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"1000000"</span>));<span class="comment">//false</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^\w$/</span>;<span class="comment">//word意思，匹配数字、字母、下划线</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"1"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^\d$/</span>;<span class="comment">//digital意思，匹配数字</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"1"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/\s/</span>;<span class="comment">//space意思，匹配空格、制表符、换行符</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"aaaa\nbbbb\tccc"</span>));<span class="comment">//true,换行符：\n,制表符：\t</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^[\S\s]$/</span>;<span class="comment">//匹配任意字符</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"11"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="comment">// . 匹配除换行符之外的任何字符</span></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^.$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"11"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="comment">//如果要匹配的字符和正则中的特殊符号冲突，必须加反斜杠进行转义</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^\[$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"1[55555]1"</span>));<span class="comment">//true</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//或写法与小括号</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> reg = <span class="regexp">/^(娃哈哈|矿泉水|冰红茶)$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">'娃哈哈'</span>)); <span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="comment">//字符串替换：replace,如果要全局替换，正则后面加g，如果忽略大小写，后面加i</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> str=<span class="string">'abcdefghi'</span>;</div><div class="line">str= str.replace(<span class="regexp">/c/gi</span>,<span class="string">"&amp;&amp;&amp;&amp;"</span>);</div><div class="line"><span class="built_in">console</span>.log(str);<span class="comment">//ab&amp;&amp;&amp;&amp;defghi</span></div><div class="line"></div><div class="line"><span class="comment">//替换第一个空格</span></div><div class="line"><span class="keyword">let</span> str=<span class="string">'abcde fghis ndf'</span>;</div><div class="line">str= str.replace(<span class="regexp">/\s&#123;1&#125;/g</span>,<span class="string">"&amp;&amp;&amp;&amp;"</span>);</div><div class="line"><span class="built_in">console</span>.log(str);<span class="comment">//ab&amp;&amp;&amp;&amp;defghi</span></div></pre></td></tr></table></figure>
+<h4 id="易错问题"><a href="#易错问题" class="headerlink" title="易错问题"></a>易错问题</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/[0-,100]/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"99"</span>));<span class="comment">//false</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"9"</span>));<span class="comment">//false</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>正则表达式永远匹配的是字符串，上面的含义是：0到1，或者0，或者0</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^[\S\s]$/</span>;<span class="comment">//匹配任意字符</span></div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">""</span>));<span class="comment">//false</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>匹配任意字符，但是你得输入啊</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^.$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"."</span>));<span class="comment">//false</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>. 匹配除换行符之外的任何字符,要验证 <strong>==.==</strong> ，必须加反斜杠转义，或者加中括号。</p>
+</blockquote>
+<h4 id="常见面试相关"><a href="#常见面试相关" class="headerlink" title="常见面试相关"></a>常见面试相关</h4><blockquote>
+<p>正则去空格<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建一个带空格的字符串</span></div><div class="line"><span class="keyword">let</span> str = <span class="string">'  abcde fgh ijk '</span>;</div><div class="line"><span class="comment">// 匹配开头为空格的多个字符</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"  去掉左空格："</span> + str.replace(<span class="regexp">/^\s*/g</span>, <span class="string">''</span>));</div><div class="line"><span class="comment">// 匹配结尾为空格的多个字符</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"  去掉右空格："</span> + str.replace(<span class="regexp">/\s*$/g</span>, <span class="string">''</span>));</div><div class="line"><span class="comment">// 匹配开头或结尾为空格的多个字符，即左右空格</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"去掉左右空格："</span> + str.replace((<span class="regexp">/^\s*/g</span>|<span class="regexp">/\s*$/g</span>), <span class="string">''</span>));</div><div class="line"><span class="comment">// 不设定位置，匹配全部</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"去掉所有空格："</span> + str.replace(<span class="regexp">/\s*/g</span>, <span class="string">''</span>));</div></pre></td></tr></table></figure></p>
+<p> 匹配二进制数字<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"10101111"</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/^[01]+$/g</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(str));</div></pre></td></tr></table></figure></p>
+<p>非零的十进制数字 (有至少一位数字, 但是不能以0开头)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"81"</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/^[1-9][0-9]?$/g</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(str));</div></pre></td></tr></table></figure></p>
+<p>匹配一年中的12个月<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"12"</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/^(0?[1-9]|1[0-2])$/g</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(str));</div></pre></td></tr></table></figure></p>
+<p>匹配qq号最长为13为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str =<span class="string">"10009093283333"</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/^[1-9][0-9]&#123;4,12&#125;$/g</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(str));</div></pre></td></tr></table></figure></p>
+<p>匹配常见的固定电话号码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"000-12344562"</span>;</div><div class="line"><span class="comment">//  \(? 匹配左括号一次或0次然后以0开头后面加两个数字，再匹配右括号或空格或减号一次或0次，随后匹配8个数字</span></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/\(?0\d&#123;2&#125;[) -]?\d&#123;8&#125;/g</span>;</div><div class="line"><span class="built_in">console</span>.log(str.match(reg));</div></pre></td></tr></table></figure></p>
+<p>匹配ip地址<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"255.221.221.12"</span>;</div><div class="line"><span class="comment">// [01]?\d\d?表示匹配小于199的数，可以说两位数或一位数，2[0-4]\d表示从200到249，配合25[0-5]就表示小于255的数了。</span></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/(([01]?\d\d?|2[0-4]\d|25[0-5])\.)&#123;3&#125;([01]?\d\d?|2[0-4]\d|25[0-5])$/g</span>;</div><div class="line"><span class="built_in">console</span>.log(str.match(reg));</div></pre></td></tr></table></figure></p>
+<p> 匹配用尖括号括起来的以a开头的字符串<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"&lt;a herf='www.baidu.com'&gt;"</span>;</div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/&lt;a[^&gt;]+&gt;/g</span>;</div><div class="line"><span class="built_in">console</span>.log(str.match(reg));</div></pre></td></tr></table></figure></p>
+<p>分割数字每三个以一个逗号划分<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">"12345678901"</span>;</div><div class="line"><span class="keyword">var</span> re = <span class="regexp">/(\d)(?=(\d&#123;3&#125;)+$)/g</span>;</div><div class="line">    <span class="comment">//(\d&#123;3&#125;)+$ 的意思是连续匹配 3 个数字，且最后一次匹配以 3 个数字结尾。</span></div><div class="line">    <span class="comment">//要找到所有的单个字符，这些字符的后面跟随的字符的个数必须是3的倍数，并在符合条件的单个字符后面添加,</span></div><div class="line">str.replace(re,<span class="string">'$1,'</span>);</div></pre></td></tr></table></figure></p>
+<p>判断字符串是否包含数字<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">containsNumber</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> regx = <span class="regexp">/\d/</span>;</div><div class="line">    <span class="keyword">return</span> regx.text(str);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>验证邮箱<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isEmail</span>(<span class="params">email</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> regx = <span class="regexp">/^([a-zA-Z0-9_\-])+@([a-zA-Z0-9_\-])+(\.[a-zA-Z0-9_\-])+$/</span>;</div><div class="line">    <span class="keyword">return</span> regx.test(email);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>验证身份证号码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isCardNo</span>(<span class="params">number</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> regx = <span class="regexp">/(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)/</span>;</div><div class="line">    <span class="keyword">return</span> regx.test(number);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>去除首尾的’/‘<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="string">'/asdf//'</span>;</div><div class="line">str = str.replace(<span class="regexp">/^\/*|\/*$/g</span>, <span class="string">''</span>);</div></pre></td></tr></table></figure></p>
+<p>判断日期格式是否符合</p>
+<ul>
+<li>‘2017-05-11’的形式，简单判断，只判断格式</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regx = <span class="regexp">/^\d&#123;4&#125;\-\d&#123;1,2&#125;\-\d&#123;1,2&#125;$/</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>车牌号正则<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regx = <span class="regexp">/^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]&#123;1&#125;[A-Z]&#123;1&#125;[A-Z0-9]&#123;4&#125;[A-Z0-9挂学警港澳]&#123;1&#125;$/</span>;</div></pre></td></tr></table></figure></p>
+<p>密码强度正则，最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regx = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&amp;*? ]).*$/</span>;</div></pre></td></tr></table></figure></p>
+<p>URL正则<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> regx = <span class="regexp">/^((https?|ftp|file):\/\/)?([\da-z\.-]+)\.([a-z\.]&#123;2,6&#125;)([\/\w \.-]*)*\/?$/</span>;</div></pre></td></tr></table></figure></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用在前端，就一句话：匹配字符串。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="javaScript" scheme="http://yoursite.com/categories/javaScript/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript介绍、安装、编译及开发工具配置</title>
+    <link href="http://yoursite.com/2019/05/19/TypeScript%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2019/05/19/TypeScript中的数据类型/</id>
+    <published>2019-05-18T16:00:00.000Z</published>
+    <updated>2020-05-25T14:27:54.286Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p> typescript中为了使编写的代码更规范，更有利于维护，增加了类型校验，在typescript中主要给我们提供了以下数据类型</p>
+<ul>
+<li>布尔类型（boolean）</li>
+<li>数字类型（number）</li>
+<li>字符串类型(string)</li>
+<li>数组类型（array）</li>
+<li>元组类型（tuple）</li>
+<li>枚举类型（enum）</li>
+<li>任意类型（any）</li>
+<li>null 和 undefined</li>
+<li>void类型</li>
+<li>never类型</li>
+</ul>
+</blockquote>
+<a id="more"></a>
+<h4 id="布尔类型（boolean）"><a href="#布尔类型（boolean）" class="headerlink" title="布尔类型（boolean）"></a>布尔类型（boolean）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5的写法（正确写法）</span></div><div class="line"><span class="keyword">var</span> flag=<span class="literal">true</span>;</div><div class="line">    flag=<span class="number">456</span>;</div><div class="line">    </div><div class="line"><span class="comment">//在ts中会报错    </span></div><div class="line"><span class="keyword">var</span> flag:boolean=<span class="literal">true</span>;</div><div class="line">    flag=<span class="number">123</span>;  <span class="comment">//错误</span></div><div class="line">    flag=<span class="literal">false</span>;  <span class="comment">//正确</span></div></pre></td></tr></table></figure>
+<h4 id="数字类型（number）"><a href="#数字类型（number）" class="headerlink" title="数字类型（number）"></a>数字类型（number）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num:number=<span class="number">123</span>;</div><div class="line">    num=<span class="number">456</span>;</div><div class="line">    <span class="built_in">console</span>.log(num);  <span class="regexp">/正确/</span></div><div class="line">    num=<span class="string">'str'</span>;    <span class="comment">//错误</span></div></pre></td></tr></table></figure>
+<h4 id="字符串类型-string"><a href="#字符串类型-string" class="headerlink" title="字符串类型(string)"></a>字符串类型(string)</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str:string=<span class="string">'this is ts'</span>;</div><div class="line">    str=<span class="string">'haha'</span>;  <span class="comment">//正确</span></div><div class="line">    str=<span class="literal">true</span>;  <span class="comment">//错误</span></div></pre></td></tr></table></figure>
+<h4 id="数组类型（array）"><a href="#数组类型（array）" class="headerlink" title="数组类型（array）"></a>数组类型（array）</h4><ul>
+<li>ts中定义数组有两种方式<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1.第一种定义数组的方式</span></div><div class="line"><span class="keyword">var</span> arr:number[]=[<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>];</div><div class="line"></div><div class="line"><span class="comment">//2.第二种定义数组的方式</span></div><div class="line"><span class="keyword">var</span> arr:<span class="built_in">Array</span>&lt;number&gt;=[<span class="number">11</span>,<span class="number">22</span>,<span class="number">33</span>];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="元组类型（tuple）"><a href="#元组类型（tuple）" class="headerlink" title="元组类型（tuple）"></a>元组类型（tuple）</h4><ul>
+<li>属于数组的一种<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr:[number,string]=[<span class="number">123</span>,<span class="string">'this is ts'</span>];</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="枚举类型（enum）"><a href="#枚举类型（enum）" class="headerlink" title="枚举类型（enum）"></a>枚举类型（enum）</h4><ul>
+<li>enum 枚举名{<pre><code>    标识符[=整型常数],
+    标识符[=整型常数],
+    ...
+    标识符[=整型常数]
+} ;
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">enum Flag &#123;success=<span class="number">1</span>,error=<span class="number">2</span>&#125;;</div><div class="line"><span class="keyword">let</span> s:Flag=Flag.success;</div><div class="line"><span class="built_in">console</span>.log(s);<span class="comment">//1</span></div><div class="line"></div><div class="line">enum Color &#123;blue,red,<span class="string">'orange'</span>&#125;;</div><div class="line"><span class="keyword">var</span> c:Color=Color.red;</div><div class="line"><span class="built_in">console</span>.log(c);   <span class="comment">//1  如果标识符没有赋值 它的值就是下标</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="任意类型（any）"><a href="#任意类型（any）" class="headerlink" title="任意类型（any）"></a>任意类型（any）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num:any=<span class="number">123</span>;</div><div class="line">    num=<span class="string">'str'</span>;</div><div class="line">    num=<span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="comment">//任意类型的用处</span></div><div class="line"><span class="keyword">var</span> oBox:any=<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>);</div><div class="line">    oBox.style.color=<span class="string">'red'</span>;</div></pre></td></tr></table></figure>
+<h4 id="任意类型（any）-1"><a href="#任意类型（any）-1" class="headerlink" title="任意类型（any）"></a>任意类型（any）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num:any=<span class="number">123</span>;</div><div class="line">    num=<span class="string">'str'</span>;</div><div class="line">    num=<span class="literal">true</span>;</div><div class="line"></div><div class="line"><span class="comment">//任意类型的用处</span></div><div class="line"><span class="keyword">var</span> oBox:any=<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>);</div><div class="line">    oBox.style.color=<span class="string">'red'</span>;</div></pre></td></tr></table></figure>
+<h4 id="null-和-undefined-其他（never类型）数据类型的子类型"><a href="#null-和-undefined-其他（never类型）数据类型的子类型" class="headerlink" title="null 和 undefined  其他（never类型）数据类型的子类型"></a>null 和 undefined  其他（never类型）数据类型的子类型</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num:number;</div><div class="line"><span class="built_in">console</span>.log(num)  <span class="comment">//输出：undefined   报错</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> num:<span class="literal">undefined</span>;</div><div class="line"><span class="built_in">console</span>.log(num)  <span class="comment">//输出：undefined  //正确</span></div><div class="line"></div><div class="line"><span class="comment">//一个元素可能是 number类型 可能是null 可能是undefined</span></div><div class="line"><span class="keyword">var</span> num:number | <span class="literal">null</span> | <span class="literal">undefined</span>;</div><div class="line">num=<span class="number">1234</span>;</div><div class="line"><span class="built_in">console</span>.log(num)</div></pre></td></tr></table></figure>
+<h4 id="void类型"><a href="#void类型" class="headerlink" title="void类型"></a>void类型</h4><ul>
+<li>typescript中的void表示没有任何类型，一般用于定义方法的时候方法没有返回值。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//es5的定义方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   <span class="built_in">console</span>.log(<span class="string">'run'</span>)</div><div class="line">&#125;</div><div class="line">run();</div><div class="line"></div><div class="line"><span class="comment">//ts中定义方法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">void</span></span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'run'</span>)</div><div class="line">&#125;</div><div class="line">run();</div><div class="line">        </div><div class="line"><span class="comment">//错误写法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">undefined</span></span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'run'</span>)</div><div class="line">&#125;</div><div class="line">run();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="never类型"><a href="#never类型" class="headerlink" title="never类型"></a>never类型</h4><ul>
+<li>是其他类型 （包括 null 和 undefined）的子类型，代表从不会出现的值。</li>
+<li>这意味着声明never的变量只能被never类型所赋值<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a:never;</div><div class="line">a=<span class="number">123</span>; <span class="comment">//错误的写法</span></div><div class="line"></div><div class="line">a=<span class="function">(<span class="params">(</span>)=&gt;</span>&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'错误'</span>);</div><div class="line">&#125;)()</div></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt; typescript中为了使编写的代码更规范，更有利于维护，增加了类型校验，在typescript中主要给我们提供了以下数据类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;布尔类型（boolean）&lt;/li&gt;
+&lt;li&gt;数字类型（number）&lt;/li&gt;
+&lt;li&gt;字符串类型(string)&lt;/li&gt;
+&lt;li&gt;数组类型（array）&lt;/li&gt;
+&lt;li&gt;元组类型（tuple）&lt;/li&gt;
+&lt;li&gt;枚举类型（enum）&lt;/li&gt;
+&lt;li&gt;任意类型（any）&lt;/li&gt;
+&lt;li&gt;null 和 undefined&lt;/li&gt;
+&lt;li&gt;void类型&lt;/li&gt;
+&lt;li&gt;never类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/categories/TypeScript/"/>
+    
+    
+      <category term="TS" scheme="http://yoursite.com/tags/TS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript介绍、安装、编译及开发工具配置</title>
+    <link href="http://yoursite.com/2019/05/18/TypeScript%E4%BB%8B%E7%BB%8D%E3%80%81%E5%AE%89%E8%A3%85%E3%80%81%E7%BC%96%E8%AF%91%E5%8F%8A%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yoursite.com/2019/05/18/TypeScript介绍、安装、编译及开发工具配置/</id>
+    <published>2019-05-17T16:00:00.000Z</published>
+    <updated>2020-05-25T13:08:32.849Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>2018年TypeScript非常火，现在都2019年了。望其项背，努力跟上世界的脚步吧。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="TypeScript-介绍"><a href="#TypeScript-介绍" class="headerlink" title="TypeScript 介绍"></a>TypeScript 介绍</h2><ul>
+<li>TypeScript是由微软开发的一款开源编程语言。</li>
+<li>typeScript是JavaScript的超集，遵循最新的ES5、ES6规范。TypeScript扩展了JavaScript的语法。</li>
+<li>TypeScript更像后端Java、C#这样的面向对象语言，可以让js开发大型企业项目。</li>
+<li>谷歌也在大力支持TypeScript的推广，谷歌的angular2.x+就是基于TypeScript语法。</li>
+<li>最新的Vue、React也可以集成TypeScript语法。</li>
+<li>Nodejs框架Nestjs、midway中就是TypeScript语法。<blockquote>
+<p>TS、ES6、ES5关系如下图</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1gf4zpiszs3j2058055t9h.jpg" alt="535114296f32a0f74761362fb69cfd9.png"></p>
+<h2 id="Typescript-安装-编译"><a href="#Typescript-安装-编译" class="headerlink" title="Typescript 安装 编译"></a>Typescript 安装 编译</h2><ul>
+<li><p>安装（在使用 npm 命令之前电脑必须得安装 nodejs）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install -g typescript</div><div class="line">或者</div><div class="line">cnpm install -g typescript</div><div class="line">或者</div><div class="line">yarn global add typescript</div></pre></td></tr></table></figure>
+</li>
+<li><p>运行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tsc helloworld.ts</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>注意：：如果电脑上面没有安装过 cnpm，请先安装 cnpm<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g cnpm --registry=https:<span class="comment">//registry.npm.taobao.org</span></div></pre></td></tr></table></figure></p>
+<p>注意：如果电脑上面没有安装过 yarn 请先安装 yarn:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install -g yarn</div><div class="line">或者</div><div class="line">cnpm install -g yarn</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="Vscode-设置自动编译-ts-文件"><a href="#Vscode-设置自动编译-ts-文件" class="headerlink" title="Vscode 设置自动编译.ts 文件"></a>Vscode 设置自动编译.ts 文件</h2><ul>
+<li><p>创建 tsconfig.json 文件 tsc –init 生成配置文件</p>
+<p> <img src="http://ww1.sinaimg.cn/large/e0823b04ly1gf4zz8it4cj207807dwgv.jpg" alt="61c923b8e251353c6af30cedab98c20.png"></p>
+</li>
+<li>老版本 vscode 点击: 任务-&gt;运行任务-&gt; tsc:监视-tsconfig.json 然后就可以自动生<br>成代码了</li>
+<li>最新版本 vscode 点击: 终端-&gt;运行任务-&gt;typescript-&gt;tsc:监视-tsconfig.json 然后就<br>可以自动生成代码了</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1gf500pqikxj20fg06sq5a.jpg" alt="6efb9b64becc156f8bedeecf011838b.png"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;2018年TypeScript非常火，现在都2019年了。望其项背，努力跟上世界的脚步吧。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="iframe" scheme="http://yoursite.com/tags/iframe/"/>
+    
+  </entry>
   
   <entry>
     <title>table行内编辑和双击变输入框</title>
@@ -1304,142 +1563,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于跨域</title>
-    <link href="http://yoursite.com/2016/12/02/%E8%B7%A8%E5%9F%9F/"/>
-    <id>http://yoursite.com/2016/12/02/跨域/</id>
-    <published>2016-12-01T16:00:00.000Z</published>
-    <updated>2017-07-14T07:58:56.845Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<h2 id="同源"><a href="#同源" class="headerlink" title="同源"></a>同源</h2><blockquote>
-<p>要了解跨域,首先就要知道什么是同源?</p>
-</blockquote>
-<p>所谓同源是指，域名，协议，端口完全相同<br><a id="more"></a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//URL	说明	是否允许通信</span></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名下	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/lab/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/script/b.js	//同一域名下不同文件夹	允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com:8000/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//同一域名，不同端口	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">https:<span class="comment">//www.a.com/b.js	//同一域名，不同协议	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//70.32.92.74/b.js	//域名和域名对应ip	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//script.a.com/b.js	//主域相同，子域不同	不允许</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.a.com/a.js</span></div><div class="line">http:<span class="comment">//a.com/b.js	//同一域名，不同二级域名（同上）	不允许（cookie这种情况下也不允许访问）</span></div><div class="line"></div><div class="line">http:<span class="comment">//www.cnblogs.com/a.js</span></div><div class="line">http:<span class="comment">//www.a.com/b.js	//不同域名	不允许</span></div></pre></td></tr></table></figure>
-<p>同源策略是浏览器的一种安全策略,不然互联网就真的数据共享了,哪里有版权和产权可言呢!所以JavaScript遵循老大的规矩，是不允许跨域调用其他页面的对象的.但是  哼哼  伟大的劳动人民魔高一丈.</p>
-<p>##跨域方案</p>
-<p>顶级域名相同的可以通过domain.name来解决，即同时设置 domain.name = 顶级域名（如example.com）</p>
-<ul>
-<li><p>document.domain + iframe</p>
-</li>
-<li><p>window.name + iframe</p>
-</li>
-<li><p>location.hash + iframe</p>
-</li>
-<li><p>window.postMessage()</p>
-</li>
-</ul>
-<p><a href="http://rickgray.me/2015/09/03/solutions-to-cross-domain-in-browser.html" target="_blank" rel="external">大神解析</a></p>
-<h2 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h2><blockquote>
-<p>JSON with Padding其本质是利用了<script src=""></script>标签具有可跨域的特性，由服务端返回一个预先定义的Javascript函数的调用，并且将服务器数据以该函数参数的形式传递过来，此方法需要前后端配合完成。</p>
-</blockquote>
-<p>只能以get发送请求</p>
-<ul>
-<li>src只能发送get请求</li>
-<li>jsonp也只能通过get请求</li>
-<li>服务端代码</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;?php </div><div class="line">    $callBack = $_GET[<span class="string">'callback'</span>];</div><div class="line">    $arr = array(</div><div class="line">        <span class="string">'name'</span> =&gt;<span class="string">'西兰花'</span> ,</div><div class="line">        <span class="string">'color'</span> =&gt;<span class="string">'red'</span> </div><div class="line">         );</div><div class="line"></div><div class="line">    echo $callBack.<span class="string">"("</span>.json_encode($arr).<span class="string">")"</span>;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>前端代码:注意,域名不同<ul>
-<li>核心是 通过script标签的src属性提交get请求</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript"&gt;</div><div class="line">        function fn(data)&#123;</div><div class="line">            console.log(data);</div><div class="line">        &#125;</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;script type="text/javascript" src='http://www.section02.com/seciton02_jsonP.php?callback=fn'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    &lt;h1&gt;区域1的页面_jsonP演示&lt;/h1&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<p>##jQuery 的$.ajax()</p>
-<blockquote>
-<p>方法当中集成了JSONP的实现，可以非常方便的实现跨域数据的访问。</p>
-</blockquote>
-<p>dataType: ‘jsonp’ 设置dataType值为jsonp即开启跨域访问<br>jsonp 可以指定服务端接收的参数的“key”值，默认为callback<br>jsonpCallback 可以指定相应的回调函数，默认自动生成</p>
-<pre><code>*实例代码
-</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">	&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">    &lt;script type="text/javascript" src='jquery/jquery-3.0.0.min.js'&gt;&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">&lt;h1&gt;区域1的页面&lt;/h1&gt;</div><div class="line">    &lt;input type="button" name="" onclick='sendAjax()' value="jquery区域请求"&gt;</div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    function sendAjax()&#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            url:'http://www.section02.com/sectcion02_jqJsonp.php',</div><div class="line">            type:'post',</div><div class="line">            dataType: 'jsonp',</div><div class="line">            data:&#123;name:'itt'&#125;,</div><div class="line">            success:function(data)&#123;</div><div class="line">                console.log(data);</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h2 id="跨域借口"><a href="#跨域借口" class="headerlink" title="跨域借口"></a>跨域借口</h2><blockquote>
-<p>一些平台为我们提供了可以直接使用的接口,我们只需要按照他们提供的格式提交数据即可</p>
-</blockquote>
-<p><a href="http://developer.baidu.com/map/carapi-7.htm" target="_blank" rel="external">百度车联网api</a><br>开发者秘钥ak:0A5bc3c4fb543c8f9bc54b77bc155724</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;h2 id=&quot;同源&quot;&gt;&lt;a href=&quot;#同源&quot; class=&quot;headerlink&quot; title=&quot;同源&quot;&gt;&lt;/a&gt;同源&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;要了解跨域,首先就要知道什么是同源?&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所谓同源是指，域名，协议，端口完全相同&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="跨域" scheme="http://yoursite.com/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前端常见的小算法</title>
-    <link href="http://yoursite.com/2016/11/25/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E7%9A%84%E5%B0%8F%E7%AE%97%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/11/25/前端常见的小算法/</id>
-    <published>2016-11-24T16:00:00.000Z</published>
-    <updated>2017-07-14T07:59:35.165Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的</p>
-</blockquote>
- <a id="more"></a>
-<h3 id="字符串翻转"><a href="#字符串翻转" class="headerlink" title="字符串翻转"></a>字符串翻转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function strReverse(str) &#123;</div><div class="line">	return str= str.split(&apos;&apos;).reverse().join(&apos;&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">方法一:</div><div class="line">  function quchong1(arr)&#123;</div><div class="line">            	var newArr=[];</div><div class="line">            	for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">            		var flag=true;</div><div class="line">            		for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">            			if(arr[i]===newArr[j])&#123;</div><div class="line">            				flag=false;</div><div class="line">            			&#125;</div><div class="line">            		&#125;</div><div class="line">            		if(flag)&#123;</div><div class="line">            			newArr.push(arr[i]);</div><div class="line">            		&#125;</div><div class="line">            	&#125;</div><div class="line">            	return newArr;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">方法二:</div><div class="line">	 function quchong2(arr)&#123;</div><div class="line">            var newArr = [];</div><div class="line">            for(var i=0;i&lt;arr.length;i++)&#123;</div><div class="line">                for(var j=0;j&lt;newArr.length;j++)&#123;</div><div class="line">                    if(arr[i]===newArr[j])&#123;</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if(j==newArr.length)&#123;</div><div class="line">                    newArr.push(arr[i]);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            return newArr</div><div class="line">        &#125;   </div><div class="line">方法三:</div><div class="line">	function quchong3(arr)&#123;</div><div class="line">		let hashtable = &#123;&#125;;</div><div class="line">		let data = [];</div><div class="line">		for (let i=0;i&lt;arr.length;i++)&#123;</div><div class="line">			if(!hashTable[arr[i]])&#123;</div><div class="line">				hashTable[arr[i]]= true;</div><div class="line">				data.push(arr[i]);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		return data ;</div><div class="line">	&#125;	             </div><div class="line">	</div><div class="line">```     </div><div class="line"></div><div class="line">### 统计一个字符串出现最多的字母</div></pre></td></tr></table></figure>
-<pre><code>function findMaxChar(str){
-    if(str.length==1){
-        return str;
-    }
-    let charObj={};
-    for(let i,i&lt;str.length;i++){
-        if(!charObj[str.charAt(i)]){
-            charObj[str.charAt(i)]=1;
-        }else{
-            charObj[str.charAt(i)]+= 1;
-        }
-    }
-    let maxChar = &apos;&apos;,
-        maxValue= 1;
-    for(var k in charObj){
-        if(charObj[k]&gt;=maxValue){
-            maxChar = k;
-            maxValue = charObj[k];
-        }
-    }    
-    return maxChar;
-}
-//暴露接口
-module.exports = findMaxChar;
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 冒泡排序(其实这玩意儿 .sort 就能搞定,但是.....)</div></pre></td></tr></table></figure>
-<p>function bubbleSort(arr){<br>    for(let i=0;i<arr.length;i++){ for(let="" j="i+1;j<arr.length;j++){" if(arr[i]="">arr[j]){<br>                let item = arr[i];<br>                arr[i] = arr[j];<br>                arr[j] = item;<br>            }<br>        }<br>    }<br>    return arr;<br>}<br>//暴露接口<br>module.exports = bubbleSort;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 不借助临时变量,交换两个数值</div><div class="line"></div><div class="line">* 这种关键是跳出惯性思维,操作性其实也就那样</div></pre></td></tr></table></figure></arr.length;i++){></p>
-<p>function swap(num1,num2){<br>    num2 = num1 - num2;<br>    num1 = num1 + num2;<br>    num2 = num1 - num2;<br>    return [num1,num2];<br>}<br>module.exports = swap;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">###	求n位斐波那契数列值</div></pre></td></tr></table></figure></p>
-<p>function fibo(n){<br> if(n==2||n==1){<br>     return 1;<br> }<br> return fibo(n-1)+fibo(n-2);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 生成斐波那契数组</div></pre></td></tr></table></figure></p>
-<p>function getFibo(n){<br>  var fibArr=[];<br>  var i= 0;<br>  while(i&lt;n){<br>      if(i&lt;=1){<br>        fibArr.push[i];<br>      }else {<br>          fibArr.push(fibArr[i-1] + fibArr[i-2])<br>      }<br>      i++;<br>  }<br>  return fibArr;<br>}<br>```</p>
-<blockquote>
-<p>暂时就想到这么多,这种小算法太多了,噌的一下还真想不太多,以后遇到慢慢往进添加吧. </p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;虽然说我们前端在工作中接触算法相对来说不多,但是一些常见的数据交互还是很重要的.下面我罗列一些常见的&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="小算法(Algorithm)" scheme="http://yoursite.com/tags/%E5%B0%8F%E7%AE%97%E6%B3%95-Algorithm/"/>
     
   </entry>
   

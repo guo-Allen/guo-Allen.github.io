@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="angular," />
+  <meta name="keywords" content="React," />
 
 
 
@@ -86,19 +86,31 @@
 
 
 
-<meta name="description" content="作用域对象  就是 $scope
-什么时候创建 $scope ?">
+<meta name="description" content="本节记录学习typeScript中的
+泛型
+泛型变量
+泛型类
+泛型接口
+泛型类接口">
 <meta property="og:type" content="article">
-<meta property="og:title" content="angular中$scope作用域">
-<meta property="og:url" content="http://yoursite.com/2016/12/25/angular中 $scope 作用域/index.html">
+<meta property="og:title" content="TypeScript中的泛型(上)">
+<meta property="og:url" content="http://yoursite.com/2019/05/24/TypeScript中的泛型(上)/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="作用域对象  就是 $scope
-什么时候创建 $scope ?">
-<meta property="og:updated_time" content="2017-07-14T07:53:14.115Z">
+<meta property="og:description" content="本节记录学习typeScript中的
+泛型
+泛型变量
+泛型类
+泛型接口
+泛型类接口">
+<meta property="og:updated_time" content="2020-07-29T16:35:30.228Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="angular中$scope作用域">
-<meta name="twitter:description" content="作用域对象  就是 $scope
-什么时候创建 $scope ?">
+<meta name="twitter:title" content="TypeScript中的泛型(上)">
+<meta name="twitter:description" content="本节记录学习typeScript中的
+泛型
+泛型变量
+泛型类
+泛型接口
+泛型类接口">
 
 
 
@@ -116,7 +128,7 @@
   };
 </script>
 
-  <title> angular中$scope作用域 | Allen's Blog </title>
+  <title> TypeScript中的泛型(上) | Allen's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +291,7 @@
             
             
               
-                angular中$scope作用域
+                TypeScript中的泛型(上)
               
             
           </h1>
@@ -291,8 +303,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-25T00:00:00+08:00" content="2016-12-25">
-              2016-12-25
+            <time itemprop="dateCreated" datetime="2019-05-24T00:00:00+08:00" content="2019-05-24">
+              2019-05-24
             </time>
           </span>
 
@@ -305,8 +317,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/angulat/" itemprop="url" rel="index">
-                    <span itemprop="name">angulat</span>
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
                   </a>
                 </span>
 
@@ -321,8 +333,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/25/angular中 $scope 作用域/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/25/angular中 $scope 作用域/" itemprop="commentsCount"></span>
+                <a href="/2019/05/24/TypeScript中的泛型(上)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/24/TypeScript中的泛型(上)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -345,22 +357,52 @@
       
 
       
-        <h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
-<h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
-<pre><code>在 ng 凡是有 控制器就有 $scope 存在.
-在 ng 中还有一个特点, 就是懒加载, 也就是说无论是什么对象只有在使用的时候被创建.
-</code></pre><h3 id="多个-scope-之间的-关系是什么"><a href="#多个-scope-之间的-关系是什么" class="headerlink" title="多个 $scope 之间的 关系是什么?"></a>多个 $scope 之间的 关系是什么?</h3><pre><code>在 ng 中 控制器可以分配作用域, 即凡是定义一个 控制器 就会创建 一个 $scope. 如果控制器有
-嵌套( 在一个 控制器里定义另一个控制器 ), 那么内控制器的 $scope 原型继承自 外控制器的 $scope
-
-对象 a 原型继承自 对象 b, 就是说 a 可以使用 b 中的方法, a 的 __proto__ 就是 b
-Object.create( b ) -&gt; a
-</code></pre><h3 id="在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><a href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样" class="headerlink" title="在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?"></a>在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</h3><p>  -&gt; 在 原型继承中 子对象可以继承访问 父对象的所有成员<br>    var base = { name: ‘jim’ };<br>    var sub = Object.create( base );<br>    console.log( sub.name );<br>  -&gt; 如果在原型继承中 修改或设置 子对象的属性, 相当于给当前对象增加了属性.<br>    sub.age = 19;<br>  -&gt; 如果修改或设置 子对象中 与 父对象同名的属性, 实际上父对象不变, 而是给子对象增加了对应的属性<br>    sub.name = ‘tom’;<br>    // 除非 sub.<strong>proto</strong>.name = ‘tom’</p>
-<pre><code>根据属性搜索原则, 在利用子对象访问 name 属性的时候, 只操作子对象, 与父对象无关.
-
-需要具备一个能力, 看 html 标签 绘制 scope 关系
-</code></pre><h3 id="为什么一开始的代码中没有写-controller-也可以双向绑定"><a href="#为什么一开始的代码中没有写-controller-也可以双向绑定" class="headerlink" title="为什么一开始的代码中没有写 controller 也可以双向绑定?"></a>为什么一开始的代码中没有写 controller 也可以双向绑定?</h3><p>  -&gt; 在 ng 程序中, 一旦使用 了 ng-app 就表明该标签与其子标签被 ng 处理,实际上在背后, 凡是有了 ng-app 的背后都会被创建一个 $rootScope 的对象,它就是所有的 $scope 的祖宗, 所有的 $scope 都是直接或间接继承与 $rootScope 的</p>
-<p>  -&gt; 凡是没有写 ng-controller 的 ng-model 都是 $rootScope 的属性</p>
-<p>  -&gt; 这个 $rootScope 是程序一开始被创建的, 因此不是使用 controller 来访问,ng 的 module 有一个方法, 叫做 run(), 表示运行, 即 ng 程序一运行的时候就会执行该方法.<br>  -语法:<br>    module.run( [ ‘…’, function ( … ) { … } ] )</p>
+        <ul>
+<li>本节记录学习typeScript中的<ul>
+<li>泛型</li>
+<li>泛型变量</li>
+<li>泛型类</li>
+<li>泛型接口</li>
+<li>泛型类接口</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="泛型介绍"><a href="#泛型介绍" class="headerlink" title="泛型介绍"></a>泛型介绍</h4><p> 软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。</p>
+<p> 在像C#和Java这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。</p>
+<blockquote>
+<p>通俗理解：泛型就是解决 类 接口 方法的复用性、以及对不特定数据类型的支持(类型校验)</p>
+</blockquote>
+<p>我们先来个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//只能返回string类型的数据</div><div class="line"></div><div class="line">    function getData(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">//同时返回 string类型 和number类型  （代码冗余）</div><div class="line">    function getData1(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">    function getData2(value:number):number&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">//同时返回 string类型 和number类型       any可以解决这个问题</div><div class="line"></div><div class="line">    function getData(value:any):any&#123;</div><div class="line">        return &apos;哈哈哈&apos;;</div><div class="line">    &#125;</div><div class="line">    getData(123);</div><div class="line">    getData(&apos;str&apos;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>但是any放弃了类型检查,传入什么 返回什么。比如:传入number 类型必须返回number类型  传入 string类型必须返回string类型</p>
+<p>所以泛型来了，可以支持不特定的数据类型   要求：传入的参数和返回的参数一致</p>
+</blockquote>
+<ul>
+<li>T表示泛型，具体什么类型是调用这个方法的时候决定的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function getData&lt;T&gt;(value:T):T&#123;</div><div class="line">    return value;</div><div class="line">&#125;</div><div class="line">getData&lt;number&gt;(123);</div><div class="line">getData&lt;string&gt;(&apos;1214231&apos;);</div><div class="line">getData&lt;number&gt;(&apos;2112&apos;)/*错误的写法*/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>比如有个最小堆算法，需要同时支持返回数字和字符串 a  -  z两种类型。  通过类的泛型来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">class MinClas&lt;T&gt;&#123;</div><div class="line">    public list:T[]=[];</div><div class="line">    add(value:T):void&#123;</div><div class="line">        this.list.push(value);</div><div class="line">    &#125;</div><div class="line">    min():T&#123;        </div><div class="line">        var minNum=this.list[0];</div><div class="line">        for(var i=0;i&lt;this.list.length;i++)&#123;</div><div class="line">            if(minNum&gt;this.list[i])&#123;</div><div class="line">                minNum=this.list[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return minNum;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var m1=new MinClas&lt;number&gt;();   /*实例化类 并且制定了类的T代表的类型是number*/</div><div class="line">m1.add(11);</div><div class="line">m1.add(3);</div><div class="line">m1.add(2);</div><div class="line">alert(m1.min())</div><div class="line"></div><div class="line">var m2=new MinClas&lt;string&gt;();   /*实例化类 并且制定了类的T代表的类型是string*/</div><div class="line">m2.add(&apos;c&apos;);</div><div class="line">m2.add(&apos;a&apos;);</div><div class="line">m2.add(&apos;v&apos;);</div><div class="line">alert(m2.min())</div></pre></td></tr></table></figure>
+<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><p>1.我们先来回忆一下函数类型接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">interface ConfigFn&#123;</div><div class="line"></div><div class="line">    (value1:string,value2:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var setData:ConfigFn=function(value1:string,value2:string):string&#123;</div><div class="line"></div><div class="line"></div><div class="line">    return value1+value2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">setData(&apos;name&apos;,&apos;张三&apos;);</div></pre></td></tr></table></figure>
+<p>2、泛型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">        interface ConfigFn&lt;T&gt;&#123;</div><div class="line">            (value:T):T;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        function getData&lt;T&gt;(value:T):T&#123;</div><div class="line"></div><div class="line">            return value;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line">        var myGetData:ConfigFn&lt;string&gt;=getData;     </div><div class="line"></div><div class="line"></div><div class="line">        myGetData(&apos;20&apos;);  /*正确*/</div><div class="line">        myGetData(20)  //错误</div><div class="line"></div><div class="line">```      </div><div class="line"></div><div class="line">#### 类的泛型-把类作为参数类型的泛型类</div><div class="line"></div><div class="line">&gt; 先来个例子 </div><div class="line">* 定义一个User的类这个类的作用就是映射数据库字段  </div><div class="line">* 然后定义一个 MysqlDb的类这个类用于操作数据库   </div><div class="line">* 然后把User类作为参数传入到MysqlDb中</div></pre></td></tr></table></figure></p>
+<p>//把类作为参数来约束数据传入的类型<br> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }</p>
+<p> class MysqlDb{<br>     add(user:User):boolean{<br>         console.log(user);<br>         return true;<br>     }<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb();<br> Db.add(u);</p>
+<p> class ArticleCate{<br>     title:string | undefined;<br>     desc:string | undefined;<br>     status:number | undefined<br> }</p>
+<p> class MysqlDb{<br>     add(info:ArticleCate):boolean{<br>         console.log(info);<br>         console.log(info.title);<br>         return true;<br> }<br>}<br> var a=new ArticleCate();<br> a.title=”国内”;<br> a.desc=”国内新闻”;<br> a.status=1;<br> var Db=new MysqlDb();<br> Db.add(a);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 问题：代码重复</div><div class="line">&gt; 接下来我们用泛型实现上面的参数</div><div class="line"></div><div class="line">* 把类作为参数类型的泛型类</div></pre></td></tr></table></figure></p>
+<p>//定义操作数据库的泛型类<br>class MysqlDb<t>{<br>    add(info:T):boolean{<br>        console.log(info);<br>        return true;<br>    }<br>    updated(info:T,id:number):boolean {<br>        console.log(info);<br>        console.log(id);<br>        return true;<br>    }<br>}</t></p>
+<p>//想给User表增加数据</p>
+<p>// 1、定义一个User类 和数据库进行映射</p>
+<p> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb<user>();<br> Db.add(u);</user></p>
+<p>//2、相关ArticleCate增加数据  定义一个ArticleCate类 和数据库进行映射<br>class ArticleCate{<br>    title:string | undefined;<br>    desc:string | undefined;<br>    status:number | undefined;<br>    constructor(params:{<br>        title:string | undefined,<br>        desc:string | undefined,<br>        status?:number | undefined<br>    }){</p>
+<pre><code>    this.title=params.title;
+    this.desc=params.desc;
+    this.status=params.status;
+}
+</code></pre><p>}<br>//增加操作<br> var a=new ArticleCate({<br>     title:’分类’,<br>     desc:’1111’,<br>     status:1<br> });</p>
+<p> //类当做参数的泛型类<br> var Db=new MysqlDb<articlecate>();<br> Db.add(a);</articlecate></p>
+<p>//修改数据<br>var a=new ArticleCate({<br>        title:’分类111’,<br>        desc:’2222’<br>});<br>a.status=0;<br>var Db=new MysqlDb<articlecate>();<br>Db.updated(a,12);<br>```</articlecate></p>
 
       
     </div>
@@ -382,7 +424,7 @@ Object.create( b ) -&gt; a
       
         <div class="post-tags">
           
-            <a href="/tags/angular/" rel="tag">#angular</a>
+            <a href="/tags/React/" rel="tag">#React</a>
           
         </div>
       
@@ -391,16 +433,16 @@ Object.create( b ) -&gt; a
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/24/JavaScript 模块化/" rel="next" title="JavaScript Module">
-                <i class="fa fa-chevron-left"></i> JavaScript Module
+              <a href="/2019/05/23/TypeScript中的接口/" rel="next" title="TypeScript中的接口">
+                <i class="fa fa-chevron-left"></i> TypeScript中的接口
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/26/angular 基础思想/" rel="prev" title="angular 基础思想">
-                angular 基础思想 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/05/25/TypeScript中的泛型(下)/" rel="prev" title="TypeScript中的泛型(下)">
+                TypeScript中的泛型(下) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -416,10 +458,10 @@ Object.create( b ) -&gt; a
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/25/angular中 $scope 作用域/"
-     data-title="angular中$scope作用域"
+        <div class="ds-share flat" data-thread-key="2019/05/24/TypeScript中的泛型(上)/"
+     data-title="TypeScript中的泛型(上)"
      data-content=""
-     data-url="http://yoursite.com/2016/12/25/angular中 $scope 作用域/">
+     data-url="http://yoursite.com/2019/05/24/TypeScript中的泛型(上)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -446,8 +488,8 @@ Object.create( b ) -&gt; a
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/25/angular中 $scope 作用域/"
-           data-title="angular中$scope作用域" data-url="http://yoursite.com/2016/12/25/angular中 $scope 作用域/">
+      <div class="ds-thread" data-thread-key="2019/05/24/TypeScript中的泛型(上)/"
+           data-title="TypeScript中的泛型(上)" data-url="http://yoursite.com/2019/05/24/TypeScript中的泛型(上)/">
       </div>
     
   </div>
@@ -596,7 +638,7 @@ Object.create( b ) -&gt; a
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域对象"><span class="nav-number">1.</span> <span class="nav-text">作用域对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时候创建-scope"><span class="nav-number">1.1.</span> <span class="nav-text">什么时候创建 $scope ?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个-scope-之间的-关系是什么"><span class="nav-number">1.2.</span> <span class="nav-text">多个 $scope 之间的 关系是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在原型继承中-如果-父对象-与-子对象-同时具有同名的属性会怎样"><span class="nav-number">1.3.</span> <span class="nav-text">在原型继承中 如果 父对象 与 子对象 同时具有同名的属性会怎样?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么一开始的代码中没有写-controller-也可以双向绑定"><span class="nav-number">1.4.</span> <span class="nav-text">为什么一开始的代码中没有写 controller 也可以双向绑定?</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型介绍"><span class="nav-number">1.</span> <span class="nav-text">泛型介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型类"><span class="nav-number">2.</span> <span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型接口"><span class="nav-number">3.</span> <span class="nav-text">泛型接口</span></a></li></ol></div>
             
           </div>
         </section>

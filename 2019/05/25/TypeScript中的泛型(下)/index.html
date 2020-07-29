@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="React," />
 
 
 
@@ -86,15 +86,16 @@
 
 
 
-<meta name="description" content="清风徐来，水波不兴。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen's Blog">
-<meta property="og:url" content="http://yoursite.com/tags/JS/index.html">
+<meta name="description" content="本节来一个泛型和接口的综合案例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript中的泛型(下)">
+<meta property="og:url" content="http://yoursite.com/2019/05/25/TypeScript中的泛型(下)/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="清风徐来，水波不兴。">
+<meta property="og:description" content="本节来一个泛型和接口的综合案例">
+<meta property="og:updated_time" content="2020-07-29T16:35:35.831Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen's Blog">
-<meta name="twitter:description" content="清风徐来，水波不兴。">
+<meta name="twitter:title" content="TypeScript中的泛型(下)">
+<meta name="twitter:description" content="本节来一个泛型和接口的综合案例">
 
 
 
@@ -112,7 +113,7 @@
   };
 </script>
 
-  <title> 标签: JS | Allen's Blog </title>
+  <title> TypeScript中的泛型(下) | Allen's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +144,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -254,46 +255,198 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        JS
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                TypeScript中的泛型(下)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-05-25T00:00:00+08:00" content="2019-05-25">
+              2019-05-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/05/25/TypeScript中的泛型(下)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/25/TypeScript中的泛型(下)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <blockquote>
+<p>本节来一个泛型和接口的综合案例</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>功能：定义一个操作数据库的库  支持 Mysql Mssql  MongoDb</p>
+</blockquote>
+<ul>
+<li><p>要求1：Mysql MsSql  MongoDb功能一样  都有 add  update  delete  get方法    </p>
+</li>
+<li><p>注意：约束统一的规范、以及代码重用</p>
+</li>
+<li><p>解决方案：需要约束规范所以要定义接口 ，需要代码重用所以用到泛型</p>
+</li>
+</ul>
+<blockquote>
+<p>回忆一下之前的内容</p>
+</blockquote>
+<ul>
+<li><p>接口：在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范</p>
+</li>
+<li><p>泛型 通俗理解：泛型就是解决 类 接口 方法的复用性、</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">interface DBI&lt;T&gt;&#123;</div><div class="line">    add(info:T):boolean;</div><div class="line">    update(info:T,id:number):boolean;</div><div class="line">    delete(id:number):boolean;</div><div class="line">    get(id:number):any[];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//定义一个操作mysql数据库的类       注意：要实现泛型接口 这个类也应该是一个泛型类</div><div class="line"></div><div class="line">class MysqlDb&lt;T&gt; implements DBI&lt;T&gt;&#123;</div><div class="line"></div><div class="line">    constructor()&#123;</div><div class="line"></div><div class="line">        console.log(&apos;数据库建立连接&apos;);</div><div class="line">    &#125;</div><div class="line">    add(info: T): boolean &#123;</div><div class="line"></div><div class="line">        console.log(info);</div><div class="line"></div><div class="line">        return true;</div><div class="line">       </div><div class="line">    &#125;    </div><div class="line">    </div><div class="line">    update(info: T, id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    delete(id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    get(id: number): any[] &#123;</div><div class="line">        var list=[</div><div class="line"></div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line"></div><div class="line">        return list;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">//定义一个操作mssql数据库的类  </div><div class="line"></div><div class="line"></div><div class="line">class MsSqlDb&lt;T&gt; implements DBI&lt;T&gt;&#123;</div><div class="line"></div><div class="line">    constructor()&#123;</div><div class="line"></div><div class="line">        console.log(&apos;数据库建立连接&apos;);</div><div class="line">    &#125;</div><div class="line">    add(info: T): boolean &#123;</div><div class="line">        console.log(info);</div><div class="line">        return true;</div><div class="line">    &#125;    </div><div class="line">    update(info: T, id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    delete(id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    get(id: number): any[] &#123;</div><div class="line">       </div><div class="line"></div><div class="line">        var list=[</div><div class="line"></div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line"></div><div class="line">        return list;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>操作用户表   定义一个User类和数据表做映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class User&#123;</div><div class="line">    username:string | undefined;</div><div class="line">    password:string | undefined;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var u=new User();</div><div class="line">u.username=&apos;张三111&apos;;</div><div class="line">u.password=&apos;123456&apos;;</div><div class="line"></div><div class="line"></div><div class="line">var oMysql=new MysqlDb&lt;User&gt;(); //类作为参数来约束数据传入的类型 </div><div class="line">oMysql.add(u);</div><div class="line"></div><div class="line">var oMssql=new MsSqlDb&lt;User&gt;();</div><div class="line">oMssql.add(u);</div><div class="line"></div><div class="line"></div><div class="line">//获取User表 ID=4的数据</div><div class="line">var data=oMssql.get(4);</div><div class="line">console.log(data);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2019/08/15/regExp/" itemprop="url">
-              
-                <span itemprop="name">正则表达式总结</span>
-              
-            </a>
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-08-15T00:00:00+08:00"
-              content="2019-08-15" >
-          08-15
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag">#React</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/24/TypeScript中的泛型(上)/" rel="next" title="TypeScript中的泛型(上)">
+                <i class="fa fa-chevron-left"></i> TypeScript中的泛型(上)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/03/redux(上)/" rel="prev" title="Redux（上）">
+                Redux（上） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2019/05/25/TypeScript中的泛型(下)/"
+     data-title="TypeScript中的泛型(下)"
+     data-content=""
+     data-url="http://yoursite.com/2019/05/25/TypeScript中的泛型(下)/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -301,6 +454,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2019/05/25/TypeScript中的泛型(下)/"
+           data-title="TypeScript中的泛型(下)" data-url="http://yoursite.com/2019/05/25/TypeScript中的泛型(下)/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -320,8 +481,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -430,6 +600,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -532,6 +713,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-29T16:22:02.551Z</updated>
+  <updated>2020-07-29T16:36:54.644Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,83 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>TypeScript中的接口</title>
-    <link href="http://yoursite.com/2020/01/04/TypeScript%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/"/>
-    <id>http://yoursite.com/2020/01/04/TypeScript中的接口/</id>
-    <published>2020-01-03T16:00:00.000Z</published>
-    <updated>2020-07-29T16:22:02.551Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li>本节记录学习typeScript中的<ul>
-<li>属性类接口</li>
-<li>函数类型接口</li>
-<li>可索引接口</li>
-<li>类类型接口</li>
-<li>接口扩展</li>
-</ul>
-</li>
-</ul>
-<a id="more"></a>
-<h4 id="接口的作用"><a href="#接口的作用" class="headerlink" title="接口的作用"></a>接口的作用</h4><blockquote>
-<p>在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等。</p>
-</blockquote>
-<h4 id="属性接口"><a href="#属性接口" class="headerlink" title="属性接口"></a>属性接口</h4><p>1、先来个例子  对json的约束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//ts中自定义方法传入参数,对json进行约束</div><div class="line">function printLabel(labelInfo:&#123;label:string&#125;):void &#123;</div><div class="line">    console.log(&apos;printLabel&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">printLabel(&apos;hahah&apos;); //错误写法</div><div class="line">printLabel(&#123;name:&apos;张三&apos;&#125;);  //错误的写法</div><div class="line">printLabel(&#123;label:&apos;张三&apos;&#125;);  //正确的写法,传入的参数必须有label</div></pre></td></tr></table></figure>
-<blockquote>
-<p>如果对批量方法传入参数进行约束呢？  就用接口了</p>
-</blockquote>
-<p>2、接口：行为和动作的规范，对批量方法进行约束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//就是传入对象的约束    属性接口</div><div class="line">interface FullName&#123;</div><div class="line"></div><div class="line">     firstName:string;   //注意;结束</div><div class="line">     secondName:string;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> function printName(name:FullName)&#123;</div><div class="line"></div><div class="line">    // 必须传入对象  firstName  secondName</div><div class="line">     console.log(name.firstName+&apos;--&apos;+name.secondName);</div><div class="line">&#125;</div><div class="line"> printName(&apos;1213&apos;);  //错误</div><div class="line"></div><div class="line">var obj=&#123;   /*传入的参数必须包含 firstName  secondName*/</div><div class="line">     age:20,</div><div class="line">    firstName:&apos;张&apos;,</div><div class="line">    secondName:&apos;三&apos;</div><div class="line">&#125;;</div><div class="line">printName(obj)</div></pre></td></tr></table></figure>
-<p>3、接口 ：可选属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">interface FullName&#123;</div><div class="line">     firstName:string;</div><div class="line">     secondName?:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function getName(name:FullName)&#123;</div><div class="line"></div><div class="line">     console.log(name)</div><div class="line">&#125;  </div><div class="line">getName(&#123;               </div><div class="line">     firstName:&apos;firstName&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>4、下面来个例子，使用接口实现ajax的封装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">interface Config&#123;</div><div class="line">    type:string;</div><div class="line">    url:string;</div><div class="line">    data?:string;</div><div class="line">    dataType:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原生js封装的ajax </div><div class="line">function ajax(config:Config)&#123;</div><div class="line"></div><div class="line">   var xhr=new XMLHttpRequest();</div><div class="line"></div><div class="line">   xhr.open(config.type,config.url,true);</div><div class="line"></div><div class="line">   xhr.send(config.data);</div><div class="line"></div><div class="line">   xhr.onreadystatechange=function()&#123;</div><div class="line"></div><div class="line">        if(xhr.readyState==4 &amp;&amp; xhr.status==200)&#123;</div><div class="line">            console.log(&apos;chengong&apos;);</div><div class="line"></div><div class="line"></div><div class="line">            if(config.dataType==&apos;json&apos;)&#123;</div><div class="line"></div><div class="line">                console.log(JSON.parse(xhr.responseText));</div><div class="line">            &#125;else&#123;</div><div class="line">                console.log(xhr.responseText)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//调用</div><div class="line">ajax(&#123;</div><div class="line">    type:&apos;get&apos;,</div><div class="line">    data:&apos;name=zhangsan&apos;,</div><div class="line">    url:&apos;http://a.itying.com/api/productlist&apos;, //api</div><div class="line">    dataType:&apos;json&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<h4 id="函数类型接口"><a href="#函数类型接口" class="headerlink" title="函数类型接口"></a>函数类型接口</h4><blockquote>
-<p>对方法传入的参数 以及返回值进行约束    批量约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 模拟加密的函数类型接口</div><div class="line"></div><div class="line">interface encrypt&#123;</div><div class="line">    (key:string,value:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var md5:encrypt=function(key:string,value:string):string&#123;</div><div class="line">        //模拟操作</div><div class="line">        return key+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">var sha1:encrypt=function(key:string,value:string):string&#123;</div><div class="line"></div><div class="line">    //模拟操作</div><div class="line">    return key+&apos;----&apos;+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(sha1(&apos;name&apos;,&apos;lisi&apos;));</div></pre></td></tr></table></figure></p>
-</blockquote>
-<h4 id="可索引接口：数组、对象的约束-（不常用）"><a href="#可索引接口：数组、对象的约束-（不常用）" class="headerlink" title="可索引接口：数组、对象的约束  （不常用）"></a>可索引接口：数组、对象的约束  （不常用）</h4><p>1、ts定义数组的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr:number[]=[2342,235325]</div><div class="line">var arr1:Array&lt;string&gt;=[&apos;111&apos;,&apos;222&apos;]</div></pre></td></tr></table></figure></p>
-<p>2、可索引接口 对数组的约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">interface UserArr&#123;</div><div class="line">     [index:number]:string</div><div class="line">&#125;</div><div class="line"></div><div class="line"> var arr:UserArr=[&apos;aaa&apos;,&apos;bbb&apos;];</div><div class="line"> console.log(arr[0]);</div><div class="line"> var arr:UserArr=[123,&apos;bbb&apos;];  /*错误*/</div><div class="line"> console.log(arr[0]);</div></pre></td></tr></table></figure></p>
-<p>3、可索引接口 对对象的约束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">interface UserObj&#123;</div><div class="line">     [index:string]:string</div><div class="line">&#125;</div><div class="line">var arr:UserObj=&#123;name:&apos;张三&apos;&#125;;</div></pre></td></tr></table></figure>
-<h4 id="类类型接口"><a href="#类类型接口" class="headerlink" title="类类型接口"></a>类类型接口</h4><blockquote>
-<p>对类的约束  和   抽象类抽象有点相似    </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    name:string;</div><div class="line">    eat(str:string):void;</div><div class="line">&#125;</div><div class="line">class Dog implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        console.log(this.name+&apos;吃粮食&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var d=new Dog(&apos;小黑&apos;);</div><div class="line">d.eat();</div><div class="line"></div><div class="line">class Cat implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat(food:string)&#123;</div><div class="line">        console.log(this.name+&apos;吃&apos;+food);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var c=new Cat(&apos;小花&apos;);</div><div class="line">c.eat(&apos;老鼠&apos;);</div></pre></td></tr></table></figure>
-<h4 id="接口扩展"><a href="#接口扩展" class="headerlink" title="接口扩展"></a>接口扩展</h4><blockquote>
-<p>接口可以继承接口   </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> interface Animal&#123;</div><div class="line">     eat():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> interface Person extends Animal&#123;</div><div class="line">     work():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> class Web implements Person&#123;</div><div class="line">     public name:string;</div><div class="line">     constructor(name:string)&#123;</div><div class="line">         this.name=name;</div><div class="line">     &#125;</div><div class="line">    eat()&#123;</div><div class="line">         console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">     &#125;</div><div class="line">     work()&#123;</div><div class="line"></div><div class="line">      console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小李&apos;);</div><div class="line">w.work();//小李写代码</div><div class="line">w.eat();//小李喜欢吃馒头</div></pre></td></tr></table></figure>
-<p>再来一个复杂点的例子</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    eat():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line">interface Person extends Animal&#123;</div><div class="line">    work():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Programmer&#123;</div><div class="line">    public name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    coding(code:string)&#123;</div><div class="line">        console.log(this.name+code)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Web extends Programmer implements Person&#123;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">       super(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;//Web类必须实现eat方法</div><div class="line">        console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">    &#125;</div><div class="line">    work()&#123;//Web类必须实现work方法</div><div class="line">        console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小郭&apos;);</div><div class="line">w.eat();//小郭喜欢吃馒头</div><div class="line">w.coding(&apos;写ts代码&apos;);//小郭写ts代码</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;本节记录学习typeScript中的&lt;ul&gt;
-&lt;li&gt;属性类接口&lt;/li&gt;
-&lt;li&gt;函数类型接口&lt;/li&gt;
-&lt;li&gt;可索引接口&lt;/li&gt;
-&lt;li&gt;类类型接口&lt;/li&gt;
-&lt;li&gt;接口扩展&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="React" scheme="http://yoursite.com/categories/React/"/>
-    
-    
-      <category term="React" scheme="http://yoursite.com/tags/React/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>正则表达式</title>
-    <link href="http://yoursite.com/2019/11/11/regExp/"/>
-    <id>http://yoursite.com/2019/11/11/regExp/</id>
-    <published>2019-11-10T16:00:00.000Z</published>
-    <updated>2020-07-29T16:30:15.624Z</updated>
+    <title>正则表达式总结</title>
+    <link href="http://yoursite.com/2019/08/15/regExp/"/>
+    <id>http://yoursite.com/2019/08/15/regExp/</id>
+    <published>2019-08-14T16:00:00.000Z</published>
+    <updated>2020-07-29T16:36:54.644Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。</p>
@@ -352,11 +280,11 @@
   </entry>
   
   <entry>
-    <title>TypeScript中的泛型(上)</title>
-    <link href="http://yoursite.com/2019/05/24/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8B)/"/>
-    <id>http://yoursite.com/2019/05/24/TypeScript中的泛型(下)/</id>
-    <published>2019-05-23T16:00:00.000Z</published>
-    <updated>2020-07-29T16:30:22.198Z</updated>
+    <title>TypeScript中的泛型(下)</title>
+    <link href="http://yoursite.com/2019/05/25/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8B)/"/>
+    <id>http://yoursite.com/2019/05/25/TypeScript中的泛型(下)/</id>
+    <published>2019-05-24T16:00:00.000Z</published>
+    <updated>2020-07-29T16:35:35.831Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>本节来一个泛型和接口的综合案例</p>
@@ -406,10 +334,10 @@
   
   <entry>
     <title>TypeScript中的泛型(上)</title>
-    <link href="http://yoursite.com/2019/05/23/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8A)/"/>
-    <id>http://yoursite.com/2019/05/23/TypeScript中的泛型(上)/</id>
-    <published>2019-05-22T16:00:00.000Z</published>
-    <updated>2020-07-29T16:30:21.340Z</updated>
+    <link href="http://yoursite.com/2019/05/24/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8A)/"/>
+    <id>http://yoursite.com/2019/05/24/TypeScript中的泛型(上)/</id>
+    <published>2019-05-23T16:00:00.000Z</published>
+    <updated>2020-07-29T16:35:30.228Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>本节记录学习typeScript中的<ul>
@@ -468,6 +396,78 @@
 &lt;li&gt;泛型类&lt;/li&gt;
 &lt;li&gt;泛型接口&lt;/li&gt;
 &lt;li&gt;泛型类接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript中的接口</title>
+    <link href="http://yoursite.com/2019/05/23/TypeScript%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2019/05/23/TypeScript中的接口/</id>
+    <published>2019-05-22T16:00:00.000Z</published>
+    <updated>2020-07-29T16:35:23.068Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习typeScript中的<ul>
+<li>属性类接口</li>
+<li>函数类型接口</li>
+<li>可索引接口</li>
+<li>类类型接口</li>
+<li>接口扩展</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="接口的作用"><a href="#接口的作用" class="headerlink" title="接口的作用"></a>接口的作用</h4><blockquote>
+<p>在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等。</p>
+</blockquote>
+<h4 id="属性接口"><a href="#属性接口" class="headerlink" title="属性接口"></a>属性接口</h4><p>1、先来个例子  对json的约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//ts中自定义方法传入参数,对json进行约束</div><div class="line">function printLabel(labelInfo:&#123;label:string&#125;):void &#123;</div><div class="line">    console.log(&apos;printLabel&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">printLabel(&apos;hahah&apos;); //错误写法</div><div class="line">printLabel(&#123;name:&apos;张三&apos;&#125;);  //错误的写法</div><div class="line">printLabel(&#123;label:&apos;张三&apos;&#125;);  //正确的写法,传入的参数必须有label</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果对批量方法传入参数进行约束呢？  就用接口了</p>
+</blockquote>
+<p>2、接口：行为和动作的规范，对批量方法进行约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//就是传入对象的约束    属性接口</div><div class="line">interface FullName&#123;</div><div class="line"></div><div class="line">     firstName:string;   //注意;结束</div><div class="line">     secondName:string;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> function printName(name:FullName)&#123;</div><div class="line"></div><div class="line">    // 必须传入对象  firstName  secondName</div><div class="line">     console.log(name.firstName+&apos;--&apos;+name.secondName);</div><div class="line">&#125;</div><div class="line"> printName(&apos;1213&apos;);  //错误</div><div class="line"></div><div class="line">var obj=&#123;   /*传入的参数必须包含 firstName  secondName*/</div><div class="line">     age:20,</div><div class="line">    firstName:&apos;张&apos;,</div><div class="line">    secondName:&apos;三&apos;</div><div class="line">&#125;;</div><div class="line">printName(obj)</div></pre></td></tr></table></figure>
+<p>3、接口 ：可选属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">interface FullName&#123;</div><div class="line">     firstName:string;</div><div class="line">     secondName?:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function getName(name:FullName)&#123;</div><div class="line"></div><div class="line">     console.log(name)</div><div class="line">&#125;  </div><div class="line">getName(&#123;               </div><div class="line">     firstName:&apos;firstName&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>4、下面来个例子，使用接口实现ajax的封装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">interface Config&#123;</div><div class="line">    type:string;</div><div class="line">    url:string;</div><div class="line">    data?:string;</div><div class="line">    dataType:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原生js封装的ajax </div><div class="line">function ajax(config:Config)&#123;</div><div class="line"></div><div class="line">   var xhr=new XMLHttpRequest();</div><div class="line"></div><div class="line">   xhr.open(config.type,config.url,true);</div><div class="line"></div><div class="line">   xhr.send(config.data);</div><div class="line"></div><div class="line">   xhr.onreadystatechange=function()&#123;</div><div class="line"></div><div class="line">        if(xhr.readyState==4 &amp;&amp; xhr.status==200)&#123;</div><div class="line">            console.log(&apos;chengong&apos;);</div><div class="line"></div><div class="line"></div><div class="line">            if(config.dataType==&apos;json&apos;)&#123;</div><div class="line"></div><div class="line">                console.log(JSON.parse(xhr.responseText));</div><div class="line">            &#125;else&#123;</div><div class="line">                console.log(xhr.responseText)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//调用</div><div class="line">ajax(&#123;</div><div class="line">    type:&apos;get&apos;,</div><div class="line">    data:&apos;name=zhangsan&apos;,</div><div class="line">    url:&apos;http://a.itying.com/api/productlist&apos;, //api</div><div class="line">    dataType:&apos;json&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h4 id="函数类型接口"><a href="#函数类型接口" class="headerlink" title="函数类型接口"></a>函数类型接口</h4><blockquote>
+<p>对方法传入的参数 以及返回值进行约束    批量约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 模拟加密的函数类型接口</div><div class="line"></div><div class="line">interface encrypt&#123;</div><div class="line">    (key:string,value:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var md5:encrypt=function(key:string,value:string):string&#123;</div><div class="line">        //模拟操作</div><div class="line">        return key+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">var sha1:encrypt=function(key:string,value:string):string&#123;</div><div class="line"></div><div class="line">    //模拟操作</div><div class="line">    return key+&apos;----&apos;+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(sha1(&apos;name&apos;,&apos;lisi&apos;));</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="可索引接口：数组、对象的约束-（不常用）"><a href="#可索引接口：数组、对象的约束-（不常用）" class="headerlink" title="可索引接口：数组、对象的约束  （不常用）"></a>可索引接口：数组、对象的约束  （不常用）</h4><p>1、ts定义数组的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr:number[]=[2342,235325]</div><div class="line">var arr1:Array&lt;string&gt;=[&apos;111&apos;,&apos;222&apos;]</div></pre></td></tr></table></figure></p>
+<p>2、可索引接口 对数组的约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">interface UserArr&#123;</div><div class="line">     [index:number]:string</div><div class="line">&#125;</div><div class="line"></div><div class="line"> var arr:UserArr=[&apos;aaa&apos;,&apos;bbb&apos;];</div><div class="line"> console.log(arr[0]);</div><div class="line"> var arr:UserArr=[123,&apos;bbb&apos;];  /*错误*/</div><div class="line"> console.log(arr[0]);</div></pre></td></tr></table></figure></p>
+<p>3、可索引接口 对对象的约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">interface UserObj&#123;</div><div class="line">     [index:string]:string</div><div class="line">&#125;</div><div class="line">var arr:UserObj=&#123;name:&apos;张三&apos;&#125;;</div></pre></td></tr></table></figure>
+<h4 id="类类型接口"><a href="#类类型接口" class="headerlink" title="类类型接口"></a>类类型接口</h4><blockquote>
+<p>对类的约束  和   抽象类抽象有点相似    </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    name:string;</div><div class="line">    eat(str:string):void;</div><div class="line">&#125;</div><div class="line">class Dog implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        console.log(this.name+&apos;吃粮食&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var d=new Dog(&apos;小黑&apos;);</div><div class="line">d.eat();</div><div class="line"></div><div class="line">class Cat implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat(food:string)&#123;</div><div class="line">        console.log(this.name+&apos;吃&apos;+food);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var c=new Cat(&apos;小花&apos;);</div><div class="line">c.eat(&apos;老鼠&apos;);</div></pre></td></tr></table></figure>
+<h4 id="接口扩展"><a href="#接口扩展" class="headerlink" title="接口扩展"></a>接口扩展</h4><blockquote>
+<p>接口可以继承接口   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> interface Animal&#123;</div><div class="line">     eat():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> interface Person extends Animal&#123;</div><div class="line">     work():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> class Web implements Person&#123;</div><div class="line">     public name:string;</div><div class="line">     constructor(name:string)&#123;</div><div class="line">         this.name=name;</div><div class="line">     &#125;</div><div class="line">    eat()&#123;</div><div class="line">         console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">     &#125;</div><div class="line">     work()&#123;</div><div class="line"></div><div class="line">      console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小李&apos;);</div><div class="line">w.work();//小李写代码</div><div class="line">w.eat();//小李喜欢吃馒头</div></pre></td></tr></table></figure>
+<p>再来一个复杂点的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    eat():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line">interface Person extends Animal&#123;</div><div class="line">    work():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Programmer&#123;</div><div class="line">    public name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    coding(code:string)&#123;</div><div class="line">        console.log(this.name+code)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Web extends Programmer implements Person&#123;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">       super(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;//Web类必须实现eat方法</div><div class="line">        console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">    &#125;</div><div class="line">    work()&#123;//Web类必须实现work方法</div><div class="line">        console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小郭&apos;);</div><div class="line">w.eat();//小郭喜欢吃馒头</div><div class="line">w.coding(&apos;写ts代码&apos;);//小郭写ts代码</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习typeScript中的&lt;ul&gt;
+&lt;li&gt;属性类接口&lt;/li&gt;
+&lt;li&gt;函数类型接口&lt;/li&gt;
+&lt;li&gt;可索引接口&lt;/li&gt;
+&lt;li&gt;类类型接口&lt;/li&gt;
+&lt;li&gt;接口扩展&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1283,70 +1283,6 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
-    <title>JS中 异常</title>
-    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
-    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
-    <published>2016-12-23T16:00:00.000Z</published>
-    <updated>2017-07-14T07:56:46.049Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
-<li>程序执行是出现的结果与预期结果不一致.</li>
-<li>运行时出现了错误<a id="more"></a>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
-<li>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段<br>1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.<br>2&gt; 只有在运行时出现的错误才可以被 try-catch</li>
-</ul>
-</li>
-</ol>
-<h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
-<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
-<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br>在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br>将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
-<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
-</li>
-<li><p>什么时候使用 throw 抛出异常</p>
-<ul>
-<li>写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<ul>
-<li>一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>例如: Person( name, age, gender )</p>
-<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
-<ul>
-<li><p>系统定义的内置异常不够使用的时候</p>
-<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
-<p>2&gt; try {</p>
-<pre><code>} catch ( e ) {
-
-} finally { // 永远会执行
-
-}
-</code></pre><p>3&gt; try {</p>
-<pre><code>} finally {
-
-}
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是异常？&quot;&gt;&lt;a href=&quot;#什么是异常？&quot; class=&quot;headerlink&quot; title=&quot;什么是异常？&quot;&gt;&lt;/a&gt;什么是异常？&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;程序执行是出现的结果与预期结果不一致.&lt;/li&gt;
-&lt;li&gt;运行时出现了错误
-    
-    </summary>
-    
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
-    
-    
-      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
-    
-  </entry>
-  
-  <entry>
     <title>JavaScript Module</title>
     <link href="http://yoursite.com/2016/12/24/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/24/JavaScript 模块化/</id>
@@ -1413,6 +1349,70 @@ Object.create( b ) -&gt; a
     
     
       <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中 异常</title>
+    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
+    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
+    <published>2016-12-23T16:00:00.000Z</published>
+    <updated>2017-07-14T07:56:46.049Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
+<li>程序执行是出现的结果与预期结果不一致.</li>
+<li>运行时出现了错误<a id="more"></a>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段<br>1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.<br>2&gt; 只有在运行时出现的错误才可以被 try-catch</li>
+</ul>
+</li>
+</ol>
+<h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
+<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
+<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br>在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br>将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
+<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
+</li>
+<li><p>什么时候使用 throw 抛出异常</p>
+<ul>
+<li>写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<ul>
+<li>一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>例如: Person( name, age, gender )</p>
+<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
+<ul>
+<li><p>系统定义的内置异常不够使用的时候</p>
+<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
+<p>2&gt; try {</p>
+<pre><code>} catch ( e ) {
+
+} finally { // 永远会执行
+
+}
+</code></pre><p>3&gt; try {</p>
+<pre><code>} finally {
+
+}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是异常？&quot;&gt;&lt;a href=&quot;#什么是异常？&quot; class=&quot;headerlink&quot; title=&quot;什么是异常？&quot;&gt;&lt;/a&gt;什么是异常？&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;程序执行是出现的结果与预期结果不一致.&lt;/li&gt;
+&lt;li&gt;运行时出现了错误
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   

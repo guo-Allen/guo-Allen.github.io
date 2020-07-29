@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-18T03:41:26.888Z</updated>
+  <updated>2020-07-29T16:22:02.551Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,83 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>TypeScript中的接口</title>
+    <link href="http://yoursite.com/2020/01/04/TypeScript%E4%B8%AD%E7%9A%84%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2020/01/04/TypeScript中的接口/</id>
+    <published>2020-01-03T16:00:00.000Z</published>
+    <updated>2020-07-29T16:22:02.551Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习typeScript中的<ul>
+<li>属性类接口</li>
+<li>函数类型接口</li>
+<li>可索引接口</li>
+<li>类类型接口</li>
+<li>接口扩展</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="接口的作用"><a href="#接口的作用" class="headerlink" title="接口的作用"></a>接口的作用</h4><blockquote>
+<p>在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范，在程序设计里面，接口起到一种限制和规范的作用。接口定义了某一批类所需要遵守的规范，接口不关心这些类的内部状态数据，也不关心这些类里方法的实现细节，它只规定这批类里必须提供某些方法，提供这些方法的类就可以满足实际需要。 typescrip中的接口类似于java，同时还增加了更灵活的接口类型，包括属性、函数、可索引和类等。</p>
+</blockquote>
+<h4 id="属性接口"><a href="#属性接口" class="headerlink" title="属性接口"></a>属性接口</h4><p>1、先来个例子  对json的约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//ts中自定义方法传入参数,对json进行约束</div><div class="line">function printLabel(labelInfo:&#123;label:string&#125;):void &#123;</div><div class="line">    console.log(&apos;printLabel&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">printLabel(&apos;hahah&apos;); //错误写法</div><div class="line">printLabel(&#123;name:&apos;张三&apos;&#125;);  //错误的写法</div><div class="line">printLabel(&#123;label:&apos;张三&apos;&#125;);  //正确的写法,传入的参数必须有label</div></pre></td></tr></table></figure>
+<blockquote>
+<p>如果对批量方法传入参数进行约束呢？  就用接口了</p>
+</blockquote>
+<p>2、接口：行为和动作的规范，对批量方法进行约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">//就是传入对象的约束    属性接口</div><div class="line">interface FullName&#123;</div><div class="line"></div><div class="line">     firstName:string;   //注意;结束</div><div class="line">     secondName:string;</div><div class="line"></div><div class="line"> &#125;</div><div class="line"></div><div class="line"> function printName(name:FullName)&#123;</div><div class="line"></div><div class="line">    // 必须传入对象  firstName  secondName</div><div class="line">     console.log(name.firstName+&apos;--&apos;+name.secondName);</div><div class="line">&#125;</div><div class="line"> printName(&apos;1213&apos;);  //错误</div><div class="line"></div><div class="line">var obj=&#123;   /*传入的参数必须包含 firstName  secondName*/</div><div class="line">     age:20,</div><div class="line">    firstName:&apos;张&apos;,</div><div class="line">    secondName:&apos;三&apos;</div><div class="line">&#125;;</div><div class="line">printName(obj)</div></pre></td></tr></table></figure>
+<p>3、接口 ：可选属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">interface FullName&#123;</div><div class="line">     firstName:string;</div><div class="line">     secondName?:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">function getName(name:FullName)&#123;</div><div class="line"></div><div class="line">     console.log(name)</div><div class="line">&#125;  </div><div class="line">getName(&#123;               </div><div class="line">     firstName:&apos;firstName&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>4、下面来个例子，使用接口实现ajax的封装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">interface Config&#123;</div><div class="line">    type:string;</div><div class="line">    url:string;</div><div class="line">    data?:string;</div><div class="line">    dataType:string;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原生js封装的ajax </div><div class="line">function ajax(config:Config)&#123;</div><div class="line"></div><div class="line">   var xhr=new XMLHttpRequest();</div><div class="line"></div><div class="line">   xhr.open(config.type,config.url,true);</div><div class="line"></div><div class="line">   xhr.send(config.data);</div><div class="line"></div><div class="line">   xhr.onreadystatechange=function()&#123;</div><div class="line"></div><div class="line">        if(xhr.readyState==4 &amp;&amp; xhr.status==200)&#123;</div><div class="line">            console.log(&apos;chengong&apos;);</div><div class="line"></div><div class="line"></div><div class="line">            if(config.dataType==&apos;json&apos;)&#123;</div><div class="line"></div><div class="line">                console.log(JSON.parse(xhr.responseText));</div><div class="line">            &#125;else&#123;</div><div class="line">                console.log(xhr.responseText)</div><div class="line"></div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line">   &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//调用</div><div class="line">ajax(&#123;</div><div class="line">    type:&apos;get&apos;,</div><div class="line">    data:&apos;name=zhangsan&apos;,</div><div class="line">    url:&apos;http://a.itying.com/api/productlist&apos;, //api</div><div class="line">    dataType:&apos;json&apos;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h4 id="函数类型接口"><a href="#函数类型接口" class="headerlink" title="函数类型接口"></a>函数类型接口</h4><blockquote>
+<p>对方法传入的参数 以及返回值进行约束    批量约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 模拟加密的函数类型接口</div><div class="line"></div><div class="line">interface encrypt&#123;</div><div class="line">    (key:string,value:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var md5:encrypt=function(key:string,value:string):string&#123;</div><div class="line">        //模拟操作</div><div class="line">        return key+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(md5(&apos;name&apos;,&apos;zhangsan&apos;));</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">var sha1:encrypt=function(key:string,value:string):string&#123;</div><div class="line"></div><div class="line">    //模拟操作</div><div class="line">    return key+&apos;----&apos;+value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">console.log(sha1(&apos;name&apos;,&apos;lisi&apos;));</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="可索引接口：数组、对象的约束-（不常用）"><a href="#可索引接口：数组、对象的约束-（不常用）" class="headerlink" title="可索引接口：数组、对象的约束  （不常用）"></a>可索引接口：数组、对象的约束  （不常用）</h4><p>1、ts定义数组的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var arr:number[]=[2342,235325]</div><div class="line">var arr1:Array&lt;string&gt;=[&apos;111&apos;,&apos;222&apos;]</div></pre></td></tr></table></figure></p>
+<p>2、可索引接口 对数组的约束<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">interface UserArr&#123;</div><div class="line">     [index:number]:string</div><div class="line">&#125;</div><div class="line"></div><div class="line"> var arr:UserArr=[&apos;aaa&apos;,&apos;bbb&apos;];</div><div class="line"> console.log(arr[0]);</div><div class="line"> var arr:UserArr=[123,&apos;bbb&apos;];  /*错误*/</div><div class="line"> console.log(arr[0]);</div></pre></td></tr></table></figure></p>
+<p>3、可索引接口 对对象的约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">interface UserObj&#123;</div><div class="line">     [index:string]:string</div><div class="line">&#125;</div><div class="line">var arr:UserObj=&#123;name:&apos;张三&apos;&#125;;</div></pre></td></tr></table></figure>
+<h4 id="类类型接口"><a href="#类类型接口" class="headerlink" title="类类型接口"></a>类类型接口</h4><blockquote>
+<p>对类的约束  和   抽象类抽象有点相似    </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    name:string;</div><div class="line">    eat(str:string):void;</div><div class="line">&#125;</div><div class="line">class Dog implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        console.log(this.name+&apos;吃粮食&apos;)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var d=new Dog(&apos;小黑&apos;);</div><div class="line">d.eat();</div><div class="line"></div><div class="line">class Cat implements Animal&#123;</div><div class="line">    name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    eat(food:string)&#123;</div><div class="line">        console.log(this.name+&apos;吃&apos;+food);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">var c=new Cat(&apos;小花&apos;);</div><div class="line">c.eat(&apos;老鼠&apos;);</div></pre></td></tr></table></figure>
+<h4 id="接口扩展"><a href="#接口扩展" class="headerlink" title="接口扩展"></a>接口扩展</h4><blockquote>
+<p>接口可以继承接口   </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"> interface Animal&#123;</div><div class="line">     eat():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> interface Person extends Animal&#123;</div><div class="line">     work():void;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> class Web implements Person&#123;</div><div class="line">     public name:string;</div><div class="line">     constructor(name:string)&#123;</div><div class="line">         this.name=name;</div><div class="line">     &#125;</div><div class="line">    eat()&#123;</div><div class="line">         console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">     &#125;</div><div class="line">     work()&#123;</div><div class="line"></div><div class="line">      console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小李&apos;);</div><div class="line">w.work();//小李写代码</div><div class="line">w.eat();//小李喜欢吃馒头</div></pre></td></tr></table></figure>
+<p>再来一个复杂点的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">interface Animal&#123;</div><div class="line">    eat():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line">interface Person extends Animal&#123;</div><div class="line">    work():void;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Programmer&#123;</div><div class="line">    public name:string;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">        this.name=name;</div><div class="line">    &#125;</div><div class="line">    coding(code:string)&#123;</div><div class="line">        console.log(this.name+code)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">class Web extends Programmer implements Person&#123;</div><div class="line">    constructor(name:string)&#123;</div><div class="line">       super(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;//Web类必须实现eat方法</div><div class="line">        console.log(this.name+&apos;喜欢吃馒头&apos;)</div><div class="line">    &#125;</div><div class="line">    work()&#123;//Web类必须实现work方法</div><div class="line">        console.log(this.name+&apos;写代码&apos;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var w=new Web(&apos;小郭&apos;);</div><div class="line">w.eat();//小郭喜欢吃馒头</div><div class="line">w.coding(&apos;写ts代码&apos;);//小郭写ts代码</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习typeScript中的&lt;ul&gt;
+&lt;li&gt;属性类接口&lt;/li&gt;
+&lt;li&gt;函数类型接口&lt;/li&gt;
+&lt;li&gt;可索引接口&lt;/li&gt;
+&lt;li&gt;类类型接口&lt;/li&gt;
+&lt;li&gt;接口扩展&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
     <title>正则表达式</title>
-    <link href="http://yoursite.com/2020/07/18/regExp/"/>
-    <id>http://yoursite.com/2020/07/18/regExp/</id>
-    <published>2020-07-17T16:00:00.000Z</published>
-    <updated>2020-07-18T03:41:26.888Z</updated>
+    <link href="http://yoursite.com/2019/11/11/regExp/"/>
+    <id>http://yoursite.com/2019/11/11/regExp/</id>
+    <published>2019-11-10T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:15.624Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>正则表达式，又称规则表达式。（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式通常被用来检索、替换那些符合某个模式(规则)的文本。</p>
@@ -84,7 +156,7 @@
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> reg=<span class="regexp">/^.$/</span>;</div><div class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"."</span>));<span class="comment">//false</span></div></pre></td></tr></table></figure>
 <blockquote>
-<p>. 匹配除换行符之外的任何字符,要验证 <strong>==.==</strong> ，必须加反斜杠转义，或者加中括号。</p>
+<p>. 匹配除换行符之外的任何字符,要验证 <strong>.</strong> ，必须加反斜杠转义，或者加中括号。</p>
 </blockquote>
 <h4 id="常见面试相关"><a href="#常见面试相关" class="headerlink" title="常见面试相关"></a>常见面试相关</h4><blockquote>
 <p>正则去空格<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建一个带空格的字符串</span></div><div class="line"><span class="keyword">let</span> str = <span class="string">'  abcde fgh ijk '</span>;</div><div class="line"><span class="comment">// 匹配开头为空格的多个字符</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"  去掉左空格："</span> + str.replace(<span class="regexp">/^\s*/g</span>, <span class="string">''</span>));</div><div class="line"><span class="comment">// 匹配结尾为空格的多个字符</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"  去掉右空格："</span> + str.replace(<span class="regexp">/\s*$/g</span>, <span class="string">''</span>));</div><div class="line"><span class="comment">// 匹配开头或结尾为空格的多个字符，即左右空格</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"去掉左右空格："</span> + str.replace((<span class="regexp">/^\s*/g</span>|<span class="regexp">/\s*$/g</span>), <span class="string">''</span>));</div><div class="line"><span class="comment">// 不设定位置，匹配全部</span></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"去掉所有空格："</span> + str.replace(<span class="regexp">/\s*/g</span>, <span class="string">''</span>));</div></pre></td></tr></table></figure></p>
@@ -128,6 +200,477 @@
     
     
       <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Redux（上）</title>
+    <link href="http://yoursite.com/2019/06/03/redux(%E4%B8%8A)/"/>
+    <id>http://yoursite.com/2019/06/03/redux(上)/</id>
+    <published>2019-06-02T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:18.765Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习Redux中<ul>
+<li>redux概述</li>
+<li>Rudex三大核心 </li>
+<li>Redux组成</li>
+<li>React-redux<a id="more"></a>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="redux概述"><a href="#redux概述" class="headerlink" title="redux概述"></a>redux概述</h4><ul>
+<li>随着JavaScript单页面开发日趋复杂，JavaScript需要处理管理更多的state,这些state可能包括服务器响应、缓存数据、本地生成未持久化到服务器的数据，也包括UI状态等。</li>
+<li>管理不断变化的state非常麻烦，如果一个model的变化会引起另一个model变化，那么当view变化是，就可能引起对应model以及另一个model的变化，一次可能会引起另一个view的变化。所以就会产生混乱。</li>
+<li>而Redux就是为了去解决这个问题。<blockquote>
+<p>总结：redux是一个JavaScript容器，用于进行全局的状态管理。</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="Rudex三大核心"><a href="#Rudex三大核心" class="headerlink" title="Rudex三大核心"></a>Rudex三大核心</h4><ol>
+<li><p>单一数据源<br><img src="http://ww1.sinaimg.cn/large/e0823b04ly1gh481bk9moj20lv09k3za.jpg" alt="微信图片_20200726113822.png"></p>
+</li>
+<li><p>State是只读的</p>
+<p> <strong>唯一改变state的方法就是出发action，action是一个用于描述已发生事件的普通对象</strong></p>
+<p> 这样确保了视图和网络请求都不能直接去修改state，相反，它们只能表达想要修改的意图，因为所有的修改都被集中化处理，并且严格按照一个接一个顺序执行</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">store.dispatch(&#123;</div><div class="line">    <span class="attr">type</span>:<span class="string">"COMPLETE_TODO"</span>,</div><div class="line">    <span class="attr">index</span>:<span class="number">1</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用纯函数来执行修改</p>
+<p> <strong>为了描述action如何改变state tree，你需要去编写reducers</strong></p>
+<p> Reducers只是一个纯函数，它接收先前的state和action，并且返回新的state。可以复用、可以控制顺序、传入附加参数。</p>
+</li>
+</ol>
+<h4 id="Redux组成"><a href="#Redux组成" class="headerlink" title="Redux组成"></a>Redux组成</h4><ol>
+<li><p>state 状态</p>
+<p> <strong>在React中改变状态，大致可分为以下三类</strong></p>
+<ul>
+<li>DomainDate：服务器端的数据（用户信息、商品列表等）</li>
+<li>UI state：当前组件的状态（弹框的显示隐藏、受控组件等等）</li>
+<li>APP state：APP级别的状态（loading等）</li>
+</ul>
+</li>
+<li><p>action 事件</p>
+<p> <strong>action是把数据从应用传到store的载体，他是store数据的唯一来源，一般，我们通过 store.dispatch() 将action传递给store</strong><br> <img src="http://ww1.sinaimg.cn/large/e0823b04ly1gh48v64ymlj20ot081q47.jpg" alt="b0fbdc0c4d8f5d180edf5fa80ecf7b0.png"></p>
+<ul>
+<li>action本质就是一个JavaScript普通对象</li>
+<li>action对象内部必须要有一个type属性来表示要执行的动作</li>
+<li>多数情况下，这个type会被定义成字符串常量</li>
+<li>除了type字段外，action的结构可随意定义<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">type</span>:<span class="string">"todo_somthing"</span>,</div><div class="line">    <span class="attr">info</span>:&#123;...&#125;,</div><div class="line">    <span class="attr">isLoading</span>:<span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>注：action只是描述有事情要发生，并没有描述如何更新state</p>
+</blockquote>
+<ol>
+<li><p>Reducer</p>
+<p> <strong>reducer本质是一个函数，他是响应发送过来的actions，然后经过处理，把state发送给store</strong></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> initState=&#123;...&#125;;</div><div class="line">rootRuducer=<span class="function">(<span class="params">state=initState,action</span>)=&gt;</span>&#123;</div><div class="line">    ...</div><div class="line">    return &#123;...&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>注：在reducer函数中，需要return 返回值，这样Store才能接受到数据；函数会接受两个参数，第一个参数是初始化state，第二个参数是action。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1gh495lb9z8j210f08575u.jpg" alt="084e53fff46fe38c91bf06066521a1d.png"></p>
+<ol>
+<li><p>Store</p>
+<p> <strong>Store就是把action与reducer联系到一起的对象</strong></p>
+<blockquote>
+<p>主要职责</p>
+</blockquote>
+<ul>
+<li>维持应用的state</li>
+<li>提供getState() 方法获取state</li>
+<li>提供dispatch()方法发送action</li>
+<li>通过subscribe()来注册监听</li>
+<li>通过subscribe()返回值来注销监听</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; createStore &#125; form <span class="string">"redux"</span>;</div><div class="line"><span class="keyword">const</span> store = createStore(传递的reducer);</div></pre></td></tr></table></figure>
+<h4 id="React-redux"><a href="#React-redux" class="headerlink" title="React-redux"></a>React-redux</h4><ol>
+<li><p>介绍</p>
+<p> <strong>react-redux就是Rudux官方出的 用于配合React的绑定库</strong></p>
+<ul>
+<li>react-redux能够使你的React自荐从Redux store中很方便的读取数据，并且向store中分发actions以此来更新数据</li>
+</ul>
+</li>
+<li><p>react-redux中的两个重要成员</p>
+<p> <strong>Provider</strong></p>
+<ul>
+<li>Provider包裹在根组件的最外层，使所有子组件都能拿到state</li>
+<li>Provider接受store作为props，然后通过context往下传递，这样react中任何组件都可以通过context获取到store</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/e0823b04ly1gh4agkpfdpj20r80bjgnb.jpg" alt="12aa6ec10a169ba940275637234ca76.png"></p>
+</li>
+</ol>
+<p><strong>connect</strong></p>
+<ul>
+<li>Provider内部组件如果想要使用到state中的数据，就必须要connect进行一层包裹封装，换一句话来说就是必须要被connect进行加强。</li>
+<li>connect就是方便我们组件能够获取到store中的state。   </li>
+<li><p>导入connect方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">"react-redux"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>调用connect方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">connect(...)(Component)</div></pre></td></tr></table></figure>
+</li>
+<li><p>connnect第一个括号参数说明</p>
+<ul>
+<li><p>mapStateToProps(state,ownProps)</p>
+<blockquote>
+<p>这个函数允许我们将store中的数据作为props绑定到组件上（state：redux中的store；ownProps:自己的props）</p>
+</blockquote>
+</li>
+<li><p>mapDispatchToProps(dispatch,owmProps)</p>
+<blockquote>
+<p>将action作为props绑定到我们自己的函数中（dispatch：就是store.dispatch();ownProps:自己的props）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习Redux中&lt;ul&gt;
+&lt;li&gt;redux概述&lt;/li&gt;
+&lt;li&gt;Rudex三大核心 &lt;/li&gt;
+&lt;li&gt;Redux组成&lt;/li&gt;
+&lt;li&gt;React-redux
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript中的泛型(上)</title>
+    <link href="http://yoursite.com/2019/05/24/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8B)/"/>
+    <id>http://yoursite.com/2019/05/24/TypeScript中的泛型(下)/</id>
+    <published>2019-05-23T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:22.198Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>本节来一个泛型和接口的综合案例</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>功能：定义一个操作数据库的库  支持 Mysql Mssql  MongoDb</p>
+</blockquote>
+<ul>
+<li><p>要求1：Mysql MsSql  MongoDb功能一样  都有 add  update  delete  get方法    </p>
+</li>
+<li><p>注意：约束统一的规范、以及代码重用</p>
+</li>
+<li><p>解决方案：需要约束规范所以要定义接口 ，需要代码重用所以用到泛型</p>
+</li>
+</ul>
+<blockquote>
+<p>回忆一下之前的内容</p>
+</blockquote>
+<ul>
+<li><p>接口：在面向对象的编程中，接口是一种规范的定义，它定义了行为和动作的规范</p>
+</li>
+<li><p>泛型 通俗理解：泛型就是解决 类 接口 方法的复用性、</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">interface DBI&lt;T&gt;&#123;</div><div class="line">    add(info:T):boolean;</div><div class="line">    update(info:T,id:number):boolean;</div><div class="line">    delete(id:number):boolean;</div><div class="line">    get(id:number):any[];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//定义一个操作mysql数据库的类       注意：要实现泛型接口 这个类也应该是一个泛型类</div><div class="line"></div><div class="line">class MysqlDb&lt;T&gt; implements DBI&lt;T&gt;&#123;</div><div class="line"></div><div class="line">    constructor()&#123;</div><div class="line"></div><div class="line">        console.log(&apos;数据库建立连接&apos;);</div><div class="line">    &#125;</div><div class="line">    add(info: T): boolean &#123;</div><div class="line"></div><div class="line">        console.log(info);</div><div class="line"></div><div class="line">        return true;</div><div class="line">       </div><div class="line">    &#125;    </div><div class="line">    </div><div class="line">    update(info: T, id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    delete(id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    get(id: number): any[] &#123;</div><div class="line">        var list=[</div><div class="line"></div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line"></div><div class="line">        return list;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">//定义一个操作mssql数据库的类  </div><div class="line"></div><div class="line"></div><div class="line">class MsSqlDb&lt;T&gt; implements DBI&lt;T&gt;&#123;</div><div class="line"></div><div class="line">    constructor()&#123;</div><div class="line"></div><div class="line">        console.log(&apos;数据库建立连接&apos;);</div><div class="line">    &#125;</div><div class="line">    add(info: T): boolean &#123;</div><div class="line">        console.log(info);</div><div class="line">        return true;</div><div class="line">    &#125;    </div><div class="line">    update(info: T, id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    delete(id: number): boolean &#123;</div><div class="line">        throw new Error(&quot;Method not implemented.&quot;);</div><div class="line">    &#125;</div><div class="line">    get(id: number): any[] &#123;</div><div class="line">       </div><div class="line"></div><div class="line">        var list=[</div><div class="line"></div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                title:&apos;xxxx&apos;,</div><div class="line">                desc:&apos;xxxxxxxxxx&apos;</div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line"></div><div class="line">        return list;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>操作用户表   定义一个User类和数据表做映射<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">class User&#123;</div><div class="line">    username:string | undefined;</div><div class="line">    password:string | undefined;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var u=new User();</div><div class="line">u.username=&apos;张三111&apos;;</div><div class="line">u.password=&apos;123456&apos;;</div><div class="line"></div><div class="line"></div><div class="line">var oMysql=new MysqlDb&lt;User&gt;(); //类作为参数来约束数据传入的类型 </div><div class="line">oMysql.add(u);</div><div class="line"></div><div class="line">var oMssql=new MsSqlDb&lt;User&gt;();</div><div class="line">oMssql.add(u);</div><div class="line"></div><div class="line"></div><div class="line">//获取User表 ID=4的数据</div><div class="line">var data=oMssql.get(4);</div><div class="line">console.log(data);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本节来一个泛型和接口的综合案例&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript中的泛型(上)</title>
+    <link href="http://yoursite.com/2019/05/23/TypeScript%E4%B8%AD%E7%9A%84%E6%B3%9B%E5%9E%8B(%E4%B8%8A)/"/>
+    <id>http://yoursite.com/2019/05/23/TypeScript中的泛型(上)/</id>
+    <published>2019-05-22T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:21.340Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习typeScript中的<ul>
+<li>泛型</li>
+<li>泛型变量</li>
+<li>泛型类</li>
+<li>泛型接口</li>
+<li>泛型类接口</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="泛型介绍"><a href="#泛型介绍" class="headerlink" title="泛型介绍"></a>泛型介绍</h4><p> 软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。</p>
+<p> 在像C#和Java这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。</p>
+<blockquote>
+<p>通俗理解：泛型就是解决 类 接口 方法的复用性、以及对不特定数据类型的支持(类型校验)</p>
+</blockquote>
+<p>我们先来个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//只能返回string类型的数据</div><div class="line"></div><div class="line">    function getData(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">//同时返回 string类型 和number类型  （代码冗余）</div><div class="line">    function getData1(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">    function getData2(value:number):number&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">//同时返回 string类型 和number类型       any可以解决这个问题</div><div class="line"></div><div class="line">    function getData(value:any):any&#123;</div><div class="line">        return &apos;哈哈哈&apos;;</div><div class="line">    &#125;</div><div class="line">    getData(123);</div><div class="line">    getData(&apos;str&apos;);</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>但是any放弃了类型检查,传入什么 返回什么。比如:传入number 类型必须返回number类型  传入 string类型必须返回string类型</p>
+<p>所以泛型来了，可以支持不特定的数据类型   要求：传入的参数和返回的参数一致</p>
+</blockquote>
+<ul>
+<li>T表示泛型，具体什么类型是调用这个方法的时候决定的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function getData&lt;T&gt;(value:T):T&#123;</div><div class="line">    return value;</div><div class="line">&#125;</div><div class="line">getData&lt;number&gt;(123);</div><div class="line">getData&lt;string&gt;(&apos;1214231&apos;);</div><div class="line">getData&lt;number&gt;(&apos;2112&apos;)/*错误的写法*/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>比如有个最小堆算法，需要同时支持返回数字和字符串 a  -  z两种类型。  通过类的泛型来实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">class MinClas&lt;T&gt;&#123;</div><div class="line">    public list:T[]=[];</div><div class="line">    add(value:T):void&#123;</div><div class="line">        this.list.push(value);</div><div class="line">    &#125;</div><div class="line">    min():T&#123;        </div><div class="line">        var minNum=this.list[0];</div><div class="line">        for(var i=0;i&lt;this.list.length;i++)&#123;</div><div class="line">            if(minNum&gt;this.list[i])&#123;</div><div class="line">                minNum=this.list[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return minNum;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var m1=new MinClas&lt;number&gt;();   /*实例化类 并且制定了类的T代表的类型是number*/</div><div class="line">m1.add(11);</div><div class="line">m1.add(3);</div><div class="line">m1.add(2);</div><div class="line">alert(m1.min())</div><div class="line"></div><div class="line">var m2=new MinClas&lt;string&gt;();   /*实例化类 并且制定了类的T代表的类型是string*/</div><div class="line">m2.add(&apos;c&apos;);</div><div class="line">m2.add(&apos;a&apos;);</div><div class="line">m2.add(&apos;v&apos;);</div><div class="line">alert(m2.min())</div></pre></td></tr></table></figure>
+<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><p>1.我们先来回忆一下函数类型接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">interface ConfigFn&#123;</div><div class="line"></div><div class="line">    (value1:string,value2:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var setData:ConfigFn=function(value1:string,value2:string):string&#123;</div><div class="line"></div><div class="line"></div><div class="line">    return value1+value2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">setData(&apos;name&apos;,&apos;张三&apos;);</div></pre></td></tr></table></figure>
+<p>2、泛型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">        interface ConfigFn&lt;T&gt;&#123;</div><div class="line">            (value:T):T;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        function getData&lt;T&gt;(value:T):T&#123;</div><div class="line"></div><div class="line">            return value;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line">        var myGetData:ConfigFn&lt;string&gt;=getData;     </div><div class="line"></div><div class="line"></div><div class="line">        myGetData(&apos;20&apos;);  /*正确*/</div><div class="line">        myGetData(20)  //错误</div><div class="line"></div><div class="line">```      </div><div class="line"></div><div class="line">#### 类的泛型-把类作为参数类型的泛型类</div><div class="line"></div><div class="line">&gt; 先来个例子 </div><div class="line">* 定义一个User的类这个类的作用就是映射数据库字段  </div><div class="line">* 然后定义一个 MysqlDb的类这个类用于操作数据库   </div><div class="line">* 然后把User类作为参数传入到MysqlDb中</div></pre></td></tr></table></figure></p>
+<p>//把类作为参数来约束数据传入的类型<br> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }</p>
+<p> class MysqlDb{<br>     add(user:User):boolean{<br>         console.log(user);<br>         return true;<br>     }<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb();<br> Db.add(u);</p>
+<p> class ArticleCate{<br>     title:string | undefined;<br>     desc:string | undefined;<br>     status:number | undefined<br> }</p>
+<p> class MysqlDb{<br>     add(info:ArticleCate):boolean{<br>         console.log(info);<br>         console.log(info.title);<br>         return true;<br> }<br>}<br> var a=new ArticleCate();<br> a.title=”国内”;<br> a.desc=”国内新闻”;<br> a.status=1;<br> var Db=new MysqlDb();<br> Db.add(a);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 问题：代码重复</div><div class="line">&gt; 接下来我们用泛型实现上面的参数</div><div class="line"></div><div class="line">* 把类作为参数类型的泛型类</div></pre></td></tr></table></figure></p>
+<p>//定义操作数据库的泛型类<br>class MysqlDb<t>{<br>    add(info:T):boolean{<br>        console.log(info);<br>        return true;<br>    }<br>    updated(info:T,id:number):boolean {<br>        console.log(info);<br>        console.log(id);<br>        return true;<br>    }<br>}</t></p>
+<p>//想给User表增加数据</p>
+<p>// 1、定义一个User类 和数据库进行映射</p>
+<p> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb<user>();<br> Db.add(u);</user></p>
+<p>//2、相关ArticleCate增加数据  定义一个ArticleCate类 和数据库进行映射<br>class ArticleCate{<br>    title:string | undefined;<br>    desc:string | undefined;<br>    status:number | undefined;<br>    constructor(params:{<br>        title:string | undefined,<br>        desc:string | undefined,<br>        status?:number | undefined<br>    }){</p>
+<pre><code>    this.title=params.title;
+    this.desc=params.desc;
+    this.status=params.status;
+}
+</code></pre><p>}<br>//增加操作<br> var a=new ArticleCate({<br>     title:’分类’,<br>     desc:’1111’,<br>     status:1<br> });</p>
+<p> //类当做参数的泛型类<br> var Db=new MysqlDb<articlecate>();<br> Db.add(a);</articlecate></p>
+<p>//修改数据<br>var a=new ArticleCate({<br>        title:’分类111’,<br>        desc:’2222’<br>});<br>a.status=0;<br>var Db=new MysqlDb<articlecate>();<br>Db.updated(a,12);<br>```</articlecate></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习typeScript中的&lt;ul&gt;
+&lt;li&gt;泛型&lt;/li&gt;
+&lt;li&gt;泛型变量&lt;/li&gt;
+&lt;li&gt;泛型类&lt;/li&gt;
+&lt;li&gt;泛型接口&lt;/li&gt;
+&lt;li&gt;泛型类接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript的类（下）</title>
+    <link href="http://yoursite.com/2019/05/22/TypeScript%E4%B8%AD%E7%9A%84%E7%B1%BB%EF%BC%88%E4%B8%8B%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/05/22/TypeScript中的类（下）/</id>
+    <published>2019-05-21T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:20.523Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习Typescript中<ul>
+<li>类中的静态属性 静态方法 </li>
+<li>抽象类 </li>
+<li>多态</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h4 id="静态属性-静态方法"><a href="#静态属性-静态方法" class="headerlink" title="静态属性 静态方法"></a>静态属性 静态方法</h4><blockquote>
+<p>先回忆下es5中的静态属性及方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.run1=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">//实例方法</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Person.name=<span class="string">'哈哈哈'</span>;</div><div class="line">Person.run2=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">//静态方法</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person();</div><div class="line">Person.run2(); 静态方法的调用</div></pre></td></tr></table></figure></p>
+<p>静态方法存在的意义<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//举个例子，jQuery我们都用过吧，比如下面这两个api</span></div><div class="line">        $(<span class="string">'#box'</span>).css(<span class="string">'color'</span>,<span class="string">'red'</span>)</div><div class="line">        $.get(<span class="string">'url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">        &#125;)</div><div class="line"> </div><div class="line"> <span class="comment">//我们简单模拟一下上面的api       </span></div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params">element</span>)</span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Base(element)</div><div class="line">        &#125;</div><div class="line">        $.get=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">function</span> <span class="title">Base</span>(<span class="params">element</span>)</span>&#123;</div><div class="line">            <span class="keyword">this</span>.element=获取dom节点;</div><div class="line">            <span class="keyword">this</span>.css=<span class="function"><span class="keyword">function</span>(<span class="params">arr,value</span>)</span>&#123;</div><div class="line">                <span class="keyword">this</span>.element.style.arr=value;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"><span class="comment">//总结：$.get()就是静态方法，$('#box').css()就是实例方法。</span></div></pre></td></tr></table></figure></p>
+<p>TypeScript中的静态属性及方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Per</span></span>&#123;</div><div class="line">     public name:string;</div><div class="line">     public age:number=<span class="number">20</span>;</div><div class="line">     <span class="comment">//静态属性</span></div><div class="line">     <span class="keyword">static</span> sex=<span class="string">"男"</span>;</div><div class="line">     <span class="keyword">constructor</span>(name:string) &#123;</div><div class="line">             <span class="keyword">this</span>.name=name;</div><div class="line">     &#125;</div><div class="line">     run()&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">         alert(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span>)</div><div class="line">     &#125;</div><div class="line">     work()&#123;</div><div class="line">         alert(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在工作`</span>)</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">static</span> print()&#123;  <span class="comment">/*静态方法  里面没法直接调用类里面的属性*/</span></div><div class="line">         alert(<span class="string">'print方法'</span>+Per.sex);</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Per(<span class="string">'张三'</span>);</div><div class="line"> p.run();</div><div class="line"> Per.print();</div><div class="line"> alert(Per.sex);</div></pre></td></tr></table></figure>
+<h4 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h4><ul>
+<li>父类定义一个方法不去实现，让继承它的子类去实现  每一个子类有不同的表现 </li>
+<li>多态属于继承</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</div><div class="line">    name:string;</div><div class="line">    <span class="keyword">constructor</span>(name:string) &#123;</div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line">    eat()&#123;   <span class="comment">//具体吃什么  不知道   ，  具体吃什么?继承它的子类去实现 ，每一个子类的表现不一样</span></div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'吃的方法'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">        <span class="keyword">super</span>(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="string">'吃粮食'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">        <span class="keyword">super</span>(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name+<span class="string">'吃老鼠'</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h4><ul>
+<li>它是提供其他类继承的基类，不能直接被实例化。</li>
+<li>用abstract关键字定义抽象类和抽象方法，抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。</li>
+<li>abstract抽象方法只能放在抽象类里面</li>
+<li>抽象类和抽象方法用来定义标准 。   标准：Animal 这个类要求它的子类必须包含eat方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//标准:</span></div><div class="line"></div><div class="line">abstract <span class="class"><span class="keyword">class</span> <span class="title">Animal</span></span>&#123;</div><div class="line">    public name:string;</div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line">    abstract eat():any;  <span class="comment">//抽象方法不包含具体实现并且必须在派生类中实现。</span></div><div class="line">    run()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'其他方法可以不实现'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// var a=new Animal() /*错误的写法*/</span></div><div class="line"> </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</div><div class="line">    <span class="comment">//抽象类的子类必须实现抽象类里面的抽象方法</span></div><div class="line">    <span class="keyword">constructor</span>(name:any)&#123;</div><div class="line">        <span class="keyword">super</span>(name)</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">'吃粮食'</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> d=<span class="keyword">new</span> Dog(<span class="string">'小花花'</span>);</div><div class="line">d.eat();</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span></span>&#123;</div><div class="line">    <span class="comment">//抽象类的子类必须实现抽象类里面的抽象方法</span></div><div class="line">    <span class="keyword">constructor</span>(name:any)&#123;</div><div class="line">        <span class="keyword">super</span>(name)</div><div class="line">    &#125;</div><div class="line">    run()&#123;</div><div class="line">    &#125;</div><div class="line">    eat()&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name+<span class="string">'吃老鼠'</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> c=<span class="keyword">new</span> Cat(<span class="string">'小花猫'</span>);</div><div class="line">c.eat();</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习Typescript中&lt;ul&gt;
+&lt;li&gt;类中的静态属性 静态方法 &lt;/li&gt;
+&lt;li&gt;抽象类 &lt;/li&gt;
+&lt;li&gt;多态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/categories/TypeScript/"/>
+    
+    
+      <category term="TS" scheme="http://yoursite.com/tags/TS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript的类（上）</title>
+    <link href="http://yoursite.com/2019/05/21/TypeScript%E4%B8%AD%E7%9A%84%E7%B1%BB%EF%BC%88%E4%B8%8A%EF%BC%89/"/>
+    <id>http://yoursite.com/2019/05/21/TypeScript中的类（上）/</id>
+    <published>2019-05-20T16:00:00.000Z</published>
+    <updated>2020-07-29T16:30:19.732Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习TS中的类。</li>
+<li>先回忆下es5中的类及其继承。</li>
+<li>然后练习TS中的类和继承及其修饰符。</li>
+</ul>
+<a id="more"></a>
+<h4 id="es5中的类"><a href="#es5中的类" class="headerlink" title="es5中的类"></a>es5中的类</h4><blockquote>
+<p>最简单的类<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name=<span class="string">'张三'</span>;</div><div class="line">    <span class="keyword">this</span>.age=<span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person();</div><div class="line">alert(p.name);</div></pre></td></tr></table></figure></p>
+<p>构造函数和原型链里面增加方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name=<span class="string">'张三'</span>;  <span class="comment">/*属性*/</span></div><div class="line">    <span class="keyword">this</span>.age=<span class="number">20</span>;</div><div class="line">    <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//原型链上面的属性会被多个实例共享   构造函数不会</span></div><div class="line">Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line">Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person();</div><div class="line">alert(p.name);</div><div class="line">p.run();</div><div class="line">p.work();</div></pre></td></tr></table></figure></p>
+<p>类里面的静态方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name=<span class="string">'张三'</span>;  <span class="comment">/*属性*/</span></div><div class="line">    <span class="keyword">this</span>.age=<span class="number">20</span>;</div><div class="line">    <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">        lert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">Person.getInfo=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    alert(<span class="string">'我是静态方法'</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//原型链上面的属性会被多个实例共享   构造函数不会</span></div><div class="line">Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line"></div><div class="line"> &#125;</div><div class="line"> <span class="keyword">var</span> p=<span class="keyword">new</span> Person();    </div><div class="line"> p.work();</div><div class="line"></div><div class="line"><span class="comment">//调用静态方法</span></div><div class="line">Person.getInfo();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>es5里面的继承   对象冒充实现继承</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="keyword">this</span>.name=<span class="string">'张三'</span>;  <span class="comment">/*属性*/</span></div><div class="line">     <span class="keyword">this</span>.age=<span class="number">20</span>;</div><div class="line">     <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">        alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"> &#125;      </div><div class="line"> Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line"> Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line"></div><div class="line"> &#125;</div><div class="line">   </div><div class="line"> <span class="comment">//Web类 继承Person类   原型链+对象冒充的组合继承模式</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Web</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     Person.call(<span class="keyword">this</span>);    <span class="comment">/*对象冒充实现继承*/</span></div><div class="line"> &#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> w=<span class="keyword">new</span> Web();</div><div class="line">w.run();  <span class="comment">//对象冒充可以继承构造函数里面的属性和方法</span></div><div class="line">w.work();  <span class="comment">//对象冒充可以继承构造函数里面的属性和方法   但是没法继承原型链上面的属性和方法</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>es5里面的继承   原型链实现继承</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="keyword">this</span>.name=<span class="string">'张三'</span>;  <span class="comment">/*属性*/</span></div><div class="line">     <span class="keyword">this</span>.age=<span class="number">20</span>;</div><div class="line">     <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">         alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">     &#125;</div><div class="line"></div><div class="line"> &#125;      </div><div class="line"> Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line"> Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line"></div><div class="line"> &#125;</div><div class="line">   </div><div class="line"> <span class="comment">//Web类 继承Person类   原型链+对象冒充的组合继承模式</span></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Web</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     </div><div class="line"> &#125;</div><div class="line"></div><div class="line">Web.prototype=<span class="keyword">new</span> Person();   <span class="comment">//原型链实现继承</span></div><div class="line"><span class="keyword">var</span> w=<span class="keyword">new</span> Web();</div><div class="line"> <span class="comment">//原型链实现继承:可以继承构造函数里面的属性和方法 也可以继承原型链上面的属性和方法</span></div><div class="line">w.run();</div><div class="line">w.work();</div></pre></td></tr></table></figure>
+<blockquote>
+<p>原型链实现继承的 问题？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">         <span class="keyword">this</span>.name=name;  <span class="comment">/*属性*/</span></div><div class="line">         <span class="keyword">this</span>.age=age;</div><div class="line">         <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">             alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">         &#125;</div><div class="line"></div><div class="line"> &#125;      </div><div class="line">Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line">Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line">&#125;</div><div class="line">       </div><div class="line">      </div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Web</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line"> &#125;</div><div class="line"></div><div class="line"> Web.prototype=<span class="keyword">new</span> Person();</div><div class="line"> <span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'赵四'</span>,<span class="number">20</span>);   <span class="comment">//实例化子类的时候没法给父类传参</span></div><div class="line"> w.run();</div></pre></td></tr></table></figure></p>
+<p>原型链+对象冒充的组合继承模式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">          <span class="keyword">this</span>.name=name;  <span class="comment">/*属性*/</span></div><div class="line">          <span class="keyword">this</span>.age=age;</div><div class="line">          <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">              alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">          &#125;</div><div class="line"></div><div class="line">  &#125;      </div><div class="line">  Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line">  Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line"></div><div class="line">&#125;</div><div class="line">    </div><div class="line">   </div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">Web</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line"></div><div class="line">      Person.call(<span class="keyword">this</span>,name,age);   <span class="comment">//对象冒充继承   实例化子类可以给父类传参</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  Web.prototype=<span class="keyword">new</span> Person();</div><div class="line"></div><div class="line">  <span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'赵四'</span>,<span class="number">20</span>);   <span class="comment">//实例化子类的时候没法给父类传参</span></div><div class="line"></div><div class="line">   w.run();</div><div class="line">  w.work();</div></pre></td></tr></table></figure></p>
+<p>原型链+对象冒充继承的另一种方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line">         <span class="keyword">this</span>.name=name;  <span class="comment">/*属性*/</span></div><div class="line">         <span class="keyword">this</span>.age=age;</div><div class="line">         <span class="keyword">this</span>.run=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;  <span class="comment">/*实例方法*/</span></div><div class="line">             alert(<span class="keyword">this</span>.name+<span class="string">'在运动'</span>);</div><div class="line">         &#125;</div><div class="line"></div><div class="line"> &#125;      </div><div class="line"> Person.prototype.sex=<span class="string">"男"</span>;</div><div class="line"> Person.prototype.work=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">         alert(<span class="keyword">this</span>.name+<span class="string">'在工作'</span>);</div><div class="line"></div><div class="line"> &#125;</div><div class="line">    </div><div class="line">   </div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Web</span>(<span class="params">name,age</span>)</span>&#123;</div><div class="line"></div><div class="line">     Person.call(<span class="keyword">this</span>,name,age);   <span class="comment">//对象冒充继承  可以继承构造函数里面的属性和方法、实例化子类可以给父类传参</span></div><div class="line"> &#125;</div><div class="line"> <span class="comment">//重点在这儿</span></div><div class="line"> Web.prototype=Person.prototype;</div><div class="line"></div><div class="line"> <span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'赵四'</span>,<span class="number">20</span>);   <span class="comment">//实例化子类的时候没法给父类传参</span></div><div class="line"></div><div class="line"> w.run();</div><div class="line"> w.work();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="ts中类的定义"><a href="#ts中类的定义" class="headerlink" title="ts中类的定义"></a>ts中类的定义</h4><blockquote>
+<p>ts中定义类：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    name:string;   <span class="comment">//属性  前面省略了public关键词</span></div><div class="line">    <span class="keyword">constructor</span>(n:string)&#123;  <span class="comment">//构造函数   实例化类的时候触发的方法</span></div><div class="line">        <span class="keyword">this</span>.name=n;</div><div class="line">    &#125;</div><div class="line">    run():<span class="keyword">void</span>&#123;</div><div class="line">        alert(<span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'张三'</span>);</div><div class="line">p.run()</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    name:string; </div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;  <span class="comment">//构造函数   实例化类的时候触发的方法</span></div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line">    getName():string&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">    &#125;</div><div class="line">    setName(name:string):<span class="keyword">void</span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'张三'</span>);</div><div class="line">alert(p.getName());</div><div class="line">p.setName(<span class="string">'李四'</span>);</div><div class="line">alert(p.getName());</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ts中实现继承  extends、 super</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">    name:string;</div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line">   run():string&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"> <span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'王五'</span>);</div><div class="line"> alert(p.run())</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Web</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">       <span class="keyword">super</span>(name);  <span class="comment">/*初始化父类的构造函数*/</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'李四'</span>);</div><div class="line">alert(w.run());</div></pre></td></tr></table></figure>
+<blockquote>
+<p>ts中继承的探讨  父类的方法和子类的方法一致</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">     name:string;</div><div class="line"></div><div class="line">     <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">         <span class="keyword">this</span>.name=name;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">     run():string&#123;</div><div class="line"></div><div class="line">         <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line"> <span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'王五'</span>);</div><div class="line"> alert(p.run())</div><div class="line"></div><div class="line"></div><div class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Web</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line">     <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">         <span class="keyword">super</span>(name);  <span class="comment">/*初始化父类的构造函数*/</span></div><div class="line">     &#125;</div><div class="line">     run():string&#123;</div><div class="line">         <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动-子类`</span></div><div class="line">     &#125;</div><div class="line">     work()&#123;</div><div class="line">         alert(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在工作`</span>)</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'李四'</span>);</div><div class="line">alert(w.run());</div><div class="line">w.work();</div><div class="line">alert(w.run());</div><div class="line"></div><div class="line">结论：如果方法一致，先去子类里面找，没有再去父类找。</div></pre></td></tr></table></figure>
+<blockquote>
+<p>类里面的修饰符  typescript里面定义属性的时候给我们提供了 三种修饰符</p>
+</blockquote>
+<ul>
+<li>public :公有          在当前类里面、 子类  、类外面都可以访问（属性如果不加修饰符 默认就是 公有）</li>
+<li>protected：保护类型    在当前类里面、子类里面可以访问 ，在类外部没法访问</li>
+<li>private ：私有         在当前类里面可以访问，子类、类外部都没法访问</li>
+</ul>
+<p>public :公有          在类里面、 子类  、类外面都可以访问<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">       <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">             public name:string;  <span class="comment">/*公有属性*/</span></div><div class="line"></div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                 <span class="keyword">this</span>.name=name;</div><div class="line">             &#125;</div><div class="line"></div><div class="line">             run():string&#123;</div><div class="line"></div><div class="line">                 <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">        <span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'王五'</span>);</div><div class="line">        alert(p.run())</div><div class="line"></div><div class="line"></div><div class="line">         <span class="class"><span class="keyword">class</span> <span class="title">Web</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                 <span class="keyword">super</span>(name);  <span class="comment">/*初始化父类的构造函数*/</span></div><div class="line">             &#125;</div><div class="line">             run():string&#123;</div><div class="line">                 <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动-子类`</span></div><div class="line">             &#125;</div><div class="line">             work()&#123;</div><div class="line">                 alert(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在工作`</span>)</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">        <span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'李四'</span>);</div><div class="line">        w.work();</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//类外部访问公有属性(注：和上面无关)</span></div><div class="line"></div><div class="line">           <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">             public name:string;  <span class="comment">/*公有属性*/</span></div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                 <span class="keyword">this</span>.name=name;</div><div class="line">             &#125;</div><div class="line">             run():string&#123;</div><div class="line">                 <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">var</span>  p=<span class="keyword">new</span> Person(<span class="string">'哈哈哈'</span>);</div><div class="line">         alert(p.name);</div></pre></td></tr></table></figure></p>
+<p>protected：保护类型    在类里面、子类里面可以访问 ，在类外部没法访问</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">       <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">             protected name:string;  <span class="comment">/*公有属性*/</span></div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                <span class="keyword">this</span>.name=name;</div><div class="line">             &#125;</div><div class="line">             run():string&#123;</div><div class="line">                 <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'王五'</span>);</div><div class="line">         alert(p.run())</div><div class="line"></div><div class="line"></div><div class="line">         <span class="class"><span class="keyword">class</span> <span class="title">Web</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line"></div><div class="line">                 <span class="keyword">super</span>(name);  <span class="comment">/*初始化父类的构造函数*/</span></div><div class="line">             &#125;                  </div><div class="line">             work()&#123;</div><div class="line"></div><div class="line">                 alert(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在工作`</span>)</div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line"></div><div class="line">         <span class="keyword">var</span> w=<span class="keyword">new</span> Web(<span class="string">'李四11'</span>);</div><div class="line"></div><div class="line">         w.work();</div><div class="line"></div><div class="line">         alert( w.run());</div><div class="line"></div><div class="line"></div><div class="line">        </div><div class="line"><span class="comment">//类外外部没法访问保护类型的属性</span></div><div class="line">         <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">             protected name:string;  <span class="comment">/*保护类型*/</span></div><div class="line">             <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                <span class="keyword">this</span>.name=name;</div><div class="line">             &#125;</div><div class="line">             run():string&#123;</div><div class="line">                 <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">             &#125;</div><div class="line">         &#125;</div><div class="line">         <span class="keyword">var</span>  p=<span class="keyword">new</span> Person(<span class="string">'哈哈哈'</span>);</div><div class="line">         alert(p.name);</div></pre></td></tr></table></figure>
+<p>private ：私有        在类里面可以访问，子类、类外部都没法访问</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">             <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line">                 private name:string;  <span class="comment">/*私有*/</span></div><div class="line">                 <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                     <span class="keyword">this</span>.name=name;</div><div class="line">                 &#125;</div><div class="line">                 run():string&#123;</div><div class="line">                     <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">                 &#125;</div><div class="line">             &#125;</div><div class="line">             <span class="class"><span class="keyword">class</span> <span class="title">Web</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</div><div class="line">                 <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">                     <span class="keyword">super</span>(name)</div><div class="line">                 &#125;</div><div class="line">                 work()&#123;</div><div class="line">                     <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在工作`</span>)</div><div class="line">                 &#125;</div><div class="line">             &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"></div><div class="line">    private name:string;  <span class="comment">/*私有*/</span></div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(name:string)&#123;</div><div class="line">        <span class="keyword">this</span>.name=name;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    run():string&#123;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>在运动`</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> p=<span class="keyword">new</span> Person(<span class="string">'哈哈哈'</span>);</div><div class="line"></div><div class="line">alert(p.run());</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习TS中的类。&lt;/li&gt;
+&lt;li&gt;先回忆下es5中的类及其继承。&lt;/li&gt;
+&lt;li&gt;然后练习TS中的类和继承及其修饰符。&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/categories/TypeScript/"/>
+    
+    
+      <category term="TS" scheme="http://yoursite.com/tags/TS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>TypeScript的函数</title>
+    <link href="http://yoursite.com/2019/05/20/Typescript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%20/"/>
+    <id>http://yoursite.com/2019/05/20/Typescript中的函数 /</id>
+    <published>2019-05-19T16:00:00.000Z</published>
+    <updated>2020-07-29T16:22:33.525Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>本节记录学习TS中的函数，包括函数的定义、可选参数、默认参数、剩余参数、函数重载、es6箭头函数  </p>
+</blockquote>
+<a id="more"></a>
+<h4 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h4><blockquote>
+<p>es5定义函数的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//函数声明法</span></div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'run'</span>;</div><div class="line"> &#125;</div><div class="line"><span class="comment">//匿名函数</span></div><div class="line">  <span class="keyword">var</span> run2=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="string">'run2'</span>;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>ts中定义函数的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//函数声明法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'run'</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//错误写法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line"><span class="comment">//匿名函数</span></div><div class="line"><span class="keyword">var</span> fun2=<span class="function"><span class="keyword">function</span>(<span class="params"></span>):<span class="title">number</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line">alert(fun2()); <span class="comment">/*调用方法*/</span></div></pre></td></tr></table></figure></p>
+<p>ts中定义方法传参<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:string,age:number</span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> --- <span class="subst">$&#123;age&#125;</span>`</span>;</div><div class="line">&#125;</div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>,<span class="number">20</span>));</div></pre></td></tr></table></figure></p>
+<p>没有返回值的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>):<span class="title">void</span></span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'run'</span>);</div><div class="line">&#125;</div><div class="line">run();</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="方法可选参数"><a href="#方法可选参数" class="headerlink" title="方法可选参数"></a>方法可选参数</h4><blockquote>
+<p>es5里面方法的实参和行参可以不一样，但是ts中必须一样，如果不一样就需要配置可选参数 </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:string,age?:number</span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(age)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> --- <span class="subst">$&#123;age&#125;</span>`</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> ---年龄保密`</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>)); <span class="comment">//zhangsan --- 年龄保密</span></div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>,<span class="number">123</span>)); <span class="comment">//zhangsan --- 123</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意:可选参数必须配置到参数的最后面<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误写法</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name?:string,age:number</span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(age)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> --- <span class="subst">$&#123;age&#125;</span>`</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> ---年龄保密`</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>))</div></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h3><blockquote>
+<p>es5里面没法设置默认参数，es6和ts中都可以设置默认参数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:string,age:number=<span class="number">20</span></span>):<span class="title">string</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(age)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> --- <span class="subst">$&#123;age&#125;</span>`</span>;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;name&#125;</span> ---年龄保密`</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">alert( getInfo(<span class="string">'张三'</span>));<span class="comment">//张三 --- 20</span></div><div class="line">alert( getInfo(<span class="string">'张三'</span>,<span class="number">30</span>));<span class="comment">//张三 --- 30</span></div><div class="line"><span class="string">``</span><span class="string">`     </span></div><div class="line"></div><div class="line">#### 剩余参数(参数很多，根本写不完怎么办？)</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a:number,b:number,c:number,d:number</span>):<span class="title">number</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> a+b+c+d;</div><div class="line">&#125;</div><div class="line">alert(sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)); <span class="comment">//10</span></div><div class="line"></div><div class="line"><span class="comment">//三点运算符 接受新参传过来的值</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">...result:number[]</span>):<span class="title">number</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> sum=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;result.length;i++)&#123;</div><div class="line">        sum+=result[i];  </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line">alert(sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)) ;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a:number,b:number,...result:number[]</span>):<span class="title">number</span></span>&#123;</div><div class="line">    <span class="keyword">var</span> sum=a+b;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;result.length;i++)&#123;</div><div class="line">        sum+=result[i];  </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> sum;</div><div class="line">&#125;</div><div class="line">alert(sum(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>)) ;<span class="comment">//1赋值给a,2赋值给b,其余赋值给result;</span></div></pre></td></tr></table></figure>
+<h4 id="ts函数重载"><a href="#ts函数重载" class="headerlink" title="ts函数重载"></a>ts函数重载</h4><blockquote>
+<p>java中方法的重载：重载指的是两个或者两个以上同名函数，但它们的参数不一样，这时会出现函数重载的情况。</p>
+<p>typescript中的重载：通过为同一个函数提供多个函数类型定义来试下多种功能的目的。</p>
+<p>ts为了兼容es5 以及 es6 重载的写法和java中有区别。</p>
+</blockquote>
+<ul>
+<li>es5中出现同名方法，下面的会替换上面的方法 </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">config</span>)</span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">css</span>(<span class="params">config,value</span>)</span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>ts中的重载<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:string</span>):<span class="title">string</span>;</span></div><div class="line"><span class="title">function</span> <span class="title">getInfo</span>(<span class="params">age:number</span>):<span class="title">string</span>;</div><div class="line"><span class="title">function</span> <span class="title">getInfo</span>(<span class="params">str:any</span>):<span class="title">any</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> str===<span class="string">'string'</span>)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'我叫：'</span>+str;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'我的年龄是'</span>+str;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">alert(getInfo(<span class="string">'张三'</span>));   <span class="comment">//正确</span></div><div class="line">alert(getInfo(<span class="number">20</span>));   <span class="comment">//正确</span></div><div class="line">alert(getInfo(<span class="literal">true</span>));    <span class="comment">//错误写法</span></div><div class="line"></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">name:string</span>):<span class="title">string</span>;</span></div><div class="line"><span class="title">function</span> <span class="title">getInfo</span>(<span class="params">name:string,age:number</span>):<span class="title">string</span>;</div><div class="line"><span class="title">function</span> <span class="title">getInfo</span>(<span class="params">name:any,age?:any</span>):<span class="title">any</span>&#123;</div><div class="line">    <span class="keyword">if</span>(age)&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'我叫：'</span>+name+<span class="string">'我的年龄是'</span>+age;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'我叫：'</span>+name;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>));  <span class="comment">/*正确*/</span></div><div class="line">alert(getInfo(<span class="number">123</span>));  错误</div><div class="line">alert(getInfo(<span class="string">'zhangsan'</span>,<span class="number">20</span>));</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-6、箭头函数-es6"><a href="#3-6、箭头函数-es6" class="headerlink" title="3.6、箭头函数  es6"></a>3.6、箭头函数  es6</h4><blockquote>
+<p>this指向的问题    箭头函数里面的this指向上下文</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">            </div><div class="line"><span class="comment">//es5函数写法</span></div><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">   alert(<span class="string">'run'</span>)</div><div class="line">&#125;,<span class="number">1000</span>)</div><div class="line"></div><div class="line"><span class="comment">//es6中函数写法</span></div><div class="line"> setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">    alert(<span class="string">'run'</span>)</div><div class="line">&#125;,<span class="number">1000</span>)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本节记录学习TS中的函数，包括函数的定义、可选参数、默认参数、剩余参数、函数重载、es6箭头函数  &lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="TypeScript" scheme="http://yoursite.com/categories/TypeScript/"/>
+    
+    
+      <category term="TS" scheme="http://yoursite.com/tags/TS/"/>
     
   </entry>
   
@@ -740,6 +1283,70 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>JS中 异常</title>
+    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
+    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
+    <published>2016-12-23T16:00:00.000Z</published>
+    <updated>2017-07-14T07:56:46.049Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
+<li>程序执行是出现的结果与预期结果不一致.</li>
+<li>运行时出现了错误<a id="more"></a>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
+<li>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段<br>1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.<br>2&gt; 只有在运行时出现的错误才可以被 try-catch</li>
+</ul>
+</li>
+</ol>
+<h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
+<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
+<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br>在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br>将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
+<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
+</li>
+<li><p>什么时候使用 throw 抛出异常</p>
+<ul>
+<li>写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<ul>
+<li>一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>例如: Person( name, age, gender )</p>
+<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
+<ul>
+<li><p>系统定义的内置异常不够使用的时候</p>
+<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
+<p>2&gt; try {</p>
+<pre><code>} catch ( e ) {
+
+} finally { // 永远会执行
+
+}
+</code></pre><p>3&gt; try {</p>
+<pre><code>} finally {
+
+}
+</code></pre></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什么是异常？&quot;&gt;&lt;a href=&quot;#什么是异常？&quot; class=&quot;headerlink&quot; title=&quot;什么是异常？&quot;&gt;&lt;/a&gt;什么是异常？&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;程序执行是出现的结果与预期结果不一致.&lt;/li&gt;
+&lt;li&gt;运行时出现了错误
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript Module</title>
     <link href="http://yoursite.com/2016/12/24/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
     <id>http://yoursite.com/2016/12/24/JavaScript 模块化/</id>
@@ -806,70 +1413,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS中 异常</title>
-    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
-    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
-    <published>2016-12-23T16:00:00.000Z</published>
-    <updated>2017-07-14T07:56:46.049Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
-<li>程序执行是出现的结果与预期结果不一致.</li>
-<li>运行时出现了错误<a id="more"></a>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><ul>
-<li>要知道代码错在哪里，首先就要明白代码的执行顺序， 在 js 中程序的运行分成预解析与执行两个阶段<br>1&gt; 在预解析过程中出现的错误, 多半是 语法. 这一类错误是无法处理的.<br>2&gt; 只有在运行时出现的错误才可以被 try-catch</li>
-</ul>
-</li>
-</ol>
-<h2 id="找错喽"><a href="#找错喽" class="headerlink" title="找错喽"></a>找错喽</h2><ol>
-<li><p>throw new Error( ‘错误的消息’ )<br>人为的抛出异常会阻止其后的代码执行. 和内置的异常逻辑是一模一样的.</p>
-<p>异常的抛出顺序<br> func( ) -&gt; fun() -&gt; foo() -&gt; fn();<br>在 实际开发中 常常是 函数调用函数, 利用多层调用来实现具体 的内容<br>将调用的函数称为调用者, 而被调用的函数称为被调用者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">function foo1() &#123;</div><div class="line">      console.log( &apos;foo1 Start &apos;);</div><div class="line">      foo2();</div><div class="line">      console.log( &apos;foo1 finish &apos;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  function foo2() &#123;</div><div class="line">      console.log( &apos;foo2 Start &apos;);</div><div class="line">      try &#123;</div><div class="line">          foo3();</div><div class="line">      &#125; catch ( e ) &#123;</div><div class="line"></div><div class="line">      &#125;</div><div class="line">      console.log( &apos;foo2 finish &apos;);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">   function foo3() &#123;</div><div class="line">      console.log( &apos;foo3 Start &apos;);</div><div class="line">      throw new Error( &apos;我是一个自定义异常&apos; );</div><div class="line"></div><div class="line">      console.log( &apos;foo3 finish &apos;);</div><div class="line">  &#125;</div><div class="line"> </div><div class="line">  foo1();</div><div class="line">  console.log( &apos;over&apos; );</div></pre></td></tr></table></figure>
-<p> 在异常发出的时候, 首先会在当前函数中寻找是否有 try-catch<br> 如果发现已经处理了异常 就没有任何影响. 如果没有出现 try-catch<br> 那么其后代码不在执行, 跳转到其调用函数, 检查是否出现 try-catch<br> 如果有, 则继续运行( 原函数中异常之后的代码, 还是不执行 )<br> 如果没有出现 try-catch, 则继续往上抛出. 直至全局范围, 若出现错误则爆红停止运行</p>
-</li>
-<li><p>什么时候使用 throw 抛出异常</p>
-<ul>
-<li>写一个函数是为了使用函数进行计算等运行. 因此需要输入数据, 而在实际开发中函数没有( 少用 )无效的函数.<ul>
-<li>一般函数的返回值是需要用来做其他事情的. 那么为了保证函数可以正常返回数据. 因此可以利用一次判断限制函数传入的参数是否正确, 否则抛出异常, 让其后的代码不在执行.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>例如: Person( name, age, gender )</p>
-<p>  function Person ( name, age, gender ) {<br>  if ( typeof name == ‘string’ &amp;&amp; typeof age == ‘number’ &amp;&amp; typeof gender === ‘string’ ) {<br>              throw new Error( ‘…. 参数不正确’ );<br>           }<br>    // 其后的代码<br>  }</p>
-<ul>
-<li><p>系统定义的内置异常不够使用的时候</p>
-<p>  在 js 中 try-catch 语法有 3 中( 知道即可 )<br>1&gt; try-catch</p>
-<p>2&gt; try {</p>
-<pre><code>} catch ( e ) {
-
-} finally { // 永远会执行
-
-}
-</code></pre><p>3&gt; try {</p>
-<pre><code>} finally {
-
-}
-</code></pre></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;什么是异常？&quot;&gt;&lt;a href=&quot;#什么是异常？&quot; class=&quot;headerlink&quot; title=&quot;什么是异常？&quot;&gt;&lt;/a&gt;什么是异常？&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;程序执行是出现的结果与预期结果不一致.&lt;/li&gt;
-&lt;li&gt;运行时出现了错误
-    
-    </summary>
-    
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
-    
-    
-      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   
@@ -949,620 +1492,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MVC及MVVC 在Angular中的思想</title>
-    <link href="http://yoursite.com/2016/12/23/MVC%20%E5%8F%8A%20MVVM%20%E6%80%9D%E6%83%B3/"/>
-    <id>http://yoursite.com/2016/12/23/MVC 及 MVVM 思想/</id>
-    <published>2016-12-22T16:00:00.000Z</published>
-    <updated>2017-07-14T07:57:27.076Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="MVC-的基本概念"><a href="#MVC-的基本概念" class="headerlink" title="MVC 的基本概念"></a>MVC 的基本概念</h3><ul>
-<li>概念解释<ul>
-<li>M Model, 模型, 数据</li>
-<li>V View, 视图, 就是如何展示数据</li>
-<li>C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.<a id="more"></a></li>
-</ul>
-</li>
-<li>使用 MVC 的思想处理代码, 可以使得代码分工变得明确, 那么代码的组织方式可以根据不同分块进行单独处理,所以 在 ng 中, 提供了一个非常不同于以往的编程方法<ul>
-<li>在 ng 中完全遵循 MVC 的思想, 将 html 当做展示数据的 View, 而 需要在 界面中展示的数据就是 modle.</li>
-<li>在处理文本输入绑定的时候, 输入的文本内容就是数据. 所在凡是需要作为数据的标签可以利用 ng-model </li>
-<li>给它取一个名字. 在有了名字以后, 代码的背后就会对应的创建一个 该名字的 Model 出来. 在数据发生变化的时候, 为了可以展示数据, 会自动的将数据展示到 界面中( 控制器 )</li>
-</ul>
-</li>
-</ul>
-<h3 id="ng弱化了控制器"><a href="#ng弱化了控制器" class="headerlink" title="ng弱化了控制器"></a>ng弱化了控制器</h3><ul>
-<li>在 传统的 MVC 框架中, 控制器是联系 view 与 model 的桥梁, 一般书写代码都在控制器中. 在控制器里面调用使用视图与数据模型. 在 ng 中似乎弱化了控制器的功能.</li>
-<li>在 MVC 的思想中有两个基本问题<br>  1&gt; 数据如何同步<br>  2&gt; 业务逻辑如何实现在 ng 中所谓控制器的功能实际上表现出来的只有 模块功能的管理作用.</li>
-</ul>
-<h3 id="ng是MVVM-框架"><a href="#ng是MVVM-框架" class="headerlink" title="ng是MVVM 框架"></a>ng是MVVM 框架</h3><ul>
-<li><p>MVVM是Model-View-ViewModel的简写,MVVM（Model-View-ViewModel）框架的由来便是MVP（Model-View-Presenter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架。它立足于原有MVP框架并且把WPF的新特性糅合进去，以应对客户日益复杂的需求变化。</p>
-</li>
-<li><p>正因为, ng减少了控制器的作用, 但是引入了一个新的对象, 这个对象与界面中数据一一对应,并且支持数据的双向绑定. 这样的一个对象与 Model 还是有一定的区别. 这个对象称为ViewModel, 基于视图的数据模型.虽然因此弱化了 controller 的概念, 但是强化了 viewmodel 的功能. 因此有人称 ng 是 MVVM 框架.</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;MVC-的基本概念&quot;&gt;&lt;a href=&quot;#MVC-的基本概念&quot; class=&quot;headerlink&quot; title=&quot;MVC 的基本概念&quot;&gt;&lt;/a&gt;MVC 的基本概念&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;概念解释&lt;ul&gt;
-&lt;li&gt;M Model, 模型, 数据&lt;/li&gt;
-&lt;li&gt;V View, 视图, 就是如何展示数据&lt;/li&gt;
-&lt;li&gt;C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.
-    
-    </summary>
-    
-      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
-    
-    
-      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS严格模式</title>
-    <link href="http://yoursite.com/2016/12/23/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2016/12/23/严格模式/</id>
-    <published>2016-12-22T16:00:00.000Z</published>
-    <updated>2017-07-14T08:02:05.260Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
-<li>消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；</li>
-<li>消除代码运行的一些不安全之处，保证代码运行的安全；</li>
-<li>提高编译效率，增加运行效率；</li>
-<li>为未来新版本的JavaScript做好铺垫。<a id="more"></a>
-<h2 id="严格模式标记"><a href="#严格模式标记" class="headerlink" title="严格模式标记"></a>严格模式标记</h2></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div></pre></td></tr></table></figure>
-<p>在老版本浏览器会将其当做一行普通字符串忽略。</p>
-<h2 id="使用模式"><a href="#使用模式" class="headerlink" title="使用模式"></a>使用模式</h2><h3 id="针对整个脚本文件"><a href="#针对整个脚本文件" class="headerlink" title="针对整个脚本文件"></a>针对整个脚本文件</h3><p>将”use strict;”放在脚本文件的第一行，则整个脚本将以“严格模式”运行。如果此语句不放在第一行，则无效，整个脚本以“正常模式”运行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">　　<span class="string">"use strict"</span>;</div><div class="line">　　<span class="built_in">console</span>.log(<span class="string">"这是严格模式。"</span>);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">　　<span class="built_in">console</span>.log(<span class="string">"这是正常模式。"</span>);</div><div class="line">	<span class="string">"use strict"</span>;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h3 id="针对单个函数"><a href="#针对单个函数" class="headerlink" title="针对单个函数"></a>针对单个函数</h3><p>将”use strict;”放在函数体的第一行，则整个函数以”严格模式”运行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">strict</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这是严格模式。"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">noStrict</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这是正常模式。"</span>);</div><div class="line">	<span class="string">"use strict"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="脚本文件的变通写法"><a href="#脚本文件的变通写法" class="headerlink" title="脚本文件的变通写法"></a>脚本文件的变通写法</h3><p>由于第一种方式不利于文件合并，所以最好的做法是：将整个脚本文件放在一个沙箱模式（立即执行的匿名函数）中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="comment">// 代码块</span></div><div class="line">&#125;());</div></pre></td></tr></table></figure>
-<h2 id="语法以及行为变化"><a href="#语法以及行为变化" class="headerlink" title="语法以及行为变化"></a>语法以及行为变化</h2><p>严格模式下，对JavaScript的语法和行为，都做一些变化。</p>
-<h3 id="全局变量的隐式声明"><a href="#全局变量的隐式声明" class="headerlink" title="全局变量的隐式声明"></a>全局变量的隐式声明</h3><p>在正常模式中，如果一个变量没有声明就赋值，默认是全局变量。但是在严格模式已禁止这种用法，全局变量必须显式声明。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line">v = <span class="number">1</span>; <span class="comment">// 报错，v is not defined。</span></div><div class="line"><span class="comment">// 在严格模式下，变量必须先使用var定义，在赋值。</span></div></pre></td></tr></table></figure>
-<h3 id="静态绑定"><a href="#静态绑定" class="headerlink" title="静态绑定"></a>静态绑定</h3><p>JavaScript语言一个特点，就是允许”动态绑定”，即某些属性和方法到底属于哪一个对象，不是在编译时确定的，而是在运行时确定的。</p>
-<p>严格模式对动态绑定做一些限制。某些情况下，只允许静态绑定。也就是说，属性和方法到底归属哪个对象，在编译阶段就确定。这样做有利于编译效率的提高，也使代码更易阅读，更少出现bug。</p>
-<p>详细涉及以下几方面：</p>
-<p>1.禁止使用with语句</p>
-<p>由于with语句无法再编译阶段就确定 属性到底归属哪个对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> v = <span class="number">1</span>;</div><div class="line"><span class="comment">// 报错，语法异常</span></div><div class="line"><span class="keyword">with</span>(o)&#123;</div><div class="line">	v = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.eval作用域</p>
-<p>正常模式，JavaScript语言具有两种变量作用域：全局作用域 和 函数作用域（局部作用域）。<br>严格模式，具有第三种作用域：eval作用域。</p>
-<p>正常模式下，eval语句的作用域取决于 它处于全局作用域，还是函数作用域。<br>严格模式下，eval语句本身就是一个作用域，不再能够产生全局变量，其所生产的变量只能用于eval内部。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">eval</span>(<span class="string">"var x = 3; x"</span>)); <span class="comment">// 3</span></div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
-<p>3.增强安全性</p>
-<ul>
-<li>在普通函数执行模式下，禁止this关键字指向全局对象.</li>
-<li>因此，使用构造函数时，忘记new，this不再指向window对象，而是报错。就不会意外给window对象添加属性或方法。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">// window</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// undefined</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="keyword">this</span>.name = <span class="string">"tom"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> f = foo(); <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<p>4.禁止在函数内部访问caller以及arguments</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	fn.caller;	  <span class="comment">// 报错</span></div><div class="line">	fn.arguments; <span class="comment">// 报错</span></div><div class="line">&#125;</div><div class="line">fn();</div></pre></td></tr></table></figure>
-<p>5.禁止删除变量</p>
-<p>在严格模式下无法删除变量。只有configurable设置为true的对象属性，才能被删除。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> x;</div><div class="line"><span class="keyword">delete</span> x; <span class="comment">// 报错</span></div><div class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.create(<span class="literal">null</span>, &#123;</div><div class="line">	<span class="string">"x"</span>: &#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">10</span>,</div><div class="line">		<span class="attr">configurable</span>: <span class="literal">true</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"><span class="keyword">delete</span> o.x; <span class="comment">// success</span></div></pre></td></tr></table></figure>
-<p>6.显式报错</p>
-<ul>
-<li>在正常模式下，为一个对象的只读属性进行赋值，不会报错，只会默默的失败。<br>而严格模式下，会抛出异常。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">"v"</span>, &#123; <span class="attr">value</span>: <span class="number">1</span>, <span class="attr">writable</span>: <span class="literal">false</span> &#125;);</div><div class="line">o.v = <span class="number">2</span>; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，对一个使用getter方法读取的属性进行赋值，会报错。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot;use strict&quot;;</div><div class="line">var o = &#123;</div><div class="line">	get v() &#123; return 1; &#125;</div><div class="line">&#125;;</div><div class="line">o.v = 2; // 报错</div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，对禁止扩展的对象添加新属性，会报错。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"><span class="built_in">Object</span>.preventExtensions(o);</div><div class="line">o.v = <span class="number">1</span>; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，删除一个不可删除的属性，会报错。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">delete</span> <span class="built_in">Object</span>.prototype; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<p>7.重名错误: 严格模式新增了一些语法错误。</p>
-<ul>
-<li>对象不能有重名的属性<br>正常模式下，如果对象有多个重名属性，最后赋值的那个属性会覆盖前面的值。严格模式下，这属于语法错误。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	<span class="attr">p</span>: <span class="number">1</span>,</div><div class="line">	<span class="attr">p</span>: <span class="number">2</span></div><div class="line">&#125;; <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<ul>
-<li>函数不能有重名的参数<br>正常模式下，如果函数有多个重名的参数，可以用arguments[i]读取。严格模式下，这属于语法错误。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a, a, b</span>) </span>&#123; <span class="comment">// 语法错误</span></div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>8.禁止八进制表示法<br>正常模式下，整数的第一位如果是0，表示这是八进制数，比如0100等于十进制的64。严格模式禁止这种表示法，整数第一位为0，将报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> n = <span class="number">0100</span>; <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<h3 id="arguments对象的限制"><a href="#arguments对象的限制" class="headerlink" title="arguments对象的限制"></a>arguments对象的限制</h3><p>arguments是函数的参数对象，严格模式对它的使用做了限制。<br>1.不允许对arguments赋值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="built_in">arguments</span>++; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">var</span> obj = &#123; set p(<span class="built_in">arguments</span>) &#123; &#125; &#125;; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">try</span> &#123; &#125; <span class="keyword">catch</span> (<span class="built_in">arguments</span>) &#123; &#125; <span class="comment">// 语法错误</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arguments</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"arguments"</span>, <span class="string">"'use strict'; return 17;"</span>); <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<p>2.arguments不再追踪参数的变化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">	a = <span class="number">2</span>;</div><div class="line">	<span class="keyword">return</span> [a, <span class="built_in">arguments</span>[<span class="number">0</span>]];</div><div class="line">&#125;</div><div class="line">f(<span class="number">1</span>); <span class="comment">// 正常模式为[2,2]</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	a = <span class="number">2</span>;</div><div class="line">	<span class="keyword">return</span> [a, <span class="built_in">arguments</span>[<span class="number">0</span>]];</div><div class="line">&#125;</div><div class="line">f(<span class="number">1</span>); <span class="comment">// 严格模式为[2,1]</span></div></pre></td></tr></table></figure>
-<p>3.禁止使用arguments.callee<br>这意味着，无法在匿名函数内部调用自身了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="built_in">arguments</span>.callee; &#125;;</div><div class="line">f(); <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<h3 id="函数必须声明在顶层"><a href="#函数必须声明在顶层" class="headerlink" title="函数必须声明在顶层"></a>函数必须声明在顶层</h3><p>将来Javascript的新版本会引入”块级作用域”。为了与新版本接轨，严格模式只允许在全局作用域或函数作用域的顶层声明函数。也就是说，不允许在非函数的代码块内声明函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h3><p>为了向将来Javascript的新版本过渡，严格模式新增了一些保留字：implements, interface, let, package, private, protected, public, static, yield。<br>使用这些词作为变量名将会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">package</span>(<span class="params">protected</span>) </span>&#123; <span class="comment">// 语法错误</span></div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="keyword">var</span> implements; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此外，ECMAscript第五版本身还规定了另一些保留字（class, enum, export, extends, import, super），以及各大浏览器自行增加的const保留字，也是不能作为变量名的。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;目的&quot;&gt;&lt;a href=&quot;#目的&quot; class=&quot;headerlink&quot; title=&quot;目的&quot;&gt;&lt;/a&gt;目的&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；&lt;/li&gt;
-&lt;li&gt;消除代码运行的一些不安全之处，保证代码运行的安全；&lt;/li&gt;
-&lt;li&gt;提高编译效率，增加运行效率；&lt;/li&gt;
-&lt;li&gt;为未来新版本的JavaScript做好铺垫。
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Node js（基础）</title>
-    <link href="http://yoursite.com/2016/12/20/Node%20JS%20%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/12/20/Node JS （基础）/</id>
-    <published>2016-12-19T16:00:00.000Z</published>
-    <updated>2017-07-14T07:57:36.221Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
-<li>要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。</li>
-<li><p>S（Server）：服务器端， 为客户端提交接口(数据)</p>
-<a id="more"></a>
-<ul>
-<li>常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<!--more--> </li>
-<li>简单来说服务器就是处理客户端的请求，做出处理之后并响应回去。</li>
-</ul>
-</li>
-<li><p>B（Browser）：客户端，简单说就是把一坨用户看不懂的数据变成友好的形式给用户体验</p>
-</li>
-</ul>
-<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><ul>
-<li><p>简单的说呢<br>  Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境</p>
-</li>
-<li><p>复杂的说呢就是:<br>  V8引 擎执行Javascript的速度非常快，性能非常好，Node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好，也就是它对Google V8引擎进行了封装。</p>
-</li>
-<li><p>特点：<br>  Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>  Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>  Node.js 可跨平台 (Linux  windows  Unix)</p>
-</li>
-</ul>
-<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
-<li>在几年的时间里，Node.JS逐渐发展成一个成熟的开发平台，吸引了许多开发者。有许多大型高流量网站都采用Node.JS进行开发，此外，开发人员还可以使用它来开发一些快速移动Web框架。除了Web应用外，NodeJS也被应用在许多方面，这些项目涉及到应用程序监控、媒体流、远程控制、桌面和移动应用等等。真的是很牛逼啊。</li>
-</ul>
-<h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><p>####饮水思源嘛，人家开发出来，我们后来人总得记着</p>
-<ul>
-<li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
-<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
-<li>2009 年，Angular 诞生了</li>
-<li>2009年5月，Ryan Dahl在GitHub上发布了最初版本的部分Node.js包，随后几个月里，有人开始使用Node.js开发应用。</li>
-<li>2009年11月和2010年4月，两届JSConf大会都安排了Node.js的讲座。</li>
-<li>2010年年底，Node.js获得云计算服务商Joyent资助，创始人Ryan Dahl加入Joyent全职负责Node.js的发展。</li>
-<li>2011年7月，Node.js在微软的支持下发布Windows版本。</li>
-</ul>
-<h3 id="1-5-资源推荐"><a href="#1-5-资源推荐" class="headerlink" title="1.5 资源推荐"></a>1.5 资源推荐</h3><ul>
-<li>深入浅出 Node.js</li>
-<li>CNODE</li>
-<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
-</ul>
-<h2 id="2-Node-js-关于-HTTP-处理过程"><a href="#2-Node-js-关于-HTTP-处理过程" class="headerlink" title="2. Node.js 关于 HTTP 处理过程"></a>2. Node.js 关于 HTTP 处理过程</h2><h3 id="2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。"><a href="#2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。" class="headerlink" title="2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。"></a>2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	var http = require(&apos;http&apos;);</div><div class="line">	var server = http.createServer(function(request, response) &#123;   </div><div class="line">	// handle your requset </div><div class="line">	&#125;);</div><div class="line">```	</div><div class="line">###	2.2 传入 createServer 的 function 在每次 HTTP 请求时都将被调用执行，因此这个 function 也被称为请求的处理者。事实上通过 createServer 返回的 Server 对象是一个 EventEmitter，我们需要做的仅仅是在这里保存这个 server 对象，并在之后对其添加监听器。</div><div class="line">```	</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。"><a href="#2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。" class="headerlink" title="2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。"></a>2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;).listen(8080);</div></pre></td></tr></table></figure>
-<h3 id="2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案"><a href="#2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案" class="headerlink" title="2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案."></a>2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案.</h3><h2 id="3-Node中的-JavaScript"><a href="#3-Node中的-JavaScript" class="headerlink" title="3. Node中的 JavaScript"></a>3. Node中的 JavaScript</h2><ul>
-<li><em>console</em></li>
-<li><em>setInterval(callback, delay[, …args])</em></li>
-<li><em>setTimeout(callback, delay[, …args])</em></li>
-<li><em>clearInterval(intervalObject)</em></li>
-<li><em>clearTimeout(timeoutObject)</em></li>
-<li>clearImmediate(immediateObject)</li>
-<li>setImmediate(callback[, …args])</li>
-<li>__dirname</li>
-<li>__filename</li>
-<li>module</li>
-<li>exports</li>
-<li>global</li>
-<li>process</li>
-<li>require()</li>
-</ul>
-<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
-<li>path.basename(path[, ext])：获取文件名部分</li>
-<li>path.dirname(path)：获取目录部分</li>
-<li>path.extname(path)：获取扩展名部分</li>
-<li>path.isAbsolute(path)：判断是否是绝对路径</li>
-<li>path.join([…paths])：将多个路径拼接为一个路径</li>
-</ul>
-<h3 id="同步调用与异步调用"><a href="#同步调用与异步调用" class="headerlink" title="同步调用与异步调用"></a>同步调用与异步调用</h3><p>fs模块对文件的几乎所有操作都有同步和异步两种形式，例如：<code>readFile()</code> 和 <code>readFileSync()</code>。</p>
-<p>同步与异步文件系统调用的区别</p>
-<ul>
-<li>同步调用立即执行，会阻塞后续代码继续执行，如果想要捕获异常需要使用 <code>try-catch</code></li>
-<li>异步调用不会阻塞后续代码继续执行，需要回调函数作为额外的参数，通常包含一个错误作为回调函数的第一个参数</li>
-<li>异步调用通过判断第一个err对象来处理异常</li>
-<li>异步调用结果往往通过回调函数来进行获取</li>
-</ul>
-<p>Node 只在文件IO操作中，提供了同步调用和异步调用两种形式，两者可以结合使用，<br>但是推荐能使用异步调用解决问题的情况下，少用同步调用。</p>
-<h3 id="文件操作常用API"><a href="#文件操作常用API" class="headerlink" title="文件操作常用API"></a>文件操作常用API</h3><ul>
-<li>fs.writeFile(file, data, callback)：文件写入</li>
-<li>fs.appendFile(file, data, callback)：文件追加</li>
-<li>fs.readFile(file[, options], callback)：文件读取</li>
-<li>fs.unlink(path, callback)：删除文件</li>
-<li>fs.stat(path, callback)：获取文件信息</li>
-<li>fs.access(path, callback)：验证文件路径是否存在</li>
-<li>fs.rename(oldPath, newPath, callback)：重命名或移动文件</li>
-</ul>
-<h3 id="目录操作常用API"><a href="#目录操作常用API" class="headerlink" title="目录操作常用API"></a>目录操作常用API</h3><ul>
-<li>fs.mkdir(path, callback)：创建一个目录</li>
-<li>fs.rmdir(path, callback)：删除一个空目录</li>
-<li>fs.readdir(path, callback)：读取一个目录</li>
-<li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
-</ul>
-<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
-<li><p>Server</p>
-<ul>
-<li>http.createServer([requestListener])</li>
-<li>Event: ‘request’</li>
-<li>Event: ‘close’</li>
-<li>Event: ‘connection’</li>
-<li>server.close([callback])</li>
-<li>server.listen([port][, hostname][, backlog][, callback])</li>
-</ul>
-</li>
-<li><p>Request</p>
-<ul>
-<li>Event: ‘data’</li>
-<li>Event: ‘close’</li>
-<li>message.headers</li>
-<li>message.httpVersion</li>
-<li>message.method</li>
-<li>message.url</li>
-</ul>
-</li>
-<li><p>Response</p>
-<ul>
-<li>response.write(chunk[, encoding][, callback])</li>
-<li>response.end([data][, encoding][, callback])</li>
-<li>response.writeHead(statusCode[, statusMessage][, headers])</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;1-Node-js-介绍&quot;&gt;&lt;a href=&quot;#1-Node-js-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. Node.js 介绍&quot;&gt;&lt;/a&gt;1. Node.js 介绍&lt;/h2&gt;&lt;h3 id=&quot;1-1-网站开发模型（BS）&quot;&gt;&lt;a href=&quot;#1-1-网站开发模型（BS）&quot; class=&quot;headerlink&quot; title=&quot;1.1 网站开发模型（BS）&quot;&gt;&lt;/a&gt;1.1 网站开发模型（BS）&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;S（Server）：服务器端， 为客户端提交接口(数据)&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
-    
-    
-      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Node 模块化简介</title>
-    <link href="http://yoursite.com/2016/12/18/Node%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    <id>http://yoursite.com/2016/12/18/Node 模块化/</id>
-    <published>2016-12-17T16:00:00.000Z</published>
-    <updated>2017-07-14T07:57:49.040Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是"><a href="#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是" class="headerlink" title="既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是"></a>既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是</h2><h3 id="1-模块简介"><a href="#1-模块简介" class="headerlink" title="1. 模块简介"></a>1. 模块简介</h3><ul>
-<li>一个 js 文件就是一个模块</li>
-<li>每个模块都是私有的作用域<a id="more"></a></li>
-<li><p>每个模块内部都提供了一个接口对象：module.exports</p>
-<ul>
-<li>可以通过给 module.exports 接口对象添加成员或者赋值对外提供接口接口对象</li>
-</ul>
-</li>
-<li><p>为了方便，每个模块内部还为 module.exports 接口对象提供了一个别名： exports </p>
-<ul>
-<li>所以也可以通过给 exports 接口对象添加成员向外暴露</li>
-</ul>
-</li>
-<li><p>如果想要向外暴露单个的成员（单个函数、单个变量等）</p>
-<ul>
-<li>则通过给 module.exports 接口对象赋值即可</li>
-<li>注意：给 exports 赋值不管用<ul>
-<li>因为每个模块内部最终暴露的接口对象是 module.exports</li>
-<li>所以给 exports 赋值会切断和 module.exports 之间的引用关系，是不管用的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>在模块中，可以使用 requri` 函数加载执行指定模块</p>
-<ul>
-<li>调用 require 函数之后会执行被加载模块中的代码通过得到该模块中的 module.exports 接口对象</li>
-</ul>
-</li>
-</ul>
-<h3 id="2-自定义模块（用户自己编写的模块）"><a href="#2-自定义模块（用户自己编写的模块）" class="headerlink" title="2. 自定义模块（用户自己编写的模块）"></a>2. 自定义模块（用户自己编写的模块）</h3><p>以 ./ 或 ../ 开头的模块标识就是文件模块，一般就是用户编写的。</p>
-<ul>
-<li>require</li>
-<li>module.exports</li>
-<li>exports</li>
-</ul>
-<h3 id="3-核心模块（Node-内置）"><a href="#3-核心模块（Node-内置）" class="headerlink" title="3. 核心模块（Node 内置）"></a>3. 核心模块（Node 内置）</h3><ul>
-<li>核心模块就是 node 内置的模块，需要通过唯一的标识名称来进行获取</li>
-<li>每一个核心模块基本上都是暴露了一个对象，里面包含一些方法供我们使用</li>
-<li>每一个核心模块都有自己的作用</li>
-<li>一般在加载核心模块的时候，变量的起名最好就和核心模块的标识名同名即可<ul>
-<li>例如：var fs = require(‘fs’)</li>
-</ul>
-</li>
-<li>核心模块本质上也是文件模块<ul>
-<li>核心模块已经被编译到了 node 的可执行程序，一般看不到</li>
-<li>可以通过查看 node 的源码看到核心模块文件</li>
-<li>核心模块也是基于模块化的方式编写的模块</li>
-</ul>
-</li>
-</ul>
-<p>每一个模块都提供了单一的功能，以下是常用的核心模块：</p>
-<table>
-<thead>
-<tr>
-<th>模块名称</th>
-<th>模块作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fs</td>
-<td>文件操作</td>
-</tr>
-<tr>
-<td>http</td>
-<td>http服务</td>
-</tr>
-<tr>
-<td>net</td>
-<td>Socket网络编程</td>
-</tr>
-<tr>
-<td>os</td>
-<td>操作系统相关</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>path</td>
-<td>路径操作</td>
-</tr>
-<tr>
-<td>querystring</td>
-<td>处理查询字符串</td>
-</tr>
-<tr>
-<td>url</td>
-<td>处理url路径</td>
-</tr>
-<tr>
-<td>util</td>
-<td>工具函数</td>
-</tr>
-</tbody>
-</table>
-<h3 id="4-第三方模块（也称作包，由社区提供）"><a href="#4-第三方模块（也称作包，由社区提供）" class="headerlink" title="4. 第三方模块（也称作包，由社区提供）"></a>4. 第三方模块（也称作包，由社区提供）</h3><h3 id="包与-Npm"><a href="#包与-Npm" class="headerlink" title="包与 Npm"></a>包与 Npm</h3><ul>
-<li>包<ul>
-<li>将相同业务功能的文件模块组织到一个目录中，那这个目录就称之为包</li>
-<li>包就是文件模块的集合</li>
-</ul>
-</li>
-<li>package.json 包说明文件</li>
-<li>npm 网站<ul>
-<li>npm 第一层含义就是包的托管网站</li>
-<li>(<a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a>)</li>
-</ul>
-</li>
-<li>npm 命令行工具<ul>
-<li>Node 本身提供了一个包管理工具：npm Node Package Manage</li>
-<li>npm 命令行工具可以安装和管理 Node 包</li>
-<li>例如，安装 art-template</li>
-<li>就可以使用 npm install art-template</li>
-<li>想要在项目中使用，就可以使用这个工具来帮你安装就可以了</li>
-<li>为什么要安装到项目根路径？</li>
-<li>为什么使用   require(‘art-template’) 就可以使用模板引擎</li>
-</ul>
-</li>
-</ul>
-<h3 id="5-文件模块系统"><a href="#5-文件模块系统" class="headerlink" title="5. 文件模块系统"></a>5. 文件模块系统</h3><h4 id="在实际开发中建议用一下模块来整理文档文件。"><a href="#在实际开发中建议用一下模块来整理文档文件。" class="headerlink" title="在实际开发中建议用一下模块来整理文档文件。"></a>在实际开发中建议用一下模块来整理文档文件。</h4><ul>
-<li><p>app.js</p>
-<ul>
-<li>创建服务器</li>
-<li>监听request请求事件,设置请求处理函数,这个事件是所有请求的入口</li>
-<li>绑定端口号,启动服务器</li>
-</ul>
-</li>
-<li><p>router.js</p>
-<ul>
-<li>解析请求路径,根据不同的请求路径,分发到具体的处理函数    </li>
-</ul>
-</li>
-<li><p>handler.js</p>
-<ul>
-<li>书写具体处理函数</li>
-</ul>
-</li>
-<li><p>views文件</p>
-<ul>
-<li>用来存放请求的静态页面</li>
-</ul>
-</li>
-<li><p>static文件</p>
-<ul>
-<li>用来存放静态页面所需的样式，图片，字体等。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是&quot;&gt;&lt;a href=&quot;#既然简单的写页面都知道外链css样式层和js行为层-那么前后端交互就更得模块分明不是&quot; class=&quot;headerlink&quot; title=&quot;既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&quot;&gt;&lt;/a&gt;既然简单的写页面都知道外链css样式层和js行为层,那么前后端交互就更得模块分明不是&lt;/h2&gt;&lt;h3 id=&quot;1-模块简介&quot;&gt;&lt;a href=&quot;#1-模块简介&quot; class=&quot;headerlink&quot; title=&quot;1. 模块简介&quot;&gt;&lt;/a&gt;1. 模块简介&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;一个 js 文件就是一个模块&lt;/li&gt;
-&lt;li&gt;每个模块都是私有的作用域
-    
-    </summary>
-    
-      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
-    
-    
-      <category term="模块化" scheme="http://yoursite.com/tags/%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我想要的</title>
-    <link href="http://yoursite.com/2016/12/17/%E6%97%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2016/12/17/无题/</id>
-    <published>2016-12-16T16:00:00.000Z</published>
-    <updated>2017-07-14T08:01:50.761Z</updated>
-    
-    <content type="html"><![CDATA[<hr>
-<blockquote>
-<p>前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.<br>  <a id="more"></a><br>最近一直听学友的李香兰,低沉的嗓音,再配上粤语的歌词,竟然莫名的悲伤,悲伤就悲伤吧,我他妈还循环了一天.我们都是孤单的人儿呐.体己的人就那么两个,还他妈都不在身边,旁人谁会顾忌你第二天的情绪呢. </p>
-<p>有时候就想啊,一个人跑到北京来干嘛,说真的. 还失眠.</p>
-<p>有人说,是压力太大了,可是,还是他妈太闲了呢.</p>
-<p>我一直想着系统的把ES6文档仔细读一遍,可是时间就是不知道都去哪儿了.笔记也做的七七八八,哪儿都有. 力拔山兮气盖世， 时不利兮骓不逝啊. 可是,可是,我忘了吗?小时候村东头的老王头说了,这孩子命脉通畅,足足有四两命呐,是干光宗耀祖大事的人呐.我忘了吗?我忘了二大爷眼中的期望么?我忘了郭皮皮钦佩的目光了吗?我没有,我是我们村第一个考上大学的孩子啊;我是我们村第一个看见黄河的年轻人呐;我每天都在知识的海洋里遨游,一次一次被拍打漆黑的礁石上,又一次次转身投入,只是为了弹奏灵魂的交响乐,只留给凡尘一条冗长冗长的背影,那看似满不在乎的转身，是我风干泪眼后萧瑟的影子啊. 心有猛虎,细嗅蔷薇. 我肩上扛得,是我们村的伟大复兴!</p>
-<p>对啊,我是有历史使命的人啊,我能倒下吗?我能烦恼么?我能孤独么?  </p>
-<p>聪明的孩子都变了.可是总要有人来坚持大家放弃了梦想啊,就让那些无缘的旧时光轻飘飘的溜走吧.</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;hr&gt;
-&lt;blockquote&gt;
-&lt;p&gt;前段时间特别烦,看见代码就烦,一整天都在逛论坛,看知乎一些杂事野史,听歌逛评论,去贴吧骂人. 恍惚,难道真的是单身太久了? 以前看过一个故事,说一个人别待太久,至少养条狗也行.  细思极恐.&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>很暗的</title>
-    <link href="http://yoursite.com/2016/12/08/%E5%BE%88%E6%9A%97%E7%9A%84/"/>
-    <id>http://yoursite.com/2016/12/08/很暗的/</id>
-    <published>2016-12-07T16:00:00.000Z</published>
-    <updated>2017-07-14T07:58:43.473Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。</p>
-<p>我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。<br><a id="more"></a><br>然而我发现我错了。</p>
-<p>其实是我开始了新生活之后，在潜移默化里，会在某一个平凡的时刻里，我乍然发现，我竟然已经忘记你很久了。</p>
-<p>这种乍然是很悲哀的。</p>
-<p>我总以为我与你的感情是伟大的，那它的消失也该是一件轰动的事情。</p>
-<p>然而事实上它的消失是悄然无息的。</p>
-<p>现在的某天里，我跟故友说，我好像喜欢上了一个人。<br>  故友也不会提起你的名字，而是安静地听我的新恋情。</p>
-<p>偶尔会有人问起你——那xxx呢？还有联系么。<br>然后我才会想起你，一时间会不知道该说什么好了。</p>
-<p>我曾经，是真的那样真实地喜欢过你。这种喜欢我想我此生大概都不会有第二次了。</p>
-<p>你简直是我的全部。</p>
-<p>跟你聊过的事，我还记得你对我的评价，记得你说的玩笑或者是真话。</p>
-<p>也记得你说最近跟我说的最后一句话。</p>
-<p>我记得你跟我说过的好听的话。</p>
-<p>也记得你对我说过的残忍的话。</p>
-<p>这么多的话我不知道我还会记得多久，我知道我回忆这些的时候还会有一点开心或者难过</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;很久以前，我想过很多次以后的情景，我想过有一天我终于放弃你时候的样子。&lt;/p&gt;
-&lt;p&gt;我以为我会在某个晴朗的早晨，醒过来的刹那发现我不再喜欢你了，然后开始我的新生活。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="杂记" scheme="http://yoursite.com/categories/%E6%9D%82%E8%AE%B0/"/>
-    
-    
-      <category term="人生" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ES5数组新增Api</title>
-    <link href="http://yoursite.com/2016/12/07/ES5-%E6%95%B0%E7%BB%84%E6%96%B0%E5%A2%9E%E7%9A%84%E5%87%A0%E4%B8%AAApi/"/>
-    <id>http://yoursite.com/2016/12/07/ES5-数组新增的几个Api/</id>
-    <published>2016-12-06T16:00:00.000Z</published>
-    <updated>2017-07-14T07:56:18.449Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="forEach-callback-thisArg"><a href="#forEach-callback-thisArg" class="headerlink" title="forEach(callback[thisArg])"></a>forEach(callback[thisArg])</h2><ul>
-<li>在ES5之前，我们可以通过for和for in 两种方式来遍历数组，而ES5引入了一个新方法forEach，使数组遍历更加简洁，forEach需要传递2个参数，第一个参数是回调函数，是必选参数，第二个参数是一个对象，用来改变callback中的this指向，是可选参数。<a id="more"></a>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v,i,r</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(v,i,r);</div><div class="line">&#125;)</div><div class="line">-&gt;</div><div class="line">a <span class="number">0</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div><div class="line">b <span class="number">1</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div><div class="line">c <span class="number">2</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>从输出的结果可以看出，callback中传入了3个参数v,i,r 分别表示当前元素、当前位置、数组对象.再看看使用 thisArg 的例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">   <span class="attr">print</span>:<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(a,b);</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v,i,a</span>)</span>&#123;</div><div class="line">   <span class="keyword">this</span>.print(v,i);</div><div class="line">&#125;,obj);</div></pre></td></tr></table></figure>
-<p>不传thisArgs时，callback中的 this 默认指向 window 对象，当传递thisArg时，callback中的this就指向了thisArg，因此这个参数的目的就是为了改变回调函数中的this指向。</p>
-<ul>
-<li>对于不支持ES5的浏览器，我们可以对forEach进行简单的扩展来兼容老的浏览器：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.forEach)&#123;</div><div class="line">    <span class="built_in">Array</span>.prototype.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">callback,thisArg</span>)</span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.length;i++)&#123;</div><div class="line">            <span class="comment">//当thisArg为undefined时，JS引擎会将window作为其调用者</span></div><div class="line">            callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="map-callback-thisArg"><a href="#map-callback-thisArg" class="headerlink" title="map(callback[,thisArg])"></a>map(callback[,thisArg])</h2><ul>
-<li>map的作用是对原数组进行加工处理后并将其作为一个新数组返回，该方法同样接收两个参数，callback是回调函数用于对数组进行加工处理，thisArg和上面的一样。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">10</span>,<span class="attr">h</span>:<span class="number">10</span>&#125;, <span class="comment">//定义长和宽</span></div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">15</span>,<span class="attr">h</span>:<span class="number">20</span>&#125;,</div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">12</span>,<span class="attr">h</span>:<span class="number">12</span>&#125;</div><div class="line">];</div><div class="line"><span class="keyword">var</span> newArr = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">   <span class="comment">//根据长宽计算出面积并赋值给新属性area </span></div><div class="line">   item.area = item.w * item.h;</div><div class="line">   <span class="keyword">return</span> item;</div><div class="line">&#125;);</div><div class="line">newArr[<span class="number">0</span>] - &gt; &#123;<span class="attr">w</span>: <span class="number">10</span>, <span class="attr">h</span>: <span class="number">10</span>, <span class="attr">area</span>: <span class="number">100</span>&#125;</div></pre></td></tr></table></figure>
-<p>可以看出，newArr返回的是增加了area属性的对象数组。这个方法非常实用，一般情况下，当一个ajax请求返回时，我们都要对其结果集进行过滤和校验等操作，这时map就派上用场了。我们再看看如果对map进行兼容性扩展：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.map) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.map = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">       <span class="keyword">var</span> temp = [];</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">var</span> newItem = callback.call(thisArg,<span class="keyword">this</span>[i]);</div><div class="line">           temp.push(newItem); <span class="comment">//将callback返回的新元素压入temp中</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> temp;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="filter-callback-thisArg"><a href="#filter-callback-thisArg" class="headerlink" title="filter(callback[thisArg])"></a>filter(callback[thisArg])</h2><ul>
-<li>filter是<code>过滤</code>的意思，所以这个方法的作用就是返回一个匹配过滤条件的新数组，其接收两个参数callback和thisArg, callback也是回调函数，主要用于对元素进行条件匹配，thisArg和forEach中的thisArg作用一样，在这里就不重复了，看下面示例：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"a"</span>,<span class="string">"c"</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">     <span class="keyword">return</span> item === <span class="string">"a"</span>;</div><div class="line">&#125;);</div><div class="line">       </div><div class="line">newArr -&gt; [<span class="string">"a"</span>,<span class="string">"a"</span>]</div></pre></td></tr></table></figure>
-<p>代码很简单，一看就明白，没有filter的时候，要实现这个功能，我们事先要创建一个空的数组，把匹配到的元素再push进去，现在就不需要那么麻烦了，我们再看看对filter的扩展：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.filter) &#123;</div><div class="line">    <span class="built_in">Array</span>.prototype.filter = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> temp = [];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(callback.call(thisArg,<span class="keyword">this</span>[i]))&#123;</div><div class="line">               <span class="comment">//如果callback返回true,则该元素符合过滤条件，将元素压入temp中</span></div><div class="line">               temp.push(<span class="keyword">this</span>[i]);</div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="some-callback-thisArg"><a href="#some-callback-thisArg" class="headerlink" title="some (callback[,thisArg])"></a>some (callback[,thisArg])</h2><ul>
-<li>some是<code>某些、一些</code>的意思，因此，some的作用是检测数组中的每一个元素，当callback返回true时就停止遍历，并返回true，这样的描述似乎有些抽象，看代码：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> result = arr.some( <span class="function"><span class="keyword">function</span>(<span class="params"> item, index, array </span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( item, index, array);</div><div class="line">    <span class="keyword">return</span> item &gt; <span class="number">2</span>;</div><div class="line">&#125;);</div><div class="line">-&gt;</div><div class="line"> <span class="number">1</span> <span class="number">0</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">2</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">3</span> <span class="number">2</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"></div><div class="line"> restule -&gt; <span class="literal">true</span></div></pre></td></tr></table></figure>
-<p>从运行结果看，some检测整个数组，只要当arr中有一个元素符合条件item&gt;2 就停止检测和遍历，并返回true，以表示检测到目标。这和我们在for循环中使用break语言的作用有点类似！ 下面对于some的扩展会有助于你对some的理解：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.some) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.some = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString()))&#123;</div><div class="line"></div><div class="line">               <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//检测到callback返回true,跳出循环，并返回true</span></div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//一个符合条件的都没有检测到，返回false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="every-callback-thisArg"><a href="#every-callback-thisArg" class="headerlink" title="every (callback[,thisArg])"></a>every (callback[,thisArg])</h2><ul>
-<li>every是<code>每一个</code>的意思，相比some来讲，every对元素的检测更加严格，那every到底是干什么的呢，看代码：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> result = arr.every( <span class="function"><span class="keyword">function</span>(<span class="params"> item, index, array </span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( item, index, array );</div><div class="line">    <span class="keyword">return</span> item &lt; <span class="number">3</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> <span class="number">1</span> <span class="number">0</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">2</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">3</span> <span class="number">2</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"></div><div class="line"> result -&gt; <span class="literal">false</span></div></pre></td></tr></table></figure>
-<p> 从运行结果看，当检测第3个元素时，item&lt;3为false, 停止检测，并返回false，这说明every在检测元素时，要求每一个元素都要符合条件item&lt;3，如果有一个不符合就停止检测，并返回false,(ps：你可以测试item&lt;5时的运行结果，返回值一定是true)。那every到底有什么用武之地呢？ 当一个for循环使用了break语句后，我们想知道for循环是否正常的执行完时， 我们一般会通过检测for中的索引i==arr.length来判断,因此every的作用就体现在这里。 我们再看看对于every方法的扩展：</p>
- <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.every) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.every = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(!callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString()))&#123;</div><div class="line"></div><div class="line">               <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//检测到不符合条件的元素,跳出循环，并返回false</span></div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//所有元素都符合条件，返回true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="reduce-callback-initialValue"><a href="#reduce-callback-initialValue" class="headerlink" title="reduce(callback[initialValue])"></a>reduce(callback[initialValue])</h2><ul>
-<li>官方解释:该方法应用一个函数对一个累加器和数组的每个值(从左到右)减少到一个单一值(什么玩意儿嘛)<br>*代码如下:</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">previousValue, currentValue, currentIndex, array</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(previousValue, currentValue,currentIndex);</div><div class="line">    <span class="keyword">return</span> previousValue + currentValue;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">1</span></div><div class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">2</span></div><div class="line"><span class="number">6</span> <span class="number">4</span> <span class="number">3</span></div><div class="line"></div><div class="line">newArr -&gt; <span class="number">10</span></div></pre></td></tr></table></figure>
-<p>从运行结果可以看出，reduce实现了数组元素的累加功能，reduce接收4个参数，previousValue存放的是上一次callback返回的结果，currentValue是当前元素，currentIndex是当前元素位置，array是当前数组。</p>
-<ul>
-<li>previousValue 初始值为数组的第一个元素，数组从第2个元素开始遍历。我们再来看看initialValue 究竟是什么鬼：</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">previousValue, currentValue, currentIndex, array</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(previousValue, currentValue,currentIndex);</div><div class="line">    <span class="keyword">return</span> previousValue + currentValue;</div><div class="line">&#125;,<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="number">100</span> <span class="number">1</span> <span class="number">0</span></div><div class="line"><span class="number">101</span> <span class="number">2</span> <span class="number">1</span></div><div class="line"><span class="number">103</span> <span class="number">3</span> <span class="number">2</span></div><div class="line"><span class="number">106</span> <span class="number">4</span> <span class="number">3</span></div><div class="line"></div><div class="line">newArr -&gt; <span class="number">110</span></div></pre></td></tr></table></figure>
-<p>从运行结果看，initialValue参数指定了previousValue的初始值，更重要的是，这次数组是从第1个位置开始遍历，而不再是从第2个位置开始了。</p>
-<h2 id="reduceRight-callback-initialValue"><a href="#reduceRight-callback-initialValue" class="headerlink" title="reduceRight (callback[,initialValue])"></a>reduceRight (callback[,initialValue])</h2><ul>
-<li>和reduce的作用完全相同，唯一的不同是，reduceRight是从右至左遍历数组的元素。</li>
-</ul>
-<h2 id="indexOf-和-lastIndexOf"><a href="#indexOf-和-lastIndexOf" class="headerlink" title="indexOf##和## lastIndexOf"></a>indexOf##和## lastIndexOf</h2><ul>
-<li>这两个方法和String类中indexOf和lastIndexOf作用类似</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;forEach-callback-thisArg&quot;&gt;&lt;a href=&quot;#forEach-callback-thisArg&quot; class=&quot;headerlink&quot; title=&quot;forEach(callback[thisArg])&quot;&gt;&lt;/a&gt;forEach(callback[thisArg])&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;在ES5之前，我们可以通过for和for in 两种方式来遍历数组，而ES5引入了一个新方法forEach，使数组遍历更加简洁，forEach需要传递2个参数，第一个参数是回调函数，是必选参数，第二个参数是一个对象，用来改变callback中的this指向，是可选参数。
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
     
   </entry>
   

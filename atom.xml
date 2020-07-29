@@ -818,325 +818,11 @@
   </entry>
   
   <entry>
-    <title>table行内编辑和双击变输入框</title>
-    <link href="http://yoursite.com/2017/11/03/table%E5%8F%8C%E5%87%BB%E5%8F%98%E8%BE%93%E5%85%A5%E6%A1%86/"/>
-    <id>http://yoursite.com/2017/11/03/table双击变输入框/</id>
-    <published>2017-11-02T16:00:00.000Z</published>
-    <updated>2017-11-03T02:56:41.818Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>最近用dataTable做Lims的管理界面，使用的是bootstrap-dataTable,样式还不错，功能api也很丰富，增删查又是，就是表格修改竟然是付费的，我这西北汉子的血性，付费怎么可以呢（请原谅小码畜没钱支持原创）。自己写呗。我这里提供两种思路。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="行内编辑"><a href="#行内编辑" class="headerlink" title="行内编辑"></a>行内编辑</h2><ul>
-<li>思路：（在每一行最后动态生成一个编辑按钮，可以使用bootstrap提供的自己图标）。<br>1.点击编辑按钮，获取当前行的每一个单元格td,循环遍历获取单元格的text，每个单元格中的值替换为一个input输入框，将text赋值给input的value。同时编辑按钮变为保存按钮。<br>2.点击保存按钮，获取当前行的每一个单元格td,循环遍历获取单元格中input的value，每个单元格中的input输入框替换为input的value。同时保存按钮变为编辑按钮。<br>3.可以在层叠样式中为input输入框设置一些样式，宽高啦，边框颜色啦，边框阴影啦这些。<br>4.这种思路太简单啦，我就写代码啦。</li>
-</ul>
-<p><strong>之前遇到一个bug，table中的输入框宽高占100%在移动端会让table超出页面部分没有滚动条，不能滑动。只需要设置宽高为99%就完美解决啦</strong></p>
-<h2 id="双击变输入框"><a href="#双击变输入框" class="headerlink" title="双击变输入框"></a>双击变输入框</h2><blockquote>
-<p>我原本是想做成上述这种编辑格式的，奈何Boss钟情于行内双击编辑，说简单有效快，客户都蠢萌，什么行内编辑啦，弹框编辑啦，麻烦！ </p>
-<p>那就写呗，我原本的思路是获取tbody中的所有单元格，双击时变为输入框，点击document时又赋值就行啦。结果写出来一看，图样图森破啊。百度走一波，百度前十条都是错的，而且都一模一样，难道这些人写博客不管对错都照抄的么？（不开心）。</p>
-</blockquote>
-<p><strong>想了一晚上，还是想到了。赋值时不能注册给页面单击事件，应该给document注册mouseup事件</strong></p>
-<ul>
-<li>代码如下<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 事件   </span></div><div class="line"><span class="built_in">document</span>.ondblclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span>(event.srcElement.tagName.toLowerCase() == <span class="string">"td"</span>) &#123;</div><div class="line">		<span class="keyword">var</span> obj=event.srcElement;</div><div class="line">		<span class="keyword">var</span> tdValue = obj.innerText;</div><div class="line">	    obj.innerText = <span class="string">""</span>;</div><div class="line">    	<span class="keyword">var</span> txt = <span class="built_in">document</span>.createElement(<span class="string">"input"</span>);</div><div class="line">	    txt.type = <span class="string">"text"</span>;</div><div class="line">	    txt.value = tdValue;</div><div class="line">    	txt.id = <span class="string">"edit"</span>;</div><div class="line">    	txt.setAttribute(<span class="string">"className"</span>, <span class="string">"form-control"</span>);</div><div class="line">	    obj.appendChild(txt);</div><div class="line">    	txt.select();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"><span class="comment">// 取消单元格中的文本框，并将文本框中的值赋给单元格   </span></div><div class="line"><span class="built_in">document</span>.onmouseup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>) &amp;&amp; event.srcElement.id != <span class="string">"edit"</span>) &#123;</div><div class="line">		<span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>).parentElement;</div><div class="line">    	<span class="keyword">var</span> txtValue = <span class="built_in">document</span>.getElementById(<span class="string">"edit"</span>).value;</div><div class="line">    	obj.innerText = txtValue;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;最近用dataTable做Lims的管理界面，使用的是bootstrap-dataTable,样式还不错，功能api也很丰富，增删查又是，就是表格修改竟然是付费的，我这西北汉子的血性，付费怎么可以呢（请原谅小码畜没钱支持原创）。自己写呗。我这里提供两种思路。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="dataTable" scheme="http://yoursite.com/tags/dataTable/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Iframe父子窗口元素获取、通信、跳转</title>
-    <link href="http://yoursite.com/2017/08/18/Iframe%E7%88%B6%E5%AD%90%E7%AA%97%E5%8F%A3%E5%85%83%E7%B4%A0%E8%8E%B7%E5%8F%96%E3%80%81%E9%80%9A%E4%BF%A1%E3%80%81%E8%B7%B3%E8%BD%AC/"/>
-    <id>http://yoursite.com/2017/08/18/Iframe父子窗口元素获取、通信、跳转/</id>
-    <published>2017-08-17T16:00:00.000Z</published>
-    <updated>2017-08-18T03:50:31.281Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。</p>
-</blockquote>
-<a id="more"></a>
-<h2 id="在父窗口中获取iframe中子元素"><a href="#在父窗口中获取iframe中子元素" class="headerlink" title="在父窗口中获取iframe中子元素"></a>在父窗口中获取iframe中子元素</h2><ul>
-<li>列表项</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text1 = <span class="built_in">window</span>.frames[<span class="string">"iframe的name值"</span>].document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> text2 = <span class="built_in">document</span>.getElementById(<span class="string">"iframe的Id"</span>).contentWindow.document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div></pre></td></tr></table></figure>
-<ul>
-<li>jQuery<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 = $(<span class="string">"#iframe的ID"</span>).find(<span class="string">"#iframe中的元素ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 =  $(<span class="string">"#iframe中的元素ID"</span>,<span class="built_in">document</span>.frames(<span class="string">"frame的name"</span>).document);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="在子元素中获取父iframe窗口"><a href="#在子元素中获取父iframe窗口" class="headerlink" title="在子元素中获取父iframe窗口"></a>在子元素中获取父iframe窗口</h2><ul>
-<li><p>js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text =  parent.window.document.getElementById(<span class="string">"#iframe的ID"</span>);</div></pre></td></tr></table></figure>
-</li>
-<li><p>jQuery</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 =$(<span class="string">'iframe的Id'</span>, parent.document);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 = $(<span class="built_in">window</span>.parent).find(<span class="string">"iframe[id='xxx']"</span>)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="在父子窗口通信"><a href="#在父子窗口通信" class="headerlink" title="在父子窗口通信"></a>在父子窗口通信</h2><ul>
-<li><p>方法调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childMethod();</div><div class="line">子页面调用父页面方法：parent.window.parentMethod();</div></pre></td></tr></table></figure>
-</li>
-<li><p>变量调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childValue();</div><div class="line">子页面调用父页面方法：parent.window.parentValue();</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h2><ul>
-<li><p>子页面中a链接固定跳转。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"跳转的路径"</span> target=<span class="string">"父窗口iframe的Name"</span>&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>子页面中js跳转。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframe的Id"</span>, <span class="built_in">window</span>.parent.document)[<span class="number">0</span>].src = <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>多个父iframe窗口，顶级窗口跳转。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"iframe"</span>,top.parent.document)[<span class="number">0</span>].src= <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="iframe" scheme="http://yoursite.com/tags/iframe/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用chart.js与echarts.js绘制图表</title>
-    <link href="http://yoursite.com/2017/07/29/%E4%BD%BF%E7%94%A8chart.js%E4%B8%8Eecharts.js%E7%BB%98%E5%88%B6%E5%9B%BE%E8%A1%A8/"/>
-    <id>http://yoursite.com/2017/07/29/使用chart.js与echarts.js绘制图表/</id>
-    <published>2017-07-28T16:00:00.000Z</published>
-    <updated>2017-08-01T10:07:48.894Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法</strong><br><a id="more"></a> </p>
-<h2 id="了解图表插件"><a href="#了解图表插件" class="headerlink" title="了解图表插件"></a>了解图表插件</h2><blockquote>
-<p>要在前端页面中使用图标插件，首先就要对其有基本的了解，无论是chart.js还是echart.js都是基于H5新属性Canvas提供的API封装的插件，其基本原理也就是在画布上绘制坐标，定义相对于坐标的算法实现描点、连线、填充等操作。在HTML页面中开发者只需要添加一个Canvas标签即可，然后在js中获取Canvas元素，运用插件提供的方法绘制图标，所以在页面中我们看到的图表并不存在实际DOM元素，它只是相对于画布绘制的图形，点击右键可是能图片另存为的哦</p>
-</blockquote>
-<p>当然说这些对于我们务实的程序员并没有什么卵用，但是当boss给出需求和技术时能自信的说自己的见解，哼哼，技术大牛有没有。<br>言归正传，接下来我将分别介绍这两种图表插件的基本使用方法</p>
-<h2 id="使用chart-js绘制柱状图与饼图"><a href="#使用chart-js绘制柱状图与饼图" class="headerlink" title="使用chart.js绘制柱状图与饼图"></a>使用chart.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件"><a href="#下载并引入chart-js文件" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
-<li>下载<br><a href="https://github.com/chartjs/Chart.js" target="_blank" rel="external">chart.js下载</a></li>
-<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"Chart.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="创建图表"><a href="#创建图表" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
-<li><p>HTML<br>无论哪种图表插件都是基于Canvas标签的，所以我们首先要在页面写一个Canvas标签，并定义需要绘制图形的高度和宽度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;canvas id=<span class="string">"myChart"</span> width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;&lt;/canvas&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们需要的DOM节点，然后在这个DOM节点上调用 Canvas的-getContext(“2d”) 方法。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"myChart"</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - 当然我们也可以用JQuery</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="keyword">var</span> ctx = $(<span class="string">"#myChart"</span>).get(<span class="number">0</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">当我们完成了在指定的canvas上实例化Chart对象之后，Chart.js会自动针对retina屏幕做缩放。</div><div class="line"> </div><div class="line"> - js操作</div><div class="line">Chart对象设置完成后，我们就可以继续创建Chart.js中提供的具体类型的图表了。下面这个案例中，我们将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 Bar(data,options)这个API，此方法需要传入两个实参，当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可，下面我们分别展示 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据</span></div><div class="line"><span class="keyword">var</span> barChartData = &#123;</div><div class="line">        <span class="comment">//X轴显示的数据</span></div><div class="line">		labels: [<span class="string">"类别一"</span>, <span class="string">"类别二"</span>, <span class="string">"类别三"</span>, <span class="string">"类别四"</span>, <span class="string">"类别五"</span>],</div><div class="line">		<span class="attr">datasets</span>: [&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"繁殖"</span>, <span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">68</span>, <span class="number">59</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">56</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;,</div><div class="line">			&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"出货"</span>,<span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(60,141,188,0.9)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(60,141,188,0.8)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">28</span>, <span class="number">48</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">86</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	&#125;;</div><div class="line"><span class="comment">// 柱状图选项设置</span></div><div class="line"><span class="keyword">var</span> barChartOptions = &#123;</div><div class="line">		<span class="attr">scaleOverlay</span>: <span class="literal">false</span>, <span class="comment">// 网格线是否在数据线的上面</span></div><div class="line">		scaleOverride: <span class="literal">false</span>, <span class="comment">// 是否用硬编码重写y轴网格线</span></div><div class="line">		scaleSteps: <span class="literal">null</span>, <span class="comment">//y轴刻度的个数</span></div><div class="line">		scaleStepWidth: <span class="literal">null</span>, <span class="comment">//y轴每个刻度的宽度</span></div><div class="line">		scaleStartValue: <span class="literal">null</span>, <span class="comment">//y轴的起始值</span></div><div class="line">		scaleBeginAtZero: <span class="literal">true</span>,<span class="comment">// y轴标记是否从0开始</span></div><div class="line">		scaleShowGridLines: <span class="literal">true</span>,<span class="comment">// 是否显示网格线</span></div><div class="line">		scaleGridLineColor: <span class="string">"rgba(0,0,0,.05)"</span>,<span class="comment">// 网格线的颜色</span></div><div class="line">		scaleGridLineWidth: <span class="number">1</span>, <span class="comment">// 网格线的线宽</span></div><div class="line">		scaleShowHorizontalLines: <span class="literal">true</span>,<span class="comment">// 是否显示横向线</span></div><div class="line">		scaleShowVerticalLines: <span class="literal">true</span>,<span class="comment">// 是否显示竖向线</span></div><div class="line">		barShowStroke: <span class="literal">true</span>,<span class="comment">// 是否显示线</span></div><div class="line">		barStrokeWidth: <span class="number">2</span>, <span class="comment">// 线宽</span></div><div class="line">		barValueSpacing: <span class="number">20</span>,<span class="comment">// 柱状块与x值所形成的线之间的距离</span></div><div class="line">		barDatasetSpacing: <span class="number">1</span>,<span class="comment">// 在同一x值内的柱状块之间的间距</span></div><div class="line">		animation : <span class="literal">true</span>,<span class="comment">//是否有动画效果</span></div><div class="line">        animationSteps : <span class="number">60</span>,<span class="comment">//动画的步数</span></div><div class="line">        animationEasing : <span class="string">"easeOutQuart"</span>,<span class="comment">// 动画的效果</span></div><div class="line">		 <span class="comment">// 图例</span></div><div class="line">		legendTemplate: <span class="string">"&lt;ul class=\"&lt;%=name.toLowerCase()%&gt;-legend\"&gt;&lt;% for (var i=0; i&lt;datasets.length; i++)&#123;%&gt;&lt;li&gt;&lt;span style=\"background-color:&lt;%=datasets[i].fillColor%&gt;\"&gt;&lt;/span&gt;&lt;%if(datasets[i].label)&#123;%&gt;&lt;%=datasets[i].label%&gt;&lt;%&#125;%&gt;&lt;/li&gt;&lt;%&#125;%&gt;&lt;/ul&gt;"</span>,</div><div class="line">		<span class="comment">//Boolean - whether to make the chart responsive</span></div><div class="line">		responsive: <span class="literal">true</span>,</div><div class="line">		<span class="attr">maintainAspectRatio</span>: <span class="literal">true</span></div><div class="line">	&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
-</li>
-<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg" alt="chart.js 柱状图"></p>
-</li>
-<li><p>接下来我们再创建一个饼图</p>
-<blockquote>
-<p>使用chart.js在页面上展现饼图，我们需要使用它提供的 Pie(data,options)这个API，此方法可以传入两个实参，其实我们只传第一个参数就行了（除非你是处女座的程序员），当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据  （对于一个饼图,必须传递一个对象数组的值和颜色属性。value键的值应该是一个数字。chart.js会计算的相对比例。）</span></div><div class="line"><span class="keyword">var</span> pieChartData = [</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">30</span>,</div><div class="line">		<span class="attr">color</span>:<span class="string">"#F38630"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">50</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#E0E4CC"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">100</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#69D2E7"</span></div><div class="line">	&#125;			</div><div class="line">];</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4az9gjhzj20b40b40t2.jpg" alt="chart.js 饼图"></p>
-</li>
-</ul>
-<h2 id="使用echarts-js绘制柱状图与饼图"><a href="#使用echarts-js绘制柱状图与饼图" class="headerlink" title="使用echarts.js绘制柱状图与饼图"></a>使用echarts.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件-1"><a href="#下载并引入chart-js文件-1" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
-<li>下载<br><a href="https://github.com/ecomfe/echartss" target="_blank" rel="external">echarts.js下载</a></li>
-<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"echarts.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="创建图表-1"><a href="#创建图表-1" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
-<li><p>HTML<br>Echarts图表插件也是基于Canvas标签的，但是不同于chart.js直接在页面中写canvas标签，而是我们需要在页面中写一个div盒子，并定义需要绘制图形的高度和宽度。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"main"</span> style=<span class="string">"height:400px;"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们定义的div标签，然后在这个DOM节点上调用 echarts.init()方法初始化，它会自动给div标签内添加一个canvas画布。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - js操作</div><div class="line">Echarts对象初始化完成后，我们就可以继续创建Echarts.js中提供的具体类型的图表了。下面这个案例中，我们也将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据选项设置</span></div><div class="line">option = &#123;</div><div class="line">		<span class="attr">color</span>: [<span class="string">'#3398DB'</span>],</div><div class="line">		<span class="attr">title</span>: &#123;</div><div class="line">		    <span class="attr">text</span>: <span class="string">'订单数量'</span>,</div><div class="line">		    <span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">		    <span class="attr">textStyle</span>: &#123;</div><div class="line">		        <span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">		        <span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">	    	    <span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">	    	&#125;</div><div class="line">    	&#125;,</div><div class="line">		<span class="attr">tooltip</span>: &#123;&#125;,</div><div class="line">		<span class="attr">legend</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">'数量'</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">xAxis</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">"02月"</span>, <span class="string">"03月"</span>, <span class="string">"04月"</span>, <span class="string">"05月"</span>, <span class="string">"06月"</span>, <span class="string">"07月"</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">yAxis</span>: &#123;&#125;,</div><div class="line">		<span class="attr">series</span>: [&#123;</div><div class="line">			<span class="comment">// 根据名字对应到相应的系列</span></div><div class="line">			name: <span class="string">'数量'</span>,</div><div class="line">			<span class="attr">type</span>: <span class="string">'bar'</span>,</div><div class="line">			<span class="attr">data</span>:  [<span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>]</div><div class="line">		&#125;]</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
-</li>
-<li><p>图表展示</p>
-</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4c8i3p0hj20eb0cb0st.jpg" alt="Echarts.js 柱状图"></p>
-<ul>
-<li><p>接下来我们再创建一个饼图</p>
-<blockquote>
-<p>使用Echarts.js在页面上展现饼图，我们也是使用它提供的setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据选项设置  （对于饼图,必须传递在series的data中传入一个数组对象。value键的值应该是一个数字。Echarts.js会计算的相对比例。）</span></div><div class="line">		option = &#123;</div><div class="line">					<span class="attr">title</span>: &#123;</div><div class="line">						<span class="attr">text</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">						<span class="attr">textStyle</span>: &#123;</div><div class="line">							<span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">							<span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">							<span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">						&#125;</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">tooltip</span>: &#123;</div><div class="line">						<span class="attr">trigger</span>: <span class="string">'item'</span>,</div><div class="line">						<span class="attr">formatter</span>: <span class="string">"&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)"</span></div><div class="line">					&#125;,</div><div class="line">					<span class="attr">series</span>: [&#123;</div><div class="line">						<span class="attr">name</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">type</span>: <span class="string">'pie'</span>,</div><div class="line">						<span class="attr">radius</span>: <span class="string">'55%'</span>,</div><div class="line">						<span class="attr">center</span>: [<span class="string">'50%'</span>, <span class="string">'60%'</span>],</div><div class="line">						<span class="attr">data</span>: [&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"55555"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"88888"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">4</span>,<span class="string">"name"</span>:<span class="string">"产品03"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">9</span>,<span class="string">"name"</span>:<span class="string">"科技服务"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">1</span>,<span class="string">"name"</span>:<span class="string">"成人组织"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">6</span>,<span class="string">"name"</span>:<span class="string">"医学健康"</span>&#125;],</div><div class="line">						<span class="attr">itemStyle</span>: &#123;</div><div class="line">							<span class="attr">normal</span>: &#123;</div><div class="line">								<span class="attr">label</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span>,</div><div class="line">									<span class="attr">formatter</span>: <span class="string">'&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)'</span></div><div class="line">								&#125;,</div><div class="line">								<span class="attr">labelLine</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span></div><div class="line">								&#125;</div><div class="line">							&#125;,</div><div class="line">							<span class="attr">emphasis</span>: &#123;</div><div class="line">								<span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">								<span class="attr">shadowOffsetX</span>: <span class="number">0</span>,</div><div class="line">								<span class="attr">shadowColor</span>: <span class="string">'rgba(0, 0, 0, 0.5)'</span></div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;]</div><div class="line">				&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
-</blockquote>
-</li>
-<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4cy9ga60j20bv09o3yu.jpg" alt="Echarts.js 饼图"></p>
-</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<p>市场上有好多好多的图表统计插件，大体有以下几种</p>
-</blockquote>
-<ul>
-<li>MSChart<br>这个是Visual Studio里的自带控件，使用比较简单，不过数据需要在后台绑定。</li>
-<li>ichart.js<br>是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 支持饼图、环形图、折线图、面积图、柱形图、条形图等。</li>
-<li>Chart.js<br>也是一款基于HTML5的图形库和ichartjs整体类似,支持柱状图、饼图、曲线图、雷达图、蛛网图、级地图等。不过Chart.js的教程文档没有ichartjs的详细。不过感觉在对于移动的适配上感觉比ichartjs要好一点。</li>
-<li>ECharts.js<br>这也是一款基于HTML5的图形库。图形的创建也比较简单，直接引用Javascript即可。这也是我最喜欢使用的，喜欢这个库的原因主要有三点。<ol>
-<li>这个库是百度的项目，而且一直有更新，目前最新的是EChart 3；</li>
-<li>这个库的项目文档比较详细，每个点都说明的比较清楚，而且是中文的，理解比较容易；</li>
-<li>这个库有深度的交互式数据探索，而且图表的动画真的真的是很炫酷呐。</li>
-</ol>
-</li>
-</ul>
-<p><strong>最后附上chart.js与echart.js的中文文档，我这里只讲了柱状图与饼图的简单使用方法，如有其它图表需求，请移步官方文档</strong><br> <a href="http://www.bootcss.com/p/chart.js/docs/" target="_blank" rel="external">chart.js中文文档</a></p>
-<p> <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="external">Echarts.js中文文档</a></p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;strong&gt;最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法&lt;/strong&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="chartJs与echartsJs" scheme="http://yoursite.com/categories/chartJs%E4%B8%8EechartsJs/"/>
-    
-    
-      <category term="图表插件" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%A1%A8%E6%8F%92%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>模板引擎</title>
-    <link href="http://yoursite.com/2017/07/18/%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E/"/>
-    <id>http://yoursite.com/2017/07/18/模板引擎/</id>
-    <published>2017-07-18T10:30:00.000Z</published>
-    <updated>2017-07-18T10:34:59.470Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="模板引擎简介"><a href="#模板引擎简介" class="headerlink" title="模板引擎简介"></a>模板引擎简介</h2><blockquote>
-<p>我们在实际开发中，前后交互需要频繁的使用ajax，使用ajax请求数据时,返回的如果是一个JSON格式的字符串,我们需要将其包装到对应的HTML代码中,再添加到页面上,才能看到效果.那么这个包装得过程有没有简单的方法呢?<br><a id="more"></a></p>
-<ul>
-<li>假设有如下的数据<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line"> <span class="attr">name</span>:<span class="string">"fox"</span>,</div><div class="line"> <span class="attr">age</span>:<span class="number">18</span>,</div><div class="line"> <span class="attr">skill</span>:<span class="string">"卖萌"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<ul>
-<li><p>希望包装为：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;li&gt;姓名:fox&lt;/li&gt;</div><div class="line">  &lt;li&gt;年龄:18&lt;/li&gt;</div><div class="line">  &lt;li&gt;爱好:卖萌&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>定义模板，替换为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">  &lt;li&gt;姓名:&lt;%= name %&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;年龄:&lt;%= age %&gt;&lt;/li&gt;</div><div class="line">  &lt;li&gt;爱好:&lt;%= skill %&gt;&lt;/li&gt;</div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>其间需要我们使用对象替换的位置为&lt;%=属性名%&gt;部分,如果可以读取模板-&gt;传入对象-&gt;完成替换-&gt;返回html代码,实现这样的步骤,那么就能够完成我们的模板操作了</strong></p>
-<h2 id="模板插件原理"><a href="#模板插件原理" class="headerlink" title="模板插件原理"></a>模板插件原理</h2><blockquote>
-<p>我们定义一段文本作为模板,读取文本,使用特殊的符号&lt;%=属性名%&gt;,通过正则表达式找到这些特殊的符号进行替换,是不是就实现了这样的效果呢?</p>
-</blockquote>
-<h3 id="定义正则表达式"><a href="#定义正则表达式" class="headerlink" title="定义正则表达式"></a>定义正则表达式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* </span></div><div class="line">JS中的RegExp对象:</div><div class="line">    创建</div><div class="line">        创建方法1: var reg = new RegExp("正则")</div><div class="line">        创建方法2: var reg = /正则/;    推荐使用这种</div><div class="line">    使用:</div><div class="line">        reg.exec(string) 可以检测字符串</div><div class="line">*/</div><div class="line"><span class="comment">/*</span></div><div class="line">正则含义</div><div class="line">     &lt;%  : 以 &lt;% 开始</div><div class="line">    =\s*： "="号之后有0个或多个空白字符</div><div class="line">    ([^%&gt;]+\S): 匹配除了%&gt;以外的所有字符(至少1个)</div><div class="line">    \s*:0个或多个空白字符</div><div class="line">    %&gt;:以%&gt;结束</div><div class="line">*/</div><div class="line">    <span class="keyword">var</span> reg = <span class="regexp">/&lt;%=\s*([^%&gt;]+\S)\s*%&gt;/</span>;</div></pre></td></tr></table></figure>
-<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ul>
-<li>定义好作为模板的文本</li>
-<li>使用正则表达式进行匹配替换即可<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义文本</span></div><div class="line"><span class="keyword">var</span> str = <span class="string">'大家好，我叫&lt;%= name %&gt;，我今年&lt;%= age %&gt;，我的爱好为:&lt;%= skill %&gt;'</span>;</div><div class="line"><span class="comment">// 定义数据</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">        <span class="attr">name</span>: <span class="string">'itcast'</span>,</div><div class="line">        <span class="attr">age</span>: <span class="number">10</span>,</div><div class="line">        <span class="attr">skill</span>:<span class="string">'打篮球'</span></div><div class="line">        &#125;;</div><div class="line"><span class="comment">// 快速的创建方法,好处,直接使用 \ 即可 不需要考虑 转义</span></div><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/&lt;%=\s*([^%&gt;]+\S)\s*%&gt;/</span>;</div><div class="line"><span class="comment">// 返回的是一个对象</span></div><div class="line"><span class="keyword">var</span> match = <span class="literal">null</span>;</div><div class="line"><span class="comment">// 使用  while循环 进行检查,知道没有匹配的内容</span></div><div class="line"><span class="keyword">while</span> (match = reg.exec(str))&#123;</div><div class="line">    <span class="comment">// 匹配到的字符串</span></div><div class="line">    <span class="keyword">var</span> mathString = match[<span class="number">0</span>]</div><div class="line">    <span class="comment">// 子表达式匹配到的字符串</span></div><div class="line">    <span class="keyword">var</span> subString = match[<span class="number">1</span>];</div><div class="line">    <span class="comment">// 打印文本内容</span></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"循环中:"</span>+str);</div><div class="line">    <span class="comment">// 替换字符串的内容</span></div><div class="line">    <span class="keyword">var</span> str = str.replace(mathString,data[subString]);</div><div class="line">     match = reg.exec(str);</div><div class="line">&#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"循环完毕:"</span>+str);</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>基本原理就是不断的去循环用正则匹配，如果匹配到了立即替换，从而达到批量替换的目的</strong></p>
-<h2 id="常见的模板插件"><a href="#常见的模板插件" class="headerlink" title="常见的模板插件"></a>常见的模板插件</h2><p>您可以前往以下网址下载：<br><a href="http://tangram.baidu.com/BaiduTemplate/" target="_blank" rel="external">baidu Template（百度开发）</a><br><a href="https://github.com/aui/artTemplate" target="_blank" rel="external">ArtTemplate（腾讯开发）</a><br><a href="https://github.com/shepherdwind/velocity.js/" target="_blank" rel="external">velocity.js（淘宝开发）</a></p>
-<blockquote>
-<p>模板引擎的用法大同小异,ArtTemplate由于性能优秀,且我在开发中常用artTemplate，这里我演示ArtTemplate的用法，ArtTemplate分为简洁语法和原生语法两个版本，其实也是大同小异，这里我会分别演示。</p>
-</blockquote>
-<h3 id="ArtTemplate简洁语法"><a href="#ArtTemplate简洁语法" class="headerlink" title="ArtTemplate简洁语法"></a>ArtTemplate简洁语法</h3><ul>
-<li><p>导入模板引擎：将下载好的ArtTemplate导入到页面中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src = <span class="string">"plugins/template/template.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>定义模板：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script id="test" type="text/html"&gt;</div><div class="line">&lt;h1&gt;&#123;&#123;title&#125;&#125;&lt;/h1&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &#123;&#123;each list as value i&#125;&#125;</div><div class="line">        &lt;li&gt;索引 &#123;&#123;i + 1&#125;&#125; ：&#123;&#123;value&#125;&#125;&lt;/li&gt;</div><div class="line">    &#123;&#123;/each&#125;&#125;</div><div class="line">&lt;/ul&gt;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>这里一定要注意script标签的type是“text/html”,如果写成”text/javascript”会执行</strong></p>
-<ul>
-<li>渲染数据：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里我们模拟数据，在实际开发中都是后台约定好数据格式，用ajax传递真实数据。</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">    <span class="attr">title</span>: <span class="string">'标签'</span>,</div><div class="line">    <span class="attr">list</span>: [<span class="string">'文艺'</span>, <span class="string">'博客'</span>, <span class="string">'摄影'</span>, <span class="string">'电影'</span>, <span class="string">'民谣'</span>, <span class="string">'旅行'</span>, <span class="string">'吉他'</span>]</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="ArtTemplate原生语法"><a href="#ArtTemplate原生语法" class="headerlink" title="ArtTemplate原生语法"></a>ArtTemplate原生语法</h3><ul>
-<li><p>导入模板引擎：将下载好的ArtTemplate导入到页面中</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src = <span class="string">"plugins/template/template-native.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>定义模板：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;script id=<span class="string">"test"</span> type=<span class="string">"text/html"</span>&gt;</div><div class="line">&lt;h1&gt;&lt;%=title%&gt;&lt;/h1&gt;</div><div class="line">&lt;ul&gt;</div><div class="line">    &lt;%for(i = 0; i &lt; list.length; i ++) &#123;%&gt;</div><div class="line">        &lt;li&gt;索引 &lt;%=i + 1%&gt; ：&lt;%=list[i]%&gt;&lt;/li&gt;</div><div class="line">    &lt;%&#125;%&gt;</div><div class="line">&lt;/ul&gt;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>再次重申：这里一定要注意script标签的type是“text/html”,如果写成”text/javascript”会执行</strong></p>
-<ul>
-<li>渲染数据：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这里我们模拟数据，在实际开发中和后台约定好数据格式，用ajax传递真实数据。</span></div><div class="line"><span class="keyword">var</span> data = &#123;</div><div class="line">    <span class="attr">title</span>: <span class="string">'标签'</span>,</div><div class="line">    <span class="attr">list</span>: [<span class="string">'文艺'</span>, <span class="string">'博客'</span>, <span class="string">'摄影'</span>, <span class="string">'电影'</span>, <span class="string">'民谣'</span>, <span class="string">'旅行'</span>, <span class="string">'吉他'</span>]</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> html = template(<span class="string">'test'</span>, data);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerHTML = html;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>art-template 真的是一个渲染性能出众模板引擎，无论在NodeJS还是在浏览器中都可以运行。在实际开发中为开发者提供了很大的便利，我介绍的这点只是我在开发中最常用的功能，如果想深入了解，请移步<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">ArtTemplate</a>。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;模板引擎简介&quot;&gt;&lt;a href=&quot;#模板引擎简介&quot; class=&quot;headerlink&quot; title=&quot;模板引擎简介&quot;&gt;&lt;/a&gt;模板引擎简介&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;我们在实际开发中，前后交互需要频繁的使用ajax，使用ajax请求数据时,返回的如果是一个JSON格式的字符串,我们需要将其包装到对应的HTML代码中,再添加到页面上,才能看到效果.那么这个包装得过程有没有简单的方法呢?&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="template" scheme="http://yoursite.com/tags/template/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>创建对象的五种方式</title>
-    <link href="http://yoursite.com/2017/02/27/%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%BA%94%E7%A7%8D%E6%96%B9%E5%BC%8F/"/>
-    <id>http://yoursite.com/2017/02/27/创建对象的五种方式/</id>
-    <published>2017-02-26T16:00:00.000Z</published>
-    <updated>2017-07-14T08:07:48.519Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="第一种-new一个"><a href="#第一种-new一个" class="headerlink" title="第一种 new一个"></a>第一种 new一个</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj1=new Object();</div><div class="line">console.log(obj1);</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="第二种-字面量"><a href="#第二种-字面量" class="headerlink" title="第二种  字面量"></a>第二种  字面量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var obj2=&#123;name:&apos;top&apos;,age:19&#125;;</div><div class="line">console.log(obj2);</div></pre></td></tr></table></figure>
-<h2 id="第三种-构造函数"><a href="#第三种-构造函数" class="headerlink" title="第三种  构造函数"></a>第三种  构造函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Person (name,age,skill) &#123;</div><div class="line">	this.name=name;</div><div class="line">	this.age=age;</div><div class="line">	this.skill=skill;</div><div class="line">&#125;</div><div class="line">var obj3=new Person(&apos;top&apos;,19,&apos;吃饭&apos;);</div><div class="line">console.log(obj3);</div></pre></td></tr></table></figure>
-<h2 id="第四种-原型式"><a href="#第四种-原型式" class="headerlink" title="第四种  原型式"></a>第四种  原型式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function person () &#123;&#125;</div><div class="line">person.prototype=&#123;</div><div class="line">	constructor:person,</div><div class="line">	name:&apos;张三&apos;,</div><div class="line">	age:29</div><div class="line">&#125;;</div><div class="line">var zs=new person;</div><div class="line">zs.name=&apos;李四&apos;;</div><div class="line">console.log(zs);</div></pre></td></tr></table></figure>
-<h2 id="第五种-组合方式"><a href="#第五种-组合方式" class="headerlink" title="第五种   组合方式"></a>第五种   组合方式</h2><pre><code>function Info (name,age,skill) {
-    this.name=name;
-    this.age=age;
-    this.skill=skill;
-}
-    Info.prototype.sayHi=function  () {
-    console.log(&apos;我的名字是&apos;+this.name);
-}
-var zs=new Info(&apos;tom&apos;,39,&apos;抓老鼠&apos;);
-zs.sayHi();
-console.log(zs);
-</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;第一种-new一个&quot;&gt;&lt;a href=&quot;#第一种-new一个&quot; class=&quot;headerlink&quot; title=&quot;第一种 new一个&quot;&gt;&lt;/a&gt;第一种 new一个&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;var obj1=new Object();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;console.log(obj1);&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
-    
-      <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
     <title>angular 基础思想</title>
-    <link href="http://yoursite.com/2016/12/26/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
-    <id>http://yoursite.com/2016/12/26/angular 基础思想/</id>
-    <published>2016-12-25T16:00:00.000Z</published>
-    <updated>2017-07-14T07:52:39.116Z</updated>
+    <link href="http://yoursite.com/2018/12/26/angular%20%E5%9F%BA%E7%A1%80%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2018/12/26/angular 基础思想/</id>
+    <published>2018-12-25T16:00:00.000Z</published>
+    <updated>2020-07-29T16:43:54.491Z</updated>
     
     <content type="html"><![CDATA[<h2 id="angular-官方"><a href="#angular-官方" class="headerlink" title="angular 官方"></a>angular 官方</h2><ul>
 <li>ng 表示 AngularJS.</li>
@@ -1245,10 +931,10 @@ console.log(zs);
   
   <entry>
     <title>angular中$scope作用域</title>
-    <link href="http://yoursite.com/2016/12/25/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
-    <id>http://yoursite.com/2016/12/25/angular中 $scope 作用域/</id>
-    <published>2016-12-24T16:00:00.000Z</published>
-    <updated>2017-07-14T07:53:14.115Z</updated>
+    <link href="http://yoursite.com/2018/12/25/angular%E4%B8%AD%20$scope%20%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    <id>http://yoursite.com/2018/12/25/angular中 $scope 作用域/</id>
+    <published>2018-12-24T16:00:00.000Z</published>
+    <updated>2020-07-29T16:44:04.635Z</updated>
     
     <content type="html"><![CDATA[<h2 id="作用域对象"><a href="#作用域对象" class="headerlink" title="作用域对象"></a>作用域对象</h2><p>  就是 $scope</p>
 <h3 id="什么时候创建-scope"><a href="#什么时候创建-scope" class="headerlink" title="什么时候创建 $scope ?"></a>什么时候创建 $scope ?</h3>  <a id="more"></a> 
@@ -1283,11 +969,216 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>MVC及MVVC 在Angular中的思想</title>
+    <link href="http://yoursite.com/2018/12/23/MVC%20%E5%8F%8A%20MVVM%20%E6%80%9D%E6%83%B3/"/>
+    <id>http://yoursite.com/2018/12/23/MVC 及 MVVM 思想/</id>
+    <published>2018-12-22T16:00:00.000Z</published>
+    <updated>2020-07-29T16:44:34.062Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="MVC-的基本概念"><a href="#MVC-的基本概念" class="headerlink" title="MVC 的基本概念"></a>MVC 的基本概念</h3><ul>
+<li>概念解释<ul>
+<li>M Model, 模型, 数据</li>
+<li>V View, 视图, 就是如何展示数据</li>
+<li>C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.<a id="more"></a></li>
+</ul>
+</li>
+<li>使用 MVC 的思想处理代码, 可以使得代码分工变得明确, 那么代码的组织方式可以根据不同分块进行单独处理,所以 在 ng 中, 提供了一个非常不同于以往的编程方法<ul>
+<li>在 ng 中完全遵循 MVC 的思想, 将 html 当做展示数据的 View, 而 需要在 界面中展示的数据就是 modle.</li>
+<li>在处理文本输入绑定的时候, 输入的文本内容就是数据. 所在凡是需要作为数据的标签可以利用 ng-model </li>
+<li>给它取一个名字. 在有了名字以后, 代码的背后就会对应的创建一个 该名字的 Model 出来. 在数据发生变化的时候, 为了可以展示数据, 会自动的将数据展示到 界面中( 控制器 )</li>
+</ul>
+</li>
+</ul>
+<h3 id="ng弱化了控制器"><a href="#ng弱化了控制器" class="headerlink" title="ng弱化了控制器"></a>ng弱化了控制器</h3><ul>
+<li>在 传统的 MVC 框架中, 控制器是联系 view 与 model 的桥梁, 一般书写代码都在控制器中. 在控制器里面调用使用视图与数据模型. 在 ng 中似乎弱化了控制器的功能.</li>
+<li>在 MVC 的思想中有两个基本问题<br>  1&gt; 数据如何同步<br>  2&gt; 业务逻辑如何实现在 ng 中所谓控制器的功能实际上表现出来的只有 模块功能的管理作用.</li>
+</ul>
+<h3 id="ng是MVVM-框架"><a href="#ng是MVVM-框架" class="headerlink" title="ng是MVVM 框架"></a>ng是MVVM 框架</h3><ul>
+<li><p>MVVM是Model-View-ViewModel的简写,MVVM（Model-View-ViewModel）框架的由来便是MVP（Model-View-Presenter）模式与WPF结合的应用方式时发展演变过来的一种新型架构框架。它立足于原有MVP框架并且把WPF的新特性糅合进去，以应对客户日益复杂的需求变化。</p>
+</li>
+<li><p>正因为, ng减少了控制器的作用, 但是引入了一个新的对象, 这个对象与界面中数据一一对应,并且支持数据的双向绑定. 这样的一个对象与 Model 还是有一定的区别. 这个对象称为ViewModel, 基于视图的数据模型.虽然因此弱化了 controller 的概念, 但是强化了 viewmodel 的功能. 因此有人称 ng 是 MVVM 框架.</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;MVC-的基本概念&quot;&gt;&lt;a href=&quot;#MVC-的基本概念&quot; class=&quot;headerlink&quot; title=&quot;MVC 的基本概念&quot;&gt;&lt;/a&gt;MVC 的基本概念&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;概念解释&lt;ul&gt;
+&lt;li&gt;M Model, 模型, 数据&lt;/li&gt;
+&lt;li&gt;V View, 视图, 就是如何展示数据&lt;/li&gt;
+&lt;li&gt;C Controller, 控制器, 表上如何联系数据与展示. 可以认为是主要的代码逻辑区域.
+    
+    </summary>
+    
+      <category term="angulat" scheme="http://yoursite.com/categories/angulat/"/>
+    
+    
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Iframe父子窗口元素获取、通信、跳转</title>
+    <link href="http://yoursite.com/2018/08/20/Iframe%E7%88%B6%E5%AD%90%E7%AA%97%E5%8F%A3%E5%85%83%E7%B4%A0%E8%8E%B7%E5%8F%96%E3%80%81%E9%80%9A%E4%BF%A1%E3%80%81%E8%B7%B3%E8%BD%AC/"/>
+    <id>http://yoursite.com/2018/08/20/Iframe父子窗口元素获取、通信、跳转/</id>
+    <published>2018-08-19T16:00:00.000Z</published>
+    <updated>2020-07-29T16:47:01.608Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="在父窗口中获取iframe中子元素"><a href="#在父窗口中获取iframe中子元素" class="headerlink" title="在父窗口中获取iframe中子元素"></a>在父窗口中获取iframe中子元素</h2><ul>
+<li>列表项</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text1 = <span class="built_in">window</span>.frames[<span class="string">"iframe的name值"</span>].document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> text2 = <span class="built_in">document</span>.getElementById(<span class="string">"iframe的Id"</span>).contentWindow.document.getElementById(<span class="string">"iframe中元素的ID"</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>jQuery<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 = $(<span class="string">"#iframe的ID"</span>).find(<span class="string">"#iframe中的元素ID"</span>);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 =  $(<span class="string">"#iframe中的元素ID"</span>,<span class="built_in">document</span>.frames(<span class="string">"frame的name"</span>).document);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在子元素中获取父iframe窗口"><a href="#在子元素中获取父iframe窗口" class="headerlink" title="在子元素中获取父iframe窗口"></a>在子元素中获取父iframe窗口</h2><ul>
+<li><p>js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> text =  parent.window.document.getElementById(<span class="string">"#iframe的ID"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>jQuery</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 第一种</span></div><div class="line"><span class="keyword">var</span> test1 =$(<span class="string">'iframe的Id'</span>, parent.document);</div><div class="line"><span class="comment">// 第二种</span></div><div class="line"><span class="keyword">var</span> test2 = $(<span class="built_in">window</span>.parent).find(<span class="string">"iframe[id='xxx']"</span>)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="在父子窗口通信"><a href="#在父子窗口通信" class="headerlink" title="在父子窗口通信"></a>在父子窗口通信</h2><ul>
+<li><p>方法调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childMethod();</div><div class="line">子页面调用父页面方法：parent.window.parentMethod();</div></pre></td></tr></table></figure>
+</li>
+<li><p>变量调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">父页面调用子页面方法：FrameName.window.childValue();</div><div class="line">子页面调用父页面方法：parent.window.parentValue();</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="页面跳转"><a href="#页面跳转" class="headerlink" title="页面跳转"></a>页面跳转</h2><ul>
+<li><p>子页面中a链接固定跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"跳转的路径"</span> target=<span class="string">"父窗口iframe的Name"</span>&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>子页面中js跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#iframe的Id"</span>, <span class="built_in">window</span>.parent.document)[<span class="number">0</span>].src = <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>多个父iframe窗口，顶级窗口跳转。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"iframe"</span>,top.parent.document)[<span class="number">0</span>].src= <span class="string">"要跳转的路径"</span>;</div></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽说当下前端三大框架如日中天，谁还用过时的iframe标签呐，除非那些不道德的钓鱼网站。但是，但是遇到系统升级，系统很大，中心功能繁杂，全面翻新工作量大，怎么办呢，iframe呗，换个马甲瞧瞧。可是iframe中毕竟是两个窗口，所以元素获取、通信、跳转这些和直接获取元素不同，特此来总结一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="iframe" scheme="http://yoursite.com/tags/iframe/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用chart.js与echarts.js绘制图表</title>
+    <link href="http://yoursite.com/2018/07/29/%E4%BD%BF%E7%94%A8chart.js%E4%B8%8Eecharts.js%E7%BB%98%E5%88%B6%E5%9B%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2018/07/29/使用chart.js与echarts.js绘制图表/</id>
+    <published>2018-07-28T16:00:00.000Z</published>
+    <updated>2020-07-29T16:47:45.848Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法</strong><br><a id="more"></a> </p>
+<h2 id="了解图表插件"><a href="#了解图表插件" class="headerlink" title="了解图表插件"></a>了解图表插件</h2><blockquote>
+<p>要在前端页面中使用图标插件，首先就要对其有基本的了解，无论是chart.js还是echart.js都是基于H5新属性Canvas提供的API封装的插件，其基本原理也就是在画布上绘制坐标，定义相对于坐标的算法实现描点、连线、填充等操作。在HTML页面中开发者只需要添加一个Canvas标签即可，然后在js中获取Canvas元素，运用插件提供的方法绘制图标，所以在页面中我们看到的图表并不存在实际DOM元素，它只是相对于画布绘制的图形，点击右键可是能图片另存为的哦</p>
+</blockquote>
+<p>当然说这些对于我们务实的程序员并没有什么卵用，但是当boss给出需求和技术时能自信的说自己的见解，哼哼，技术大牛有没有。<br>言归正传，接下来我将分别介绍这两种图表插件的基本使用方法</p>
+<h2 id="使用chart-js绘制柱状图与饼图"><a href="#使用chart-js绘制柱状图与饼图" class="headerlink" title="使用chart.js绘制柱状图与饼图"></a>使用chart.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件"><a href="#下载并引入chart-js文件" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/chartjs/Chart.js" target="_blank" rel="external">chart.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"Chart.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表"><a href="#创建图表" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>无论哪种图表插件都是基于Canvas标签的，所以我们首先要在页面写一个Canvas标签，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;canvas id=<span class="string">"myChart"</span> width=<span class="string">"400"</span> height=<span class="string">"400"</span>&gt;&lt;/canvas&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们需要的DOM节点，然后在这个DOM节点上调用 Canvas的-getContext(“2d”) 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"myChart"</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - 当然我们也可以用JQuery</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="keyword">var</span> ctx = $(<span class="string">"#myChart"</span>).get(<span class="number">0</span>).getContext(<span class="string">"2d"</span>);</div><div class="line"><span class="keyword">var</span> myNewChart = <span class="keyword">new</span> Chart(ctx);</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line">当我们完成了在指定的canvas上实例化Chart对象之后，Chart.js会自动针对retina屏幕做缩放。</div><div class="line"> </div><div class="line"> - js操作</div><div class="line">Chart对象设置完成后，我们就可以继续创建Chart.js中提供的具体类型的图表了。下面这个案例中，我们将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 Bar(data,options)这个API，此方法需要传入两个实参，当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可，下面我们分别展示 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据</span></div><div class="line"><span class="keyword">var</span> barChartData = &#123;</div><div class="line">        <span class="comment">//X轴显示的数据</span></div><div class="line">		labels: [<span class="string">"类别一"</span>, <span class="string">"类别二"</span>, <span class="string">"类别三"</span>, <span class="string">"类别四"</span>, <span class="string">"类别五"</span>],</div><div class="line">		<span class="attr">datasets</span>: [&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"繁殖"</span>, <span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(210, 214, 222, 1)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">68</span>, <span class="number">59</span>, <span class="number">80</span>, <span class="number">81</span>, <span class="number">56</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;,</div><div class="line">			&#123;</div><div class="line">				<span class="attr">label</span>: <span class="string">"出货"</span>,<span class="comment">//图例</span></div><div class="line">				fillColor: <span class="string">"rgba(60,141,188,0.9)"</span>, <span class="comment">//填充色</span></div><div class="line">				strokeColor: <span class="string">"rgba(60,141,188,0.8)"</span>, <span class="comment">//描边色</span></div><div class="line">				data: [<span class="number">28</span>, <span class="number">48</span>, <span class="number">40</span>, <span class="number">19</span>, <span class="number">86</span>]  <span class="comment">//数据</span></div><div class="line">			&#125;</div><div class="line">		]</div><div class="line">	&#125;;</div><div class="line"><span class="comment">// 柱状图选项设置</span></div><div class="line"><span class="keyword">var</span> barChartOptions = &#123;</div><div class="line">		<span class="attr">scaleOverlay</span>: <span class="literal">false</span>, <span class="comment">// 网格线是否在数据线的上面</span></div><div class="line">		scaleOverride: <span class="literal">false</span>, <span class="comment">// 是否用硬编码重写y轴网格线</span></div><div class="line">		scaleSteps: <span class="literal">null</span>, <span class="comment">//y轴刻度的个数</span></div><div class="line">		scaleStepWidth: <span class="literal">null</span>, <span class="comment">//y轴每个刻度的宽度</span></div><div class="line">		scaleStartValue: <span class="literal">null</span>, <span class="comment">//y轴的起始值</span></div><div class="line">		scaleBeginAtZero: <span class="literal">true</span>,<span class="comment">// y轴标记是否从0开始</span></div><div class="line">		scaleShowGridLines: <span class="literal">true</span>,<span class="comment">// 是否显示网格线</span></div><div class="line">		scaleGridLineColor: <span class="string">"rgba(0,0,0,.05)"</span>,<span class="comment">// 网格线的颜色</span></div><div class="line">		scaleGridLineWidth: <span class="number">1</span>, <span class="comment">// 网格线的线宽</span></div><div class="line">		scaleShowHorizontalLines: <span class="literal">true</span>,<span class="comment">// 是否显示横向线</span></div><div class="line">		scaleShowVerticalLines: <span class="literal">true</span>,<span class="comment">// 是否显示竖向线</span></div><div class="line">		barShowStroke: <span class="literal">true</span>,<span class="comment">// 是否显示线</span></div><div class="line">		barStrokeWidth: <span class="number">2</span>, <span class="comment">// 线宽</span></div><div class="line">		barValueSpacing: <span class="number">20</span>,<span class="comment">// 柱状块与x值所形成的线之间的距离</span></div><div class="line">		barDatasetSpacing: <span class="number">1</span>,<span class="comment">// 在同一x值内的柱状块之间的间距</span></div><div class="line">		animation : <span class="literal">true</span>,<span class="comment">//是否有动画效果</span></div><div class="line">        animationSteps : <span class="number">60</span>,<span class="comment">//动画的步数</span></div><div class="line">        animationEasing : <span class="string">"easeOutQuart"</span>,<span class="comment">// 动画的效果</span></div><div class="line">		 <span class="comment">// 图例</span></div><div class="line">		legendTemplate: <span class="string">"&lt;ul class=\"&lt;%=name.toLowerCase()%&gt;-legend\"&gt;&lt;% for (var i=0; i&lt;datasets.length; i++)&#123;%&gt;&lt;li&gt;&lt;span style=\"background-color:&lt;%=datasets[i].fillColor%&gt;\"&gt;&lt;/span&gt;&lt;%if(datasets[i].label)&#123;%&gt;&lt;%=datasets[i].label%&gt;&lt;%&#125;%&gt;&lt;/li&gt;&lt;%&#125;%&gt;&lt;/ul&gt;"</span>,</div><div class="line">		<span class="comment">//Boolean - whether to make the chart responsive</span></div><div class="line">		responsive: <span class="literal">true</span>,</div><div class="line">		<span class="attr">maintainAspectRatio</span>: <span class="literal">true</span></div><div class="line">	&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4a8m9wz0j20lj0cvwep.jpg" alt="chart.js 柱状图"></p>
+</li>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用chart.js在页面上展现饼图，我们需要使用它提供的 Pie(data,options)这个API，此方法可以传入两个实参，其实我们只传第一个参数就行了（除非你是处女座的程序员），当然在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据  （对于一个饼图,必须传递一个对象数组的值和颜色属性。value键的值应该是一个数字。chart.js会计算的相对比例。）</span></div><div class="line"><span class="keyword">var</span> pieChartData = [</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">30</span>,</div><div class="line">		<span class="attr">color</span>:<span class="string">"#F38630"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">50</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#E0E4CC"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span> : <span class="number">100</span>,</div><div class="line">		<span class="attr">color</span> : <span class="string">"#69D2E7"</span></div><div class="line">	&#125;			</div><div class="line">];</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myNewChart.Bar(barChartData, barChartOptions);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4az9gjhzj20b40b40t2.jpg" alt="chart.js 饼图"></p>
+</li>
+</ul>
+<h2 id="使用echarts-js绘制柱状图与饼图"><a href="#使用echarts-js绘制柱状图与饼图" class="headerlink" title="使用echarts.js绘制柱状图与饼图"></a>使用echarts.js绘制柱状图与饼图</h2><h3 id="下载并引入chart-js文件-1"><a href="#下载并引入chart-js文件-1" class="headerlink" title="下载并引入chart.js文件"></a>下载并引入chart.js文件</h3><ul>
+<li>下载<br><a href="https://github.com/ecomfe/echartss" target="_blank" rel="external">echarts.js下载</a></li>
+<li>引入chart.js文件<br>我们需要在页面中引入Chart.js文件。此图表插件在全局命名空间中定义了Chart变量。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"echarts.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="创建图表-1"><a href="#创建图表-1" class="headerlink" title="创建图表"></a>创建图表</h3><ul>
+<li><p>HTML<br>Echarts图表插件也是基于Canvas标签的，但是不同于chart.js直接在页面中写canvas标签，而是我们需要在页面中写一个div盒子，并定义需要绘制图形的高度和宽度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"main"</span> style=<span class="string">"height:400px;"</span>&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JavaScript<br>具体操作都要在JS代码中编写。首先从html页面中获取我们定义的div标签，然后在这个DOM节点上调用 echarts.init()方法初始化，它会自动给div标签内添加一个canvas画布。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> myChart = echarts.init(<span class="built_in">document</span>.getElementById(<span class="string">'main'</span>));</div><div class="line"><span class="string">``</span><span class="string">` </span></div><div class="line"> - js操作</div><div class="line">Echarts对象初始化完成后，我们就可以继续创建Echarts.js中提供的具体类型的图表了。下面这个案例中，我们也将展示如何绘制一幅柱状图和饼图。</div><div class="line">&gt; 使用chart.js在页面上展现柱状图，我们需要使用它提供的 setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</div><div class="line">`<span class="string">``</span>javascript</div><div class="line"><span class="comment">//柱状图数据选项设置</span></div><div class="line">option = &#123;</div><div class="line">		<span class="attr">color</span>: [<span class="string">'#3398DB'</span>],</div><div class="line">		<span class="attr">title</span>: &#123;</div><div class="line">		    <span class="attr">text</span>: <span class="string">'订单数量'</span>,</div><div class="line">		    <span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">		    <span class="attr">textStyle</span>: &#123;</div><div class="line">		        <span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">		        <span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">	    	    <span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">	    	&#125;</div><div class="line">    	&#125;,</div><div class="line">		<span class="attr">tooltip</span>: &#123;&#125;,</div><div class="line">		<span class="attr">legend</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">'数量'</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">xAxis</span>: &#123;</div><div class="line">			<span class="attr">data</span>: [<span class="string">"02月"</span>, <span class="string">"03月"</span>, <span class="string">"04月"</span>, <span class="string">"05月"</span>, <span class="string">"06月"</span>, <span class="string">"07月"</span>]</div><div class="line">		&#125;,</div><div class="line">		<span class="attr">yAxis</span>: &#123;&#125;,</div><div class="line">		<span class="attr">series</span>: [&#123;</div><div class="line">			<span class="comment">// 根据名字对应到相应的系列</span></div><div class="line">			name: <span class="string">'数量'</span>,</div><div class="line">			<span class="attr">type</span>: <span class="string">'bar'</span>,</div><div class="line">			<span class="attr">data</span>:  [<span class="number">9</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>]</div><div class="line">		&#125;]</div><div class="line">    &#125;;</div><div class="line"></div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</li>
+<li><p>图表展示</p>
+</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4c8i3p0hj20eb0cb0st.jpg" alt="Echarts.js 柱状图"></p>
+<ul>
+<li><p>接下来我们再创建一个饼图</p>
+<blockquote>
+<p>使用Echarts.js在页面上展现饼图，我们也是使用它提供的setOption(option)这个API，此方法需要传入一个实参，在实际开发中数据是后台传入的，这里我们自定义一些数据，在实际开发中按照这个数据模式传值即可 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//饼图数据选项设置  （对于饼图,必须传递在series的data中传入一个数组对象。value键的值应该是一个数字。Echarts.js会计算的相对比例。）</span></div><div class="line">		option = &#123;</div><div class="line">					<span class="attr">title</span>: &#123;</div><div class="line">						<span class="attr">text</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">x</span>: <span class="string">'center'</span>,</div><div class="line">						<span class="attr">textStyle</span>: &#123;</div><div class="line">							<span class="attr">fontSize</span>: <span class="number">15</span>,</div><div class="line">							<span class="attr">fontWeight</span>: <span class="string">'normal'</span>,</div><div class="line">							<span class="attr">color</span>: <span class="string">'#333'</span></div><div class="line">						&#125;</div><div class="line">					&#125;,</div><div class="line">					<span class="attr">tooltip</span>: &#123;</div><div class="line">						<span class="attr">trigger</span>: <span class="string">'item'</span>,</div><div class="line">						<span class="attr">formatter</span>: <span class="string">"&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)"</span></div><div class="line">					&#125;,</div><div class="line">					<span class="attr">series</span>: [&#123;</div><div class="line">						<span class="attr">name</span>: <span class="string">''</span>,</div><div class="line">						<span class="attr">type</span>: <span class="string">'pie'</span>,</div><div class="line">						<span class="attr">radius</span>: <span class="string">'55%'</span>,</div><div class="line">						<span class="attr">center</span>: [<span class="string">'50%'</span>, <span class="string">'60%'</span>],</div><div class="line">						<span class="attr">data</span>: [&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"55555"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">2</span>,<span class="string">"name"</span>:<span class="string">"88888"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">4</span>,<span class="string">"name"</span>:<span class="string">"产品03"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">9</span>,<span class="string">"name"</span>:<span class="string">"科技服务"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">1</span>,<span class="string">"name"</span>:<span class="string">"成人组织"</span>&#125;,&#123;<span class="string">"value"</span>:<span class="number">6</span>,<span class="string">"name"</span>:<span class="string">"医学健康"</span>&#125;],</div><div class="line">						<span class="attr">itemStyle</span>: &#123;</div><div class="line">							<span class="attr">normal</span>: &#123;</div><div class="line">								<span class="attr">label</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span>,</div><div class="line">									<span class="attr">formatter</span>: <span class="string">'&#123;b&#125;:&#123;c&#125;(&#123;d&#125;%)'</span></div><div class="line">								&#125;,</div><div class="line">								<span class="attr">labelLine</span>: &#123;</div><div class="line">									<span class="attr">show</span>: <span class="literal">true</span></div><div class="line">								&#125;</div><div class="line">							&#125;,</div><div class="line">							<span class="attr">emphasis</span>: &#123;</div><div class="line">								<span class="attr">shadowBlur</span>: <span class="number">10</span>,</div><div class="line">								<span class="attr">shadowOffsetX</span>: <span class="number">0</span>,</div><div class="line">								<span class="attr">shadowColor</span>: <span class="string">'rgba(0, 0, 0, 0.5)'</span></div><div class="line">							&#125;</div><div class="line">						&#125;</div><div class="line">					&#125;]</div><div class="line">				&#125;;</div><div class="line">	</div><div class="line"><span class="comment">//开始绘制图形	</span></div><div class="line">myChart.setOption(option);</div></pre></td></tr></table></figure>
+</blockquote>
+</li>
+<li><p>图表展示<br><img src="http://ww1.sinaimg.cn/mw690/e0823b04ly1fi4cy9ga60j20bv09o3yu.jpg" alt="Echarts.js 饼图"></p>
+</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
+<p>市场上有好多好多的图表统计插件，大体有以下几种</p>
+</blockquote>
+<ul>
+<li>MSChart<br>这个是Visual Studio里的自带控件，使用比较简单，不过数据需要在后台绑定。</li>
+<li>ichart.js<br>是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 支持饼图、环形图、折线图、面积图、柱形图、条形图等。</li>
+<li>Chart.js<br>也是一款基于HTML5的图形库和ichartjs整体类似,支持柱状图、饼图、曲线图、雷达图、蛛网图、级地图等。不过Chart.js的教程文档没有ichartjs的详细。不过感觉在对于移动的适配上感觉比ichartjs要好一点。</li>
+<li>ECharts.js<br>这也是一款基于HTML5的图形库。图形的创建也比较简单，直接引用Javascript即可。这也是我最喜欢使用的，喜欢这个库的原因主要有三点。<ol>
+<li>这个库是百度的项目，而且一直有更新，目前最新的是EChart 3；</li>
+<li>这个库的项目文档比较详细，每个点都说明的比较清楚，而且是中文的，理解比较容易；</li>
+<li>这个库有深度的交互式数据探索，而且图表的动画真的真的是很炫酷呐。</li>
+</ol>
+</li>
+</ul>
+<p><strong>最后附上chart.js与echart.js的中文文档，我这里只讲了柱状图与饼图的简单使用方法，如有其它图表需求，请移步官方文档</strong><br> <a href="http://www.bootcss.com/p/chart.js/docs/" target="_blank" rel="external">chart.js中文文档</a></p>
+<p> <a href="http://echarts.baidu.com/tutorial.html#5%20%E5%88%86%E9%92%9F%E4%B8%8A%E6%89%8B%20ECharts" target="_blank" rel="external">Echarts.js中文文档</a></p>
+<hr>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;最近在升级公司得lims-6.0版本，BOSS要求给门户页面添加一个柱状图与饼图，进入页面时柱状图与饼图能分别显示当前年份接收的各月份样本数量，点击柱状图时饼图能够显示当前月份接收的各种样本数量，要求使用echarts.js图标插件。正好前段时间使用chart.js在另一个项目中做过柱状图，今天就来总结一下两种图标插件的基本使用方法&lt;/strong&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="chartJs与echartsJs" scheme="http://yoursite.com/categories/chartJs%E4%B8%8EechartsJs/"/>
+    
+    
+      <category term="图表插件" scheme="http://yoursite.com/tags/%E5%9B%BE%E8%A1%A8%E6%8F%92%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JavaScript Module</title>
-    <link href="http://yoursite.com/2016/12/24/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
-    <id>http://yoursite.com/2016/12/24/JavaScript 模块化/</id>
-    <published>2016-12-23T16:00:00.000Z</published>
-    <updated>2017-07-14T07:56:33.816Z</updated>
+    <link href="http://yoursite.com/2018/05/24/JavaScript%20%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+    <id>http://yoursite.com/2018/05/24/JavaScript 模块化/</id>
+    <published>2018-05-23T16:00:00.000Z</published>
+    <updated>2020-07-29T16:46:37.697Z</updated>
     
     <content type="html"><![CDATA[<ul>
 <li>Node 中可以使用 JavaScript<ul>
@@ -1353,11 +1244,86 @@ Object.create( b ) -&gt; a
   </entry>
   
   <entry>
+    <title>ES5数组新增Api</title>
+    <link href="http://yoursite.com/2018/05/07/ES5-%E6%95%B0%E7%BB%84%E6%96%B0%E5%A2%9E%E7%9A%84%E5%87%A0%E4%B8%AAApi/"/>
+    <id>http://yoursite.com/2018/05/07/ES5-数组新增的几个Api/</id>
+    <published>2018-05-06T16:00:00.000Z</published>
+    <updated>2020-07-29T16:47:30.660Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="forEach-callback-thisArg"><a href="#forEach-callback-thisArg" class="headerlink" title="forEach(callback[thisArg])"></a>forEach(callback[thisArg])</h2><ul>
+<li>在ES5之前，我们可以通过for和for in 两种方式来遍历数组，而ES5引入了一个新方法forEach，使数组遍历更加简洁，forEach需要传递2个参数，第一个参数是回调函数，是必选参数，第二个参数是一个对象，用来改变callback中的this指向，是可选参数。<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v,i,r</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(v,i,r);</div><div class="line">&#125;)</div><div class="line">-&gt;</div><div class="line">a <span class="number">0</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div><div class="line">b <span class="number">1</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div><div class="line">c <span class="number">2</span> [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>]</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>从输出的结果可以看出，callback中传入了3个参数v,i,r 分别表示当前元素、当前位置、数组对象.再看看使用 thisArg 的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> obj = &#123;</div><div class="line">   <span class="attr">print</span>:<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">       <span class="built_in">console</span>.log(a,b);</div><div class="line">   &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">v,i,a</span>)</span>&#123;</div><div class="line">   <span class="keyword">this</span>.print(v,i);</div><div class="line">&#125;,obj);</div></pre></td></tr></table></figure>
+<p>不传thisArgs时，callback中的 this 默认指向 window 对象，当传递thisArg时，callback中的this就指向了thisArg，因此这个参数的目的就是为了改变回调函数中的this指向。</p>
+<ul>
+<li>对于不支持ES5的浏览器，我们可以对forEach进行简单的扩展来兼容老的浏览器：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.forEach)&#123;</div><div class="line">    <span class="built_in">Array</span>.prototype.forEach = <span class="function"><span class="keyword">function</span>(<span class="params">callback,thisArg</span>)</span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="keyword">this</span>.length;i++)&#123;</div><div class="line">            <span class="comment">//当thisArg为undefined时，JS引擎会将window作为其调用者</span></div><div class="line">            callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="map-callback-thisArg"><a href="#map-callback-thisArg" class="headerlink" title="map(callback[,thisArg])"></a>map(callback[,thisArg])</h2><ul>
+<li>map的作用是对原数组进行加工处理后并将其作为一个新数组返回，该方法同样接收两个参数，callback是回调函数用于对数组进行加工处理，thisArg和上面的一样。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">10</span>,<span class="attr">h</span>:<span class="number">10</span>&#125;, <span class="comment">//定义长和宽</span></div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">15</span>,<span class="attr">h</span>:<span class="number">20</span>&#125;,</div><div class="line">   &#123;<span class="attr">w</span>:<span class="number">12</span>,<span class="attr">h</span>:<span class="number">12</span>&#125;</div><div class="line">];</div><div class="line"><span class="keyword">var</span> newArr = arr.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">   <span class="comment">//根据长宽计算出面积并赋值给新属性area </span></div><div class="line">   item.area = item.w * item.h;</div><div class="line">   <span class="keyword">return</span> item;</div><div class="line">&#125;);</div><div class="line">newArr[<span class="number">0</span>] - &gt; &#123;<span class="attr">w</span>: <span class="number">10</span>, <span class="attr">h</span>: <span class="number">10</span>, <span class="attr">area</span>: <span class="number">100</span>&#125;</div></pre></td></tr></table></figure>
+<p>可以看出，newArr返回的是增加了area属性的对象数组。这个方法非常实用，一般情况下，当一个ajax请求返回时，我们都要对其结果集进行过滤和校验等操作，这时map就派上用场了。我们再看看如果对map进行兼容性扩展：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.map) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.map = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">       <span class="keyword">var</span> temp = [];</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">var</span> newItem = callback.call(thisArg,<span class="keyword">this</span>[i]);</div><div class="line">           temp.push(newItem); <span class="comment">//将callback返回的新元素压入temp中</span></div><div class="line">       &#125;</div><div class="line">       <span class="keyword">return</span> temp;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="filter-callback-thisArg"><a href="#filter-callback-thisArg" class="headerlink" title="filter(callback[thisArg])"></a>filter(callback[thisArg])</h2><ul>
+<li>filter是<code>过滤</code>的意思，所以这个方法的作用就是返回一个匹配过滤条件的新数组，其接收两个参数callback和thisArg, callback也是回调函数，主要用于对元素进行条件匹配，thisArg和forEach中的thisArg作用一样，在这里就不重复了，看下面示例：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"a"</span>,<span class="string">"c"</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">     <span class="keyword">return</span> item === <span class="string">"a"</span>;</div><div class="line">&#125;);</div><div class="line">       </div><div class="line">newArr -&gt; [<span class="string">"a"</span>,<span class="string">"a"</span>]</div></pre></td></tr></table></figure>
+<p>代码很简单，一看就明白，没有filter的时候，要实现这个功能，我们事先要创建一个空的数组，把匹配到的元素再push进去，现在就不需要那么麻烦了，我们再看看对filter的扩展：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.filter) &#123;</div><div class="line">    <span class="built_in">Array</span>.prototype.filter = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> temp = [];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(callback.call(thisArg,<span class="keyword">this</span>[i]))&#123;</div><div class="line">               <span class="comment">//如果callback返回true,则该元素符合过滤条件，将元素压入temp中</span></div><div class="line">               temp.push(<span class="keyword">this</span>[i]);</div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="some-callback-thisArg"><a href="#some-callback-thisArg" class="headerlink" title="some (callback[,thisArg])"></a>some (callback[,thisArg])</h2><ul>
+<li>some是<code>某些、一些</code>的意思，因此，some的作用是检测数组中的每一个元素，当callback返回true时就停止遍历，并返回true，这样的描述似乎有些抽象，看代码：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> result = arr.some( <span class="function"><span class="keyword">function</span>(<span class="params"> item, index, array </span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( item, index, array);</div><div class="line">    <span class="keyword">return</span> item &gt; <span class="number">2</span>;</div><div class="line">&#125;);</div><div class="line">-&gt;</div><div class="line"> <span class="number">1</span> <span class="number">0</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">2</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">3</span> <span class="number">2</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"></div><div class="line"> restule -&gt; <span class="literal">true</span></div></pre></td></tr></table></figure>
+<p>从运行结果看，some检测整个数组，只要当arr中有一个元素符合条件item&gt;2 就停止检测和遍历，并返回true，以表示检测到目标。这和我们在for循环中使用break语言的作用有点类似！ 下面对于some的扩展会有助于你对some的理解：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.some) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.some = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString()))&#123;</div><div class="line"></div><div class="line">               <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//检测到callback返回true,跳出循环，并返回true</span></div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//一个符合条件的都没有检测到，返回false</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="every-callback-thisArg"><a href="#every-callback-thisArg" class="headerlink" title="every (callback[,thisArg])"></a>every (callback[,thisArg])</h2><ul>
+<li>every是<code>每一个</code>的意思，相比some来讲，every对元素的检测更加严格，那every到底是干什么的呢，看代码：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [ <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> result = arr.every( <span class="function"><span class="keyword">function</span>(<span class="params"> item, index, array </span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log( item, index, array );</div><div class="line">    <span class="keyword">return</span> item &lt; <span class="number">3</span>;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"> <span class="number">1</span> <span class="number">0</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">2</span> <span class="number">1</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"> <span class="number">3</span> <span class="number">2</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</div><div class="line"></div><div class="line"> result -&gt; <span class="literal">false</span></div></pre></td></tr></table></figure>
+<p> 从运行结果看，当检测第3个元素时，item&lt;3为false, 停止检测，并返回false，这说明every在检测元素时，要求每一个元素都要符合条件item&lt;3，如果有一个不符合就停止检测，并返回false,(ps：你可以测试item&lt;5时的运行结果，返回值一定是true)。那every到底有什么用武之地呢？ 当一个for循环使用了break语句后，我们想知道for循环是否正常的执行完时， 我们一般会通过检测for中的索引i==arr.length来判断,因此every的作用就体现在这里。 我们再看看对于every方法的扩展：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(!<span class="built_in">Array</span>.prototype.every) &#123;</div><div class="line">   <span class="built_in">Array</span>.prototype.every = <span class="function"><span class="keyword">function</span> (<span class="params">callback, thisArg</span>) </span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++) &#123;</div><div class="line">           <span class="keyword">if</span>(!callback.call(thisArg,<span class="keyword">this</span>[i],i,<span class="keyword">this</span>.toString()))&#123;</div><div class="line"></div><div class="line">               <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">//检测到不符合条件的元素,跳出循环，并返回false</span></div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>; <span class="comment">//所有元素都符合条件，返回true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="reduce-callback-initialValue"><a href="#reduce-callback-initialValue" class="headerlink" title="reduce(callback[initialValue])"></a>reduce(callback[initialValue])</h2><ul>
+<li>官方解释:该方法应用一个函数对一个累加器和数组的每个值(从左到右)减少到一个单一值(什么玩意儿嘛)<br>*代码如下:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">previousValue, currentValue, currentIndex, array</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(previousValue, currentValue,currentIndex);</div><div class="line">    <span class="keyword">return</span> previousValue + currentValue;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">1</span></div><div class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">2</span></div><div class="line"><span class="number">6</span> <span class="number">4</span> <span class="number">3</span></div><div class="line"></div><div class="line">newArr -&gt; <span class="number">10</span></div></pre></td></tr></table></figure>
+<p>从运行结果可以看出，reduce实现了数组元素的累加功能，reduce接收4个参数，previousValue存放的是上一次callback返回的结果，currentValue是当前元素，currentIndex是当前元素位置，array是当前数组。</p>
+<ul>
+<li>previousValue 初始值为数组的第一个元素，数组从第2个元素开始遍历。我们再来看看initialValue 究竟是什么鬼：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</div><div class="line"><span class="keyword">var</span> newArr = arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">previousValue, currentValue, currentIndex, array</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(previousValue, currentValue,currentIndex);</div><div class="line">    <span class="keyword">return</span> previousValue + currentValue;</div><div class="line">&#125;,<span class="number">100</span>);</div><div class="line"></div><div class="line"><span class="number">100</span> <span class="number">1</span> <span class="number">0</span></div><div class="line"><span class="number">101</span> <span class="number">2</span> <span class="number">1</span></div><div class="line"><span class="number">103</span> <span class="number">3</span> <span class="number">2</span></div><div class="line"><span class="number">106</span> <span class="number">4</span> <span class="number">3</span></div><div class="line"></div><div class="line">newArr -&gt; <span class="number">110</span></div></pre></td></tr></table></figure>
+<p>从运行结果看，initialValue参数指定了previousValue的初始值，更重要的是，这次数组是从第1个位置开始遍历，而不再是从第2个位置开始了。</p>
+<h2 id="reduceRight-callback-initialValue"><a href="#reduceRight-callback-initialValue" class="headerlink" title="reduceRight (callback[,initialValue])"></a>reduceRight (callback[,initialValue])</h2><ul>
+<li>和reduce的作用完全相同，唯一的不同是，reduceRight是从右至左遍历数组的元素。</li>
+</ul>
+<h2 id="indexOf-和-lastIndexOf"><a href="#indexOf-和-lastIndexOf" class="headerlink" title="indexOf##和## lastIndexOf"></a>indexOf##和## lastIndexOf</h2><ul>
+<li>这两个方法和String类中indexOf和lastIndexOf作用类似</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;forEach-callback-thisArg&quot;&gt;&lt;a href=&quot;#forEach-callback-thisArg&quot; class=&quot;headerlink&quot; title=&quot;forEach(callback[thisArg])&quot;&gt;&lt;/a&gt;forEach(callback[thisArg])&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在ES5之前，我们可以通过for和for in 两种方式来遍历数组，而ES5引入了一个新方法forEach，使数组遍历更加简洁，forEach需要传递2个参数，第一个参数是回调函数，是必选参数，第二个参数是一个对象，用来改变callback中的this指向，是可选参数。
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
+    
+    
+      <category term="Array" scheme="http://yoursite.com/tags/Array/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JS中 异常</title>
-    <link href="http://yoursite.com/2016/12/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
-    <id>http://yoursite.com/2016/12/24/Js中异常 exception /</id>
-    <published>2016-12-23T16:00:00.000Z</published>
-    <updated>2017-07-14T07:56:46.049Z</updated>
+    <link href="http://yoursite.com/2018/03/24/Js%E4%B8%AD%E5%BC%82%E5%B8%B8%20exception%20/"/>
+    <id>http://yoursite.com/2018/03/24/Js中异常 exception /</id>
+    <published>2018-03-23T16:00:00.000Z</published>
+    <updated>2020-07-29T16:46:48.353Z</updated>
     
     <content type="html"><![CDATA[<h2 id="什么是异常？"><a href="#什么是异常？" class="headerlink" title="什么是异常？"></a>什么是异常？</h2><ol>
 <li>程序执行是出现的结果与预期结果不一致.</li>
@@ -1418,10 +1384,10 @@ Object.create( b ) -&gt; a
   
   <entry>
     <title>对象的四种继承</title>
-    <link href="http://yoursite.com/2016/12/24/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
-    <id>http://yoursite.com/2016/12/24/实现继承/</id>
-    <published>2016-12-23T16:00:00.000Z</published>
-    <updated>2017-07-14T07:59:44.570Z</updated>
+    <link href="http://yoursite.com/2017/12/24/%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF/"/>
+    <id>http://yoursite.com/2017/12/24/实现继承/</id>
+    <published>2017-12-23T16:00:00.000Z</published>
+    <updated>2020-07-29T16:47:58.120Z</updated>
     
     <content type="html"><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
 <li>我们都知道面向对象的三大特性：封装、继承、多态。</li>
@@ -1492,6 +1458,146 @@ Object.create( b ) -&gt; a
     
     
       <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Node js（基础）</title>
+    <link href="http://yoursite.com/2017/12/20/Node%20JS%20%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2017/12/20/Node JS （基础）/</id>
+    <published>2017-12-19T16:00:00.000Z</published>
+    <updated>2020-07-29T16:43:30.477Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-Node-js-介绍"><a href="#1-Node-js-介绍" class="headerlink" title="1. Node.js 介绍"></a>1. Node.js 介绍</h2><h3 id="1-1-网站开发模型（BS）"><a href="#1-1-网站开发模型（BS）" class="headerlink" title="1.1 网站开发模型（BS）"></a>1.1 网站开发模型（BS）</h3><ul>
+<li>要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。</li>
+<li><p>S（Server）：服务器端， 为客户端提交接口(数据)</p>
+<a id="more"></a>
+<ul>
+<li>常用的服务器语言有：Java、.Net、Ruby、Python、PHP、Go、Swift、Lua<!--more--> </li>
+<li>简单来说服务器就是处理客户端的请求，做出处理之后并响应回去。</li>
+</ul>
+</li>
+<li><p>B（Browser）：客户端，简单说就是把一坨用户看不懂的数据变成友好的形式给用户体验</p>
+</li>
+</ul>
+<h3 id="1-2-什么是-Node-js？"><a href="#1-2-什么是-Node-js？" class="headerlink" title="1.2 什么是 Node.js？"></a>1.2 什么是 Node.js？</h3><ul>
+<li><p>简单的说呢<br>  Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境</p>
+</li>
+<li><p>复杂的说呢就是:<br>  V8引 擎执行Javascript的速度非常快，性能非常好，Node.js对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好，也就是它对Google V8引擎进行了封装。</p>
+</li>
+<li><p>特点：<br>  Node.js 使用高效、轻量级的事件驱动、非阻塞 I/O 模型<br>  Node.js 的生态系统 npm 是目前最大的开源包管理系统<br>  Node.js 可跨平台 (Linux  windows  Unix)</p>
+</li>
+</ul>
+<h3 id="1-3-使用-Node-可以做什么？"><a href="#1-3-使用-Node-可以做什么？" class="headerlink" title="1.3 使用 Node 可以做什么？"></a>1.3 使用 Node 可以做什么？</h3><ul>
+<li>在几年的时间里，Node.JS逐渐发展成一个成熟的开发平台，吸引了许多开发者。有许多大型高流量网站都采用Node.JS进行开发，此外，开发人员还可以使用它来开发一些快速移动Web框架。除了Web应用外，NodeJS也被应用在许多方面，这些项目涉及到应用程序监控、媒体流、远程控制、桌面和移动应用等等。真的是很牛逼啊。</li>
+</ul>
+<h3 id="1-4-Node-发展史"><a href="#1-4-Node-发展史" class="headerlink" title="1.4 Node 发展史"></a>1.4 Node 发展史</h3><p>####饮水思源嘛，人家开发出来，我们后来人总得记着</p>
+<ul>
+<li>Node.js 由 Ryan Dahl 和一些其他的开发者于2009年在 Joyent 工作时发明</li>
+<li>2009年2月，Ryan Dahl在博客上宣布准备基于V8创建一个轻量级的Web服务器并提供一套库。</li>
+<li>2009 年，Angular 诞生了</li>
+<li>2009年5月，Ryan Dahl在GitHub上发布了最初版本的部分Node.js包，随后几个月里，有人开始使用Node.js开发应用。</li>
+<li>2009年11月和2010年4月，两届JSConf大会都安排了Node.js的讲座。</li>
+<li>2010年年底，Node.js获得云计算服务商Joyent资助，创始人Ryan Dahl加入Joyent全职负责Node.js的发展。</li>
+<li>2011年7月，Node.js在微软的支持下发布Windows版本。</li>
+</ul>
+<h3 id="1-5-资源推荐"><a href="#1-5-资源推荐" class="headerlink" title="1.5 资源推荐"></a>1.5 资源推荐</h3><ul>
+<li>深入浅出 Node.js</li>
+<li>CNODE</li>
+<li><a href="https://cnodejs.org/getstart" target="_blank" rel="external">Nodejs 新手入门</a></li>
+</ul>
+<h2 id="2-Node-js-关于-HTTP-处理过程"><a href="#2-Node-js-关于-HTTP-处理过程" class="headerlink" title="2. Node.js 关于 HTTP 处理过程"></a>2. Node.js 关于 HTTP 处理过程</h2><h3 id="2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。"><a href="#2-1-Node-的网络应用都需要先创建一个网络服务对象，通过-createServer-来实现。" class="headerlink" title="2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。"></a>2.1 Node 的网络应用都需要先创建一个网络服务对象，通过 createServer 来实现。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">	var http = require(&apos;http&apos;);</div><div class="line">	var server = http.createServer(function(request, response) &#123;   </div><div class="line">	// handle your requset </div><div class="line">	&#125;);</div><div class="line">```	</div><div class="line">###	2.2 传入 createServer 的 function 在每次 HTTP 请求时都将被调用执行，因此这个 function 也被称为请求的处理者。事实上通过 createServer 返回的 Server 对象是一个 EventEmitter，我们需要做的仅仅是在这里保存这个 server 对象，并在之后对其添加监听器。</div><div class="line">```	</div><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。"><a href="#2-3-当-HTTP-请求这个服务时，node-调用请求处理者-function-并传入一些用于处理事务相关的对象：request-和-response。我们可以非常方便的获得这两个对象。" class="headerlink" title="2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。"></a>2.3 当 HTTP 请求这个服务时，node 调用请求处理者 function 并传入一些用于处理事务相关的对象：request 和 response。我们可以非常方便的获得这两个对象。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var http = require(&apos;http&apos;);</div><div class="line">var server = http.createServer(); </div><div class="line">server.on(&apos;request&apos;, function(request, response) &#123;</div><div class="line">// handle your requset </div><div class="line">&#125;).listen(8080);</div></pre></td></tr></table></figure>
+<h3 id="2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案"><a href="#2-4-为了对实际的请求提供服务，在-server-对象上需要调用-listen-方法。绝大多数情况你需要传入-listen-你想要服务监听的端口号，这里也存在很多其他的可选方案" class="headerlink" title="2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案."></a>2.4 为了对实际的请求提供服务，在 server 对象上需要调用 listen 方法。绝大多数情况你需要传入 listen 你想要服务监听的端口号，这里也存在很多其他的可选方案.</h3><h2 id="3-Node中的-JavaScript"><a href="#3-Node中的-JavaScript" class="headerlink" title="3. Node中的 JavaScript"></a>3. Node中的 JavaScript</h2><ul>
+<li><em>console</em></li>
+<li><em>setInterval(callback, delay[, …args])</em></li>
+<li><em>setTimeout(callback, delay[, …args])</em></li>
+<li><em>clearInterval(intervalObject)</em></li>
+<li><em>clearTimeout(timeoutObject)</em></li>
+<li>clearImmediate(immediateObject)</li>
+<li>setImmediate(callback[, …args])</li>
+<li>__dirname</li>
+<li>__filename</li>
+<li>module</li>
+<li>exports</li>
+<li>global</li>
+<li>process</li>
+<li>require()</li>
+</ul>
+<h2 id="4-文件操作"><a href="#4-文件操作" class="headerlink" title="4.文件操作"></a>4.文件操作</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><ul>
+<li>path.basename(path[, ext])：获取文件名部分</li>
+<li>path.dirname(path)：获取目录部分</li>
+<li>path.extname(path)：获取扩展名部分</li>
+<li>path.isAbsolute(path)：判断是否是绝对路径</li>
+<li>path.join([…paths])：将多个路径拼接为一个路径</li>
+</ul>
+<h3 id="同步调用与异步调用"><a href="#同步调用与异步调用" class="headerlink" title="同步调用与异步调用"></a>同步调用与异步调用</h3><p>fs模块对文件的几乎所有操作都有同步和异步两种形式，例如：<code>readFile()</code> 和 <code>readFileSync()</code>。</p>
+<p>同步与异步文件系统调用的区别</p>
+<ul>
+<li>同步调用立即执行，会阻塞后续代码继续执行，如果想要捕获异常需要使用 <code>try-catch</code></li>
+<li>异步调用不会阻塞后续代码继续执行，需要回调函数作为额外的参数，通常包含一个错误作为回调函数的第一个参数</li>
+<li>异步调用通过判断第一个err对象来处理异常</li>
+<li>异步调用结果往往通过回调函数来进行获取</li>
+</ul>
+<p>Node 只在文件IO操作中，提供了同步调用和异步调用两种形式，两者可以结合使用，<br>但是推荐能使用异步调用解决问题的情况下，少用同步调用。</p>
+<h3 id="文件操作常用API"><a href="#文件操作常用API" class="headerlink" title="文件操作常用API"></a>文件操作常用API</h3><ul>
+<li>fs.writeFile(file, data, callback)：文件写入</li>
+<li>fs.appendFile(file, data, callback)：文件追加</li>
+<li>fs.readFile(file[, options], callback)：文件读取</li>
+<li>fs.unlink(path, callback)：删除文件</li>
+<li>fs.stat(path, callback)：获取文件信息</li>
+<li>fs.access(path, callback)：验证文件路径是否存在</li>
+<li>fs.rename(oldPath, newPath, callback)：重命名或移动文件</li>
+</ul>
+<h3 id="目录操作常用API"><a href="#目录操作常用API" class="headerlink" title="目录操作常用API"></a>目录操作常用API</h3><ul>
+<li>fs.mkdir(path, callback)：创建一个目录</li>
+<li>fs.rmdir(path, callback)：删除一个空目录</li>
+<li>fs.readdir(path, callback)：读取一个目录</li>
+<li>fs.rename(oldPath, newPath, callback)：重命名或移动目录</li>
+</ul>
+<h2 id="5-HTTP"><a href="#5-HTTP" class="headerlink" title="5. HTTP"></a>5. HTTP</h2><h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><ul>
+<li><p>Server</p>
+<ul>
+<li>http.createServer([requestListener])</li>
+<li>Event: ‘request’</li>
+<li>Event: ‘close’</li>
+<li>Event: ‘connection’</li>
+<li>server.close([callback])</li>
+<li>server.listen([port][, hostname][, backlog][, callback])</li>
+</ul>
+</li>
+<li><p>Request</p>
+<ul>
+<li>Event: ‘data’</li>
+<li>Event: ‘close’</li>
+<li>message.headers</li>
+<li>message.httpVersion</li>
+<li>message.method</li>
+<li>message.url</li>
+</ul>
+</li>
+<li><p>Response</p>
+<ul>
+<li>response.write(chunk[, encoding][, callback])</li>
+<li>response.end([data][, encoding][, callback])</li>
+<li>response.writeHead(statusCode[, statusMessage][, headers])</li>
+</ul>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-Node-js-介绍&quot;&gt;&lt;a href=&quot;#1-Node-js-介绍&quot; class=&quot;headerlink&quot; title=&quot;1. Node.js 介绍&quot;&gt;&lt;/a&gt;1. Node.js 介绍&lt;/h2&gt;&lt;h3 id=&quot;1-1-网站开发模型（BS）&quot;&gt;&lt;a href=&quot;#1-1-网站开发模型（BS）&quot; class=&quot;headerlink&quot; title=&quot;1.1 网站开发模型（BS）&quot;&gt;&lt;/a&gt;1.1 网站开发模型（BS）&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;要认识NodeJs首先要知道了解网站开发模型，传统的网站开发模型就是BS模型，也就是浏览器服务器模型。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;S（Server）：服务器端， 为客户端提交接口(数据)&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="NodeJs" scheme="http://yoursite.com/categories/NodeJs/"/>
+    
+    
+      <category term="NodeJs" scheme="http://yoursite.com/tags/NodeJs/"/>
     
   </entry>
   

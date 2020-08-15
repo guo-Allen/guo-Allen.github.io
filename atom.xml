@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-29T16:36:54.644Z</updated>
+  <updated>2020-08-02T10:02:39.372Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,86 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Redux（下）</title>
+    <link href="http://yoursite.com/2020/01/02/redux(%E4%B8%8B)/"/>
+    <id>http://yoursite.com/2020/01/02/redux(下)/</id>
+    <published>2020-01-01T16:00:00.000Z</published>
+    <updated>2020-08-02T10:02:39.372Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>本节记录学习Redux中redux-Saga<ul>
+<li>中间件的概念</li>
+<li>Redux-Saga介绍</li>
+<li>middleware API</li>
+<li>Saga辅助函数</li>
+<li>Effect创建器</li>
+<li>Effect 组合器<br>#### <a id="more"></a>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="Redux-Saga介绍"><a href="#Redux-Saga介绍" class="headerlink" title="Redux-Saga介绍"></a>Redux-Saga介绍</h4><h5 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h5><p>中间件简单来理解，就是一种独立运行于各个框架之间的代码，本质就是一个函数，可访问请求对象和响应对象，可对请求进行拦截处理，处理后再将控制权向下传递，也可终止请求，向客户端做出响应。</p>
+<p>而在Redux里面，借鉴了这一套思想，中间件事运行在action发送出去，到达reducer之间的一段代码，就可以吧代码调用流程变为 action =&gt; middlewares =&gt; reducer，这种机制可以让我们改变数据流，实现例如 异步action、action过滤，日志输入，异常报告等功能。</p>
+<h5 id="Redux-Saga"><a href="#Redux-Saga" class="headerlink" title="Redux-Saga"></a>Redux-Saga</h5><p>redux-saga 是一个用于管理应用程序 side effect 副作用（例如：异步操作等）的library，它的目的是让副作用管理更加简单，执行更高效。</p>
+<p>redux-saga就是redux的一个中间件，可以通过正常的redux action 从主应用程序启动，暂停和取消，它可以访问完整的redux state，也能够 dispatch redux action。</p>
+<p>redux-saga 使用了ES6的Generator功能，让异步流程更加易于读取，写入和测试，通过这种方式，让异步看起来更加像标准同步的JavaScript代码（有点像async/await）。</p>
+<h4 id="常见api介绍"><a href="#常见api介绍" class="headerlink" title="常见api介绍"></a>常见api介绍</h4><h5 id="middleware-API"><a href="#middleware-API" class="headerlink" title="middleware API"></a>middleware API</h5><ul>
+<li><p>createSagaMiddleware(options) 创建一个Redux middleware,并将Sagas连接到Redux Store，通过createStore 第三个参数传入。</p>
+<ul>
+<li>options：传递给middleware的选项列表，默认可以不用传递。</li>
+</ul>
+</li>
+<li><p>middleware.run(saga,…args) 动态的运行saga。只能用于在applayMiddleware阶段之后执行Saga</p>
+</li>
+</ul>
+<blockquote>
+<p>store代码演示</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore, applyMiddleware&#125; from &quot;redux&quot;;</div><div class="line"></div><div class="line">import &#123; defReducer &#125; from &quot;./reducers&quot;;</div><div class="line"></div><div class="line">//导入 saga 最终需要去run一下，执行一下 saga</div><div class="line">import &#123;defSaga&#125; from &quot;redux-saga&quot;;</div><div class="line"></div><div class="line">//导入createSagaMiddleware</div><div class="line">import createSagaMiddleware from &quot;redux-saga&quot;;</div><div class="line"></div><div class="line">//构建store</div><div class="line">//creteStore(reducer,initState,中间件)，通过 applyMiddleware 来关联 saga 和 store；</div><div class="line">export default createStore(defReducer, &#123;&#125;, applyMiddlewate(sagaMiddleware);</div><div class="line"></div><div class="line">//利用middleware 来run 一下</div><div class="line">sagaMiddleware.run(defSaga);</div></pre></td></tr></table></figure>
+<h5 id="Saga辅助函数"><a href="#Saga辅助函数" class="headerlink" title="Saga辅助函数"></a>Saga辅助函数</h5><ul>
+<li>takeEvery(pattern,saga,…args) 在发起（dispatch） 到Store并且匹配 pattern 的每一个action 上派生一个saga</li>
+<li>takeLatest(pattern,saga,…args) 在发起到Store 并且匹配 pattern 的每一个action 上派生一个saga。并自动取消之前所有已经启动但仍在执行中的saga任务</li>
+<li>throttle(ms,pattern,saga,…args) 在发起到 Store 并且匹配pattern 的一个action 上派生一个saga。它在派生一次任务之后，仍然将新传入的 action 接受到底层的 buffer 中，至多保留（最近的）一个。但与此同时，它在ms毫秒内将暂停派生新的任务—这也就是它被命名为节流阀的原因。</li>
+<li></li>
+</ul>
+<blockquote>
+<p>接上面的代码，defSaga代码演示</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import &#123;takeEvery,takeLatest,throttle,select,call&#125; from &quot;redux-saga/effects&quot;;</div><div class="line">import axios from &quot;axios&quot;;</div><div class="line"></div><div class="line">export function* defSaga()&#123;</div><div class="line">    yield takeEvery(&quot;takeEcery&quot;,function*()&#123;</div><div class="line">        //获取state数据</div><div class="line">        const state = yield select(state);</div><div class="line">        //发送请求</div><div class="line">        const res = yield call(axios.post,&quot;http://127.0.0.1:8800/getInfo&quot;,&#123;</div><div class="line">            ...state</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        yield put(&#123;</div><div class="line">            type:&quot;get_info_success&quot;,</div><div class="line">            ...res.data</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Effect创建器"><a href="#Effect创建器" class="headerlink" title="Effect创建器"></a>Effect创建器</h5><p>上面的代码我们就已经引入了effect的创建器：select、call、put,接下来详细介绍</p>
+<ul>
+<li>select(selector,…args) 获取redux中的state，如果调用select的参数为空（即 yield select()）,那么effect会取得完整的state（与调用getState()的结果相同）</li>
+<li>call（fn,…args）创建一个Effect描述信息，用来命令middleware以参数args调用函数fn</li>
+<li>take(pattern) 阻塞的方法，用来匹配发出的action</li>
+<li>put(action) 用来命令middleware向Store发起一个action。这个effect是非阻塞型的。</li>
+</ul>
+<h5 id="Effect-组合器（comBinators）"><a href="#Effect-组合器（comBinators）" class="headerlink" title="Effect 组合器（comBinators）"></a>Effect 组合器（comBinators）</h5><ul>
+<li>race(effects):创建一个effect描述信息，用来命令middleware在对各effect间竞赛（race），其中一个完成了之后，那么另外一个effect默认被取消。</li>
+<li>all([…effects]):创建一个Effect描述信息，用来命令middleware并行的运行多个effect，并等待他们全部完成</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;本节记录学习Redux中redux-Saga&lt;ul&gt;
+&lt;li&gt;中间件的概念&lt;/li&gt;
+&lt;li&gt;Redux-Saga介绍&lt;/li&gt;
+&lt;li&gt;middleware API&lt;/li&gt;
+&lt;li&gt;Saga辅助函数&lt;/li&gt;
+&lt;li&gt;Effect创建器&lt;/li&gt;
+&lt;li&gt;Effect 组合器&lt;br&gt;####
+    
+    </summary>
+    
+      <category term="React" scheme="http://yoursite.com/categories/React/"/>
+    
+    
+      <category term="React" scheme="http://yoursite.com/tags/React/"/>
+    
+  </entry>
   
   <entry>
     <title>正则表达式总结</title>
@@ -1458,108 +1538,6 @@ Object.create( b ) -&gt; a
     
     
       <category term="高级面向对象" scheme="http://yoursite.com/tags/%E9%AB%98%E7%BA%A7%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS严格模式</title>
-    <link href="http://yoursite.com/2017/12/23/%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2017/12/23/严格模式/</id>
-    <published>2017-12-22T16:00:00.000Z</published>
-    <updated>2020-07-29T16:52:00.056Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><ol>
-<li>消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；</li>
-<li>消除代码运行的一些不安全之处，保证代码运行的安全；</li>
-<li>提高编译效率，增加运行效率；</li>
-<li>为未来新版本的JavaScript做好铺垫。<a id="more"></a>
-<h2 id="严格模式标记"><a href="#严格模式标记" class="headerlink" title="严格模式标记"></a>严格模式标记</h2></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div></pre></td></tr></table></figure>
-<p>在老版本浏览器会将其当做一行普通字符串忽略。</p>
-<h2 id="使用模式"><a href="#使用模式" class="headerlink" title="使用模式"></a>使用模式</h2><h3 id="针对整个脚本文件"><a href="#针对整个脚本文件" class="headerlink" title="针对整个脚本文件"></a>针对整个脚本文件</h3><p>将”use strict;”放在脚本文件的第一行，则整个脚本将以“严格模式”运行。如果此语句不放在第一行，则无效，整个脚本以“正常模式”运行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">　　<span class="string">"use strict"</span>;</div><div class="line">　　<span class="built_in">console</span>.log(<span class="string">"这是严格模式。"</span>);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">　　<span class="built_in">console</span>.log(<span class="string">"这是正常模式。"</span>);</div><div class="line">	<span class="string">"use strict"</span>;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
-<h3 id="针对单个函数"><a href="#针对单个函数" class="headerlink" title="针对单个函数"></a>针对单个函数</h3><p>将”use strict;”放在函数体的第一行，则整个函数以”严格模式”运行。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">strict</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这是严格模式。"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">noStrict</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">"这是正常模式。"</span>);</div><div class="line">	<span class="string">"use strict"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="脚本文件的变通写法"><a href="#脚本文件的变通写法" class="headerlink" title="脚本文件的变通写法"></a>脚本文件的变通写法</h3><p>由于第一种方式不利于文件合并，所以最好的做法是：将整个脚本文件放在一个沙箱模式（立即执行的匿名函数）中。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="comment">// 代码块</span></div><div class="line">&#125;());</div></pre></td></tr></table></figure>
-<h2 id="语法以及行为变化"><a href="#语法以及行为变化" class="headerlink" title="语法以及行为变化"></a>语法以及行为变化</h2><p>严格模式下，对JavaScript的语法和行为，都做一些变化。</p>
-<h3 id="全局变量的隐式声明"><a href="#全局变量的隐式声明" class="headerlink" title="全局变量的隐式声明"></a>全局变量的隐式声明</h3><p>在正常模式中，如果一个变量没有声明就赋值，默认是全局变量。但是在严格模式已禁止这种用法，全局变量必须显式声明。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line">v = <span class="number">1</span>; <span class="comment">// 报错，v is not defined。</span></div><div class="line"><span class="comment">// 在严格模式下，变量必须先使用var定义，在赋值。</span></div></pre></td></tr></table></figure>
-<h3 id="静态绑定"><a href="#静态绑定" class="headerlink" title="静态绑定"></a>静态绑定</h3><p>JavaScript语言一个特点，就是允许”动态绑定”，即某些属性和方法到底属于哪一个对象，不是在编译时确定的，而是在运行时确定的。</p>
-<p>严格模式对动态绑定做一些限制。某些情况下，只允许静态绑定。也就是说，属性和方法到底归属哪个对象，在编译阶段就确定。这样做有利于编译效率的提高，也使代码更易阅读，更少出现bug。</p>
-<p>详细涉及以下几方面：</p>
-<p>1.禁止使用with语句</p>
-<p>由于with语句无法再编译阶段就确定 属性到底归属哪个对象</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> v = <span class="number">1</span>;</div><div class="line"><span class="comment">// 报错，语法异常</span></div><div class="line"><span class="keyword">with</span>(o)&#123;</div><div class="line">	v = <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>2.eval作用域</p>
-<p>正常模式，JavaScript语言具有两种变量作用域：全局作用域 和 函数作用域（局部作用域）。<br>严格模式，具有第三种作用域：eval作用域。</p>
-<p>正常模式下，eval语句的作用域取决于 它处于全局作用域，还是函数作用域。<br>严格模式下，eval语句本身就是一个作用域，不再能够产生全局变量，其所生产的变量只能用于eval内部。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> x = <span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">eval</span>(<span class="string">"var x = 3; x"</span>)); <span class="comment">// 3</span></div><div class="line"><span class="built_in">console</span>.log(x); <span class="comment">// 2</span></div></pre></td></tr></table></figure>
-<p>3.增强安全性</p>
-<ul>
-<li>在普通函数执行模式下，禁止this关键字指向全局对象.</li>
-<li>因此，使用构造函数时，忘记new，this不再指向window对象，而是报错。就不会意外给window对象添加属性或方法。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>);<span class="comment">// window</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// undefined</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="keyword">this</span>.name = <span class="string">"tom"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> f = foo(); <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<p>4.禁止在函数内部访问caller以及arguments</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	fn.caller;	  <span class="comment">// 报错</span></div><div class="line">	fn.arguments; <span class="comment">// 报错</span></div><div class="line">&#125;</div><div class="line">fn();</div></pre></td></tr></table></figure>
-<p>5.禁止删除变量</p>
-<p>在严格模式下无法删除变量。只有configurable设置为true的对象属性，才能被删除。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> x;</div><div class="line"><span class="keyword">delete</span> x; <span class="comment">// 报错</span></div><div class="line"><span class="keyword">var</span> o = <span class="built_in">Object</span>.create(<span class="literal">null</span>, &#123;</div><div class="line">	<span class="string">"x"</span>: &#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">10</span>,</div><div class="line">		<span class="attr">configurable</span>: <span class="literal">true</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div><div class="line"><span class="keyword">delete</span> o.x; <span class="comment">// success</span></div></pre></td></tr></table></figure>
-<p>6.显式报错</p>
-<ul>
-<li>在正常模式下，为一个对象的只读属性进行赋值，不会报错，只会默默的失败。<br>而严格模式下，会抛出异常。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"><span class="built_in">Object</span>.defineProperty(o, <span class="string">"v"</span>, &#123; <span class="attr">value</span>: <span class="number">1</span>, <span class="attr">writable</span>: <span class="literal">false</span> &#125;);</div><div class="line">o.v = <span class="number">2</span>; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，对一个使用getter方法读取的属性进行赋值，会报错。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&quot;use strict&quot;;</div><div class="line">var o = &#123;</div><div class="line">	get v() &#123; return 1; &#125;</div><div class="line">&#125;;</div><div class="line">o.v = 2; // 报错</div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，对禁止扩展的对象添加新属性，会报错。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"><span class="built_in">Object</span>.preventExtensions(o);</div><div class="line">o.v = <span class="number">1</span>; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<ul>
-<li>严格模式下，删除一个不可删除的属性，会报错。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">delete</span> <span class="built_in">Object</span>.prototype; <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<p>7.重名错误: 严格模式新增了一些语法错误。</p>
-<ul>
-<li>对象不能有重名的属性<br>正常模式下，如果对象有多个重名属性，最后赋值的那个属性会覆盖前面的值。严格模式下，这属于语法错误。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	<span class="attr">p</span>: <span class="number">1</span>,</div><div class="line">	<span class="attr">p</span>: <span class="number">2</span></div><div class="line">&#125;; <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<ul>
-<li>函数不能有重名的参数<br>正常模式下，如果函数有多个重名的参数，可以用arguments[i]读取。严格模式下，这属于语法错误。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a, a, b</span>) </span>&#123; <span class="comment">// 语法错误</span></div><div class="line">	<span class="keyword">return</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>8.禁止八进制表示法<br>正常模式下，整数的第一位如果是0，表示这是八进制数，比如0100等于十进制的64。严格模式禁止这种表示法，整数第一位为0，将报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> n = <span class="number">0100</span>; <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<h3 id="arguments对象的限制"><a href="#arguments对象的限制" class="headerlink" title="arguments对象的限制"></a>arguments对象的限制</h3><p>arguments是函数的参数对象，严格模式对它的使用做了限制。<br>1.不允许对arguments赋值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="built_in">arguments</span>++; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">var</span> obj = &#123; set p(<span class="built_in">arguments</span>) &#123; &#125; &#125;; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">try</span> &#123; &#125; <span class="keyword">catch</span> (<span class="built_in">arguments</span>) &#123; &#125; <span class="comment">// 语法错误</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">arguments</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"arguments"</span>, <span class="string">"'use strict'; return 17;"</span>); <span class="comment">// 语法错误</span></div></pre></td></tr></table></figure>
-<p>2.arguments不再追踪参数的变化</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">	a = <span class="number">2</span>;</div><div class="line">	<span class="keyword">return</span> [a, <span class="built_in">arguments</span>[<span class="number">0</span>]];</div><div class="line">&#125;</div><div class="line">f(<span class="number">1</span>); <span class="comment">// 正常模式为[2,2]</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	a = <span class="number">2</span>;</div><div class="line">	<span class="keyword">return</span> [a, <span class="built_in">arguments</span>[<span class="number">0</span>]];</div><div class="line">&#125;</div><div class="line">f(<span class="number">1</span>); <span class="comment">// 严格模式为[2,1]</span></div></pre></td></tr></table></figure>
-<p>3.禁止使用arguments.callee<br>这意味着，无法在匿名函数内部调用自身了。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="built_in">arguments</span>.callee; &#125;;</div><div class="line">f(); <span class="comment">// 报错</span></div></pre></td></tr></table></figure>
-<h3 id="函数必须声明在顶层"><a href="#函数必须声明在顶层" class="headerlink" title="函数必须声明在顶层"></a>函数必须声明在顶层</h3><p>将来Javascript的新版本会引入”块级作用域”。为了与新版本接轨，严格模式只允许在全局作用域或函数作用域的顶层声明函数。也就是说，不允许在非函数的代码块内声明函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123; &#125; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="保留字"><a href="#保留字" class="headerlink" title="保留字"></a>保留字</h3><p>为了向将来Javascript的新版本过渡，严格模式新增了一些保留字：implements, interface, let, package, private, protected, public, static, yield。<br>使用这些词作为变量名将会报错。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">package</span>(<span class="params">protected</span>) </span>&#123; <span class="comment">// 语法错误</span></div><div class="line"><span class="meta">	"use strict"</span>;</div><div class="line">	<span class="keyword">var</span> implements; <span class="comment">// 语法错误</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>此外，ECMAscript第五版本身还规定了另一些保留字（class, enum, export, extends, import, super），以及各大浏览器自行增加的const保留字，也是不能作为变量名的。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;目的&quot;&gt;&lt;a href=&quot;#目的&quot; class=&quot;headerlink&quot; title=&quot;目的&quot;&gt;&lt;/a&gt;目的&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;消除JavaScript语法的一些不合理、不严谨之处，减少一些怪异行为；&lt;/li&gt;
-&lt;li&gt;消除代码运行的一些不安全之处，保证代码运行的安全；&lt;/li&gt;
-&lt;li&gt;提高编译效率，增加运行效率；&lt;/li&gt;
-&lt;li&gt;为未来新版本的JavaScript做好铺垫。
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="http://yoursite.com/categories/JavaScript/"/>
-    
     
   </entry>
   

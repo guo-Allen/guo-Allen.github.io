@@ -86,31 +86,34 @@
 
 
 
-<meta name="description" content="本节记录学习typeScript中的
-泛型
-泛型变量
-泛型类
-泛型接口
-泛型类接口">
+<meta name="description" content="本节记录学习Redux中redux-Saga
+中间件的概念
+Redux-Saga介绍
+middleware API
+Saga辅助函数
+Effect创建器
+Effect 组合器####">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TypeScript中的泛型(上)">
-<meta property="og:url" content="http://yoursite.com/2019/05/23/TypeScript中的泛型(上)/index.html">
+<meta property="og:title" content="Redux（下）">
+<meta property="og:url" content="http://yoursite.com/2020/01/02/redux(下)/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="本节记录学习typeScript中的
-泛型
-泛型变量
-泛型类
-泛型接口
-泛型类接口">
-<meta property="og:updated_time" content="2020-07-29T16:30:21.340Z">
+<meta property="og:description" content="本节记录学习Redux中redux-Saga
+中间件的概念
+Redux-Saga介绍
+middleware API
+Saga辅助函数
+Effect创建器
+Effect 组合器####">
+<meta property="og:updated_time" content="2020-08-02T10:02:39.372Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TypeScript中的泛型(上)">
-<meta name="twitter:description" content="本节记录学习typeScript中的
-泛型
-泛型变量
-泛型类
-泛型接口
-泛型类接口">
+<meta name="twitter:title" content="Redux（下）">
+<meta name="twitter:description" content="本节记录学习Redux中redux-Saga
+中间件的概念
+Redux-Saga介绍
+middleware API
+Saga辅助函数
+Effect创建器
+Effect 组合器####">
 
 
 
@@ -128,7 +131,7 @@
   };
 </script>
 
-  <title> TypeScript中的泛型(上) | Allen's Blog </title>
+  <title> Redux（下） | Allen's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -291,7 +294,7 @@
             
             
               
-                TypeScript中的泛型(上)
+                Redux（下）
               
             
           </h1>
@@ -303,8 +306,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-05-23T00:00:00+08:00" content="2019-05-23">
-              2019-05-23
+            <time itemprop="dateCreated" datetime="2020-01-02T00:00:00+08:00" content="2020-01-02">
+              2020-01-02
             </time>
           </span>
 
@@ -333,8 +336,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2019/05/23/TypeScript中的泛型(上)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/05/23/TypeScript中的泛型(上)/" itemprop="commentsCount"></span>
+                <a href="/2020/01/02/redux(下)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2020/01/02/redux(下)/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -358,51 +361,56 @@
 
       
         <ul>
-<li>本节记录学习typeScript中的<ul>
-<li>泛型</li>
-<li>泛型变量</li>
-<li>泛型类</li>
-<li>泛型接口</li>
-<li>泛型类接口</li>
+<li>本节记录学习Redux中redux-Saga<ul>
+<li>中间件的概念</li>
+<li>Redux-Saga介绍</li>
+<li>middleware API</li>
+<li>Saga辅助函数</li>
+<li>Effect创建器</li>
+<li>Effect 组合器<br>#### <a id="more"></a>
+</li>
 </ul>
 </li>
 </ul>
-<a id="more"></a>
-<h4 id="泛型介绍"><a href="#泛型介绍" class="headerlink" title="泛型介绍"></a>泛型介绍</h4><p> 软件工程中，我们不仅要创建一致的定义良好的API，同时也要考虑可重用性。 组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时为你提供了十分灵活的功能。</p>
-<p> 在像C#和Java这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的数据。 这样用户就可以以自己的数据类型来使用组件。</p>
-<blockquote>
-<p>通俗理解：泛型就是解决 类 接口 方法的复用性、以及对不特定数据类型的支持(类型校验)</p>
-</blockquote>
-<p>我们先来个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//只能返回string类型的数据</div><div class="line"></div><div class="line">    function getData(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">//同时返回 string类型 和number类型  （代码冗余）</div><div class="line">    function getData1(value:string):string&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line">    function getData2(value:number):number&#123;</div><div class="line">         return value;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">//同时返回 string类型 和number类型       any可以解决这个问题</div><div class="line"></div><div class="line">    function getData(value:any):any&#123;</div><div class="line">        return &apos;哈哈哈&apos;;</div><div class="line">    &#125;</div><div class="line">    getData(123);</div><div class="line">    getData(&apos;str&apos;);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>但是any放弃了类型检查,传入什么 返回什么。比如:传入number 类型必须返回number类型  传入 string类型必须返回string类型</p>
-<p>所以泛型来了，可以支持不特定的数据类型   要求：传入的参数和返回的参数一致</p>
-</blockquote>
+<h4 id="Redux-Saga介绍"><a href="#Redux-Saga介绍" class="headerlink" title="Redux-Saga介绍"></a>Redux-Saga介绍</h4><h5 id="中间件的概念"><a href="#中间件的概念" class="headerlink" title="中间件的概念"></a>中间件的概念</h5><p>中间件简单来理解，就是一种独立运行于各个框架之间的代码，本质就是一个函数，可访问请求对象和响应对象，可对请求进行拦截处理，处理后再将控制权向下传递，也可终止请求，向客户端做出响应。</p>
+<p>而在Redux里面，借鉴了这一套思想，中间件事运行在action发送出去，到达reducer之间的一段代码，就可以吧代码调用流程变为 action =&gt; middlewares =&gt; reducer，这种机制可以让我们改变数据流，实现例如 异步action、action过滤，日志输入，异常报告等功能。</p>
+<h5 id="Redux-Saga"><a href="#Redux-Saga" class="headerlink" title="Redux-Saga"></a>Redux-Saga</h5><p>redux-saga 是一个用于管理应用程序 side effect 副作用（例如：异步操作等）的library，它的目的是让副作用管理更加简单，执行更高效。</p>
+<p>redux-saga就是redux的一个中间件，可以通过正常的redux action 从主应用程序启动，暂停和取消，它可以访问完整的redux state，也能够 dispatch redux action。</p>
+<p>redux-saga 使用了ES6的Generator功能，让异步流程更加易于读取，写入和测试，通过这种方式，让异步看起来更加像标准同步的JavaScript代码（有点像async/await）。</p>
+<h4 id="常见api介绍"><a href="#常见api介绍" class="headerlink" title="常见api介绍"></a>常见api介绍</h4><h5 id="middleware-API"><a href="#middleware-API" class="headerlink" title="middleware API"></a>middleware API</h5><ul>
+<li><p>createSagaMiddleware(options) 创建一个Redux middleware,并将Sagas连接到Redux Store，通过createStore 第三个参数传入。</p>
 <ul>
-<li>T表示泛型，具体什么类型是调用这个方法的时候决定的<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function getData&lt;T&gt;(value:T):T&#123;</div><div class="line">    return value;</div><div class="line">&#125;</div><div class="line">getData&lt;number&gt;(123);</div><div class="line">getData&lt;string&gt;(&apos;1214231&apos;);</div><div class="line">getData&lt;number&gt;(&apos;2112&apos;)/*错误的写法*/</div></pre></td></tr></table></figure>
+<li>options：传递给middleware的选项列表，默认可以不用传递。</li>
+</ul>
+</li>
+<li><p>middleware.run(saga,…args) 动态的运行saga。只能用于在applayMiddleware阶段之后执行Saga</p>
 </li>
 </ul>
-<h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>比如有个最小堆算法，需要同时支持返回数字和字符串 a  -  z两种类型。  通过类的泛型来实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">class MinClas&lt;T&gt;&#123;</div><div class="line">    public list:T[]=[];</div><div class="line">    add(value:T):void&#123;</div><div class="line">        this.list.push(value);</div><div class="line">    &#125;</div><div class="line">    min():T&#123;        </div><div class="line">        var minNum=this.list[0];</div><div class="line">        for(var i=0;i&lt;this.list.length;i++)&#123;</div><div class="line">            if(minNum&gt;this.list[i])&#123;</div><div class="line">                minNum=this.list[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return minNum;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var m1=new MinClas&lt;number&gt;();   /*实例化类 并且制定了类的T代表的类型是number*/</div><div class="line">m1.add(11);</div><div class="line">m1.add(3);</div><div class="line">m1.add(2);</div><div class="line">alert(m1.min())</div><div class="line"></div><div class="line">var m2=new MinClas&lt;string&gt;();   /*实例化类 并且制定了类的T代表的类型是string*/</div><div class="line">m2.add(&apos;c&apos;);</div><div class="line">m2.add(&apos;a&apos;);</div><div class="line">m2.add(&apos;v&apos;);</div><div class="line">alert(m2.min())</div></pre></td></tr></table></figure>
-<h4 id="泛型接口"><a href="#泛型接口" class="headerlink" title="泛型接口"></a>泛型接口</h4><p>1.我们先来回忆一下函数类型接口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">interface ConfigFn&#123;</div><div class="line"></div><div class="line">    (value1:string,value2:string):string;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">var setData:ConfigFn=function(value1:string,value2:string):string&#123;</div><div class="line"></div><div class="line"></div><div class="line">    return value1+value2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">setData(&apos;name&apos;,&apos;张三&apos;);</div></pre></td></tr></table></figure>
-<p>2、泛型接口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">        interface ConfigFn&lt;T&gt;&#123;</div><div class="line">            (value:T):T;</div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line">        function getData&lt;T&gt;(value:T):T&#123;</div><div class="line"></div><div class="line">            return value;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        </div><div class="line">        var myGetData:ConfigFn&lt;string&gt;=getData;     </div><div class="line"></div><div class="line"></div><div class="line">        myGetData(&apos;20&apos;);  /*正确*/</div><div class="line">        myGetData(20)  //错误</div><div class="line"></div><div class="line">```      </div><div class="line"></div><div class="line">#### 类的泛型-把类作为参数类型的泛型类</div><div class="line"></div><div class="line">&gt; 先来个例子 </div><div class="line">* 定义一个User的类这个类的作用就是映射数据库字段  </div><div class="line">* 然后定义一个 MysqlDb的类这个类用于操作数据库   </div><div class="line">* 然后把User类作为参数传入到MysqlDb中</div></pre></td></tr></table></figure></p>
-<p>//把类作为参数来约束数据传入的类型<br> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }</p>
-<p> class MysqlDb{<br>     add(user:User):boolean{<br>         console.log(user);<br>         return true;<br>     }<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb();<br> Db.add(u);</p>
-<p> class ArticleCate{<br>     title:string | undefined;<br>     desc:string | undefined;<br>     status:number | undefined<br> }</p>
-<p> class MysqlDb{<br>     add(info:ArticleCate):boolean{<br>         console.log(info);<br>         console.log(info.title);<br>         return true;<br> }<br>}<br> var a=new ArticleCate();<br> a.title=”国内”;<br> a.desc=”国内新闻”;<br> a.status=1;<br> var Db=new MysqlDb();<br> Db.add(a);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; 问题：代码重复</div><div class="line">&gt; 接下来我们用泛型实现上面的参数</div><div class="line"></div><div class="line">* 把类作为参数类型的泛型类</div></pre></td></tr></table></figure></p>
-<p>//定义操作数据库的泛型类<br>class MysqlDb<t>{<br>    add(info:T):boolean{<br>        console.log(info);<br>        return true;<br>    }<br>    updated(info:T,id:number):boolean {<br>        console.log(info);<br>        console.log(id);<br>        return true;<br>    }<br>}</t></p>
-<p>//想给User表增加数据</p>
-<p>// 1、定义一个User类 和数据库进行映射</p>
-<p> class User{<br>     username:string | undefined;<br>     pasword:string | undefined;<br> }<br> var u=new User();<br> u.username=’张三’;<br> u.pasword=’123456’;<br> var Db=new MysqlDb<user>();<br> Db.add(u);</user></p>
-<p>//2、相关ArticleCate增加数据  定义一个ArticleCate类 和数据库进行映射<br>class ArticleCate{<br>    title:string | undefined;<br>    desc:string | undefined;<br>    status:number | undefined;<br>    constructor(params:{<br>        title:string | undefined,<br>        desc:string | undefined,<br>        status?:number | undefined<br>    }){</p>
-<pre><code>    this.title=params.title;
-    this.desc=params.desc;
-    this.status=params.status;
-}
-</code></pre><p>}<br>//增加操作<br> var a=new ArticleCate({<br>     title:’分类’,<br>     desc:’1111’,<br>     status:1<br> });</p>
-<p> //类当做参数的泛型类<br> var Db=new MysqlDb<articlecate>();<br> Db.add(a);</articlecate></p>
-<p>//修改数据<br>var a=new ArticleCate({<br>        title:’分类111’,<br>        desc:’2222’<br>});<br>a.status=0;<br>var Db=new MysqlDb<articlecate>();<br>Db.updated(a,12);<br>```</articlecate></p>
+<blockquote>
+<p>store代码演示</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore, applyMiddleware&#125; from &quot;redux&quot;;</div><div class="line"></div><div class="line">import &#123; defReducer &#125; from &quot;./reducers&quot;;</div><div class="line"></div><div class="line">//导入 saga 最终需要去run一下，执行一下 saga</div><div class="line">import &#123;defSaga&#125; from &quot;redux-saga&quot;;</div><div class="line"></div><div class="line">//导入createSagaMiddleware</div><div class="line">import createSagaMiddleware from &quot;redux-saga&quot;;</div><div class="line"></div><div class="line">//构建store</div><div class="line">//creteStore(reducer,initState,中间件)，通过 applyMiddleware 来关联 saga 和 store；</div><div class="line">export default createStore(defReducer, &#123;&#125;, applyMiddlewate(sagaMiddleware);</div><div class="line"></div><div class="line">//利用middleware 来run 一下</div><div class="line">sagaMiddleware.run(defSaga);</div></pre></td></tr></table></figure>
+<h5 id="Saga辅助函数"><a href="#Saga辅助函数" class="headerlink" title="Saga辅助函数"></a>Saga辅助函数</h5><ul>
+<li>takeEvery(pattern,saga,…args) 在发起（dispatch） 到Store并且匹配 pattern 的每一个action 上派生一个saga</li>
+<li>takeLatest(pattern,saga,…args) 在发起到Store 并且匹配 pattern 的每一个action 上派生一个saga。并自动取消之前所有已经启动但仍在执行中的saga任务</li>
+<li>throttle(ms,pattern,saga,…args) 在发起到 Store 并且匹配pattern 的一个action 上派生一个saga。它在派生一次任务之后，仍然将新传入的 action 接受到底层的 buffer 中，至多保留（最近的）一个。但与此同时，它在ms毫秒内将暂停派生新的任务—这也就是它被命名为节流阀的原因。</li>
+<li></li>
+</ul>
+<blockquote>
+<p>接上面的代码，defSaga代码演示</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import &#123;takeEvery,takeLatest,throttle,select,call&#125; from &quot;redux-saga/effects&quot;;</div><div class="line">import axios from &quot;axios&quot;;</div><div class="line"></div><div class="line">export function* defSaga()&#123;</div><div class="line">    yield takeEvery(&quot;takeEcery&quot;,function*()&#123;</div><div class="line">        //获取state数据</div><div class="line">        const state = yield select(state);</div><div class="line">        //发送请求</div><div class="line">        const res = yield call(axios.post,&quot;http://127.0.0.1:8800/getInfo&quot;,&#123;</div><div class="line">            ...state</div><div class="line">        &#125;)</div><div class="line">        </div><div class="line">        yield put(&#123;</div><div class="line">            type:&quot;get_info_success&quot;,</div><div class="line">            ...res.data</div><div class="line">        &#125;)</div><div class="line">    &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Effect创建器"><a href="#Effect创建器" class="headerlink" title="Effect创建器"></a>Effect创建器</h5><p>上面的代码我们就已经引入了effect的创建器：select、call、put,接下来详细介绍</p>
+<ul>
+<li>select(selector,…args) 获取redux中的state，如果调用select的参数为空（即 yield select()）,那么effect会取得完整的state（与调用getState()的结果相同）</li>
+<li>call（fn,…args）创建一个Effect描述信息，用来命令middleware以参数args调用函数fn</li>
+<li>take(pattern) 阻塞的方法，用来匹配发出的action</li>
+<li>put(action) 用来命令middleware向Store发起一个action。这个effect是非阻塞型的。</li>
+</ul>
+<h5 id="Effect-组合器（comBinators）"><a href="#Effect-组合器（comBinators）" class="headerlink" title="Effect 组合器（comBinators）"></a>Effect 组合器（comBinators）</h5><ul>
+<li>race(effects):创建一个effect描述信息，用来命令middleware在对各effect间竞赛（race），其中一个完成了之后，那么另外一个effect默认被取消。</li>
+<li>all([…effects]):创建一个Effect描述信息，用来命令middleware并行的运行多个effect，并等待他们全部完成</li>
+</ul>
 
       
     </div>
@@ -433,17 +441,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/22/TypeScript中的类（下）/" rel="next" title="TypeScript的类（下）">
-                <i class="fa fa-chevron-left"></i> TypeScript的类（下）
+              <a href="/2019/08/15/regExp/" rel="next" title="正则表达式总结">
+                <i class="fa fa-chevron-left"></i> 正则表达式总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/24/TypeScript中的泛型(下)/" rel="prev" title="TypeScript中的泛型(上)">
-                TypeScript中的泛型(上) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -458,10 +462,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2019/05/23/TypeScript中的泛型(上)/"
-     data-title="TypeScript中的泛型(上)"
+        <div class="ds-share flat" data-thread-key="2020/01/02/redux(下)/"
+     data-title="Redux（下）"
      data-content=""
-     data-url="http://yoursite.com/2019/05/23/TypeScript中的泛型(上)/">
+     data-url="http://yoursite.com/2020/01/02/redux(下)/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -488,8 +492,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2019/05/23/TypeScript中的泛型(上)/"
-           data-title="TypeScript中的泛型(上)" data-url="http://yoursite.com/2019/05/23/TypeScript中的泛型(上)/">
+      <div class="ds-thread" data-thread-key="2020/01/02/redux(下)/"
+           data-title="Redux（下）" data-url="http://yoursite.com/2020/01/02/redux(下)/">
       </div>
     
   </div>
@@ -551,7 +555,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -638,7 +642,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型介绍"><span class="nav-number">1.</span> <span class="nav-text">泛型介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型类"><span class="nav-number">2.</span> <span class="nav-text">泛型类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#泛型接口"><span class="nav-number">3.</span> <span class="nav-text">泛型接口</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redux-Saga介绍"><span class="nav-number">1.</span> <span class="nav-text">Redux-Saga介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中间件的概念"><span class="nav-number">1.1.</span> <span class="nav-text">中间件的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redux-Saga"><span class="nav-number">1.2.</span> <span class="nav-text">Redux-Saga</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见api介绍"><span class="nav-number">2.</span> <span class="nav-text">常见api介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#middleware-API"><span class="nav-number">2.1.</span> <span class="nav-text">middleware API</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Saga辅助函数"><span class="nav-number">2.2.</span> <span class="nav-text">Saga辅助函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Effect创建器"><span class="nav-number">2.3.</span> <span class="nav-text">Effect创建器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Effect-组合器（comBinators）"><span class="nav-number">2.4.</span> <span class="nav-text">Effect 组合器（comBinators）</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
